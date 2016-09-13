@@ -170,11 +170,11 @@ app.controller('edit',function($scope,$uibModal, dataService)
     {
         if($scope.employeeDetail == false)
         {
-            console.log('first')
+            //console.log('first')
             $scope.employeeDetail = true
-            console.log('second')
+            //console.log('second')
             $scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = element})
-            console.log('third')
+            //console.log('third')
             $scope.open()
         }
         else

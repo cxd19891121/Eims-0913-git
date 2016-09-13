@@ -1,11 +1,15 @@
 app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
 
-    var url = 'http://localhost:3000/'
+    var url = "";
     var config = {
         newUser: url + 'newuser/',
         baseUrl: url + 'api/',
         searchByName: url + 'search/name',
-        search: url + 'search'
+        search: url + 'search',
+        forget: url + 'forget',
+        refresh: url + 'backToIndex',
+        logout: url + 'logout',
+
     }
 
     var vm = this;
@@ -25,8 +29,51 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             callback(data);
         });
 
+    }
 
+    vm.login = function(loginForm,callback){
+        console.log(url)
+        $http
+        ({
+            method: 'POST',
+            url: url ,
+            data: $httpParamSerializerJQLike(loginForm),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .success(function(data)
+        {
+            callback(data)
+            /*if(!data.error) {
+                console.log(data);
+                window.location.href = data;
+            }*/
+        })
+    }
 
+    vm.forget = function(username,callback)
+    {
+        $http
+        ({
+            method: 'POST',
+            url: config.forget,
+            data: $httpParamSerializerJQLike({username:username}),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .success(function(data)
+        {
+            callback(data)
+            /*if(!data)
+            {
+                alert('fail')
+            }
+            else
+            {
+                $uibModalInstance.close()
+                console.log(data)
+                
+                //$scope.$parent.$broadcast('changeData',data)
+            }*/
+        })
     }
 
 
@@ -72,7 +119,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         $http
         ({
             method: 'GET',
-            url: 'http://localhost:3000/backToIndex',
+            url: config.refresh,//'http://localhost:3000/backToIndex',
         }).success(function(data)
         {
             window.location.href = data;
@@ -90,7 +137,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         $http
         ({
             method: 'GET',
-            url: 'http://localhost:3000/logout',
+            url: config.logout//'http://localhost:3000/logout',
         }).success(function(data)
             {
                 alert('user logout');

@@ -9,6 +9,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
         <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
         <script type='text/javascript' src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+       
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     </head>
 
@@ -73,7 +74,7 @@
 
     <script>
         var app = angular.module('myApp', ['ngAnimate', 'ui.bootstrap'])
-        app.controller('login', function($scope,$http,$httpParamSerializerJQLike, $uibModal,$log) 
+        app.controller('login', function($scope,$http,$httpParamSerializerJQLike, $uibModal,$log,dataService) 
         {
             $scope.showLogin = true
             $scope.incomplete = false
@@ -98,6 +99,15 @@
                     username : $scope.username,
                     password : $scope.password
                 }
+                dataService.login(loginForm,function(data)
+                {
+                    if(!data.error) {
+                        console.log(data);
+                        window.location.href = data;
+                    }
+                })
+
+/*
                 $http
                 ({
                     method: 'POST',
@@ -112,6 +122,7 @@
                         window.location.href = data;
                     }
                 })
+*/
             }
 
             $scope.forgetPas = false
@@ -149,13 +160,13 @@
 
             }
         })
-        app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$http,$httpParamSerializerJQLike) 
+        app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$http,$httpParamSerializerJQLike,dataService) 
         {
             
             $scope.username = ''
             $scope.ok = function () 
             {
-                $http
+                /*$http
                 ({
                     method: 'POST',
                     url: 'http://localhost:3000/forget',
@@ -165,6 +176,20 @@
                 .success(function(data)
                 {
                     
+                    if(!data)
+                    {
+                        alert('fail')
+                    }
+                    else
+                    {
+                        $uibModalInstance.close()
+                        console.log(data)
+                        
+                        //$scope.$parent.$broadcast('changeData',data)
+                    }
+                })*/
+                dataService.forget($scope.username,function(data)
+                {
                     if(!data)
                     {
                         alert('fail')
@@ -189,7 +214,7 @@
         })
         
     </script>
-
+     <script src='app/service/dataService.js'></script>
 
 </body>
 </html>

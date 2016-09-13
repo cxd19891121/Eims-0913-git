@@ -12,9 +12,12 @@
 <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
 
 <body>
-<div style="top:0;right:0;background-color:gray;">
-hello
+<div style="position:absolute;top:0;right:0;background-color:cyan;">
+    <a href="" ng-click="getMessage()" class="control-label">You have {{letterNum}} unread messages&emsp;</a>
 </div>
+<script type="text/ng-template" id="message.html">
+
+</script>
 
 
 <div ng-view>

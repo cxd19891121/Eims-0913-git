@@ -1,8 +1,10 @@
 /**
  * Created by mooner00 on 8/24/2016.
  */
-app.controller('application', function($scope,dataService)
+app.controller('application', function($scope,dataService,$uibModal)
 {
+    $scope.letterNum = 0;
+
     $scope.showSearch = true
     $scope.addDetail = false
     $scope.addNew = false
@@ -26,14 +28,24 @@ app.controller('application', function($scope,dataService)
 
     $scope.logout = function(){
         dataService.logout(function(data){
-            window.location.href = 'http://localhost:3000';
         })
-
     }
 
+    $scope.getMessage = function()
+    {
+        $scope.open()
+        dataService.getMessage(window.localStorage.username,function(data)
+        {
+            if(data)
+            {
+                $scope.messages = data
+            }
+        })
+        
+    }
+    
 
-
-
+    $scope.messages = []
 
     $scope.id = -1
     $scope.$on('editUser',function(event,data)
@@ -45,4 +57,41 @@ app.controller('application', function($scope,dataService)
     {
         $scope.$broadcast('setUserId',$scope.id)
     });
+
+    $scope.open = function (size)
+    {
+        
+        var modalInstance = $uibModal.open
+        ({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'message.html',
+            controller: 'message',
+            size: size,
+            resolve:
+            {
+                items: function ()
+                {
+                    return $scope.detail
+                }
+            }
+        })
+
+    }
+})
+
+app.controller('message', function ($scope, $uibModalInstance, items)
+{
+    $scope.detail = items
+
+    $scope.ok = function ()
+    {
+        $uibModalInstance.close()
+    }
+
+    $scope.cancel = function ()
+    {
+        $uibModalInstance.dismiss('cancel')
+    }
+
+    
 })

@@ -15,8 +15,6 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items)
         $uibModalInstance.dismiss('cancel')
     }
 
-
-
     $scope.print = function()
     {
         printdiv('printElement')
@@ -34,7 +32,6 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items)
 
     $scope.download = function()
     {
-
         downloadDiv('printElement','data.html')
     }
 

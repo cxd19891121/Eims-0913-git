@@ -1,5 +1,6 @@
 app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($http, $httpParamSerializerJQLike) {
 
+    
     var url = "";
     var config = {
         newUser: url + 'newuser/',
@@ -9,12 +10,14 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         forget: url + 'forget',
         refresh: url + 'backToIndex',
         logout: url + 'logout',
+        message: url + 'message/',
 
     }
 
+
     var vm = this;
     var baseUrl = config.baseUrl
-
+    vm.userInfo = {}
     vm.getAllBySql = function(callback){
 
         $http({
@@ -33,6 +36,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
 
     vm.login = function(loginForm,callback){
         console.log(url)
+        vm.userInfo = loginForm;
         $http
         ({
             method: 'POST',
@@ -42,6 +46,9 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         })
         .success(function(data)
         {
+            //console.log(loginForm)
+            window.localStorage.username = loginForm.username
+            //console.log(window.cookie)
             callback(data)
             /*if(!data.error) {
                 console.log(data);
@@ -141,11 +148,23 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         })
         .success(function(data)
         {
-            alert('user logout');
-            
-            window.location.href = data;
-
+            //alert('user logout');
+            console.log(window.location)
+            console.log(window.location.hostname + ':' + window.location.port)
+            var location = 'http://' + window.location.hostname + ':' + window.location.port
+            window.location.href = location
         })
+    }
+
+    vm.getMessage = function(username,callback)
+    {
+        $http({
+            method: 'GET',
+            url: config.message + username,
+        }).success(data)
+        {
+            callback(data)
+        }
     }
 
     vm.getAll = function (tableName, callback) {
@@ -176,7 +195,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             .success(function (data) {
                 callback(data)
             })
-    }
+        }
 
     vm.getAllUser = function (callback) {
         var tableName = 'user'

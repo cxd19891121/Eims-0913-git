@@ -1,5 +1,15 @@
 app.controller('search',['$scope','dataService',function($scope,dataService,$http,$httpParamSerializerJQLike)
 {
+    $scope.open = function(id) 
+    {
+        $scope.popup[id] = true;
+    }
+
+    $scope.popup = 
+    {
+        opened: false
+    }
+    
     $scope.ctrlScope = $scope
     $scope.searchObject =
     {

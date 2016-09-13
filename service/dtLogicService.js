@@ -10,6 +10,7 @@ var auth = require('./../service/authority')
 var search = require('./../service/sqlBuilder');
 var forgetService = require('./../service/forget');
 var mail = require('./../service/mail');
+var client = require('./../comm/redis');
 
 
 var repMsg = {}
@@ -37,14 +38,39 @@ var normalizeMsg = {
     }
 }
 
+// get all the website-message by user ID.
+exports.getMsgById = function(req,callback){
+    var id = req.params['id'];
 
+    auth.authCheck(req,function(o){
+        if(o.level >= 0){
+            client.get('id_'+id,function(e,o){
+                callback(e,o);
+            });
+        }
+    })
+}
+
+exports.sendMsg = function(req,callback){
+    var msgArr = req.body['message'];
+
+    msgArr.forEach(function(element){
+        client.set('id_'+element.toId, element, function(e,o){
+            callback(e,o);
+        });
+    })
+}
+
+
+
+//check auth and send back the correct client.
 exports.reach = function (req, callback) {
     auth.authCheck(req, function (o) {
         callback(o.filePath);
     })
 }
 
-
+//forget function
 exports.forget = function (req, callback) {
     var username = req.body.username
 
@@ -62,6 +88,7 @@ exports.forget = function (req, callback) {
 
 }
 
+//send email
 exports.mail = function (req, callback) {
 
     var username = req.body.username;
@@ -76,8 +103,6 @@ exports.mail = function (req, callback) {
             callback(null, o);
         }
     })
-
-
 }
 
 
@@ -121,6 +146,7 @@ exports.login = function (req, callback) {
     })
 }
 
+//logout: clear session.
 exports.logout = function (req, callback) {
     console.log('in logout dt service')
     req.session.user = null;
@@ -130,21 +156,22 @@ exports.logout = function (req, callback) {
     })
 }
 
+//refresh all the file.
 exports.backToIndex = function(req,callback){
     auth.authCheck(req,function(authObj){
         callback(authObj.fileName);
     })
 }
 
-
+//get all data into an array.
 exports.getAllBySql = function (callback) {
     search.getAll(function (e, o) {
         callback(e, o);
     })
 }
 
+//get all data into an object
 exports.getAllTable = function (callback) {
-
     dtService.getAll(userDAO, function (e, o) {
         repMsgService.buildGetAllMsg(repMsgGroup.user, 'user_info', e, o);
 
@@ -171,7 +198,7 @@ exports.getAllTable = function (callback) {
 
 }
 
-
+//insert the data into all tables.
 exports.addAll = function (req, callback) {
 
     // check the authority
@@ -232,9 +259,9 @@ exports.addAll = function (req, callback) {
 
 
     // })
-
 }
 
+//getAllById: get one personal's all information by searching the employee id.
 exports.getAllById = function (req, callback) {
     var id = req.params['id'];
 
@@ -271,7 +298,7 @@ exports.getAllById = function (req, callback) {
     })
 }
 
-
+//update individual's all information by search the employee id.
 exports.updateAllById = function (req, callback) {
     var id = req.params['id'];
 
@@ -316,6 +343,7 @@ exports.updateAllById = function (req, callback) {
     })
 }
 
+//delete all by id: given emp_id and delete all the information about this person. (this function have not implemented by our system)
 exports.deleteAllById = function (req, callback) {
     var id = req.params['id'];
 

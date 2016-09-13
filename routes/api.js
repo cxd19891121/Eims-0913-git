@@ -21,6 +21,28 @@ router.all('*', function (req, res, next) {
     next();
 });
 
+//api for website-message:
+//get message by id
+router.get('/message/:id',function(req,res){
+    dtLogicService.getMsgById(req,function(e,o){
+        if(e){
+            res.send(e)
+        }else{
+            res.send(o);
+        }
+    })
+})
+//send website-message to multi user:
+router.post('/message/',function(req,res){
+    dtLogicService.sendMsg(req,function(e,o){
+        if(e){
+            res.send(e);
+        }else{
+            res.send(o);
+        }
+    })
+})
+
 router.get('/all/:id', function (req, res) {
     dtLogicService.getAllById(req,function(e,o){
        res.send(o)

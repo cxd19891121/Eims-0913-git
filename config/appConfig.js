@@ -6,7 +6,7 @@ var fs = require('fs');
 
 var config = {
 
-    baseUrl: 'localhost',
+    baseUrl: '192.168.1.61',
     port: 3000,
     database:{
         host: 'ec2-54-243-249-149.compute-1.amazonaws.com',
@@ -19,7 +19,13 @@ var config = {
     },
 
     redis: {
-        client:'redis://h:pe9f1ih365dtc5ajp0pha3i12c7@ec2-50-19-83-130.compute-1.amazonaws.com:9119'
+        client:'redis://h:pe9f1ih365dtc5ajp0pha3i12c7@ec2-50-19-83-130.compute-1.amazonaws.com:9119',
+        port:9119,
+        password: 'pe9f1ih365dtc5ajp0pha3i12c7',
+        host: 'ec2-50-19-83-130.compute-1.amazonaws.com',
+        name:'redis-flexible-80564',
+        limit: '25MB',
+
     },
 
     session:{
@@ -38,7 +44,7 @@ var config = {
             ops:'login',
             filePath: '/login.html',
             fileName:'',
-            url:'localhost:3000/'
+            url:'http://192.168.1.61:3000/'
         },
         user:{
             level:0,
@@ -46,7 +52,7 @@ var config = {
             ops:'read, download, print',
             filePath:'/user.html',
             fileName:'user',
-            url:'localhost:3000/user/'
+            url:'http://192.168.1.61:3000/user/'
         },
         admin:{
             level:1,
@@ -54,7 +60,7 @@ var config = {
             ops:'read,add,delete,edit,download,print',
             filePath :'/administrator.html',
             fileName:'admin',
-            url:'localhost:3000/admin'
+            url:'http://192.168.1.61:3000/admin'
         },
 
     },

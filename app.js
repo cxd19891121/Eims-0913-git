@@ -8,17 +8,14 @@ var session = require('express-session');
 var routes = require('./routes/index');
 var api = require('./routes/api');
 var search  = require('./routes/search');
-var redis = require('redis');
 var config = require('./config/appConfig');
-
-var client = redis.createClient(config.redis.client);
+var client = require('./comm/redis');
 var app = express();
 
 var sessionConfig = config.session;
 sessionConfig.instance = client;
 
 app.use(session(sessionConfig));
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

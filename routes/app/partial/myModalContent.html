@@ -1,0 +1,77 @@
+<script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Detail</h3>
+                    </div>
+                    <div class="modal-body" >
+
+                        <uib-accordion close-others="personalInformation">
+                        <div uib-accordion-group class="panel-default" heading="Personal Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                            <div class="container">
+                            <span class="label label-info">Employee ID:</span> &emsp; {{ detail.e_id }} <br>     
+                            <span class="label label-info">First Name: </span> &emsp; {{ detail.first_name }} <br>
+                            <span class="label label-info">Last Name: </span> &emsp; {{ detail.last_name }} <br>
+                            <span class="label label-info">Middle Name: </span> &emsp; {{ detail.middle_name }} <br>
+                            <span class="label label-info">DOB: </span> &emsp; {{ detail.dob }} <br>
+                            <span class="label label-info">SSN: </span> &emsp; {{ detail.ssn }} <br>
+                            <span class="label label-info">Marriage: </span> &emsp; {{ detail.matrial }}<br>
+                            </div>
+                            
+                        </div>
+                        </uib-accordion> 
+
+                        <uib-accordion close-others="orderInformation">
+                        <div uib-accordion-group class="panel-default" heading="Order Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                            <div class="container">
+                                <span class="label label-info">Order Status:</span> &emsp; {{ detail.order_status }} <br>
+                                <span class="label label-info">Job Location:</span> &emsp; {{ detail.job_location }} <br>
+                                <span class="label label-info">Company:</span> &emsp; {{ detail.company }} <br>
+                                <span class="label label-info">Description:</span> &emsp; {{ detail.description }} <br>
+                                <span class="label label-info">Type:</span> &emsp; {{ detail.type }} <br>
+                                <span class="label label-info">Title:</span> &emsp; {{ detail.title }} <br>
+                                <span class="label label-info">Start Time:</span> &emsp; {{ detail.start_time }} <br>
+                                <span class="label label-info">End Time:</span> &emsp; {{ detail.end_time}} <br>
+                                <span class="label label-info">Owner:</span> &emsp; {{ detail.owner }} <br>
+                                <span class="label label-info">Extension Time:</span> &emsp; {{ detail.extension_time }}<br>
+                            </div>
+                        </div>
+                        </uib-accordion>
+
+                        <uib-accordion close-others="contactInformation">
+                        <div uib-accordion-group class="panel-default" heading="Contact Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                            <div class="container">
+                                <span class="label label-info">Phone Number:</span> &emsp; {{ detail.phone_number }} <br>
+                                <span class="label label-info">Home Number:</span> &emsp; {{ detail.home_number }} <br>
+                                <span class="label label-info">Email:</span> &emsp; {{ detail.email }} <br>
+                            </div>
+                        </div>
+                        </uib-accordion>
+
+                        <uib-accordion close-others="jobInformation">
+                        <div uib-accordion-group class="panel-default" heading="Job&Education Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                            <div class="container">
+                            <span class="label label-info">Salary:</span> &emsp; {{ detail.salary }} <br>    
+                            <span class="label label-info">Level:</span> &emsp; {{ detail.job_level }} <br> 
+                            <span class="label label-info">Job Title:</span> &emsp; {{ detail.job_title }} <br> 
+                            <span class="label label-info">Major:</span> &emsp; {{ detail.major }} <br>  
+                            <span class="label label-info">Degree:</span> &emsp; {{ detail.degree }} <br> 
+                            </div>
+                        </div>
+                        </uib-accordion>
+                        <div id="printElement" style="display:none">
+                            <ul>  
+                                <li> Name:{{detail.first_name}} &emsp; {{detail.last_name}} </li>
+                                <li> Birthday:{{detail.dob}}</li>
+                                <li> Visa Start Time:{{detail.start_time}}</li>
+                                <li> Visa End Time:{{detail.end_time}}</li>
+                                <li> Job Title:{{detail.job_title}}</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-primary" type="button" ng-click="print()">Print</button>
+                        <button class="btn btn-primary" type="button" ng-click="download()">Download</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>

@@ -1,0 +1,20 @@
+<div>
+<h1> show : {{vm.test}} </h1>
+
+    <button class="btn btn-primary" ng-click="vm.goAdd()"> Go to Add </button>
+    <button class="btn btn-primary" ng-click="vm.goEdit(7)"> Go to Edit</button>
+
+    <p>
+        <span ng-repeat = 'emp in vm.allEmp'>
+            {{emp.emp_id}}-----{{emp.first_name}}-{{emp.last_name}}<button class="btn btn-primary" ng-click = 'vm.goEdit(emp.emp_id)'> Go to Edit</button>
+            <button class="btn btn-primary">Delete This Emp</button>
+            <br>
+        </span>
+
+
+
+
+
+
+
+</div>

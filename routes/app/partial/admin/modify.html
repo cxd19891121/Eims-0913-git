@@ -1,0 +1,108 @@
+
+<div ng-controller="modify" data-ng-init="init()">
+    <div class = "container">
+
+        <h1>System Config</h1>
+    <table class="table table-striped">
+
+        <tbody>
+
+        <hr>
+        <br><br>
+        <h3><strong>Database Config :</strong> </h3>
+        <tr><td>baseUrl:</td> <td><input type="text" ng-model="config.baseUrl" size="80"></td></tr>
+        <tr><td>port:</td> <td><input type="number" ng-model="config.port" size="80"></td></tr>
+        <tr ng-repeat="(key, value) in config.database">
+            <td>{{key}}:</td> <td><input type="text" ng-model="config.database[key]" size="80"></td>
+        </tr>
+
+        <br>
+        <tr><td> <label>Redis Config:</label></td></tr>
+        <tr ng-repeat="(key, value) in config.redis">
+            <td>{{key}}:</td> <td><input type="text" ng-model="config.redis[key]" size="80"></td>
+        </tr>
+
+        <tr><td> <label>Session Config:</label></td></tr>
+        <tr ng-repeat="(key, value) in config.session">
+            <td>{{key}}:</td> <td><input type="text" ng-model="config.session[key]" size="80"></td>
+        </tr>
+
+        </tbody>
+        <tbody><tr><td> <label>Authority Config: </label></td></tr></tbody>
+        <tbody ng-repeat="(key, value) in config.auth">
+
+        <tr><td> <label>{{key}}:</label></td></tr>
+        <tr ng-repeat="(k,v) in value">
+            <td>{{ key }}.{{ k }}:</td> <td><input type="text" ng-model="value[k]" size="80"> </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr><td><label> Service Config:</label></td></tr>
+        </tbody>
+        <tbody ng-repeat="(key, value) in config.service">
+
+            <tr ng-repeat="(k,v) in value">
+                <td>{{ key }}.{{ k }}:</td> <td><input type="text" ng-model="value[k]"  size="80"> </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+        <button class="btn btn-primary" ng-click="updateConfig()">
+            <span class="glyphicon glyphicon-pencil"></span>Update Config
+        </button>
+    <br>
+        <hr>
+        <br><br>
+    <h3><strong> Create New Level:</strong> </h3>
+        <hr><br>
+        <form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">  Level name:</label>
+        <div class="col-sm-6">
+            <input type="text" ng-model="newLevel.name" size="80">
+        </div>
+    </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> Level:</label>
+            <div class="col-sm-6">
+                <input type="number" ng-model="newLevel.level" size="80">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> Tag:</label>
+            <div class="col-sm-6">
+                <input type="text" ng-model="newLevel.tag" size="80">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> Operation:</label>
+            <div class="col-sm-6">
+                <input type="text" ng-model="newLevel.ops" size="80">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> filePath:</label>
+            <div class="col-sm-6">
+                <input type="text" ng-model="newLevel.filePath" size="80">
+            </div>
+        </div>
+        </form>
+
+
+
+
+    <button class="btn btn-primary" ng-click="createLevel()">
+        <span class="glyphicon glyphicon-pencil"></span>Add level
+    </button>
+
+
+        <hr>
+        <br><br>
+
+    </div>
+</div>

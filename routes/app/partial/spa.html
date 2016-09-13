@@ -1,0 +1,139 @@
+<div>
+
+    <div class="container" ng-show="showSearch" >
+        <h3>Search</h3>
+        <hr>
+        <form class="form-horizontal" ng-controller="search">
+            <uib-accordion close-others="showMoreSearch">
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label">Employee name:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="Please input employee name">&emsp;&emsp;
+                        <button class="btn btn-success" ng-click="searchByName()">
+                            <span class="glyphicon glyphicon-log-in"></span> Search
+                        </button>
+
+                    </div>
+                </div>
+                <div uib-accordion-group class="panel-default" heading="Show More" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="form-inline">
+
+                        <label class="col-sm-2 control-label">First name:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.first_name" class='form-control'>
+                        </div>
+                        <label class="col-sm-2 control-label">Last name:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.last_name" class='form-control'>
+                        </div>
+                    </div>
+                    <br><br><br>
+
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Job title:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.job_title" class='form-control'>
+                        </div>
+                        <label class="col-sm-2 control-label">Visa status:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.status" class='form-control'>
+                        </div>
+                    </div>
+                    <br><br><br>
+
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Major:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.major" class='form-control'>
+                        </div>
+                        <label class="col-sm-2 control-label">Education:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.degree" class='form-control'>
+                        </div>
+                    </div>
+                    <br><br><br>
+
+                    <div uib-accordion-group class="panel-default" heading="Advance" is-open="status.isAdvanceOpen" is-disabled="status.isAdvanceDisabled">
+
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="date" ng-model="searchObject['visa_info.start_time']" placeholder='YYYY/MM/DD' class='form-control'>
+                            </div>
+                            <label class="col-sm-2 control-label">Visa End:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="date" ng-model="searchObject['visa_info.end_time']" placeholder='YYYY/MM/DD' class='form-control'>
+                            </div>
+
+                        </div>
+                        <br><br><br>
+
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Salary:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="number" ng-model="searchObject['salary']" class='form-control'>
+                            </div>
+                            <label class="col-sm-2 control-label">Health Insurance:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="text" ng-model="searchObject['health_insurance']" class='form-control'>
+                            </div>
+
+                        </div>
+                        <br><br><br>
+                    </div>
+                </div>
+            </uib-accordion>
+        </form>
+        <br><br>
+        <div>
+            &emsp;&emsp;
+            <button class="btn btn-success" ng-click="deepSearch()">
+                <span class="glyphicon glyphicon-log-in"></span> DeepSearch
+            </button>
+        </div>
+
+
+        <hr>
+        <button class="btn btn-success" ng-click="addNewUser()">
+            <span class="glyphicon glyphicon-log-in"></span> Add
+        </button>
+
+        <hr>
+        <div ng-controller="edit">
+                <table class="table table-striped">
+                    <thead><tr>
+                        <button class="btn btn-primary" ng-click="selectAll()">Select All </button>
+                        <th><a href="" ng-click="printAll()">Print </a> / <a href="" ng-click="downloadAll()">Download</a> </th>
+                        <th><a href="" ng-click="order('id')">Employee Id</a></th>
+                        <th><a href="" ng-click="order('first_name')">Name</a></th>
+                        <th><a href="" ng-click="order('order')">Order Status</a></th>
+                        <th><a href="" ng-click="order('visa')">Visa Status</a></th>
+                        <th><a href="" ng-click="order('expire')">Visa Expire Date</a></th>
+                        <th><a href="" ng-click="order('job')">Job Title</a></th>
+                        <th>Operation</th>
+                    </tr></thead>
+                    <tbody><tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
+                        <td><input type="checkbox" ng-model="user.flag"></td>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                        <td>{{ user.description }}</td>
+                        <td>{{ user.status }}</td>
+                        <td>{{ user.end_time }}</td>
+                        <td>{{ user.job_title }}</td>
+                        <td>
+                            <button class="btn btn-primary" ng-click="editUser(user.id)">
+                                <span class="glyphicon glyphicon-pencil"></span>Edit
+                            </button>
+                            <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)")>
+                                <span class="glyphicon glyphicon-pencil"></span>Detail
+                            </button>
+                        </td>
+                    </tr></tbody>
+                </table>
+                <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="5" boundary-links="true" items-per-page="pageSize"></ul>
+        </div>
+</div>
+
+
+
+

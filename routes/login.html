@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = 'utf-8'>
+        <title>
+            Welcome to the emjs
+        </title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
+        <script type='text/javascript' src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    </head>
+
+    <body ng-app="myApp" ng-controller="login">
+
+    <div class="container" ng-show="showLogin">
+
+        <h3>Welcome to employee information manage system</h3>
+        <hr>
+
+        <form class="form-horizontal">
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label" heading="">Username:&emsp;</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" ng-model="username" placeholder="Username">
+                </div>
+            </div>
+            
+            <br>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Password:&emsp;</label>
+                <div class="col-md-6">
+                    <input type="password" ng-model="password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+
+        </form>
+
+        <hr>
+        <button class="btn btn-success" ng-disabled="error || incomplete" ng-click="login()">
+            <span class="glyphicon glyphicon-log-in"></span> Login
+        </button>
+        <button class="btn btn-info" ng-click="forget()">
+            <span class="glyphicon glyphicon-user"></span> Forget Password
+        </button>
+        
+    </div>
+
+
+    <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Forget Password</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" heading="">Username:&emsp;</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="username" placeholder="Username">
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="modal-footer">
+                        <button class="btn btn-success" type="button" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+                <br><br>
+
+    </script>
+
+    <script>
+        var app = angular.module('myApp', ['ngAnimate', 'ui.bootstrap'])
+        app.controller('login', function($scope,$http,$httpParamSerializerJQLike, $uibModal,$log) 
+        {
+            $scope.showLogin = true
+            $scope.incomplete = false
+            $scope.$watch('password',function() {$scope.fill();});
+            $scope.$watch('username',function() {$scope.fill();});
+            $scope.fill = function() 
+            {
+                if ($scope.password != undefined && $scope.username != undefined) 
+                {
+                    $scope.incomplete = false;
+                } 
+                else 
+                {
+                    $scope.incomplete = true;
+                }
+            }
+
+            $scope.login = function()
+            {
+                var loginForm = 
+                {
+                    username : $scope.username,
+                    password : $scope.password
+                }
+                $http
+                ({
+                    method: 'POST',
+                    url: 'http://localhost:3000/',
+                    data: $httpParamSerializerJQLike(loginForm),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .success(function(data)
+                {
+                    if(!data.error) {
+                        console.log(data);
+                        window.location.href = data;
+                    }
+                })
+            }
+
+            $scope.forgetPas = false
+            $scope.forget = function()
+            {
+                if($scope.forgetPas == false)
+                {
+                    $scope.forgetPas = true
+                    //$scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = element})
+                    $scope.open()
+                }
+                else
+                {
+                    //$scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = element})
+                    $scope.open()
+                }
+            }
+
+            $scope.animationsEnabled = true
+
+            $scope.open = function (size) 
+            {
+
+                var modalInstance = $uibModal.open
+                ({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: 'myModalContent.html',
+                    controller: 'ModalInstanceCtrl',
+                    size: size,
+                    resolve: 
+                            {
+                                
+                            }
+                })
+
+            }
+        })
+        app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,$http,$httpParamSerializerJQLike) 
+        {
+            
+            $scope.username = ''
+            $scope.ok = function () 
+            {
+                $http
+                ({
+                    method: 'POST',
+                    url: 'http://localhost:3000/forget',
+                    data: $httpParamSerializerJQLike({username:$scope.username}),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .success(function(data)
+                {
+                    
+                    if(!data)
+                    {
+                        alert('fail')
+                    }
+                    else
+                    {
+                        $uibModalInstance.close()
+                        console.log(data)
+                        
+                        //$scope.$parent.$broadcast('changeData',data)
+                    }
+                })
+                $uibModalInstance.close()
+                //uibModalInstance.close()
+                
+            }
+
+            $scope.cancel = function () 
+            {
+                $uibModalInstance.dismiss('cancel')
+            }
+        })
+        
+    </script>
+
+
+</body>
+</html>

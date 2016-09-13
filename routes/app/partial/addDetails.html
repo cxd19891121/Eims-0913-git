@@ -1,0 +1,134 @@
+<div class="container">
+    <h3>Add</h3><hr>
+    <pre>Please input employee information here:</pre>
+
+    <div class="col-sm-10"><uib-progressbar  class="progress-striped" value=getProgressData()></uib-progressbar></div>
+
+
+    <form class="form-horizontal">
+        <uib-tabset active="active" type="tabs">
+            <uib-tab index="0" heading="Personal Info" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.personalInfo">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur=validate(key,addNewEmployee.personalInfo,value) ng-model = newEmployee.personalInfo[key]   placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="1" heading="order" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.orderStatus">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.orderStatus,value) ng-model = newEmployee.orderStatus[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="2" heading="contact" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.contactInfo">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.contactInfo,value) ng-model = newEmployee.contactInfo[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="3" heading="address" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.address">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.address,value) ng-model = newEmployee.address[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="4" heading="visa" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.visaInfo">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.visaInfo,value) ng-model = newEmployee.visaInfo[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="5" heading="termination" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.termination">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.termination,value) ng-model =newEmployee.termination[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="6" heading="Job&Edu" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.jobEducation">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.jobEducation,value) ng-model = newEmployee.jobEducation[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+
+            <uib-tab index="7" heading="salary" >
+                <br>
+                <div ng-repeat="(key,value) in newEmployee.salaryBenefit">
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">{{key}}:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-blur= validate(key,addNewEmployee.salaryBenefit,value) ng-model = newEmployee.salaryBenefit[key] placeholder="{{key}}">
+                            <font color="red">{{validateMessage[key]}}</font>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </uib-tab>
+        </uib-tabset>
+
+    </form>
+    <br><br><br>
+    <div class="row">
+
+        <button class="btn btn-primary" ng-click="returnToAdd()">
+            <span class="glyphicon glyphicon-backward"></span> Before
+        </button>
+        <button class="btn btn-primary" ng-click="addSubmit()">
+            <span class="glyphicon glyphicon-log-in"></span> Finish
+        </button>
+    </div>
+</div>

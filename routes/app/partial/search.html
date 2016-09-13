@@ -1,0 +1,236 @@
+<div class="container">
+    <h3>Search</h3>
+    <hr>
+    <form class="form-horizontal" ng-controller="search">
+        <uib-accordion close-others="showMoreSearch">
+            <div class="form-inline">
+                <label class="col-sm-2 control-label">Employee name:&emsp;</label>
+                <div class="col-md-4">
+                    <input type="text" ng-model="ctrlScope.employeeName" class='form-control'
+                           placeholder="employee name">&emsp;&emsp;
+                    <button class="btn btn-success" ng-click="searchByName()">
+                        <span class="glyphicon glyphicon-log-in"></span> Search
+                    </button>
+
+                </div>
+            </div>
+            <div uib-accordion-group class="panel-default" heading="Show More" is-open="status.isFirstOpen"
+                 is-disabled="status.isFirstDisabled">
+                <div class="form-inline">
+
+                    <label class="col-sm-2 control-label">First name:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchObject.first_name" class='form-control'>
+                    </div>
+                    <label class="col-sm-2 control-label">Last name:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchObject.last_name" class='form-control'>
+                    </div>
+                </div>
+                <br><br><br>
+
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label">Job title:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchObject.job_title" class='form-control'>
+                    </div>
+                    <label class="col-sm-2 control-label">Visa status:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchObject.status" class='form-control'>
+                    </div>
+                </div>
+                <br><br><br>
+
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label">Major:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchObject.major" class='form-control'>
+                    </div>
+                    <label class="col-sm-2 control-label">Education:&emsp;</label>
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchObject.degree" class='form-control'>
+                    </div>
+                </div>
+                <br><br><br>
+
+                <div uib-accordion-group class="panel-default" heading="Advance" is-open="status.isAdvanceOpen"
+                     is-disabled="status.isAdvanceDisabled">
+
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="date" ng-model="searchObject['visa_info.start_time']" placeholder='YYYY/MM/DD'
+                                   class='form-control'>
+                        </div>
+                        <label class="col-sm-2 control-label">Visa End:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="date" ng-model="searchObject['visa_info.end_time']" placeholder='YYYY/MM/DD'
+                                   class='form-control'>
+                        </div>
+
+                    </div>
+                    <br><br><br>
+
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Salary:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="searchObject['salary']" class='form-control'>
+                        </div>
+                        <label class="col-sm-2 control-label">Health Insurance:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject['health_insurance']" class='form-control'>
+                        </div>
+
+                    </div>
+                    <br><br><br>
+
+        </uib-accordion>
+
+    </form>
+</div>
+<br><br>
+<div>
+
+    &emsp;&emsp;
+    <button class="btn btn-success" ng-click="deepSearch()">
+        <span class="glyphicon glyphicon-log-in"></span> DeepSearch
+    </button>
+</div>
+
+</div>
+
+</uib-accordion>
+</form>
+
+<hr>
+<button class="btn btn-success" ng-click="addNewUser()">
+    <span class="glyphicon glyphicon-log-in"></span> Add
+</button>
+
+<button class="btn btn-success" ng-click="logout()">
+    <span class="glyphicon glyphicon-log-in"></span> logout
+</button>
+<hr>
+
+
+<div ng-controller="edit" >
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <button class="btn btn-primary" ng-click="selectAll()">Select All</button>
+            <th><a href="" ng-click="printAll()">Print </a> / <a href="" ng-click="downloadAll()">Download</a></th>
+            <th><a href="" ng-click="order('id')">Employee Id</a></th>
+            <th><a href="" ng-click="order('first_name')">Name</a></th>
+            <th><a href="" ng-click="order('order')">Order Status</a></th>
+            <th><a href="" ng-click="order('visa')">Visa Status</a></th>
+            <th><a href="" ng-click="order('expire')">Visa Expire Date</a></th>
+            <th><a href="" ng-click="order('job')">Job Title</a></th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
+            <td><input type="checkbox" ng-model="user.flag"></td>
+            <td>{{ user.e_id }}</td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.description }}</td>
+            <td>{{ user.status }}</td>
+            <td>{{ user.end_time }}</td>
+            <td>{{ user.job_title }}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="editUser(user.e_id)">
+                    <span class="glyphicon glyphicon-pencil"></span>Edit
+                </button>
+                <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
+                    <span class="glyphicon glyphicon-pencil"></span>Detail
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="5" boundary-links="true"
+        items-per-page="pageSize"></ul>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Detail</h3>
+    </div>
+    <div class="modal-body">
+
+        <uib-accordion close-others="personalInformation">
+            <div uib-accordion-group class="panel-default" heading="Personal Information" is-open="status.isFirstOpen"
+                 is-disabled="status.isFirstDisabled">
+                <div class="container">
+                    <span class="label label-info">Employee ID:</span> &emsp; {{ detail.e_id }} <br>
+                    <span class="label label-info">First Name: </span> &emsp; {{ detail.first_name }} <br>
+                    <span class="label label-info">Last Name: </span> &emsp; {{ detail.last_name }} <br>
+                    <span class="label label-info">Middle Name: </span> &emsp; {{ detail.middle_name }} <br>
+                    <span class="label label-info">DOB: </span> &emsp; {{ detail.dob }} <br>
+                    <span class="label label-info">SSN: </span> &emsp; {{ detail.ssn }} <br>
+                    <span class="label label-info">Marriage: </span> &emsp; {{ detail.matrial }}<br>
+                </div>
+
+            </div>
+        </uib-accordion>
+
+        <uib-accordion close-others="orderInformation">
+            <div uib-accordion-group class="panel-default" heading="Order Information" is-open="status.isFirstOpen"
+                 is-disabled="status.isFirstDisabled">
+                <div class="container">
+                    <span class="label label-info">Order Status:</span> &emsp; {{ detail.order_status }} <br>
+                    <span class="label label-info">Job Location:</span> &emsp; {{ detail.job_location }} <br>
+                    <span class="label label-info">Company:</span> &emsp; {{ detail.company }} <br>
+                    <span class="label label-info">Description:</span> &emsp; {{ detail.description }} <br>
+                    <span class="label label-info">Type:</span> &emsp; {{ detail.type }} <br>
+                    <span class="label label-info">Title:</span> &emsp; {{ detail.title }} <br>
+                    <span class="label label-info">Start Time:</span> &emsp; {{ detail.start_time }} <br>
+                    <span class="label label-info">End Time:</span> &emsp; {{ detail.end_time}} <br>
+                    <span class="label label-info">Owner:</span> &emsp; {{ detail.owner }} <br>
+                    <span class="label label-info">Extension Time:</span> &emsp; {{ detail.extension_time }}<br>
+                </div>
+            </div>
+        </uib-accordion>
+
+        <uib-accordion close-others="contactInformation">
+            <div uib-accordion-group class="panel-default" heading="Contact Information" is-open="status.isFirstOpen"
+                 is-disabled="status.isFirstDisabled">
+                <div class="container">
+                    <span class="label label-info">Phone Number:</span> &emsp; {{ detail.phone_number }} <br>
+                    <span class="label label-info">Home Number:</span> &emsp; {{ detail.home_number }} <br>
+                    <span class="label label-info">Email:</span> &emsp; {{ detail.email }} <br>
+                </div>
+            </div>
+        </uib-accordion>
+
+        <uib-accordion close-others="jobInformation">
+            <div uib-accordion-group class="panel-default" heading="Job&Education Information"
+                 is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                <div class="container">
+                    <span class="label label-info">Salary:</span> &emsp; {{ detail.salary }} <br>
+                    <span class="label label-info">Level:</span> &emsp; {{ detail.job_level }} <br>
+                    <span class="label label-info">Job Title:</span> &emsp; {{ detail.job_title }} <br>
+                    <span class="label label-info">Major:</span> &emsp; {{ detail.major }} <br>
+                    <span class="label label-info">Degree:</span> &emsp; {{ detail.degree }} <br>
+                </div>
+            </div>
+        </uib-accordion>
+        <div id="printElement" style="display:none">
+            <ul>
+                <li> Name:{{detail.first_name}} &emsp; {{detail.last_name}}</li>
+                <li> Birthday:{{detail.dob}}</li>
+                <li> Visa Start Time:{{detail.start_time}}</li>
+                <li> Visa End Time:{{detail.end_time}}</li>
+                <li> Job Title:{{detail.job_title}}</li>
+            </ul>
+        </div>
+
+        <button class="btn btn-primary" type="button" ng-click="print()">Print</button>
+        <button class="btn btn-primary" type="button" ng-click="download()">Download</button>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+

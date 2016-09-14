@@ -163,8 +163,29 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             url: config.message + username,
         }).success(data)
         {
-            callback(data)
+            if (data)
+            {
+                callback(data)
+            }
         }
+    }
+
+    vm.sendMessage = function(obj,callback)
+    {
+        $http({
+            method:'POST',
+            url: config.message,
+            data: angular.toJson(obj),
+            headers: {'Content-Type': 'application/json'}
+        }).then(function successCallback(data) {
+            console.log("in sucess callback");
+            console.log(data);
+            callback(null, data)
+        }, function errorCallback(data) {
+            console.log("in error callback");
+            console.log(data);
+            callback(data);
+        });
     }
 
     vm.getAll = function (tableName, callback) {
@@ -199,16 +220,16 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
 
     vm.getAllUser = function (callback) {
         var tableName = 'user'
-        console.log('in function');
+        //console.log('in function');
         $http({
             method: 'GET',
             url: baseUrl + tableName,
         }).then(function successCallback(data) {
-            console.log("in sucess callback");
-            console.log(data);
+            //console.log("in sucess callback");
+            //console.log(data);
             callback(data.data.rows)
         }, function errorCallback(data) {
-            console.log("in error callback");
+            //console.log("in error callback");
             console.log(data);
             callback(data);
         });

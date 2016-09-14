@@ -100,8 +100,6 @@ app.controller('edit',function($scope,$uibModal, dataService)
     {
         if(info.data == null || info.data == '')
         {
-            //$scope.totalItems = 0
-            //$scope.users = []
             return alert('Error: no fetched employee')
         }
         else
@@ -219,15 +217,20 @@ app.controller('edit',function($scope,$uibModal, dataService)
     function init(){
         dataService.getAllBySql(function(e,o){
             if(o){
-                //console.log('in edit controller, getAllBySql',o);
                 $scope.users = o;
+                $scope.users.forEach(function(element)
+                {
+                    for (i in element)
+                    {
+                        if(!element.hasOwnProperty(i)) continue
+                        else element[i] = parseISO8601(element[i])
+                    }
+                    element.flag = false
+                })
                 $scope.totalItems = o.length;
-
-
             }
             else{
                 $scope.users = [{id : 0,first_name:'test',description:'on project',status:'due',dob:'1/1/1995',e_id:0,job_title:'projector',age:10},{id : 1,name:'er',dob:'1/1/1',age:3}]
-
             }
         })
 

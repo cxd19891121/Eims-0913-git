@@ -138,12 +138,14 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         ({
             method: 'GET',
             url: config.logout//'http://localhost:3000/logout',
-        }).success(function(data)
-            {
-                alert('user logout');
-                window.location.href = data;
+        })
+        .success(function(data)
+        {
+            alert('user logout');
+            
+            window.location.href = data;
 
-            })
+        })
     }
 
     vm.getAll = function (tableName, callback) {
@@ -203,8 +205,6 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             url: baseUrl + tableName,
             data: angular.toJson(user),
             headers: {'Content-Type': 'application/json'}
-            //{ 'Content-Type': 'application/json' }
-
         }).then(function successCallback(data) {
             console.log("in sucess callback");
             console.log(data);

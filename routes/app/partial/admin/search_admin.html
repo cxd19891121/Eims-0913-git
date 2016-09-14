@@ -56,11 +56,11 @@
                     <div class="form-inline">
                         <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="date" ng-model="searchObject['visa_info.start_time']" placeholder='YYYY/MM/DD' class='form-control'>
+                             <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']" ng-focus="open(1)" is-open="popup['1']"/>
                         </div>
                         <label class="col-sm-2 control-label">Visa End:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="date" ng-model="searchObject['visa_info.end_time']" placeholder='YYYY/MM/DD' class='form-control'>
+                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']" ng-focus="open(0)" is-open="popup['0']"/>
                         </div>
 
                     </div>

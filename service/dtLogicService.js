@@ -38,27 +38,58 @@ var normalizeMsg = {
     }
 }
 
-// get all the website-message by user ID.
-exports.getMsgById = function(req,callback){
-    var id = req.params['id'];
+// get all the website-message by username.
+exports.getMsgByName = function(req,callback){
+    var name = req.params['name'];
+    console.log(name);
 
-    auth.authCheck(req,function(o){
-        if(o.level >= 0){
-            client.get('id_'+id,function(e,o){
-                callback(e,o);
-            });
-        }
-    })
+    client.get(name,function(e,o){
+        callback(e,JSON.parse(o));
+    });
 }
 
 exports.sendMsg = function(req,callback){
-    var msgArr = req.body['message'];
+    var msgMulti = req.body['message'];
 
-    msgArr.forEach(function(element){
-        client.set('id_'+element.toId, element, function(e,o){
-            callback(e,o);
-        });
+    msgMulti.forEach(function(msg,index){
+       // console.log('for each msg: ', msg);
+        client.get(msg.to,function(e,o){
+            // console.log("o"+index+ ":",o);
+            // console.log("msg"+index +":",msg);
+            if(e){
+                callback(e);
+
+            }else{
+                var msgArr = []
+                if(o == null || o == "") {
+                    msgArr = [];
+                }else{
+
+                    msgArr = JSON.parse(o);
+                }
+
+                msgArr.push(msg);
+         //       console.log('msgArr',msgArr);
+                client.set(msg.to,JSON.stringify(msgArr),function(e,o){
+                    if(e){
+                        callback(e);
+                    }
+                })
+            }
+        })
     })
+    callback(null,{msg: 'All messages have been send'});
+
+}
+
+exports.deleteAllMessage = function(req,callback){
+
+    var name = req.params['name'];
+    console.log(name);
+    client.set(name,"",function(e,o){
+        callback(e,{msg:o});
+    });
+
 }
 
 

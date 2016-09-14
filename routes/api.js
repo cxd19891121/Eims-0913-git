@@ -23,8 +23,8 @@ router.all('*', function (req, res, next) {
 
 //api for website-message:
 //get message by id
-router.get('/message/:id',function(req,res){
-    dtLogicService.getMsgById(req,function(e,o){
+router.get('/message/:name',function(req,res){
+    dtLogicService.getMsgByName(req,function(e,o){
         if(e){
             res.send(e)
         }else{
@@ -39,6 +39,16 @@ router.post('/message/',function(req,res){
             res.send(e);
         }else{
             res.send(o);
+        }
+    })
+})
+
+router.delete('/message/all/:name',function(req,res){
+    dtLogicService.deleteAllMessage(req,function(e,o){
+        if(e){
+            res.send(e)
+        }else{
+            res.send(o)
         }
     })
 })

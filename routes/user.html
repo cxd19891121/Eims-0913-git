@@ -12,6 +12,40 @@
 <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
 
 <body>
+<div style="position:absolute;top:0;right:0;">
+    <a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>
+    <a href="" ng-click="sendMessage()" class="control-label"> Send message </a>
+</div>
+<script type="text/ng-template" id="message.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Message</h3>
+    </div>
+    <div class="modal-body" >
+        <div ng-repeat="message in messages">
+            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  message: </span> {{message.message}}
+            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}"> from: </span> {{message.from}}
+            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  send time: </span> {{message.sendTime}}
+
+            <hr>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="send.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Send</h3>
+    </div>
+    <div class="modal-footer">
+        <div ng-repeat="user in users">
+            <input type="checkbox" ng-model="user.flag"> &nbsp;&nbsp;{{user.username}}
+        </div>
+        Message : <input type="text" ng-model="data">
+        <button class="btn btn-primary" type="button" ng-click="send()">Send</button>
+    </div>
+</script>
 
 <div ng-view>
 

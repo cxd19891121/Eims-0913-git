@@ -156,6 +156,10 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
         });
     }
 
+    vm.back= function(){
+        window.history.back();
+    }
+
     vm.getObj = function()
     {
         return {

@@ -111,6 +111,9 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
         })
     }
 
+    vm.back = function(){
+        window.history.back();
+    }
     vm.updateAllById = function(){
         dataService.updateAllById($scope.id,vm.data,function(e,o){
             //console.log(vm.data)

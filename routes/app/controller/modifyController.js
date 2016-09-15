@@ -11,6 +11,10 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         console.log($scope.config.database)
     }
 
+    $scope.back= function(){
+        window.history.back();
+    }
+
     $scope.createLevel = function()
     {
         $scope.config.auth[$scope.newLevel.name] =

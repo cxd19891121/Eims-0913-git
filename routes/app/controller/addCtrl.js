@@ -35,6 +35,9 @@ app.controller('addCtrl',function($scope,$http,$httpParamSerializerJQLike)
 
        $scope.$broadcast('selectTags',{})
     }
+    $scope.back = function(){
+        window.history.back();
+    }
 
     function pushTags(){
         if($scope.addNewEmployee.personalInfo){

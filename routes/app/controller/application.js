@@ -48,7 +48,15 @@ app.controller('application', function($scope,dataService,$uibModal)
         {
             if(data)
             {
-                $scope.messages = data
+                $scope.messages = []
+                data.forEach(function(element)
+                {
+                    if(element.delete == undefined)
+                    {
+                        $scope.messages.push(element)
+                    }
+                })
+                //$scope.messages = data
                 $scope.messages.forEach(function(element,index)
                 {
                     $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
@@ -65,7 +73,15 @@ app.controller('application', function($scope,dataService,$uibModal)
         {
             if(data)
             {
-                $scope.messages = data
+                $scope.messages = []
+                data.forEach(function(element)
+                {
+                    if(element.delete == undefined)
+                    {
+                        $scope.messages.push(element)
+                    }
+                })
+                //$scope.messages = data
                 $scope.messages.forEach(function(element,index)
                 {
                     $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
@@ -146,7 +162,12 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
             {
                 items[index].flag = true
             }
+            if (element.delete == true)
+            {
+                items.splice(index, 1);
+            }
         })
+        console.log(items)
         nums = 0
         dataService.putMessage(items,function(d)
         {
@@ -164,9 +185,15 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
         dataService.getAllUser(function(data)
         {
             console.log(data)
-            $scope.users = data
-            $scope.users.forEach( function(element,index)            {
-                $scope.users[index].flag = false
+            $scope.users = []
+            data.forEach( function(element,index)
+            {
+                
+                if (element.username !== window.localStorage.username)
+                {
+                    $scope.users.push(element)
+                    $scope.users[index].flag = false
+                }
             })
         })
     } 

@@ -11,6 +11,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         refresh: url + 'backToIndex',
         logout: url + 'logout',
         message: url + 'api/message/',
+        update: url + 'api/message/'
 
     }
 
@@ -184,6 +185,26 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             console.log("in sucess callback");
             console.log(data);
             callback(null, data)
+        }, function errorCallback(data) {
+            console.log("in error callback");
+            console.log(data);
+            callback(data);
+        });
+    }
+
+    vm.putMessage = function(obj,callback)
+    {
+        $http({
+            method: 'PUT',
+            url: config.update + window.localStorage.username,
+            data: angular.toJson({message: obj}),
+            headers: {'Content-Type': 'application/json'}
+        }).then(function successCallback(data) {
+            console.log("in sucess callback");
+            console.log(data);
+            //alert('User Information has been updated');
+            //window.location.href = url;
+            callback(data)
         }, function errorCallback(data) {
             console.log("in error callback");
             console.log(data);

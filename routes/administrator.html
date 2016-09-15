@@ -12,8 +12,8 @@
 <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
 
 <body>
-<div style="position:absolute;top:0;right:0;background-color:cyan;">
-    <a href="" ng-click="getMessage()" class="control-label">You have {{letterNum}} unread messages&emsp;</a>
+<div style="position:absolute;top:0;right:0;">
+    <a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>
     <a href="" ng-click="sendMessage()" class="control-label"> Send message </a>
 </div>
 <script type="text/ng-template" id="message.html">
@@ -22,10 +22,10 @@
     </div>
     <div class="modal-body" >
         <div ng-repeat="message in messages">
-        
-            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}"> from: </span> {{message.from}} <br>
-            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  send time: </span> {{message.sendtime}} <br>
-            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  message: </span> {{message.message}} <br>
+            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  message: </span> {{message.message}}
+            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}"> from: </span> {{message.from}} 
+            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  send time: </span> {{message.sendTime}} 
+            
             <hr>
         </div>
     </div>

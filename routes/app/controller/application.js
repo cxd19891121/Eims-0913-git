@@ -3,8 +3,8 @@
  */
 app.controller('application', function($scope,dataService,$uibModal)
 {
-    $scope.messages = [{from: 'admin',to: 'user',toID: 1,message: 'welcome to EIMS',flag: false ,readTime: '2016/1/1',sendTime: '2017/04/19'} , {from: 'login',to: 'user',toId: 1,message: 'hi', flag: true, readTime:'',sendTime:'2018/9/1'}]
-
+    $scope.messages = []
+    $scope.username = window.localStorage.username
     $scope.messages.unreadNumber = function()
     {
         var num = 0;
@@ -44,7 +44,6 @@ app.controller('application', function($scope,dataService,$uibModal)
 
     $scope.getMessage = function()
     {
-        $scope.open()
         dataService.getMessage(window.localStorage.username,function(data)
         {
             if(data)
@@ -52,8 +51,22 @@ app.controller('application', function($scope,dataService,$uibModal)
                 $scope.messages = data
             }
         })
+        $scope.open()
         
     }
+
+    $scope.refresh = function()
+    {
+        dataService.getMessage(window.localStorage.username,function(data)
+        {
+            if(data)
+            {
+                $scope.messages = data
+                $scope.letterNum = $scope.messages.length
+            }
+        })
+    }
+    $scope.refresh();
 
     
 
@@ -112,7 +125,7 @@ app.controller('application', function($scope,dataService,$uibModal)
     }
 })
 
-app.controller('message', function ($scope, $uibModalInstance, items, nums )
+app.controller('message', function ($scope, $uibModalInstance, items, nums ,dataService)
 {
     $scope.messages = items
 
@@ -127,6 +140,10 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums )
             }
         })
         nums = 0
+        dataService.putMessage(items,function(d)
+        {
+            console.log(d)
+        })
     }
 })
 
@@ -176,7 +193,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
 
         dataService.sendMessage(packet,function()
         {
-            console.log($scope.users)
+            console.log(packet)
             $uibModalInstance.close()
         })
 

@@ -10,7 +10,7 @@ app.controller('application', function($scope,dataService,$uibModal)
         var num = 0;
         $scope.messages.forEach( function(element)
         {
-            if (element.flag === false) num++            
+            if (element.flag === false) num++
         })
         return num;
     }
@@ -64,7 +64,7 @@ app.controller('application', function($scope,dataService,$uibModal)
             }
         })
         $scope.open()
-        
+
     }
 
     $scope.refresh = function()
@@ -92,7 +92,7 @@ app.controller('application', function($scope,dataService,$uibModal)
     }
     $scope.refresh();
 
-    
+
 
     $scope.id = -1
     $scope.$on('editUser',function(event,data)
@@ -107,7 +107,7 @@ app.controller('application', function($scope,dataService,$uibModal)
 
     $scope.open = function ()
     {
-        console.log($scope.letterNum)    
+        console.log($scope.letterNum)
         //console.log($scope.messages)
         var modalInstance = $uibModal.open
         ({
@@ -201,7 +201,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
                 $scope.users[index].flag = false
             })
         })
-    } 
+    }
     $scope.ok = function()
     {
         //$scope.getAllUser()
@@ -215,7 +215,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
             console.log(2)
             if (element.flag == true)
             {
-                var obj = 
+                var obj =
                 {
                     from: window.localStorage.username,
                     to: element.username,

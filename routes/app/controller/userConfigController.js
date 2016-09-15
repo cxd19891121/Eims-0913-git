@@ -73,4 +73,8 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         return (begin <= index && index < end);
     }
 
+    $scope.back = function(){
+        window.history.back();
+    }
+
 })

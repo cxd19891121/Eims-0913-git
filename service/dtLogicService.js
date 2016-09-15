@@ -260,7 +260,7 @@ exports.addAll = function (req, callback) {
                 type: 'no session'
             }
             callback(error);
-        } else if (authObj.level < 1) {
+        } else if (authObj.level > 0) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"
@@ -361,7 +361,7 @@ exports.updateAllById = function (req, callback) {
                 type: 'no session'
             }
             callback(error);
-        } else if (authObj.level < 1) {
+        } else if (authObj.level > 0) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"
@@ -406,7 +406,7 @@ exports.deleteAllById = function (req, callback) {
                 type: 'no session'
             }
             callback(error);
-        } else if (authObj.level < 1) {
+        } else if (authObj.level >0) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"

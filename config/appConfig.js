@@ -8,7 +8,7 @@ var fs = require('fs');
 
 var config = {
 
-    baseUrl: '192.168.1.61',
+    baseUrl: '192.168.1.41',
     port: 3000,
     database:{
         host: 'ec2-54-243-249-149.compute-1.amazonaws.com',
@@ -46,23 +46,23 @@ var config = {
             ops:'login',
             filePath: '/login.html',
             fileName:'',
-            url:'http://192.168.1.61:3000/'
+            url:'http://192.168.1.41:3000/'
         },
         user:{
-            level:0,
+            level:1,
             tag:'users',
             ops:'read, download, print',
             filePath:'/user.html',
             fileName:'user',
-            url:'http://192.168.1.61:3000/user/'
+            url:'http://192.168.1.41:3000/user/'
         },
         admin:{
-            level:1,
+            level:0,
             tag:'HR, administrator',
             ops:'read,add,delete,edit,download,print',
             filePath :'/administrator.html',
             fileName:'admin',
-            url:'http://192.168.1.61:3000/admin'
+            url:'http://192.168.1.41:3000/admin'
         },
 
     },
@@ -74,8 +74,6 @@ var config = {
     },
 
 }
-
-
 
 
 

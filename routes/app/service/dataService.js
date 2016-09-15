@@ -490,13 +490,19 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             //{ 'Content-Type': 'application/json' }
 
         }).then(function successCallback(data) {
-            console.log("in sucess callback");
+
+            console.log("in success callback");
             console.log(data);
-            var data = data.data;
-            alert(data.emp.msg + '\n'+ data.edu.msg+'\n' +
-                data.visa.msg+ '\n' + data.order.msg + '\n'+ data.work.msg);
-            window.location.href = url;
-            callback(null, data)
+
+            if(data.msg){
+                alert('fail to insert data');
+                callback(data);
+            }else {
+                var data = data.data;
+                alert("New Employee Info Added");
+                window.history.back();
+                callback(null, data)
+            }
         }, function errorCallback(data) {
             console.log("in error callback");
             console.log(data);

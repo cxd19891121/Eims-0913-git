@@ -31,13 +31,9 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
                 $scope.msg = e;
             }else{
                 $scope.msg = o;
-                alert(o.data);
-
                 var config = configService.getConfig();
-
-
                 var url = config.route.index;
-                window.location.href = url;
+                window.history.back();
             }
         });
 

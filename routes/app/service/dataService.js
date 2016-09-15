@@ -47,8 +47,12 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         })
         .success(function(data)
         {
-            //console.log(loginForm)
-            window.localStorage.username = loginForm.username
+
+            if(data.error){
+                alert(data.msg)
+            }else {
+                window.localStorage.username = loginForm.username
+            }
             //console.log(window.cookie)
             callback(data)
             /*if(!data.error) {

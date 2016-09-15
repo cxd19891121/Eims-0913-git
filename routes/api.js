@@ -36,11 +36,21 @@ router.get('/message/:name',function(req,res){
 })
 //send website-message to multi user:
 router.post('/message/',function(req,res){
-    console.log("send message", req.body,req.body['message']);
+
     dtLogicService.sendMsg(req,function(e,o){
 
         if(e){
             res.send(e);
+        }else{
+            res.send(o);
+        }
+    })
+})
+
+router.put('/message/:name',function(req,res){
+    dtLogicService.updateMsgByName(req,function(e,o){
+        if(e){
+            res.send(e)
         }else{
             res.send(o);
         }

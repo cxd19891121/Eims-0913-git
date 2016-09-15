@@ -53,6 +53,17 @@ exports.getMsgByName = function(req,callback){
     });
 }
 
+exports.updateMsgByName = function(req,callback){
+    var msgArr = req.body['message'];
+    var name = req.params['name'];
+
+    client.set(name,JSON.stringify(msgArr),function(e,o){
+        callback(e,{msg: o});
+    })
+
+
+}
+
 exports.sendMsg = function(req,callback){
     var msgMulti = req.body['message'];
 
@@ -63,6 +74,7 @@ exports.sendMsg = function(req,callback){
             // console.log("msg"+index +":",msg);
             if(e){
                 callback(e);
+                return;
 
             }else{
                 var msgArr = []
@@ -78,6 +90,7 @@ exports.sendMsg = function(req,callback){
                 client.set(msg.to,JSON.stringify(msgArr),function(e,o){
                     if(e){
                         callback(e);
+                        return;
                     }
                 })
             }

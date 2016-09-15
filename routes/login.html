@@ -40,7 +40,7 @@
         </form>
 
         <hr>
-        <button class="btn btn-success" ng-disabled="error || incomplete" ng-click="login()">
+        <button class="btn btn-success" ng-click="login()">
             <span class="glyphicon glyphicon-log-in"></span> Login
         </button>
         <button class="btn btn-info" ng-click="forget()">
@@ -94,6 +94,10 @@
 
             $scope.login = function()
             {
+                if ($scope.username == "" || $scope.password == "")
+                {
+                    return
+                }
                 var loginForm = 
                 {
                     username : $scope.username,

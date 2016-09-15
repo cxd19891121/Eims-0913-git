@@ -25,6 +25,7 @@
             <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  message: </span> {{message.message}}
             <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}"> from: </span> {{message.from}} 
             <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  send time: </span> {{message.sendTime}} 
+            <input type="checkbox" ng-model="message.delete"> delete
             
             <hr>
         </div>

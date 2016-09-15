@@ -5,7 +5,7 @@ app.controller('application', function($scope,dataService,$uibModal)
 {
     $scope.messages = []
     $scope.username = window.localStorage.username
-    $scope.messages.unreadNumber = function()
+    $scope.unreadNumber = function(messges)
     {
         var num = 0;
         $scope.messages.forEach( function(element)
@@ -14,7 +14,7 @@ app.controller('application', function($scope,dataService,$uibModal)
         })
         return num;
     }
-    $scope.letterNum = $scope.messages.unreadNumber()
+    $scope.letterNum = $scope.unreadNumber($scope.messages)
 
     $scope.showSearch = true
     $scope.addDetail = false
@@ -48,7 +48,19 @@ app.controller('application', function($scope,dataService,$uibModal)
         {
             if(data)
             {
-                $scope.messages = data
+                $scope.messages = []
+                data.forEach(function(element)
+                {
+                    if(element.delete == undefined)
+                    {
+                        $scope.messages.push(element)
+                    }
+                })
+                //$scope.messages = data
+                $scope.messages.forEach(function(element,index)
+                {
+                    $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+                })
             }
         })
         $scope.open()
@@ -61,8 +73,20 @@ app.controller('application', function($scope,dataService,$uibModal)
         {
             if(data)
             {
-                $scope.messages = data
-                $scope.letterNum = $scope.messages.length
+                $scope.messages = []
+                data.forEach(function(element)
+                {
+                    if(element.delete == undefined)
+                    {
+                        $scope.messages.push(element)
+                    }
+                })
+                //$scope.messages = data
+                $scope.messages.forEach(function(element,index)
+                {
+                    $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+                })
+                $scope.letterNum = $scope.unreadNumber($scope.messages)
             }
         })
     }
@@ -138,7 +162,12 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
             {
                 items[index].flag = true
             }
+            if (element.delete == true)
+            {
+                items.splice(index, 1);
+            }
         })
+        console.log(items)
         nums = 0
         dataService.putMessage(items,function(d)
         {
@@ -156,9 +185,15 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
         dataService.getAllUser(function(data)
         {
             console.log(data)
-            $scope.users = data
-            $scope.users.forEach( function(element,index)            {
-                $scope.users[index].flag = false
+            $scope.users = []
+            data.forEach( function(element,index)
+            {
+                
+                if (element.username !== window.localStorage.username)
+                {
+                    $scope.users.push(element)
+                    $scope.users[index].flag = false
+                }
             })
         })
     } 

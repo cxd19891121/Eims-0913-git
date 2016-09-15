@@ -1,18 +1,32 @@
 /**
  * Created by mooner00 on 9/6/2016.
  */
-app.controller('userConfigController', function($scope,$http,$httpParamSerializerJQLike, $uibModal,dataService,configService)
+app.controller('userConfigController', function($scope,$http,$httpParamSerializerJQLike, $uibModal,dataService,configService,$timeout)
 {
     $scope.users = [{id:1,level:1,username:"hi",password:"hello"}]
 
     $scope.msg = {};
+
+    $scope.alert = {
+        good: "New User Added",
+        fail:"Add Fail",
+    }
+    $scope.goodAdd = false;
+    $scope.failAdd = false;
+
+
 
     $scope.createUser = function()
     {
         $scope.users.push($scope.newUser)
         dataService.insertUser({user: $scope.newUser},function(data)
         {
-            console.log(data)
+            //console.log(data)
+            $scope.goodAdd = true;
+            $timeout(function(){
+                $scope.goodAdd = false;
+            }, 2000);
+
         })
     }
 

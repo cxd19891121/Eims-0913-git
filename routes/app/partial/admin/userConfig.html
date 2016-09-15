@@ -35,6 +35,12 @@
          <hr>
 
          <h2> Create New User </h2>
+
+            <h3 ng-show = goodAdd>
+                <font color="red"><strong>{{alert.good}}</strong></font>
+            </h3>
+
+
          <br>
          <form class="form-horizontal" role="form">
              <div class="form-group">
@@ -72,7 +78,7 @@
 
              <div class = 'form-group'>
                  <button class="btn btn-primary" ng-click="createUser()">
-                     <span class="glyphicon glyphicon-pencil"></span>Update
+                     <span class="glyphicon glyphicon-pencil"></span>Create
                  </button>
                  <button class="btn btn-primary" ng-click="back()">
                  <span class="glyphicon glyphicon-arrow-left"></span> Back
@@ -82,5 +88,5 @@
          </form>
 
 
-    </div>
+    </>
  </div>

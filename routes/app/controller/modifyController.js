@@ -6,6 +6,8 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
     $scope.config = {};
     $scope.newLevel = {}
     $scope.msg = {}
+
+
     $scope.init = function()
     {
         console.log($scope.config.database)

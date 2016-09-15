@@ -13,12 +13,10 @@ exports.authCheck = function(req,callback) {
     else if (req.session.user) {
 
         var level = req.session.user.level;
-        if (level == 0) {
+        if (level == config.auth.user.level) {
             callback(config.auth.user);
-        } else if (level == 1) {
+        } else if (level == config.auth.admin.level) {
             callback(config.auth.admin);
-        } else if (level == 2) {
-            callback(config.auth.developer);
         }
     }
     else{

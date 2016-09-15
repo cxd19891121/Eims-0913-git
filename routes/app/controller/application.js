@@ -184,16 +184,21 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
     {
         dataService.getAllUser(function(data)
         {
-            console.log(data)
+            //console.log(data)
             $scope.users = []
-            data.forEach( function(element,index)
+            data.forEach(function(element,index)
             {
-                
-                if (element.username !== window.localStorage.username)
+                //console.log(element.username)
+                if (element.username != window.localStorage.username)
                 {
+                    //console.log(element.username)
                     $scope.users.push(element)
-                    $scope.users[index].flag = false
+                    //$scope.users[index].flag = false
                 }
+            })
+            $scope.users.forEach(function(element,index)
+            {
+                $scope.users[index].flag = false
             })
         })
     } 

@@ -10,7 +10,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         forget: url + 'forget',
         refresh: url + 'backToIndex',
         logout: url + 'logout',
-        message: url + 'message/',
+        message: url + 'api/message/',
 
     }
 
@@ -161,21 +161,24 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         $http({
             method: 'GET',
             url: config.message + username,
-        }).success(data)
+        }).success(function(data)
         {
+            console.log('getMessage',data);
             if (data)
             {
                 callback(data)
             }
-        }
+        })
     }
 
     vm.sendMessage = function(obj,callback)
     {
+        console.log(obj)
+        var sendObj = {message: obj}
         $http({
             method:'POST',
             url: config.message,
-            data: angular.toJson(obj),
+            data: angular.toJson(sendObj),
             headers: {'Content-Type': 'application/json'}
         }).then(function successCallback(data) {
             console.log("in sucess callback");

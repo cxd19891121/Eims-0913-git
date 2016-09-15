@@ -8,7 +8,7 @@ app.controller('application', function($scope,dataService,$uibModal)
     $scope.messages.unreadNumber = function()
     {
         var num = 0;
-        $scope.messages.forEach((element) => 
+        $scope.messages.forEach( function(element)
         {
             if (element.flag === false) num++            
         })
@@ -119,7 +119,7 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums )
     $scope.ok = function ()
     {
         $uibModalInstance.close()
-        items.forEach((element,index) =>
+        items.forEach(function(element,index)
         {
             if (element.flag == false)
             {
@@ -136,12 +136,11 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
     $scope.users = []
     $scope.getAllUser = function()
     {
-        dataService.getAllUser((data) =>
+        dataService.getAllUser(function(data)
         {
             console.log(data)
             $scope.users = data
-            $scope.users.forEach((element,index) =>
-            {
+            $scope.users.forEach( function(element,index)            {
                 $scope.users[index].flag = false
             })
         })
@@ -154,8 +153,9 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
     $scope.send = function()
     {
         var packet = []
-        $scope.users.forEach((element,index) =>
+        $scope.users.forEach(function (element,index)
         {
+            console.log(2)
             if (element.flag == true)
             {
                 var obj = 
@@ -169,15 +169,17 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
                     readTime: ''
                 }
                 packet.push(obj)
+
             }
         })
+        //console.log(packet)
 
-        dataService.sendMessage((packet,function()
+        dataService.sendMessage(packet,function()
         {
+            console.log($scope.users)
+            $uibModalInstance.close()
+        })
 
-        }))
-        console.log($scope.users)
-        $uibModalInstance.close()
     }
     $scope.getAllUser()
 })

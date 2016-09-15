@@ -25,6 +25,8 @@ router.all('*', function (req, res, next) {
 //get message by id
 router.get('/message/:name',function(req,res){
     dtLogicService.getMsgByName(req,function(e,o){
+
+        console.log("get message:", e,o);
         if(e){
             res.send(e)
         }else{
@@ -34,7 +36,9 @@ router.get('/message/:name',function(req,res){
 })
 //send website-message to multi user:
 router.post('/message/',function(req,res){
+    console.log("send message", req.body,req.body['message']);
     dtLogicService.sendMsg(req,function(e,o){
+
         if(e){
             res.send(e);
         }else{
@@ -45,6 +49,7 @@ router.post('/message/',function(req,res){
 
 router.delete('/message/all/:name',function(req,res){
     dtLogicService.deleteAllMessage(req,function(e,o){
+
         if(e){
             res.send(e)
         }else{

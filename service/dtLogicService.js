@@ -56,6 +56,7 @@ exports.getMsgByName = function(req,callback){
 exports.updateMsgByName = function(req,callback){
     var msgArr = req.body['message'];
     var name = req.params['name'];
+    console.log('update msg', msgArr);
 
     client.set(name,JSON.stringify(msgArr),function(e,o){
         callback(e,{msg: o});
@@ -66,6 +67,7 @@ exports.updateMsgByName = function(req,callback){
 
 exports.sendMsg = function(req,callback){
     var msgMulti = req.body['message'];
+
 
     msgMulti.forEach(function(msg,index){
        // console.log('for each msg: ', msg);

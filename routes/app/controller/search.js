@@ -43,7 +43,8 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
             console.log(data)
             if(!data)
             {
-                alert('No feteched employee')
+                alert('No feteched employee');
+
             }
             else
             {

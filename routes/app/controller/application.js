@@ -192,8 +192,12 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
                 if (element.username !== window.localStorage.username)
                 {
                     $scope.users.push(element)
-                    $scope.users[index].flag = false
+                   // $scope.users[index].flag = false
                 }
+
+                $scope.users.forEach(function(element,index) {
+                    $scope.users[index].flag = false
+                })
             })
         })
     } 

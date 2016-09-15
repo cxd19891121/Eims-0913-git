@@ -38,12 +38,20 @@
     <div class="modal-header">
         <h3 class="modal-title">Send</h3>
     </div>
-    <div class="modal-footer">
+
+
+    <div class="container">
         <div ng-repeat="user in users">
             <input type="checkbox" ng-model="user.flag"> &nbsp;&nbsp;{{user.username}}
         </div>
-        Message : <input type="text" ng-model="data">
+
+        <hr>
+        <label><strong>Message : </strong></label>
+        <br>
+        <textarea  rows="10" cols="60" ng-model="data"></textarea>
         <button class="btn btn-primary" type="button" ng-click="send()">Send</button>
+
+        <br><br>
     </div>
 </script>
 

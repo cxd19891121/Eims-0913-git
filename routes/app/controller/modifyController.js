@@ -6,7 +6,28 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
     $scope.config = {};
     $scope.newLevel = {}
     $scope.msg = {}
+    $scope.alerts = []
+    $scope.levelAlert = []
 
+    $scope.addAlert = function(type,msg) 
+    {
+        $scope.alerts.push({type: type,msg: msg});
+    }
+
+    $scope.addLevelAlert = function(type,msg)
+    {
+        $scope.levelAlert.push({type: type,msg:msg})
+    }
+
+    $scope.closeLevelAlert = function(index)
+    {
+        $scope.alerts.splice(index ,1);
+    }
+
+    $scope.closeAlert = function(index) 
+    {
+        $scope.alerts.splice(index, 1);
+    }
 
     $scope.init = function()
     {
@@ -26,6 +47,7 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
             ops: $scope.newLevel.ops,
             filePath: $scope.newLevel.filePath
         }
+        addLevelAlert("success","success add level")
         console.log($scope.config.auth)
     }
 
@@ -41,8 +63,10 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
 
         dataService.updateConfig({config:$scope.config},function(e,o){
             if(o){
+                $scope.addAlert("success","update success")
                 $scope.msg = o;
             }else{
+                $scope.addAlert("fail","update fail")
                 $scope.msg = e;
             }
         })

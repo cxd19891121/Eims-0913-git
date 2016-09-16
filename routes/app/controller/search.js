@@ -10,6 +10,16 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         opened: false
     }
 
+    $scope.alerts = []
+    $scope.addAlert = function(type,msg) 
+    {
+        $scope.alerts.push({type: type,msg: msg});
+    }
+    $scope.closeAlert = function(index) 
+    {
+        $scope.alerts.splice(index, 1);
+    }
+
     $scope.ctrlScope = $scope
     $scope.searchObject =
     {
@@ -41,13 +51,14 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         dataService.searchByName($scope.employeeName,function(data)
         {
             console.log(data)
-            if(!data)
+            if(data.length == 0)
             {
-                alert('No feteched employee');
-
+                //alert('No feteched employee');
+                $scope.addAlert('danger','No feteched employee')
             }
             else
             {
+                $scope.addAlert('success','Search success')
                 console.log(data)
                 $scope.$parent.$broadcast('changeData',{data:data});
             }
@@ -81,10 +92,11 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         {
             if(!data)
             {
-                alert('fail')
+                $scope.addAlert('danger','No feteched employee')
             }
             else
             {
+                $scope.addAlert('success','Search success')
                 console.log(data)
                 $scope.$parent.$broadcast('changeData',{data:data})
             }

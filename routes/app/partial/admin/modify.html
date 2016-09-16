@@ -1,7 +1,7 @@
 
 <div ng-controller="modify" data-ng-init="init()">
     <div class = "container">
-
+         
         <h1>System Config</h1>
         <br>
         <button class="btn btn-primary" ng-click="back()">
@@ -51,7 +51,7 @@
         </tbody>
     </table>
 
-
+        <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <button class="btn btn-primary" ng-click="updateConfig()">
             <span class="glyphicon glyphicon-pencil"></span>Update Config
         </button>
@@ -103,6 +103,7 @@
 
 
 
+    <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeLevelAlert($index)">{{levelAlert.msg}}</div>    
 
     <button class="btn btn-primary" ng-click="createLevel()">
         <span class="glyphicon glyphicon-pencil"></span>Add level

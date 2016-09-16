@@ -97,7 +97,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     {
         if(info.data == null || info.data == '')
         {
-            return alert('Error: no fetched employee')
+            return //alert('Error: no fetched employee')
         }
         else
         {

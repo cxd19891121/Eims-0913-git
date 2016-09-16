@@ -23,7 +23,6 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
     {
         $scope.alerts.splice(index ,1);
     }
-    
 
     $scope.closeAlert = function(index) 
     {

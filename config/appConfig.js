@@ -65,6 +65,7 @@ var config = {
             url:'http://192.168.1.41:3000/admin'
         },
 
+
     },
 
     service:{
@@ -74,7 +75,6 @@ var config = {
     },
 
 }
-
 
 
 var readConfigFromJson = function(callback)

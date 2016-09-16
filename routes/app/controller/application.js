@@ -234,6 +234,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
         dataService.sendMessage(packet,function()
         {
             console.log(packet)
+
             $uibModalInstance.close()
         })
 

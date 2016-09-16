@@ -13,7 +13,15 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
     }
     $scope.goodAdd = false;
     $scope.failAdd = false;
+    $scope.alerts = []
+    $scope.addAlert = function() {
+    $scope.alerts.push({type:'success',msg: 'Success add!'});
+    };
 
+    $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+    };
+   
 
 
     $scope.createUser = function()
@@ -23,6 +31,7 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         {
             //console.log(data)
             $scope.goodAdd = true;
+            $scope.addAlert();
             $timeout(function(){
                 $scope.goodAdd = false;
             }, 2000);

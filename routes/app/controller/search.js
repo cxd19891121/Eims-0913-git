@@ -9,7 +9,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
         opened: false
     }
-    
+
     $scope.ctrlScope = $scope
     $scope.searchObject =
     {
@@ -55,6 +55,9 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
     $scope.deepSearch = function()
     {
+        console.log(1)
+        console.log($scope.showMoreSearch)
+        $scope.showMoreSearch = false
         /*$http
         ({
             method: 'POST',
@@ -86,6 +89,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
                 $scope.$parent.$broadcast('changeData',{data:data})
             }
         })
+
     }
 
 }])

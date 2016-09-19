@@ -38,9 +38,10 @@ var sqlBuilderOO =
 {
     sqlCode : 'hi',
     build : function(){
-            return selectCode + fromCode + whereCode;
+            return selectCode + fromCode + whereCode + orderByCode;
 
    },
+    orderByCode:' ',
     buildtest : function () {return this.sqlCode},
     buildLambda: function () {return this.sqlCode},
     select : function(selectColumnList)
@@ -101,7 +102,13 @@ var sqlBuilderOO =
         return this
             },
     whereCode : '',
-    buildWhereCode : function() {return whereCode}
+    buildWhereCode : function() {return whereCode},
+    orderBy: function(){
+        orderByCode = 'order by emp_id'
+        return this;
+    },
+
+    orderByCode : function(){return orderByCode}
 
 }
 
@@ -289,6 +296,7 @@ exports.getAll =  function(callback){
     var sqlCode = sqlBuilderOO.select(['*'])
         .from(['employee_info','education_info','order_info','visa_info','work_info'],'left join','e_id')
         .whereNone()
+        .orderBy()
         .build()
 
     console.log('sqlCode = ' + sqlCode)

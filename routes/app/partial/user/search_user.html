@@ -109,10 +109,19 @@
 
 
 <div ng-controller="edit">
+    <div>
+        <button class="btn btn-primary" type="button" ng-click="changeUser(all)">All</button>
+        <button class="btn btn-primary" type="button" ng-click="changeUser(incomplete)">Incomplete</button>
+        <button class="btn btn-primary" type="button" ng-click="changeUser(complete)">Completed</button>
+    </div>
+    <div ng-show="displayDownload">
+        <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
+        <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
+    </div>
     <table class="table table-striped">
         <thead><tr>
-            <button class="btn btn-primary" ng-click="selectAll()">Select All </button>
-            <th><a href="" ng-click="printAll()">Print </a> / <a href="" ng-click="downloadAll()">Download</a> </th>
+            <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
+            
             <th><a href="" ng-click="order('id')">Employee Id</a></th>
             <th><a href="" ng-click="order('first_name')">Name</a></th>
             <th><a href="" ng-click="order('visa')">Visa Status</a></th>
@@ -121,7 +130,7 @@
             <th>Operation</th>
         </tr></thead>
         <tbody><tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
-            <td><input type="checkbox" ng-model="user.flag"></td>
+            <td><input type="checkbox" ng-model="user.flag" ng-click="display()"></td>
             <td>{{ user.e_id }}</td>
             <td>{{ user.first_name }} {{ user.last_name }}</td>
             <td>{{ user.status }}</td>

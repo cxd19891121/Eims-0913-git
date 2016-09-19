@@ -66,6 +66,7 @@ exports.updateElementById = function(id,dt,callback){
 }
 
 exports.selectElementByName = function(username,callback){
+    //console.log(1)
     sql['selectUserByName'].values = [username];
     console.log(username);
     db.queryPres(sql["selectUserByName"],function(e,o){callback(e,o);})

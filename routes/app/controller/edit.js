@@ -52,11 +52,61 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.editInfo = true;
     $scope.predicate = 'name';
     $scope.reverse = true;
+    $scope.all = Symbol("all")
+    $scope.complete = Symbol("complete")
+    $scope.incomplete = Symbol("incomplete")
 
     $scope.order = function (predicate)
     {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
+    }
+
+    $scope.displayDownload = false
+
+    $scope.display = function()
+    {
+        var result = false
+        $scope.users.forEach(function (element)
+        {
+            if (element.flag == true) result = true
+        })
+        
+        $scope.displayDownload = result
+        return result
+    }
+
+    $scope.changeUser = function (symbol)
+    {
+        //console.log($scope.users)
+        $scope.allUsers[0].progress = 100
+        switch (symbol)
+        {
+            case $scope.all: 
+            {
+                //console.log(1)
+                $scope.users = $scope.allUsers
+                return
+            }
+            case $scope.complete: 
+            {
+                //console.log(2)
+                $scope.users = $scope.allUsers.filter(function (element)
+                {
+                    return element.progress == 100
+                })
+                return 
+            }
+            case $scope.incomplete:
+            {
+                //console.log(3)
+                $scope.users = $scope.allUsers.filter(function (element)
+                {
+                    return element.progress != 100
+                })
+                return
+            }
+        }
     }
 
     $scope.paginate = function (value)
@@ -69,6 +119,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     }
 
     $scope.employeeDetail = false
+    $scope.allUsers = []
     $scope.users = [{id : 0,first_name:'test',description:'on project',status:'due',dob:'1/1/1995',e_id:0,job_title:'projector',age:10},{id : 1,name:'er',dob:'1/1/1',age:3}]
 
     $scope.select = true
@@ -87,6 +138,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
             element.flag = false
 
         }
+        $scope.display()
     })
         return $scope.select = !$scope.select
     }
@@ -101,7 +153,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
         }
         else
         {
-            console.log(info)
+            //console.log(info)
             info.data.forEach(function(element)
             {
                 for (i in element)
@@ -126,17 +178,24 @@ app.controller('edit',function($scope,$uibModal, dataService)
         $scope.users.forEach(function(element)
         {
             if (element.flag == true)
-        {
-            newstr += "Name : " + element.first_name + " " + element.last_name + '<br>'
-            newstr += "DoB : " + element.dob + '<br>'
-        }
-    })
+            {
+                var formatedData = getFormatedData(element)
+                forEach(formatedData,function(key,value)
+                {
+                    if(value != null && value != undefined)
+                    {
+                        newstr += key + " : " + value + "<br>"
+                    }
+                })
+                newstr += "<br><br>"
+             
+            }
+        })
 
         var data = headstr+newstr+footstr;
         var newWindow = window.open("");
         newWindow.document.body.innerHTML = data;
         newWindow.print();
-        //document.body.innerHTML = oldstr;
         return false;
 
     }
@@ -149,10 +208,18 @@ app.controller('edit',function($scope,$uibModal, dataService)
         $scope.users.forEach(function(element)
         {
             if (element.flag == true)
-        {
-            data += "Name : " + element.first_name + " " + element.last_name + '<br>'
-            data += "DoB : " + element.dob + '<br>'
-        }
+            {
+                var formatedData = getFormatedData(element)
+                forEach(formatedData,function(key,value)
+                {
+                    if(value != null && value != undefined)
+                    {
+                        data += key + " : " + value + "<br>"
+                    }
+                })
+                data += "<br><br>"
+             
+            }
     })
         var file = new File([data], filename, {type: "text/html;charset=utf-8"});
         saveAs(file);
@@ -225,16 +292,44 @@ app.controller('edit',function($scope,$uibModal, dataService)
                     element.flag = false
                 })
                 $scope.totalItems = o.length;
+                $scope.allUsers = $scope.users
             }
             else{
-                $scope.users = [{id : 0,first_name:'test',description:'on project',status:'due',dob:'1/1/1995',e_id:0,job_title:'projector',age:10},{id : 1,name:'er',dob:'1/1/1',age:3}]
+                $scope.users = []
             }
         })
 
 
     }
 
+    var getFormatedData = function(people)
+    {
+        var formatedData = 
+        {
+            name: people.first_name + people.last_name,
+            cellphone: people.cellphone,
+            email: people.email,
+            SSN: people.ssn,
+            birthday: people.dob,
+            company: people.company_name,
+            insurance: people.health_ins,
+            job_level: people.job_level,
+            job_title: people.job_title,
+            location: people.location,
+            salary: people.salary,
+            degree: people.degree,
+            university: people.university,
+            payrise_percentage: people.payrise_precentage || people.payrise_percentage,
+            visa_start_time: people.start_time,
+            visa_end_time: people.end_time,
+
+        }
+        return formatedData
+    }
+
 })
+
+
 
 /**
  * Created by mooner00 on 8/24/2016.

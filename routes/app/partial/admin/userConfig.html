@@ -36,10 +36,6 @@
 
          <h2> Create New User </h2>
             <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-            <h3 ng-show = goodAdd>
-                <font color="red"><strong>{{alert.good}}</strong></font>
-            </h3>
-
 
          <br>
          <form class="form-horizontal" role="form">

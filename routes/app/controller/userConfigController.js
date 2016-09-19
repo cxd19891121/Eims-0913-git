@@ -13,9 +13,11 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
     }
     $scope.goodAdd = false;
     $scope.failAdd = false;
+
+
     $scope.alerts = []
     $scope.addAlert = function() {
-    $scope.alerts.push({type:'success',msg: 'Success add!'});
+        $scope.alerts.push({type:'success',msg: 'Success add!'});
     };
 
     $scope.closeAlert = function(index) {

@@ -78,7 +78,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     $scope.changeUser = function (symbol)
     {
-        //console.log(symbol)
+        //console.log($scope.users)
         $scope.allUsers[0].progress = 100
         switch (symbol)
         {
@@ -178,17 +178,24 @@ app.controller('edit',function($scope,$uibModal, dataService)
         $scope.users.forEach(function(element)
         {
             if (element.flag == true)
-        {
-            newstr += "Name : " + element.first_name + " " + element.last_name + '<br>'
-            newstr += "DoB : " + element.dob + '<br>'
-        }
-    })
+            {
+                var formatedData = getFormatedData(element)
+                forEach(formatedData,function(key,value)
+                {
+                    if(value != null && value != undefined)
+                    {
+                        newstr += key + " : " + value + "<br>"
+                    }
+                })
+                newstr += "<br><br>"
+             
+            }
+        })
 
         var data = headstr+newstr+footstr;
         var newWindow = window.open("");
         newWindow.document.body.innerHTML = data;
         newWindow.print();
-        //document.body.innerHTML = oldstr;
         return false;
 
     }
@@ -201,10 +208,18 @@ app.controller('edit',function($scope,$uibModal, dataService)
         $scope.users.forEach(function(element)
         {
             if (element.flag == true)
-        {
-            data += "Name : " + element.first_name + " " + element.last_name + '<br>'
-            data += "DoB : " + element.dob + '<br>'
-        }
+            {
+                var formatedData = getFormatedData(element)
+                forEach(formatedData,function(key,value)
+                {
+                    if(value != null && value != undefined)
+                    {
+                        data += key + " : " + value + "<br>"
+                    }
+                })
+                data += "<br><br>"
+             
+            }
     })
         var file = new File([data], filename, {type: "text/html;charset=utf-8"});
         saveAs(file);
@@ -287,7 +302,34 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     }
 
+    var getFormatedData = function(people)
+    {
+        var formatedData = 
+        {
+            name: people.first_name + people.last_name,
+            cellphone: people.cellphone,
+            email: people.email,
+            SSN: people.ssn,
+            birthday: people.dob,
+            company: people.company_name,
+            insurance: people.health_ins,
+            job_level: people.job_level,
+            job_title: people.job_title,
+            location: people.location,
+            salary: people.salary,
+            degree: people.degree,
+            university: people.university,
+            payrise_percentage: people.payrise_precentage || people.payrise_percentage,
+            visa_start_time: people.start_time,
+            visa_end_time: people.end_time,
+
+        }
+        return formatedData
+    }
+
 })
+
+
 
 /**
  * Created by mooner00 on 8/24/2016.

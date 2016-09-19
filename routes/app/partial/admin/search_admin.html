@@ -121,10 +121,20 @@
 
 
 <div ng-controller="edit">
+    <div>
+        <button class="btn btn-primary" type="button" ng-click="changeUser(all)">All</button>
+        <button class="btn btn-primary" type="button" ng-click="changeUser(incomplete)">Incomplete</button>
+        <button class="btn btn-primary" type="button" ng-click="changeUser(complete)">Completed</button>
+    </div>
+    <div ng-show="displayDownload">
+        <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
+        <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
+    </div
+    >
     <table class="table table-striped">
         <thead><tr>
-            <button class="btn btn-primary" ng-click="selectAll()">Select All </button>
-            <th><a href="" ng-click="printAll()">Print </a> / <a href="" ng-click="downloadAll()">Download</a> </th>
+            <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
+            
             <th><a href="" ng-click="order('id')">Employee Id</a></th>
             <th><a href="" ng-click="order('first_name')">Name</a></th>
             <th><a href="" ng-click="order('visa')">Visa Status</a></th>
@@ -133,7 +143,7 @@
             <th>Operation</th>
         </tr></thead>
         <tbody><tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
-            <td><input type="checkbox" ng-model="user.flag"></td>
+            <td><input type="checkbox" ng-model="user.flag" ng-click="display()"></td>
             <td>{{ user.e_id }}</td>
             <td>{{ user.first_name }} {{ user.last_name }}</td>
             <td>{{ user.status }}</td>
@@ -286,59 +296,6 @@
             <ul ng-repeat = '(k,v) in detail'>
             <li>{{k}}: {{v}} </li>
         </ul>
-
-            <!--<span class="label label-info">Employee ID:</span> &emsp; {{ detail.e_id }} <br>-->
-            <!--<span class="label label-info">First Name: </span> &emsp; {{ detail.first_name }} <br>-->
-            <!--<span class="label label-info">Last Name: </span> &emsp; {{ detail.last_name }} <br>-->
-            <!--<span class="label label-info">Middle Name: </span> &emsp; {{ detail.middle_name }} <br>-->
-            <!--<span class="label label-info">DOB: </span> &emsp; {{ detail.dob }} <br>-->
-            <!--<span class="label label-info">SSN: </span> &emsp; {{ detail.ssn }} <br>-->
-            <!--<span class="label label-info">Marriage: </span> &emsp; {{ detail.marital_status }}<br>-->
-            <!--<span class="label label-info">Order Number:</span> &emsp; {{ detail.o_id }} <br>-->
-            <!--<span class="label label-info">Job Location:</span> &emsp; {{ detail.location }} <br>-->
-            <!--<span class="label label-info">Company Name:</span> &emsp; {{ detail.company_name }} <br>-->
-            <!--<span class="label label-info">Description:</span> &emsp; {{ detail.order_description }} <br>-->
-            <!--<span class="label label-info">Type:</span> &emsp; {{ detail.type }} <br>-->
-            <!--<span class="label label-info">Title:</span> &emsp; {{ detail.title }} <br>-->
-            <!--<span class="label label-info">Start Time:</span> &emsp; {{ detail.o_start_time }} <br>-->
-            <!--<span class="label label-info">End Time:</span> &emsp; {{ detail.o_end_time}} <br>-->
-            <!--<span class="label label-info">Owner:</span> &emsp; {{ detail.owner }} <br>-->
-            <!--<span class="label label-info">Extension Time:</span> &emsp; {{ detail.extension_time }}<br>-->
-            <!--<span class="label label-info">Phone Number:</span> &emsp; {{ detail.cellphone }} <br>-->
-            <!--<span class="label label-info">Home Number:</span> &emsp; {{ detail.home_phone }} <br>-->
-            <!--<span class="label label-info">Email:</span> &emsp; {{ detail.email }} <br>-->
-            <!--<span class="label label-info">Billing Address:</span> &emsp; {{ detail.b_add }} <br>-->
-            <!--<span class="label label-info">City:</span> &emsp; {{ detail.b_city }} <br>-->
-            <!--<span class="label label-info">State:</span> &emsp; {{ detail.b_state }} <br>-->
-            <!--<span class="label label-info">Zip:</span> &emsp; {{ detail.b_zip }} <br>-->
-            <!--<span class="label label-info">Country:</span> &emsp; {{ detail.b_country }} <br>-->
-            <!--<span class="label label-info">Permanent Address:</span> &emsp; {{ detail.p_add }} <br>-->
-            <!--<span class="label label-info">City:</span> &emsp; {{ detail.p_city }} <br>-->
-            <!--<span class="label label-info">State:</span> &emsp; {{ detail.p_state }} <br>-->
-            <!--<span class="label label-info">Zip:</span> &emsp; {{ detail.p_zip }} <br>-->
-            <!--<span class="label label-info">Country:</span> &emsp; {{ detail.p_country }} <br>-->
-            <!--<span class="label label-info">Visa ID:</span> &emsp; {{ detail.v_id}} <br>-->
-            <!--<span class="label label-info">Visa Start:</span> &emsp; {{ detail.start_time }} <br>-->
-            <!--<span class="label label-info">Visa End:</span> &emsp; {{ detail.end_time }} <br>-->
-            <!--<span class="label label-info">Visa Type:</span> &emsp; {{ detail.status }} <br>-->
-            <!--<span class="label label-info">Education ID:</span> &emsp; {{ detail.ed_id }} <br>-->
-            <!--<span class="label label-info">University:</span> &emsp; {{ detail.university }} <br>-->
-            <!--<span class="label label-info">Major:</span> &emsp; {{ detail.major }} <br>-->
-            <!--<span class="label label-info">Degree:</span> &emsp; {{ detail.degree }} <br>-->
-            <!--<span class="label label-info">Job Title:</span> &emsp; {{ detail.title }} <br>-->
-            <!--<span class="label label-info">Job Type:</span> &emsp; {{ detail.type }} <br>-->
-            <!--<span class="label label-info">Job Location:</span> &emsp; {{ detail.location }} <br>-->
-            <!--<span class="label label-info">Job Description:</span> &emsp; {{ detail.description }} <br>-->
-            <!--<span class="label label-info">Job Start:</span> &emsp; {{ detail.w_start_time }} <br>-->
-            <!--<span class="label label-info">Job End:</span> &emsp; {{ detail.w_end_time }} <br>-->
-            <!--<span class="label label-info">Job Title:</span> &emsp; {{ detail.job_title }} <br>-->
-            <!--<span class="label label-info">Job Level:</span> &emsp; {{ detail.job_level }} <br>-->
-            <!--<span class="label label-info">Salary:</span> &emsp; {{ detail.salary }} <br>-->
-            <!--<span class="label label-info">Health Insurance:</span> &emsp; {{ detail.health_ins }} <br>-->
-            <!--<span class="label label-info">Regional Subsides:</span> &emsp; {{ detail.regional_subsides}} <br>-->
-            <!--<span class="label label-info">Reimbursement:</span> &emsp; {{ detail.reimbursement }} <br>-->
-            <!--<span class="label label-info">Termination Date:</span> &emsp; {{ detail.termn_date }} <br>-->
-            <!--<span class="label label-info">Reason:</span> &emsp; {{ detail.termn_reason }} <br>-->
 
         </div>
 

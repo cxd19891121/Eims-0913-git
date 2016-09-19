@@ -52,11 +52,61 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.editInfo = true;
     $scope.predicate = 'name';
     $scope.reverse = true;
+    $scope.all = Symbol("all")
+    $scope.complete = Symbol("complete")
+    $scope.incomplete = Symbol("incomplete")
 
     $scope.order = function (predicate)
     {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
+    }
+
+    $scope.displayDownload = false
+
+    $scope.display = function()
+    {
+        var result = false
+        $scope.users.forEach(function (element)
+        {
+            if (element.flag == true) result = true
+        })
+        
+        $scope.displayDownload = result
+        return result
+    }
+
+    $scope.changeUser = function (symbol)
+    {
+        //console.log(symbol)
+        $scope.allUsers[0].progress = 100
+        switch (symbol)
+        {
+            case $scope.all: 
+            {
+                //console.log(1)
+                $scope.users = $scope.allUsers
+                return
+            }
+            case $scope.complete: 
+            {
+                //console.log(2)
+                $scope.users = $scope.allUsers.filter(function (element)
+                {
+                    return element.progress == 100
+                })
+                return 
+            }
+            case $scope.incomplete:
+            {
+                //console.log(3)
+                $scope.users = $scope.allUsers.filter(function (element)
+                {
+                    return element.progress != 100
+                })
+                return
+            }
+        }
     }
 
     $scope.paginate = function (value)
@@ -69,6 +119,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     }
 
     $scope.employeeDetail = false
+    $scope.allUsers = []
     $scope.users = [{id : 0,first_name:'test',description:'on project',status:'due',dob:'1/1/1995',e_id:0,job_title:'projector',age:10},{id : 1,name:'er',dob:'1/1/1',age:3}]
 
     $scope.select = true
@@ -87,6 +138,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
             element.flag = false
 
         }
+        $scope.display()
     })
         return $scope.select = !$scope.select
     }
@@ -101,7 +153,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
         }
         else
         {
-            console.log(info)
+            //console.log(info)
             info.data.forEach(function(element)
             {
                 for (i in element)
@@ -225,9 +277,10 @@ app.controller('edit',function($scope,$uibModal, dataService)
                     element.flag = false
                 })
                 $scope.totalItems = o.length;
+                $scope.allUsers = $scope.users
             }
             else{
-                $scope.users = [{id : 0,first_name:'test',description:'on project',status:'due',dob:'1/1/1995',e_id:0,job_title:'projector',age:10},{id : 1,name:'er',dob:'1/1/1',age:3}]
+                $scope.users = []
             }
         })
 

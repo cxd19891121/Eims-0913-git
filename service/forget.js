@@ -16,7 +16,7 @@ exports.forget = function(username,callback)
     
     console.log('inservice')
     console.log(username)
-    
+
     userDAO.selectEmailByUsername(username,function(e,o){
         if(o.rows[0]){
                 console.log(o.rows[0].email)

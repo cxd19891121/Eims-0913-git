@@ -1,6 +1,11 @@
 /**
  * Created by mooner00 on 9/19/2016.
  */
+// this file is only used for test. Have not insert into system.
+// Please ignore this file when you need debug the whole application.
+
+
+
 var db = require('./../comm/database');
 var empDAO = require('./emp');
 var dtLogicService = require('./../service/dtLogicService')
@@ -31,10 +36,36 @@ var sql = {
         name:'removeCol_p_citty',
         text:'ALTER TABLE employee_info DROP COLUMN p_citty;',
     },
+
+    checkTableColType:{
+        name:'checkTableColType',
+        text:"select column_name, data_type from information_schema.columns where table_name = 'employee_info';"
+
+    },
+
+    checkEduColType:{
+        name:'checkTableColType',
+        text:"select column_name, data_type from information_schema.columns where table_name = 'education_info';"
+
+    },
+
+    checkWorkColType:{
+        name:'checkTableColType',
+        text:"select column_name, data_type from information_schema.columns where table_name = 'work_info';"
+
+    },
+
+    checkColType:{
+        name:'checkTableColType',
+        text:"select column_name, data_type from information_schema.columns where table_name = $1;",
+        values: 'order_info',
+    }
 }
 
 //removeCol();
 //updateProgress();
+//checkTableColType();
+checkTableColTypeBySql('order_info');
 
 function removeCol(){
     db.queryPres(sql['removeCol_p_citty'], function (e, o) {
@@ -44,6 +75,7 @@ function removeCol(){
             console.log(o);
         }
     })
+    //console.log();
 }
 
 
@@ -93,3 +125,25 @@ function insertCol() {
         }
     })
 }
+
+function checkTableColType (){
+    db.queryPres(sql['checkTableColType'], function (e, o) {
+        if (e) {
+            console.log(e);
+        } else {
+            console.log(o);
+        }
+    })
+}
+
+function checkTableColTypeBySql (tableName){
+    sql['checkColType'].values = [tableName];
+    db.queryPres(sql['checkColType'], function (e, o) {
+        if (e) {
+            console.log(e);
+        } else {
+            console.log(o);
+        }
+    })
+}
+

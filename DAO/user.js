@@ -13,7 +13,12 @@ var sql = {
     values:['username','password',2333,2333]},
     updateUserById: {name:"updateUserById",text:"UPDATE user_info SET username = $1, password = $2, e_id = $3, level = $4 where id=$5"
         ,values: ["username", "password", 1, 0,1] },
-    selectLastUser: {name: "selectLastUser", text: "SELECT * FROM user_info ORDER BY id DESC LIMIT 1"}
+    selectLastUser: {name: "selectLastUser", text: "SELECT * FROM user_info ORDER BY id DESC LIMIT 1"},
+    selectEmailByUsername:{name:"selectEmailByUsername", text: "SELECT email,password FROM user_info LEFT JOIN employee_info on user_info.e_id=employee_info.e_id WHERE username=$1", values: ["default"]},
+}
+
+exports.selectEmailByUsername = function(username,callback){
+    return db.queryPresValue(sql["selectEmailByUsername"].text,[username],function(e,o){callback(e,o)})
 }
 
 exports.selectAll = function(callback){
@@ -66,6 +71,7 @@ exports.selectElementByName = function(username,callback){
     console.log(username);
     db.queryPres(sql["selectUserByName"],function(e,o){callback(e,o);})
 }
+
 
 
 

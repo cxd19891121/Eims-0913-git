@@ -11,6 +11,9 @@ module.exports.getAllUser = function(callback){
         callback(e,o);
     })
 }
+module.exports.getAllUsername = function(callback){
+    userDAO.selectAllUsername(function(e,o){callback(e,o)});
+}
 
 module.exports.getUserById = function(id,callback){
 

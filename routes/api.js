@@ -129,8 +129,13 @@ router.put('/config',function(req,res){
 
 //For test
 router.get('/user', function (req, res) {
-    dtService.getAllUser(function (e, o) {
-        res.send(o);
+
+    dtLogicService.getAllUser(req,function(e,o){
+        if(e){
+            res.send(e)
+        }else{
+            res.send(o);
+        }
     })
 });
 router.get('/user/first', function (req, res) {

@@ -11,6 +11,7 @@ var search = require('./../service/sqlBuilder');
 var forgetService = require('./../service/forget');
 var mail = require('./../service/mail');
 var client = require('./../comm/redis');
+var validation = require('./../service/validate');
 
 
 var repMsg = {}
@@ -156,6 +157,29 @@ exports.mail = function (req, callback) {
     })
 }
 
+exports.getAllUser = function(req,callback){
+
+    auth.authCheck(req, function (authObj) {
+        if (authObj.level == 0) {
+            dtService.getAllUser(function(e,o){
+                callback(e,o);
+            })
+
+        } else if (authObj.level > 0) {
+            dtService.getAllUsername(function(e,o){
+                callback(e,o);
+            })
+        } else {
+            var error = {
+                msg: 'No session find, please login first',
+                type: 'no session'
+            }
+            callback(error);
+        }
+    })
+}
+
+
 
 //login service: check validation of username and password, check the authority, send the right html file back.
 exports.login = function (req, callback) {
@@ -267,7 +291,7 @@ exports.addAll = function (req, callback) {
             }
             callback(error);
         } else {
-
+            validation.empValidate(req.body['emp']);
             //add emp edu visa work order
             dtService.addElement(empDAO, req.body['emp'], function (e, o) {
                 repMsgService.buildAddMsg(repMsgGroup.emp, 'emp_info', e, o);
@@ -282,7 +306,11 @@ exports.addAll = function (req, callback) {
                         req.body['order'].eid = empId;
                         req.body['visa'].eid = empId;
 
-                        console.log('empId', empId);
+                        validation.eduValidate(req.body['edu']);
+                        validation.workValidate(req.body['work']);
+                        validation.orderValidate(req.body['order']);
+                        validation.visaValidate(req.body['visa']);
+                        //console.log('empId', empId);
 
                         dtService.addElement(workDAO, req.body['work'], function (e, o) {
                             repMsgService.buildAddMsg(repMsgGroup.work, 'work_info', e, o)
@@ -352,7 +380,14 @@ exports.getAllById = function (req, callback) {
 //update individual's all information by search the employee id.
 exports.updateAllById = function (req, callback) {
     var id = req.params['id'];
+    req.body['emp'].e_id = id;
+    validation.empValidate(req.body['emp']);
+    validation.eduValidate(req.body['edu']);
+    validation.workValidate(req.body['work']);
+    validation.orderValidate(req.body['order']);
+    validation.visaValidate(req.body['visa']);
 
+    console.log("after validation: ",req.body);
     //check the authority
     auth.authCheck(req, function (authObj) {
         if (authObj.level < 0) {
@@ -384,6 +419,7 @@ exports.updateAllById = function (req, callback) {
 
                             dtService.updateElementByEId(eduDAO, id, req.body['edu'], function (e, o) {
                                 repMsgService.buildUpdateMsg(repMsgGroup.edu, 'education_info', e, o);
+                                console.log("return msg:",repMsgGroup);
                                 callback(null, repMsgGroup);
                             })
                         })

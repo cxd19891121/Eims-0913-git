@@ -36,6 +36,9 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
 
     function moneyToInt(info)
     {
+        if(info == null){
+            return 0;
+        }
         return Number(info.replace(/[^0-9\.]+/g,""));
     }
     

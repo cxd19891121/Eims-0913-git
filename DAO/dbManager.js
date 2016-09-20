@@ -59,13 +59,26 @@ var sql = {
         name:'checkTableColType',
         text:"select column_name, data_type from information_schema.columns where table_name = $1;",
         values: 'order_info',
-    }
+    },
+
+    selectAllUsername:{name:'selectAllUsername',text:"select username from user_info"},
 }
 
 //removeCol();
 //updateProgress();
 //checkTableColType();
-checkTableColTypeBySql('order_info');
+//checkTableColTypeBySql('user_info');
+
+// var m = 1;
+// var n = '1';
+// var l = 'adsf'
+// var nn = true;
+// var mm = new Date("1111-11-11");
+// console.log("date", mm instanceof Date, !(nn instanceof Date), mm== "");
+// console.log(typeof(m) != "number");
+// console.log(typeof(n) === "string");
+// console.log(typeof(nn) === "boolean");
+// console.log(isNaN(l),isNaN(n));
 
 function removeCol(){
     db.queryPres(sql['removeCol_p_citty'], function (e, o) {

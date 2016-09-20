@@ -4,6 +4,7 @@
 var db = require('./../comm/database');
 
 var sql = {
+    selectAllUsername:{name:'selectAllUsername',text:"select username from user_info"},
     selectAllUser : { name:'selectAllFromUser', text: "select * from user_info"},
     selectUserByName  :{name: "selectUserByName", text: "SELECT * FROM user_info where username = $1", values: ["default"] },
     selectUserById: {name:'selectUserById',text:"select * from user_info where id = $1 "},
@@ -15,6 +16,10 @@ var sql = {
         ,values: ["username", "password", 1, 0,1] },
     selectLastUser: {name: "selectLastUser", text: "SELECT * FROM user_info ORDER BY id DESC LIMIT 1"},
     selectEmailByUsername:{name:"selectEmailByUsername", text: "SELECT email,password FROM user_info LEFT JOIN employee_info on user_info.e_id=employee_info.e_id WHERE username=$1", values: ["default"]},
+}
+
+exports.selectAllUsername = function(callback){
+    return db.queryPres(sql["selectAllUsername"],function(e,o){callback(e,o)});
 }
 
 exports.selectEmailByUsername = function(username,callback){
@@ -64,6 +69,7 @@ exports.updateElementById = function(id,dt,callback){
     sql['updateUserById'].values = [dt.username,dt.password,dt.eid,dt.level,id];
     return db.queryPres(sql['updateUserById'],function(e,o){callback(e,o)});
 }
+
 
 exports.selectElementByName = function(username,callback){
     //console.log(1)

@@ -31,9 +31,10 @@ var sql = {
         "regional_subsides," +
         "reimbursement," +
         "payrise_percentage)" +
-        "VALUES ($1, $2, $3, $4, $5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28)",
+        "progress"+
+        "VALUES ($1, $2, $3, $4, $5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29)",
         values: ["testname","testF",null,'1999-9-9', 0,false, "test_title","test_level",8,1111,2222,"test@gmail.com",'2001-01-01',"test" +
-        " reason","666 p street","ames","IA",50010,"USA","233 B road", "beijing","beijing",100000,"China","test healthIns","test rs","test rs",10]
+        " reason","666 p street","ames","IA",50010,"USA","233 B road", "beijing","beijing",100000,"China","test healthIns","test rs","test rs",10,0]
     },
 
     deleteEmpById: {name:"deleteEmpById",text:"DELETE FROM employee_info WHERE e_id = $1",value:[1]},
@@ -60,7 +61,9 @@ var sql = {
     "health_ins = $25," +
     "regional_subsides = $26," +
     "reimbursement = $27," +
-    "payrise_percentage = $28 where emp_id = $29",},
+    "payrise_percentage = $28 "+
+    "progress = $29"+
+    "where emp_id = $30",},
 
 
 }
@@ -97,7 +100,7 @@ exports.deleteElementById = function (id, callback) {
 
 exports.insertElement = function (data, callback) {
     sql['insertEmp'].values = [ data.fName, data.lName,data.mName,data.DOB,data.SSN,data.mStatus,data.jTitle,data.jLevel,data.salary,data.hPhone,data.cPhone,data.email,data.tDate,data.tReason,
-        data.pAdd,data.pCity,data.pState,data.pZip,data.pCountry,data.bAdd,data.bCity,data.bState,data.bZip,data.bCountry,data.hInsurance,data.rSubside,data.reimbursement,data.rPercent];
+        data.pAdd,data.pCity,data.pState,data.pZip,data.pCountry,data.bAdd,data.bCity,data.bState,data.bZip,data.bCountry,data.hInsurance,data.rSubside,data.reimbursement,data.rPercent,data.progress];
     return db.queryPres(sql['insertEmp'], function (e, o) {
         callback(e, o)
     });
@@ -106,7 +109,7 @@ exports.insertElement = function (data, callback) {
 exports.updateElementById = function (id,data, callback) {
     sql['updateEmpById'].values =  [ data.fName, data.lName,data.mName,data.DOB,data.SSN,data.mStatus,data.jTitle,data.jLevel,data.salary,data.hPhone,data.cPhone,data.email,data.tDate,data.tReason,
         data.pAdd,data.pCity,data.pState,data.pZip,data.pCountry,data.bAdd,data.bCity,data.bState,data.bZip,data.bCountry,data.hInsurance,data.rSubside,
-        data.reimbursement,data.rPercent,id];
+        data.reimbursement,data.rPercent,data.progress,id];
     return db.queryPres(sql['updateEmpById'], function (e, o) {
         callback(e, o)
     });

@@ -235,8 +235,27 @@ router.get('/app/controller/userConfigController.js',function(req,res){
     res.sendFile(__dirname + '/app/controller/userConfigController.js')
 })
 
+//new css
 
+router.get('/lib/bootstrap/css/bootstrap.css',function(req,res){
+    res.sendFile(__dirname + '/lib/bootstrap/css/bootstrap.css')
+})
 
+router.get('/lib/bootstrap/css/bootstrap-responsive.css',function(req,res){
+    res.sendFile(__dirname + '/lib/bootstrap/css/bootstrap-responsive.css')
+})
+
+router.get('/lib/font-awesome/css/font-awesome.css',function(req,res){
+    res.sendFile(__dirname + '/lib/font-awesome/css/font-awesome.css')
+})
+
+router.get('/stylesheets/theme.css',function(req,res){
+    res.sendFile(__dirname + '/stylesheets/theme.css')
+})
+
+router.get('/images/furley_bg.png',function(req,res){
+    res.sendFile(__dirname + '/images/furley_bg.png')
+})
 
 
 module.exports = router;

@@ -60,6 +60,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
+        console.log($scope.predicate)
     }
 
     $scope.displayDownload = false
@@ -78,8 +79,8 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     $scope.changeUser = function (symbol)
     {
-        //console.log($scope.users)
-        $scope.allUsers[0].progress = 100
+        console.log($scope.users)
+        //$scope.allUsers[0].progress = 100
         switch (symbol)
         {
             case $scope.all: 

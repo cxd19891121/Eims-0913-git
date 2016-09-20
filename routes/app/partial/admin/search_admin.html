@@ -14,6 +14,8 @@
                 </div>
             </div>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+
+            
             <div uib-accordion-group class="panel-default" heading="Show More" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                 <div class="form-inline">
 
@@ -134,11 +136,11 @@
         <thead><tr>
             <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
             
-            <th><a href="" ng-click="order('id')">Employee Id</a></th>
+            <th><a href="" ng-click="order('e_id')">Employee Id</a></th>
             <th><a href="" ng-click="order('first_name')">Name</a></th>
-            <th><a href="" ng-click="order('visa')">Visa Status</a></th>
-            <th><a href="" ng-click="order('expire')">Visa Expire Date</a></th>
-            <th><a href="" ng-click="order('job')">Job Title</a></th>
+            <th><a href="" ng-click="order('status')">Visa Status</a></th>
+            <th><a href="" ng-click="order('end_time')">Visa Expire Date</a></th>
+            <th><a href="" ng-click="order('job_title')">Job Title</a></th>
             <th>Operation</th>
         </tr></thead>
         <tbody><tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>

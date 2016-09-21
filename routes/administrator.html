@@ -17,7 +17,13 @@
 
 <body>
 <div style="position:absolute;top:0;right:0;">
+    Hello {{username}}
+    <button class="btn btn-primary" type="button" ng-click="getMessage()">
+        Messages<span class="badge">{{letterNum}}</span>
+    </button>
+    <!--
     <a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>
+    -->
     <a href="" ng-click="sendMessage()" class="control-label"> Send message </a>
 </div>
 <script type="text/ng-template" id="message.html">
@@ -25,14 +31,15 @@
         <h3 class="modal-title">Message</h3>
     </div>
     <div class="modal-body" >
+        <ul>
         <div ng-repeat="message in messages">
+            <li>
             <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  message: </span> {{message.message}}
             <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}"> from: </span> {{message.from}} 
             <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  send time: </span> {{message.sendTime}} 
             <input type="checkbox" ng-model="message.delete"> delete
-            
-            <hr>
-        </div>
+            </li>
+        </ul>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
@@ -50,7 +57,7 @@
             </div>
         </div>
 
-        <hr>
+        <br>
         <label><strong>Message : </strong></label>
         <br>
         <textarea  rows="10" cols="60" ng-model="data"></textarea>

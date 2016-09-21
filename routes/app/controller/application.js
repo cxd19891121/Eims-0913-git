@@ -63,7 +63,7 @@ app.controller('application', function($scope,dataService,$uibModal)
                 })
             }
         })
-        $scope.open()
+        $scope.open('lg')
 
     }
 
@@ -105,7 +105,7 @@ app.controller('application', function($scope,dataService,$uibModal)
         $scope.$broadcast('setUserId',$scope.id)
     });
 
-    $scope.open = function ()
+    $scope.open = function (size)
     {
         console.log($scope.letterNum)
         //console.log($scope.messages)
@@ -114,7 +114,7 @@ app.controller('application', function($scope,dataService,$uibModal)
             animation: $scope.animationsEnabled,
             templateUrl: 'message.html',
             controller: 'message',
-            //size: size,
+            size: size,
             resolve:
             {
                 items: function ()

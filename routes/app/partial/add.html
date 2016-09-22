@@ -1,64 +1,158 @@
 <div ng-controller="addCtrl">
     <div ng-show="addNew">
-    <div class="container">
-        <h3>Add</h3><hr>
-        <pre>Please choose following option</pre><hr>
-        <div style="width:50%" ng-repeat="(key,value) in addNewEmployee">
-            <label class="btn btn-info btn-block" ng-model="addNewEmployee[key]" uib-btn-checkbox>{{ key }}</label>
-            <br>
-        </div>
+        <div class="container">
+            <h3>Add</h3><hr>
+            <pre>Please choose following option</pre><hr>
 
-        <button class="btn btn-primary" ng-click="addUser()">
-            <span class="glyphicon glyphicon-log-in"></span> Next
-        </button>
 
-        <button class="btn btn-primary" ng-click="back()">
-            <span class="glyphicon glyphicon-arrow-left"></span> Back
-        </button>
-    </div>
+
+
+            <!--<div style="width:50%" ng-repeat="(key,value) in addNewEmployee">-->
+                <!--<label class="btn btn-info btn-block" ng-model="addNewEmployee[key]" uib-btn-checkbox>-->
+                    <!--<i ng-show = "addNewEmployee[key]" class="glyphicon glyphicon-pencil"></i>  {{ key }}</label>-->
+                <!--<br>-->
+            <!--</div>-->
+
+            <div style="width:50%">
+                <label class="btn btn-success btn-block active"  ng-model="addNewEmployee.personalInfo" aria-pressed="true">
+                    <i ng-show = "addNewEmployee.personalInfo" class="glyphicon glyphicon-pencil"></i>  Personal Information (required)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-success btn-block active"  ng-model="addNewEmployee.orderStatus" aria-pressed="true">
+                    <i ng-show = "addNewEmployee.orderStatus" class="glyphicon glyphicon-pencil"></i>  Order Information (required)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-success btn-block active"  ng-model="addNewEmployee.contactInfo" aria-pressed="true">
+                    <i ng-show = "addNewEmployee.contactInfo" class="glyphicon glyphicon-pencil"></i> Contact Information (required)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-success btn-block active"  ng-model="addNewEmployee.address" aria-pressed="true">
+                    <i ng-show = "addNewEmployee.address" class="glyphicon glyphicon-pencil"></i>  Address Information (required)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-success btn-block active"  ng-model="addNewEmployee.visaInfo" aria-pressed="true">
+                    <i ng-show = "addNewEmployee.visaInfo" class="glyphicon glyphicon-pencil"></i>  Visa Information (required)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-info btn-block" ng-model="addNewEmployee.termination" uib-btn-checkbox>
+                    <i ng-show = "addNewEmployee.termination" class="glyphicon glyphicon-pencil"></i>  Termination Information (option)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-info btn-block" ng-model="addNewEmployee.jobEducation" uib-btn-checkbox>
+                    <i ng-show = "addNewEmployee.jobEducation" class="glyphicon glyphicon-pencil"></i>  Job & Education (option)</label>
+                <br>
+            </div>
+            <div style="width:50%">
+                <label class="btn btn-info btn-block" ng-model="addNewEmployee.salaryBenefit" uib-btn-checkbox>
+                    <i ng-show = "addNewEmployee.salaryBenefit" class="glyphicon glyphicon-pencil"></i>  Salary & Benefit (option)</label>
+                <br>
+            </div>
+
+
+
+
+
+            <button class="btn btn-primary" ng-click="back()">
+                <span class="glyphicon glyphicon-arrow-left"></span> Back
+            </button>
+
+            <button class="btn btn-primary" ng-click="addUser()">
+                <span class="glyphicon glyphicon-log-in"></span> Next
+            </button>
+
+           </div>
+
     </div>
 
     <div class = "container" ng-controller="addDetailController as vm" ng-show="addDetail">
         <h3>Add html</h3>
         <pre> Please input employee information here: </pre><hr>
-        {{ progressValue }}
+
         <div class="row">
             <div class="col-sm-12"><uib-progressbar value="progressValue" class="progress-striped" >{{progressValue}}%</uib-progressbar></div>
         </div>
     
                 <div>
-                    
+
                     <uib-tabset active = 'active'>
 
-                        <uib-tab heading = 'Personal Info' index = 0>
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                        <uib-tab index = 0>
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.personalInfo && pTab.$invalid" class="glyphicon glyphicon-pencil"> </i>
+                                <i ng-show = "addNewEmployee.personalInfo && pTab.$valid" class = "glyphicon glyphicon-ok"> </i>
+                                <Strong>Personal Info</Strong>
+                            </uib-tab-heading>
+
+
+                            <form name ="pTab" class="form-horizontal" role="form" novalidate>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Name :</label>
                                     <div class="col-sm-2">
-                                        <input ng-model = 'vm.data.emp.fName' type="text" class="form-control"  placeholder="First" ng-blur="setProgress()">
+                                        <input name ="fname" ng-model = 'vm.data.emp.fName' type="text" class="form-control"  placeholder="First" ng-blur="setProgress()" ng-required = "addNewEmployee.personalInfo">
+
+                                        <!-- ng-message to show the error msg -->
+                                        <div class="help-block" ng-messages="pTab.fname.$error" ng-show="pTab.fname.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
+
                                     </div>
+
                                     <div class="col-sm-2">
                                         <input ng-model="vm.data.emp.mName" type="text" class="form-control"  placeholder="Middle" ng-blur="setProgress()">
                                     </div>
                                     <div class="col-sm-2">
-                                        <input ng-model="vm.data.emp.lName" type="text" class="form-control"  placeholder="Last" ng-blur="setProgress()">
+                                        <input name = "lname" ng-required = "addNewEmployee.personalInfo" ng-model="vm.data.emp.lName" type="text" class="form-control"  placeholder="Last" ng-blur="setProgress()" >
+
+                                        <div class="help-block" ng-messages="pTab.lname.$error" ng-show="pTab.lname.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">DOB :</label>
                                     <div class="col-sm-6">
-                                         <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB' ng-focus="open(1)" is-open="popup['1']" ng-blur="setProgress()"/>
-                                    
+                                         <input name = "dob" min="1950-01-01" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB' ng-focus="open(1)" is-open="popup['1']" ng-blur="setProgress()"/>
+
+                                        <div class="help-block" ng-messages="pTab.dob.$error" ng-show="pTab.dob.$touched">
+                                            <small ng-message="date" class = "text-danger">Invalid date</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">SSN :</label>
-                                    <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.SSN' class="form-control" type = 'tel' maxlength="9" placeholder="0000" ng-blur="setProgress()">
+                                    <div class="col-sm-4">
+                                        <input ng-model = 'vm.data.emp.SSN' class="form-control" type = 'number' maxlength="9" min = "0" placeholder="ssn" ng-blur="setProgress()" name = "ssn" >
+
+
+                                        <div class="help-block" ng-messages="pTab.ssn.$error" ng-show="pTab.ssn.$touched">
+                                            <small ng-message="number" class = "text-danger">Invalid SSN</small>
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                            <small ng-message="number" class = "text-danger">invalid format </small>
+                                            <small ng-message="maxlength" class = "text-danger"> invalid format </small>
+                                            <small ng-message="min" class = "text-danger"> invalid format </small>
+
+                                        </div>
                                     </div>
+
+                                    <div class = "col-sm-2">
+                                        <div class="checkbox">
+                                            <label class = 'control-label'>
+                                                <input  type="checkbox" ng-model = "vm.data.emp.SSN" ng-true-value = "" ng-blur="setProgress()" > I have no SSN
+                                            </label>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group">
@@ -80,68 +174,112 @@
                         </uib-tab>
 
 
-                        <uib-tab heading = 'Order Info' index = 1 >
+                        <uib-tab index = 1 >
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.orderStatus && oTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.orderStatus && oTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong>Order Info</Strong>
+                            </uib-tab-heading>
 
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                            <form name ="oTab" class="form-horizontal" role="form" novalidate>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Company Name:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.company' class="form-control" placeholder="company" ng-blur="setProgress()">
+                                        <input name = "company" ng-required = "addNewEmployee.orderStatus" ng-model = 'vm.data.order.company' class="form-control" placeholder="company" ng-blur="setProgress()" >
+
+                                        <div class="help-block" ng-messages="oTab.company.$error" ng-show="oTab.company.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.des' class="form-control" placeholder="job description" ng-blur="setProgress()">
+                                        <input name = "description" ng-required = "addNewEmployee.orderStatus" ng-model = 'vm.data.order.des' class="form-control" placeholder="job description" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="oTab.description.$error" ng-show="oTab.description.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Location:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.jLocation' class="form-control" placeholder="job location" ng-blur="setProgress()">
+                                        <input name = "location" ng-required = "addNewEmployee.orderStatus" ng-model = 'vm.data.order.jLocation' class="form-control" placeholder="job location" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="oTab.location.$error" ng-show="oTab.location.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Owner:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.owner' class="form-control" placeholder="owner" ng-blur="setProgress()">
+                                        <input name = "owner" ng-required = "addNewEmployee.orderStatus" ng-model = 'vm.data.order.owner' class="form-control" placeholder="owner" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="oTab.owner.$error" ng-show="oTab.owner.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
+
+
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Type:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.type' class="form-control" placeholder="job type" ng-blur="setProgress()">
+                                        <input name = "type" ng-required = "addNewEmployee.orderStatus" ng-model = 'vm.data.order.type' class="form-control" placeholder="job type" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="oTab.type.$error" ng-show="oTab.type.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Title:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.title' class="form-control" placeholder="job title" ng-blur="setProgress()">
+                                        <input name = "title" ng-required = "addNewEmployee.orderStatus" ng-model = 'vm.data.order.title' class="form-control" placeholder="job title" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="oTab.title.$error" ng-show="oTab.title.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Start:</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.order.sTime' ng-focus="open(5)" is-open="popup['5']" ng-blur="setProgress()"/>
-                                    
+                                        <input name = "sTime" ng-required = "addNewEmployee.orderStatus" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.order.sTime' ng-focus="open(5)" is-open="popup['5']" ng-blur="setProgress()"/>
+                                        <div class="help-block" ng-messages="oTab.sTime.$error" ng-show="oTab.sTime.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                            <small ng-message="date" class = "text-danger">Invalid date</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+
+                                        </div>
                                         
                                     </div>
 
                                     <label class="col-sm-2 control-label">End:</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.order.eTime' ng-focus="open(6)" is-open="popup['6']" ng-blur="setProgress()"/>
+                                        <input name = "eTime" ng-required = "addNewEmployee.orderStatus" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.order.eTime' ng-focus="open(6)" is-open="popup['6']" ng-blur="setProgress()"/>
+                                        <div class="help-block" ng-messages="oTab.eTime.$error" ng-show="oTab.eTime.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                            <small ng-message="date" class = "text-danger">Invalid date</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Extension Time:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.order.ext' class="form-control" ng-blur="setProgress()">
+                                        <input name = "extension"  ng-model = 'vm.data.order.ext' class="form-control" ng-blur="setProgress()">
                                     </div>
                                 </div>
 
@@ -150,27 +288,45 @@
 
                         </uib-tab>
 
-                        <uib-tab heading = 'Contact Info' index = 2>
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                        <uib-tab  index = 2>
+
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.contactInfo && cTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.contactInfo && cTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong> Contact Info</Strong>
+                            </uib-tab-heading>
+
+                            <form name ="cTab" class="form-horizontal" role="form" novalidate >
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Home Phone:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.hPhone' class="form-control" type = 'tel' ng-blur="setProgress()">
+                                        <input name = "hphone"  ng-model = 'vm.data.emp.hPhone' class="form-control" type = 'number' ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="cTab.hphone.$error" ng-show="cTab.hphone.$touched">
+                                            <small ng-message="number" class = "text-danger">Invalid number</small>
+
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Cell-Phone:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.cPhone' class="form-control" type = 'tel' ng-blur="setProgress()">
+                                        <input name = "cphone" ng-required = "addNewEmployee.contactInfo" ng-model = 'vm.data.emp.cPhone' class="form-control" type = 'tel' ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="cTab.cphone.$error" ng-show="cTab.cphone.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">E-mail:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = "vm.data.emp.email" class="form-control" ng-blur="setProgress()">
+                                        <input name = "email" ng-required = "addNewEmployee.contactInfo" ng-model = "vm.data.emp.email" class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="cTab.email.$error" ng-show="cTab.email.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                            <small ng-message = "email" class = "text-danger">Invalid Email </small>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -182,42 +338,66 @@
                             </form>
                         </uib-tab>
 
-                        <uib-tab heading = 'Address Info' index = 3>
-
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                        <uib-tab  index = 3 >
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.address && adTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.address && adTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong>Address</Strong>
+                            </uib-tab-heading>
+                            <form class="form-horizontal" role="form" name ="adTab" novalidate >
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Permanent Address:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.pAdd' class="form-control" ng-blur="setProgress()">
+                                        <input ng-model = 'vm.data.emp.pAdd' name = "pAdd" ng-required = "addNewEmployee.address" class="form-control" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="adTab.pAdd.$error" ng-show="adTab.pAdd.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">City:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.pCity' class="form-control" ng-blur="setProgress()">
+                                        <input name = "pCity" ng-required = "addNewEmployee.address" ng-model = 'vm.data.emp.pCity' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="adTab.pCity.$error" ng-show="adTab.pCity.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">State:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.pState' class="form-control" ng-blur="setProgress()">
+                                        <input name = "pState" ng-required = "addNewEmployee.address" ng-model = 'vm.data.emp.pState' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="adTab.pState.$error" ng-show="adTab.pState.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Zip Code</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.pZip' class="form-control" type ="tel" ng-blur="setProgress()" maxlength="6">
+                                        <input name = "pZip" ng-required = "addNewEmployee.address" ng-model = 'vm.data.emp.pZip' class="form-control" type ="number" ng-blur="setProgress()" maxlength="5" min = "0">
+                                        <div class="help-block" ng-messages="adTab.pZip.$error" ng-show="adTab.pZip.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                            <small ng-message="number" class = "text-danger">Invalid format </small>
+                                            <small ng-message="maxlength" class = "text-danger"> Zip code error </small>
+                                            <small ng-message="maxlength" class = "text-danger"> Invalid format</small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Country:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.pCountry' class="form-control" ng-blur="setProgress()">
+                                        <input name = "pCountry" ng-required = "addNewEmployee.address" ng-model = 'vm.data.emp.pCountry' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="adTab.pCountry.$error" ng-show="adTab.pCountry.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -225,35 +405,41 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Billing Address:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.bAdd' class="form-control" ng-blur="setProgress()">
+                                        <input name = "bAdd" ng-model = 'vm.data.emp.bAdd' class="form-control" ng-blur="setProgress()">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">City:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.bCity' class="form-control" ng-blur="setProgress()">
+                                        <input name = "bCity"  ng-model = 'vm.data.emp.bCity' class="form-control" ng-blur="setProgress()">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">State:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.bState' class="form-control" ng-blur="setProgress()">
+                                        <input name = "bState"  ng-model = 'vm.data.emp.bState' class="form-control" ng-blur="setProgress()">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Zip Code</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.bZip' class="form-control" type ="tel" ng-blur="setProgress()" maxlength="6">
+                                        <input name = "bZip" ng-model = 'vm.data.emp.bZip' class="form-control" type ="tel" ng-blur="setProgress()" maxlength="5">
+                                        <div class="help-block" ng-messages="adTab.bZip.$error" ng-show="adTab.bZip.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                            <small ng-message="number" class = "text-danger">Invalid format </small>
+                                            <small ng-message="maxlength" class = "text-danger"> Zip code error </small>
+                                            <small ng-message="min" class = "text-danger">Invalid format </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Country:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.bCountry' class="form-control" ng-blur="setProgress()">
+                                        <input name = "bCountry"  ng-model = 'vm.data.emp.bCountry' class="form-control" ng-blur="setProgress()">
                                     </div>
                                 </div>
 
@@ -265,34 +451,60 @@
                             </form>
                         </uib-tab>
 
-                        <uib-tab heading = 'Visa' index = 4>
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                        <uib-tab  index = 4>
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.visaInfo && vTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.visaInfo && vTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong>Visa</Strong>
+                            </uib-tab-heading>
+
+                            <form class="form-horizontal" role="form" name ="vTab" novalidate>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Visa Type:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.visa.type' class="form-control" ng-blur="setProgress()">
+                                        <input name = "vType" ng-required = "addNewEmployee.visaInfo" ng-model = 'vm.data.visa.type' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="vTab.vType.$error" ng-show="vTab.vType.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Start:</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.visa.sTime' ng-focus="open(7)" is-open="popup['7']" ng-blur="setProgress()"/>
-                                      
+                                        <input name = "vStart" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.visa.sTime' ng-focus="open(7)" is-open="popup['7']" ng-blur="setProgress()"/>
+
+                                        <div class="help-block" ng-messages="vTab.vStart.$error" ng-show="vTab.vStart.$touched">
+                                            <small ng-message="date" class = "text-danger">Invalid Date Type</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+                                        </div>
                                     </div>
 
-                                    <label class="col-sm-2 control-label">End:</label>
+
+
+                                    <label class="col-sm-2 control-label">Expired:</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.visa.eTime' ng-focus="open(8)" is-open="popup['8']" ng-blur="setProgress()"/>
+                                        <input name = "vEnd" ng-required = "addNewEmployee.visaInfo" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.visa.eTime' ng-focus="open(8)" is-open="popup['8']" ng-blur="setProgress()"/>
+
+                                        <div class="help-block" ng-messages="vTab.vEnd.$error" ng-show="vTab.vEnd.$touched">
+                                            <small ng-message="date" class = "text-danger">Invalid Date Type</small>
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+
+                                        </div>
                                       
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">status:</label>
+                                    <label class="col-sm-2 control-label">Status:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = "vm.data.visa.status" class="form-control" ng-blur="setProgress()">
+                                        <input name = "vStatus" ng-required = "addNewEmployee.visaInfo" ng-model = "vm.data.visa.status" class="form-control" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="vTab.vStatus.$error" ng-show="vTab.vStatus.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -306,13 +518,24 @@
 
 
                         <uib-tab heading = 'Termination' index = 5>
-
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.termination && tTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.termination &&tTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong>Address</Strong>
+                            </uib-tab-heading>
+                            <form class="form-horizontal" role="form" name ="tTab" novalidate>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Termination Date:</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.tDate' ng-focus="open(2)" is-open="popup['2']" ng-blur="setProgress()"/>
+                                        <input name = 'tDate' type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.tDate' ng-focus="open(2)" is-open="popup['2']" ng-blur="setProgress()"/>
+
+
+                                        <div class="help-block" ng-messages="tTab.tDate.$error" ng-show="oTab.tDate.$touched">
+                                            <small ng-message="date" class = "text-danger">Invalid date</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -320,7 +543,10 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Reason:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = "vm.data.emp.tReason" class="form-control" ng-blur="setProgress()">
+                                        <input name = "reason" ng-required = "addNewEmployee.termination" ng-model = "vm.data.emp.tReason" class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="tTab.reason.$error" ng-show="tTab.reason.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -334,13 +560,22 @@
                             <span ng-repeat = "element in vm.tabs.empTabTM"> {{element.tag}}: <input ng-model="element.value" ng-blur="setProgress()"><br></span>
                         </uib-tab>
 
-                        <uib-tab heading = 'Job & Education' index = 6>
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                        <uib-tab   index = 6>
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.jobEducation && jTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.jobEducation && jTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong>Job & Education</Strong>
+                            </uib-tab-heading>
+                            <form class="form-horizontal" role="form" name ="jTab" novalidate>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">University:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.edu.uni' class="form-control" ng-blur="setProgress()">
+                                        <input name = "uni" ng-required = "addNewEmployee.jobEducation" ng-model = 'vm.data.edu.uni' class="form-control" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="jTab.uni.$error" ng-show="jTab.uni.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -362,26 +597,45 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Job Title:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = "vm.data.work.title" class="form-control" ng-blur="setProgress()">
+                                        <input name = "jobTitle" ng-required = "addNewEmployee.jobEducation"  ng-model = "vm.data.work.title" class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="jTab.jobTitle.$error" ng-show="jTab.jobTitle.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Job Type:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = "vm.data.work.type" class="form-control" ng-blur="setProgress()">
+                                        <input name = "jobType" ng-required = "addNewEmployee.jobEducation" ng-model = "vm.data.work.type" class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="jTab.jobType.$error" ng-show="jTab.jobType.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Start:</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.work.sTime' ng-focus="open(3)" is-open="popup['3']" ng-blur="setProgress()"/>
+                                        <input type="text" name = "jStart" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.work.sTime' ng-focus="open(3)" is-open="popup['3']" ng-blur="setProgress()"/>
+
+                                        <div class="help-block" ng-messages="jTab.jStart.$error" ng-show="jTab.jStart.$touched">
+                                            <small ng-message="date" class = "text-danger">Invalid date</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+                                        </div>
+
+
                                         
                                     </div>
 
                                     <label class="col-sm-2 control-label">End:</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.work.eTime' ng-focus="open(4)" is-open="popup['4']" ng-blur="setProgress()"/>
+                                        <input type="text" name = "jEnd" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.work.eTime' ng-focus="open(4)" is-open="popup['4']" ng-blur="setProgress()"/>
+
+                                        <div class="help-block" ng-messages="jTab.jEnd.$error" ng-show="jTab.jEnd.$touched">
+                                            <small ng-message="date" class = "text-danger">Invalid date</small>
+                                            <small ng-message="min" class = "text-danger">Invalid date</small>
+
+                                        </div>
                                        
                                     </div>
                                 </div>
@@ -409,35 +663,55 @@
 
                         </uib-tab>
 
-                        <uib-tab heading = 'Salary & Benefit' index = 7>
-
-                            <form class="form-horizontal" role="form">
-                                <hr>
+                        <uib-tab index = 7>
+                            <uib-tab-heading>
+                                <i ng-show = "addNewEmployee.salaryBenefit && sTab.$invalid" class="glyphicon glyphicon-pencil"></i>
+                                <i ng-show = "addNewEmployee.salaryBenefit && sTab.$valid" class = "glyphicon glyphicon-ok"></i>
+                                <Strong>Salary & Benefit</Strong>
+                            </uib-tab-heading>
+                            <form class="form-horizontal" role="form" name ="sTab" novalidate>
+                                <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Job Title:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.jTitle' class="form-control" ng-blur="setProgress()">
+                                        <input name = "jobTitle" ng-required = "addNewEmployee.salaryBenefit"  ng-model = 'vm.data.emp.jTitle' class="form-control" ng-blur="setProgress()">
+
+                                        <div class="help-block" ng-messages="sTab.jobTitle.$error" ng-show="sTab.jobTitle.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Job Level:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.jLevel' class="form-control" ng-blur="setProgress()">
+                                        <input name = "joblv" ng-required = "addNewEmployee.salaryBenefit" ng-model = 'vm.data.emp.jLevel' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="sTab.joblv.$error" ng-show="sTab.joblv.$touched">
+                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Salary:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.salary' class="form-control" ng-blur="setProgress()">
+                                        <input name = "salary" type = "number" min = '0' ng-model = 'vm.data.emp.salary' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="sTab.salary.$error" ng-show="sTab.salary.$touched">
+                                            <small ng-message="number" class = "text-danger">Invalid format </small>
+                                            <small ng-message="min" class = "text-danger">Invalid number </small>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Health Insurance:</label>
                                     <div class="col-sm-6">
-                                        <input ng-model = 'vm.data.emp.hInsurance' class="form-control" ng-blur="setProgress()">
+                                        <input name = "insurance" type = "number" min = '0' ng-model = 'vm.data.emp.hInsurance' class="form-control" ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="sTab.insurance.$error" ng-show="sTab.insurance.$touched">
+                                            <small ng-message="number" class = "text-danger">Invalid format  </small>
+                                            <small ng-message="min" class = "text-danger">Invalid number </small>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -458,8 +732,11 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Pay Raise Percentage</label>
                                     <div class="col-sm-2">
-                                        <input ng-model = 'vm.data.emp.rPercent' class="form-control" type = 'number' min = '0' max = '100' ng-blur="setProgress()">
-
+                                        <input name = "payrise" min = '0' type = "number" ng-model = 'vm.data.emp.rPercent' class="form-control" type = 'number' min = '0' max = '100' ng-blur="setProgress()">
+                                        <div class="help-block" ng-messages="sTab.insurance.$error" ng-show="sTab.insurance.$touched">
+                                            <small ng-message="number" class = "text-danger">Invalid format  </small>
+                                            <small ng-message="min" class = "text-danger">Invalid number </small>
+                                        </div>
                                     </div>
                                     <label class = ' control-label'>%</label>
 
@@ -480,6 +757,5 @@
                     <br>
 
                 </div>
-
-
+    </div>
 </div>

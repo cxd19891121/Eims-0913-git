@@ -60,17 +60,17 @@ app.controller('application', function($scope,dataService,$uibModal)
                 $scope.messages.sort(function(ele1,ele2)
                 {
                     // console.log(Date.parse(ele1.sendTime))
-                    console.log(Date.parse(ele1.sendTime)-Date.parse(ele2.sendTime));
+                    //console.log(Date.parse(ele1.sendTime)-Date.parse(ele2.sendTime));
                     return Date.parse(ele2.sendTime)-Date.parse(ele1.sendTime)
                 })
-                $scope.messages.forEach((a) => console.log(a));
+                //$scope.messages.forEach((a) => console.log(a));
                 $scope.messages.forEach(function(element)
                 {
                     element.sendTime=parseISO8601(element.sendTime);
-                    console.log(element)
+                    //console.log(element)
                     // $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
                 })
-               console.log($scope.messages);
+               //console.log($scope.messages);
             }
         })
         $scope.open('lg')
@@ -120,7 +120,7 @@ app.controller('application', function($scope,dataService,$uibModal)
     $scope.open = function (size)
     {
         //$scope.getMessage();
-        console.log($scope.letterNum)
+        //console.log($scope.letterNum)
         //console.log($scope.messages)
         var modalInstance = $uibModal.open
         ({
@@ -180,7 +180,7 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
 
     $scope.ok = function ()
     {
-        console.log($scope.messages)
+        //console.log($scope.messages)
         items.forEach(function(element,index)
         {
             if (element.flag == false)
@@ -256,7 +256,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
         var packet = []
         $scope.users.forEach(function (element,index)
         {
-            console.log(2)
+            //console.log(2)
             if (element.flag == true)
             {
                 var obj =
@@ -277,7 +277,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
 
         dataService.sendMessage(packet,function()
         {
-            console.log(packet)
+            //console.log(packet)
             $uibModalInstance.close()
         })
 

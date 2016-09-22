@@ -5,7 +5,8 @@
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
 <script src="https://rawgit.com/gilf/ngPrint/master/ngPrint.min.js"></script>
@@ -16,17 +17,24 @@
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">-->
 
 <body>
-<div style="position:absolute;top:0;right:0;">
-    Hello {{username}}
-    <button class="btn btn-primary" type="button" ng-click="getMessage()">
-        Messages<span class="badge">{{letterNum}}</span>
-    </button>
-    <!--
+    <nav class="navbar navbar-default navbar-fixed-top ">
+        <div class="navbar-left">
+            <span class="first">Ames IT </span> <span class="second">Employee information manage system</span>
+        </div>
+        <div class="navbar-right">
+            Hello {{username}}
+            <button class="btn btn-primary" type="button" ng-click="getMessage()">
+                Messages<span class="badge">{{letterNum}}</span>
+            </button>
+        <!--
     <a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>
     -->
-    <a href="" ng-click="sendMessage()" class="control-label"> Send message </a>
-</div>
-<script type="text/ng-template" id="message.html">
+            <button class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">        
+            </button>
+            &nbsp;&nbsp; &nbsp;&nbsp;
+        </div>      
+    </nav>
+    <script type="text/ng-template" id="message.html">
     <div class="modal-header">
         <h3 class="modal-title">Message</h3>
     </div>
@@ -46,7 +54,7 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="send.html">
+    <script type="text/ng-template" id="send.html">
     <div class="modal-header">
         <h3 class="modal-title">Send</h3>
     </div>
@@ -68,47 +76,45 @@
 </script>
 
 
-<div ng-view>
+    <div ng-view>
 
-</div>
-
-
-
-<script src = 'app/app_admin.js'></script>
-<script src = 'app/comm.js'></script>
-<script src = 'app/rule.js'></script>
-
-<!-- Controllers  -->
-<script src = 'app/controller/userController.js'></script>
-<script src = 'app/directive/myDirctive.js'></script>
-<script src = 'app/controller/addDetailController.js'></script>
-<script src = 'app/controller/editController.js'></script>
-<script src = 'app/controller/appController.js'></script>
-<script src = 'app/controller/application.js'></script>
-<script src = 'app/controller/search.js'></script>
-<script src = 'app/controller/edit.js'></script>
-<script src = 'app/controller/addCtrl.js'></script>
-<script src = 'app/controller/modifyController.js'></script>
-<script src = 'app/controller/userConfigController.js'></script>
+    </div>
 
 
-<script src = 'app/controller/ModalInstanceCtrl.js'></script>
 
-<!-- services -->
-<script src = 'app/service/dataService.js'></script>
+    <script src='app/app_admin.js'></script>
+    <script src='app/comm.js'></script>
+    <script src='app/rule.js'></script>
 
-<!--This is only a test-->
-<script src = 'app/service/configService.js'></script>
+    <!-- Controllers  -->
+    <script src='app/controller/userController.js'></script>
+    <script src='app/directive/myDirctive.js'></script>
+    <script src='app/controller/addDetailController.js'></script>
+    <script src='app/controller/editController.js'></script>
+    <script src='app/controller/appController.js'></script>
+    <script src='app/controller/application.js'></script>
+    <script src='app/controller/search.js'></script>
+    <script src='app/controller/edit.js'></script>
+    <script src='app/controller/addCtrl.js'></script>
+    <script src='app/controller/modifyController.js'></script>
+    <script src='app/controller/userConfigController.js'></script>
 
 
-<!-- partial -->
+    <script src='app/controller/ModalInstanceCtrl.js'></script>
+
+    <!-- services -->
+    <script src='app/service/dataService.js'></script>
+
+    <!--This is only a test-->
+    <script src='app/service/configService.js'></script>
+
+
+    <!-- partial -->
 
 
 
 
 
 </body>
+
 </html>
-
-
-

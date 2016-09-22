@@ -5,12 +5,13 @@
         <uib-accordion close-others="showMoreSearch">
             <div class="form-inline">
                 <label class="col-sm-2 control-label">Employee name:&emsp;</label>
-                <div class="col-md-4">
-                    <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name">&emsp;&emsp;
-                    <button class="btn btn-success" ng-click="searchByName()">
-                        <span class="glyphicon glyphicon-log-in"></span> Search
-                    </button>
-
+                <div class="col-md-4 input-group">
+                    <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" ng-click="searchByName()">
+                            <span class="glyphicon glyphicon-search"></span> 
+                        </button>
+                    </span>
                 </div>
             </div>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
@@ -57,11 +58,13 @@
                     <div class="form-inline">
                         <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']" ng-focus="open(1)" is-open="popup['1']"/>
+                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']"
+                                ng-focus="open(1)" is-open="popup['1']" />
                         </div>
                         <label class="col-sm-2 control-label">Visa End:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']" ng-focus="open(0)" is-open="popup['0']"/>
+                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']"
+                                ng-focus="open(0)" is-open="popup['0']" />
                         </div>
 
                     </div>
@@ -83,74 +86,78 @@
         </uib-accordion>
 
     </form>
-</div>
-<br><br>
-<div>
+    </div>
+    <br><br>
+    <div>
 
-    &emsp;&emsp;
-    <button class="btn btn-success" ng-click="deepSearch()">
+        &emsp;&emsp;
+        <button class="btn btn-success" ng-click="deepSearch()">
         <span class="glyphicon glyphicon-log-in"></span> DeepSearch
     </button>
-</div>
+    </div>
 
-</div>
+    </div>
 
-</uib-accordion>
-</form>
+    </uib-accordion>
+    </form>
 
-<hr>
+    <hr>
 
-<button class="btn btn-success" ng-click="logout()">
+    <button class="btn btn-success" ng-click="logout()">
     <span class="glyphicon glyphicon-log-in"></span> logout
 </button>
 
-<hr>
+    <hr>
 
 
 
-<div ng-controller="edit">
-    <form class="form-horizotal">
-        <div class="form-inline">
-            <button class="btn btn-primary" type="button" ng-click="changeUser(all)">All</button>
-            <button class="btn btn-primary" type="button" ng-click="changeUser(incomplete)">Incomplete</button>
-            <button class="btn btn-primary" type="button" ng-click="changeUser(complete)">Completed</button>
-        
-            <div ng-show="displayDownload">
-                <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
-                <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
+    <div ng-controller="edit">
+        <form class="form-horizotal">
+            <div class="form-inline">
+                <button class="btn btn-primary" type="button" ng-click="changeUser(all)">All</button>
+                <button class="btn btn-primary" type="button" ng-click="changeUser(incomplete)">Incomplete</button>
+                <button class="btn btn-primary" type="button" ng-click="changeUser(complete)">Completed</button>
+
+                <div ng-show="displayDownload">
+                    <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
+                    <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
+                </div>
             </div>
-        </div>
-    </form>
-    <table class="table table-striped">
-        <thead><tr>
-            <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
-            
-            <th><a href="" ng-click="order('id')">Employee Id</a></th>
-            <th><a href="" ng-click="order('first_name')">Name</a></th>
-            <th><a href="" ng-click="order('visa')">Visa Status</a></th>
-            <th><a href="" ng-click="order('expire')">Visa Expire Date</a></th>
-            <th><a href="" ng-click="order('job')">Job Title</a></th>
-            <th>Operation</th>
-        </tr></thead>
-        <tbody><tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
-            <td><input type="checkbox" ng-model="user.flag" ng-click="display()"></td>
-            <td>{{ user.e_id }}</td>
-            <td>{{ user.first_name }} {{ user.last_name }}</td>
-            <td>{{ user.status }}</td>
-            <td>{{ user.end_time }}</td>
-            <td>{{ user.job_title }}</td>
-            <td>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
 
-                <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)")>
+                    <th><a href="" ng-click="order('id')">Employee Id</a></th>
+                    <th><a href="" ng-click="order('first_name')">Name</a></th>
+                    <th><a href="" ng-click="order('visa')">Visa Status</a></th>
+                    <th><a href="" ng-click="order('expire')">Visa Expire Date</a></th>
+                    <th><a href="" ng-click="order('job')">Job Title</a></th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
+                    <td><input type="checkbox" ng-model="user.flag" ng-click="display()"></td>
+                    <td>{{ user.e_id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ user.status }}</td>
+                    <td>{{ user.end_time }}</td>
+                    <td>{{ user.job_title }}</td>
+                    <td>
+
+                        <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
                     <span class="glyphicon glyphicon-pencil"></span>Detail
                 </button>
-            </td>
-        </tr></tbody>
-    </table>
-    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="5" boundary-links="true" items-per-page="pageSize"></ul>
-</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="5" boundary-links="true" items-per-page="pageSize"></ul>
+    </div>
 
-<script type="text/ng-template" id="myModalContent.html">
+    <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
         <h3 class="modal-title">Detail</h3>
     </div>
@@ -346,4 +353,3 @@
         <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
     </div>
 </script>
-

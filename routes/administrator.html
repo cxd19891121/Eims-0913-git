@@ -19,10 +19,12 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top ">
         <div class="navbar-left">
-            <span class="first">Ames IT </span> <span class="second">Employee information manage system</span>
+            <h4 class="text-success"><em class="text-warning">Ames IT</em> Employee information manage system</h4>
         </div>
-        <div class="navbar-right">
-            Hello {{username}}
+        
+        <div class="navbar-right text-success">          
+            Hello <em class="text-info">{{username}}</em>
+                           
             <button class="btn btn-primary" type="button" ng-click="getMessage()">
                 Messages<span class="badge">{{letterNum}}</span>
             </button>
@@ -39,7 +41,7 @@
         <h3 class="modal-title">Message</h3>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped modal-body">
         <thead>
         <tr>
             <th><a href="" >Message </a></th>
@@ -57,7 +59,7 @@
             </tr>
         </tbody>
     </table>
-    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="5" boundary-links="true"
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" boundary-links="true"
         items-per-page="pageSize"></ul>
     
     <div class="modal-footer">

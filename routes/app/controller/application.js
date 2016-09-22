@@ -51,16 +51,26 @@ app.controller('application', function($scope,dataService,$uibModal)
                 $scope.messages = []
                 data.forEach(function(element)
                 {
-                    if(element.delete == undefined)
-                    {
+                    if(element.delete == undefined || element.delete == false)
+                    {   
                         $scope.messages.push(element)
                     }
                 })
                 //$scope.messages = data
-                $scope.messages.forEach(function(element,index)
+                $scope.messages.sort(function(ele1,ele2)
                 {
-                    $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+                    // console.log(Date.parse(ele1.sendTime))
+                    console.log(Date.parse(ele1.sendTime)-Date.parse(ele2.sendTime));
+                    return Date.parse(ele2.sendTime)-Date.parse(ele1.sendTime)
                 })
+                $scope.messages.forEach((a) => console.log(a));
+                $scope.messages.forEach(function(element)
+                {
+                    element.sendTime=parseISO8601(element.sendTime);
+                    console.log(element)
+                    // $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+                })
+               console.log($scope.messages);
             }
         })
         $scope.open('lg')
@@ -94,6 +104,7 @@ app.controller('application', function($scope,dataService,$uibModal)
 
 
 
+
     $scope.id = -1
     $scope.$on('editUser',function(event,data)
     {
@@ -105,8 +116,10 @@ app.controller('application', function($scope,dataService,$uibModal)
         $scope.$broadcast('setUserId',$scope.id)
     });
 
+
     $scope.open = function (size)
     {
+        //$scope.getMessage();
         console.log($scope.letterNum)
         //console.log($scope.messages)
         var modalInstance = $uibModal.open
@@ -152,10 +165,22 @@ app.controller('application', function($scope,dataService,$uibModal)
 app.controller('message', function ($scope, $uibModalInstance, items, nums ,dataService)
 {
     $scope.messages = items
+    $scope.totalItems = items.length
+    $scope.currentPage = 1
+    $scope.pageSize = 10
+
+    $scope.paginate = function (value)
+    {
+        var begin, end, index;
+        begin = ($scope.currentPage - 1) * $scope.pageSize;
+        end = begin + $scope.pageSize;
+        index = $scope.messages.indexOf(value);
+        return (begin <= index && index < end);
+    }
 
     $scope.ok = function ()
     {
-        $uibModalInstance.close()
+        console.log($scope.messages)
         items.forEach(function(element,index)
         {
             if (element.flag == false)
@@ -167,12 +192,14 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
                 items.splice(index, 1);
             }
         })
-        console.log(items)
+        //console.log(items)
         nums = 0
         dataService.putMessage(items,function(d)
         {
-            console.log(d)
+            console.log("data putted")
+            //console.log(d)
         })
+        $uibModalInstance.close()
     }
 })
 
@@ -180,6 +207,23 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
 {
     $scope.data = ""
     $scope.users = []
+    $scope.disables = true;
+    $scope.disableSend = function()
+    {
+        let temp = true;
+        $scope.users.forEach(function(element,index)
+        {
+            if (element.flag == true) 
+            {
+                temp = false;
+                //console.log($scope.disables)
+                return;
+            }
+        })
+        
+        $scope.disables = temp;
+        return ;
+    }
     $scope.getAllUser = function()
     {
         dataService.getAllUser(function(data)
@@ -234,7 +278,6 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
         dataService.sendMessage(packet,function()
         {
             console.log(packet)
-
             $uibModalInstance.close()
         })
 

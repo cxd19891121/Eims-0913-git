@@ -5,8 +5,7 @@
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-    crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
 <script src="https://rawgit.com/gilf/ngPrint/master/ngPrint.min.js"></script>
@@ -21,86 +20,84 @@
         <div class="navbar-left">
             <h4 class="text-success"><em class="text-warning">Ames IT</em> Employee information manage system</h4>
         </div>
-        
-        <div class="navbar-right text-success">          
+
+        <div class="navbar-right text-success">
             Hello <em class="text-info">{{username}}</em>
-                           
-            <button class="btn btn-primary" type="button" ng-click="getMessage()">
+
+            <button uib-popover="read messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
                 Messages<span class="badge">{{letterNum}}</span>
             </button>
-        
-            <button class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">        
+
+            <button uib-popover="send message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">        
             </button>
-            <button class="btn btn-success" ng-click="searchConfig()">
-                <span class="glyphicon glyphicon-log-in"></span> Search
-            </button>
-            
-            <button class="btn btn-success" ng-click="modifyConfig()">
-                <span class="glyphicon glyphicon-log-in"></span> Setting
+            <!--<button  class="btn btn-primary" ng-click="searchConfig()">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>-->
+
+            <button uib-popover="setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">
+                <span class="glyphicon glyphicon-off"></span>
             </button>
 
-            <button class="btn btn-success" ng-click="userConfig()">
-                <span class="glyphicon glyphicon-log-in"></span> Account management
+            <button uib-popover="Account Management" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="userConfig()">
+                <span class="glyphicon glyphicon-briefcase"></span>
             </button>
 
-            <button class="btn btn-success" ng-click="logout()">
-                <span class="glyphicon glyphicon-log-in"></span> logout
-            </button>
-            &nbsp;&nbsp; &nbsp;&nbsp;
-        </div>      
+            <button uib-popover="logout" popover-placement="left-bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </button> &nbsp;&nbsp; &nbsp;&nbsp;
+        </div>
     </nav>
     <script type="text/ng-template" id="message.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Message</h3>
-    </div>
-
-
-    <table class="table table-striped modal-body">
-        <thead>
-        <tr>
-            <th><a href="" >Message </a></th>
-            <th><a href="" >From </a></th>
-            <th><a href="" >Send time </a></th>
-            <th><a href="" >Operation </a></th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr ng-class="{'success' : message.flag === true, 'danger' : message.flag === false}" ng-repeat="message in messages | filter:paginate" ng-class-odd='odd'> 
-                <td>{{message.message}}</td>
-                <td>{{message.from}} </td>
-                <td>{{message.sendTime}}</td>
-                <td><input type="checkbox" ng-model="message.delete"> delete </td>
-            </tr>
-        </tbody>
-    </table>
-    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" boundary-links="true"
-        items-per-page="pageSize"></ul>
-    
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    </div>
-</script>
-
-    <script type="text/ng-template" id="send.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Send</h3>
-    </div>
-    <div class="container">
-        <div ng-repeat="user in users" style="margin:8px;">
-            <div>
-            <input type="checkbox" ng-model="user.flag" ng-click="disableSend()"> &nbsp;&nbsp;{{user.username}}
-            </div>
+        <div class="modal-header">
+            <h3 class="modal-title">Message</h3>
         </div>
 
-        <br>
-        <label><strong>Message : </strong></label>
-        <br>
-        <textarea  rows="10" cols="60" ng-model="data"></textarea>
-        <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
 
-        <br><br>
-    </div>
-</script>
+        <table class="table table-striped modal-body">
+            <thead>
+                <tr>
+                    <th><a href="">Message </a></th>
+                    <th><a href="">From </a></th>
+                    <th><a href="">Send time </a></th>
+                    <th><a href="">Operation </a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-class="{'success' : message.flag === true, 'danger' : message.flag === false}" ng-repeat="message in messages | filter:paginate" ng-class-odd='odd'>
+                    <td>{{message.message}}</td>
+                    <td>{{message.from}} </td>
+                    <td>{{message.sendTime}}</td>
+                    <td><input type="checkbox" ng-model="message.delete"> delete </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" boundary-links="true" items-per-page="pageSize"></ul>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="send.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Send</h3>
+        </div>
+        <div class="container">
+            <div ng-repeat="user in users" style="margin:8px;">
+                <div>
+                    <input type="checkbox" ng-model="user.flag" ng-click="disableSend()"> &nbsp;&nbsp;{{user.username}}
+                </div>
+            </div>
+
+            <br>
+            <label><strong>Message : </strong></label>
+            <br>
+            <textarea rows="10" cols="60" ng-model="data"></textarea>
+            <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
+
+            <br><br>
+        </div>
+    </script>
 
 
     <div ng-view>

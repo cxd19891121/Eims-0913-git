@@ -4,7 +4,7 @@
     <form class="form-horizontal" ng-controller="search">
         <uib-accordion close-others="showMoreSearch">
             <div class="form-inline">
-                <label class="col-sm-2 control-label">Employee name:&emsp;</label>
+                <label class="col-sm-2 control-label">Search:&emsp;</label>
                 <div class="col-md-4">
                     <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name">&emsp;&emsp;
                     <button class="btn btn-success" ng-click="searchByName()">
@@ -82,6 +82,31 @@
                     </div>
                     <br><br><br>
 
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Reimbursment:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="searchObject['reimbursement']" class='form-control'>
+                        </div>
+                        
+
+                    </div>
+                    <br><br><br>
+
+                    <div class="form-inline">
+                        <label class="col-sm-2 control-label">Regional subsides:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject['regional_subsides_start']" class='form-control'>
+                            <input type="text" ng-model="searchObject['regional_subsides_end']" class='form-control'>
+                        </div>
+                        <label class="col-sm-2 control-label">Payraise percent:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject['payraise_start']" class='form-control'>
+                            <input type="text" ng-model="searchObject['payraise_end']" class='form-control'>
+                        </div>
+
+                    </div>
+                    <br><br><br>
+
         </uib-accordion>
 
     </form>
@@ -106,6 +131,7 @@
 </button>
 
 
+<<<<<<< HEAD
 <button class="btn btn-success" ng-click="modifyConfig()">
     <span class="glyphicon glyphicon-off"></span> Setting
 </button>
@@ -117,6 +143,9 @@
 <button class="btn btn-success" ng-click="logout()">
     <span class="glyphicon glyphicon-log-out"></span> logout
 </button>
+=======
+
+>>>>>>> origin/master
 
 <hr>
 

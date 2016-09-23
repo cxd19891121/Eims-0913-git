@@ -183,6 +183,13 @@ function changeOpt(sqlCode,info,operator)
         return sqlCode
 }
 
+function changeRate(sqlCode,name,val1,val2)
+{
+    if (sqlCode.indexOf(name) != -1) 
+
+    return sqlCode
+}
+
 function deepSearch(request,response,callback)
 {
     var searchObj = JSON.parse(JSON.stringify(request.body));
@@ -194,7 +201,7 @@ function deepSearch(request,response,callback)
 
     for (var info in searchObj)
     {
-        if (searchObj.hasOwnProperty(info) && searchObj[info] != '' && searchObj[info] != undefined)
+        if (searchObj.hasOwnProperty(info) && searchObj[info] != '' && searchObj[info] != undefined && info.indexOf('regional_subsides') == -1 && info.indexOf('payraise') == -1)
         {
             queryDataArray.push(searchObj[info])
             queryColumnArray.push(info)
@@ -208,9 +215,18 @@ function deepSearch(request,response,callback)
                 .from(['user_info','employee_info','education_info','order_info','visa_info'],'left join','e_id')
                 .where(queryColumnArray,queryDataArray,queryTypeArray)
                 .build()
-
+    //console.log(0)
     sqlCode = changeOpt(sqlCode,'visa_info.start_time','>=')
     sqlCode = changeOpt(sqlCode,'visa_info.end_time','<=')
+    sqlCode = sqlCode.substring(0,sqlCode.indexOf("order by emp_id"))
+    if (sqlCode.substring(sqlCode.length-3) == "WHE") sqlCode += "RE"
+    //console.log(1)
+    if (searchObj['regional_subsides_start'] != undefined ) sqlCode += " regional_subsides >= " + searchObj['regional_subsides_start'] + ' AND';
+    if (searchObj['regional_subsides_end'] != undefined ) sqlCode += " regional_subsides <= " + searchObj['regional_subsides_end'] + ' AND';
+    if (searchObj['payraise_start'] != undefined ) sqlCode += " payrise_percentage >= " + searchObj['payraise_start'] + ' AND';
+    if (searchObj['payraise_end'] != undefined ) sqlCode += " payrise_percentage <= " + searchObj['payraise_end'] + ' AND';
+    sqlCode = sqlCode.substring(0,sqlCode.length-3)
+    sqlCode += "order by emp_id"
     console.log('sqlCode = ' + sqlCode)
 
     db.queryPres(sqlCode,function(e,o){

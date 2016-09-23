@@ -21,19 +21,24 @@ app.controller('application', function($scope,dataService,$uibModal)
     $scope.addNew = false
     $scope.addNewUser = function()
     {
-        var add = window.location + 'add'
+        var add = 'admin#/' + 'add'
         window.location.href = add
     }
 
+    $scope.searchConfig = function()
+    {
+        var config = 'admin#/';
+        window.location.href = config;
+    }
     $scope.modifyConfig = function()
     {
-        var config = window.location + 'config';
+        var config = 'admin#/' + 'config';
         window.location.href = config;
     }
 
     $scope.userConfig = function()
     {
-        var userConfig = window.location + 'userConfig';
+        var userConfig = 'admin#/' + 'userConfig';
         window.location.href = userConfig;
     }
 
@@ -56,7 +61,6 @@ app.controller('application', function($scope,dataService,$uibModal)
                         $scope.messages.push(element)
                     }
                 })
-                //$scope.messages = data
                 $scope.messages.sort(function(ele1,ele2)
                 {
                     // console.log(Date.parse(ele1.sendTime))

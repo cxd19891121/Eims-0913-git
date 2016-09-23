@@ -28,10 +28,23 @@
             <button class="btn btn-primary" type="button" ng-click="getMessage()">
                 Messages<span class="badge">{{letterNum}}</span>
             </button>
-        <!--
-    <a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>
-    -->
+        
             <button class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">        
+            </button>
+            <button class="btn btn-success" ng-click="searchConfig()">
+                <span class="glyphicon glyphicon-log-in"></span> Search
+            </button>
+            
+            <button class="btn btn-success" ng-click="modifyConfig()">
+                <span class="glyphicon glyphicon-log-in"></span> Setting
+            </button>
+
+            <button class="btn btn-success" ng-click="userConfig()">
+                <span class="glyphicon glyphicon-log-in"></span> Account management
+            </button>
+
+            <button class="btn btn-success" ng-click="logout()">
+                <span class="glyphicon glyphicon-log-in"></span> logout
             </button>
             &nbsp;&nbsp; &nbsp;&nbsp;
         </div>      
@@ -41,7 +54,11 @@
         <h3 class="modal-title">Message</h3>
     </div>
 
+<<<<<<< HEAD
     <table class="table table-striped modal-body">
+=======
+    <table class="table table-striped" >
+>>>>>>> origin/master
         <thead>
         <tr>
             <th><a href="" >Message </a></th>

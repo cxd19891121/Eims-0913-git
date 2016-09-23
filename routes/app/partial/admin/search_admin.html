@@ -1,22 +1,24 @@
 <div class="container">
-    <h3>Search</h3>
-    <hr>
-    <form class="form-horizontal" ng-controller="search">
+    <form class="form-horizontal" ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
-            <div class="form-inline">
+            <div class="form-inline ">
                 <label class="col-sm-2 control-label">Search:&emsp;</label>
                 <div class="col-md-4">
-                    <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name">&emsp;&emsp;
-                    <button class="btn btn-success" ng-click="searchByName()">
-                        <span class="glyphicon glyphicon-log-in"></span> Search
-                    </button>
-
+                    <div class="input-group">
+                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" tabindex="-1">
+                                <span class="caret"></span>
+                            </button>                            
+                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
 
-            <div uib-accordion-group class="panel-default" heading="Show More" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+            <div uib-accordion-group class="panel-default"  is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                 <div class="form-inline">
 
                     <label class="col-sm-2 control-label">First name:&emsp;</label>
@@ -117,7 +119,7 @@
     <div>
 
         &emsp;&emsp;
-        <button class="btn btn-success" ng-click="deepSearch()">
+        <button class="btn btn-success " ng-click="deepSearch()">
         <span class="glyphicon glyphicon-search"></span> DeepSearch
     </button>
     </div>
@@ -127,20 +129,21 @@
     </uib-accordion>
     </form>
 
-    <hr>
-    <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'"  class="btn btn-success" ng-click="addNewUser()">
-    <span class="glyphicon glyphicon-user"></span> Add
-</button>
 
-    <hr>
+    <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-success"
+        ng-click="addNewUser()">
+            <span class="glyphicon glyphicon-user"></span> Add
+        </button>
+
+
 
 
 
     <div ng-controller="edit">
         <div>
-            <button class="btn btn-primary" type="button" ng-click="changeUser(all)">All</button>
-            <button class="btn btn-primary" type="button" ng-click="changeUser(incomplete)">Incomplete</button>
-            <button class="btn btn-primary" type="button" ng-click="changeUser(complete)">Completed</button>
+            <button class="btn btn-primary " type="button" ng-click="changeUser(all)">All</button>
+            <button class="btn btn-primary " type="button" ng-click="changeUser(incomplete)">Incomplete</button>
+            <button class="btn btn-primary " type="button" ng-click="changeUser(complete)">Completed</button>
         </div>
         <div ng-show="displayDownload">
             <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>

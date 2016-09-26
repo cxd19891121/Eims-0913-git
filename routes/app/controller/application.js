@@ -49,6 +49,7 @@ app.controller('application', function($scope,dataService,$uibModal)
 
     $scope.getMessage = function()
     {
+        //$scope.messages = []
         dataService.getMessage(window.localStorage.username,function(data)
         {
             if(data)
@@ -184,10 +185,10 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
 
     $scope.ok = function ()
     {
-        //console.log($scope.messages)
+        console.log($scope.messages)
         items.forEach(function(element,index)
         {
-            if (element.flag == false)
+            if (element.flag == false || element.flag == undefined)
             {
                 items[index].flag = true
             }

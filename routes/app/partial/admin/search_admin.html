@@ -150,6 +150,14 @@
             <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
             <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
         </div>
+ 
+        <div>
+            <select ng-model="pageSize"> 
+                <option value=5> 5 </option>
+                <option value=10> 10 </option>
+                <option value=20> 20 </option>
+            </select>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -183,7 +191,7 @@
                 </tr>
             </tbody>
         </table>
-        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="5" boundary-links="true" items-per-page="pageSize"></ul>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" boundary-links="true" items-per-page="pageSize"></ul>
     </div>
 
     <script type="text/ng-template" id="myModalContent.html">

@@ -48,7 +48,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     $scope.totalItems = 10
     $scope.currentPage = 1
-    $scope.pageSize = 10
+    $scope.pageSize = 5
     $scope.editInfo = true;
     $scope.predicate = 'name';
     $scope.reverse = true;

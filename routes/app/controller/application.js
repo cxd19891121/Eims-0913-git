@@ -57,10 +57,10 @@ app.controller('application', function($scope,dataService,$uibModal)
                 $scope.messages = []
                 data.forEach(function(element)
                 {
-                    if(element.delete == undefined || element.delete == false)
-                    {   
+                    //if(element.delete == undefined || element.delete == false)
+                    //{   
                         $scope.messages.push(element)
-                    }
+                    //}
                 })
                 $scope.messages.sort(function(ele1,ele2)
                 {
@@ -72,13 +72,14 @@ app.controller('application', function($scope,dataService,$uibModal)
                 $scope.messages.forEach(function(element)
                 {
                     element.sendTime=parseISO8601(element.sendTime);
-                    //console.log(element)
+                    // console.log(element)
                     // $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
                 })
                //console.log($scope.messages);
             }
+            $scope.open('lg')
         })
-        $scope.open('lg')
+        
 
     }
 
@@ -185,20 +186,26 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
 
     $scope.ok = function ()
     {
-        console.log($scope.messages)
+        //console.log(items)
         items.forEach(function(element,index)
         {
             if (element.flag == false || element.flag == undefined)
             {
                 items[index].flag = true
             }
+            /*
             if (element.delete == true)
             {
                 items.splice(index, 1);
             }
+            */
         })
         //console.log(items)
         nums = 0
+        items.forEach(function(element,index)
+        {
+            $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+        })
         dataService.putMessage(items,function(d)
         {
             console.log("data putted")

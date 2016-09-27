@@ -15,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            <br><br><br>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
 

@@ -13,8 +13,8 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     $scope.alerts = []
     $scope.addAlert = function(type,msg) 
     {
-        if ($scope.alerts == [])
-        $scope.alerts.push({type: type,msg: msg});
+        //console.log($scope.alerts)
+        if ($scope.alerts.length == 0) $scope.alerts.push({type: type,msg: msg});
     }
     $scope.closeAlert = function(index) 
     {

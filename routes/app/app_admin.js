@@ -4,7 +4,7 @@
 
 
 
-var app = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap','ngSanitize']);
+var app = angular.module('myApp', ['ngRoute','ngAnimate','ui.bootstrap','ngSanitize','ngMessages']);
 app.config(function($routeProvider){
     $routeProvider
         .when("/test",{

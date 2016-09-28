@@ -3,7 +3,7 @@
  */
 
 
-app.controller('addDetailController', ['$scope','dataService'   , function ($scope, dataService,uibDateParser) {
+app.controller('addDetailController', ['$scope','dataService', function ($scope, dataService) {
     var vm = this;
 
     $scope.open = function(id) 
@@ -24,20 +24,17 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
         var block = 0
         $scope.addDetail = true
         $scope.addNewEmployee = data['addNewEmployee']
-        console.log($scope.addNewEmployee)
+
         forEach(vm.getObj(),function(key,value)
         {
-            if ($scope.addNewEmployee[key] == true)
-            {
-                //console.log(key)
+            // if ($scope.addNewEmployee[key] == true)
+            // {
                 forEach(value,function(k,v){ block++ })
-            }
+            //}
         })
-        console.log(block)
+
         if (block != 0) $scope.block = Math.ceil(100/block)
         else $scope.block = 100
-        console.log($scope.block)
-        //console.log($scope.progressValue())
     })
     
     vm.message  = [];
@@ -48,29 +45,25 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
         edu :{},
         order: {},
         visa: {},
+        other:{
+            cPhoneLocation: [
+                {country: 'China', toString: 'China (+86)'},
+                {country: 'USA', toString: 'USA (+1)'}
+            ],
+            cPhoneFP:'',
+            cPhoneSP:'',
+            cPhoneThird:'',
+            ssnStatus: false,
+        },
     }
 
-    $scope.$on('selectTagss',function(e,o){
-        vm.progressTabs = [];
-        vm.selectTab = o;
-        getTabArr(o);
-    })
-    //
-    //
-    // vm.next = function(){
-    //     if(vm.progressCurrentIndex<vm.progressTabs.length-1) {
-    //         vm.progressCurrentIndex++;
-    //         var progressMax = vm.progressTabs.length;
-    //         vm.progressValue = Math.floor(vm.progressCurrentIndex * 100 / progressMax);
-    //         return vm.progressTabs[vm.progressCurrentIndex];
-    //
-    //     }else{
-    //
-    //         vm.progressValue = 100;
-    //         return vm.progressTabs[vm.progressCurrentIndex];
-    //     }
-    //
-    // }
+    vm.err = {
+        emp:{},
+        work:{},
+        edu:{},
+        order:{},
+        visa:{},
+    }
 
 
     //autoFill();
@@ -145,7 +138,20 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
         })
     }
 
+    vm.getPhone = function getCellPhone(phones){
+        var phoneNumString = "";
+        phones.forEach(function(phonePart){
+            phoneNumString += (phonePart + "");
+        })
+        return parseInt(phoneNumString);
+    }
+
+
+
     vm.insertData = function(){
+        vm.data.emp.progress = $scope.progressValue;
+        //getCellPhone(vm.data.other.cPhoneLocation,[vm.data.other.cPhoneFP,vm.data.other.cPhoneSP,vm.data.other.cPhoneThird]);
+
         dataService.addAll(vm.data,function(e,o){
             if(e){
                 vm.message = e;
@@ -166,11 +172,11 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
             personalInfo:
             {
                 first_name : vm.data.emp.fName,
-                middle_name : vm.data.emp.mName,
+            //    middle_name : vm.data.emp.mName,
                 last_name : vm.data.emp.lName,
                 dob : vm.data.emp.DOB,
                 ssn : vm.data.emp.SSN,
-                marital_status : vm.data.emp.mStatus,
+            //    marital_status : vm.data.emp.mStatus,
             },
             orderStatus:
             {
@@ -213,8 +219,8 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
             },
             termination:
             {
-                t_data : vm.data.emp.tDate,
-                t_reason : vm.data.emp.tReason
+         //       t_data : vm.data.emp.tDate,
+          //      t_reason : vm.data.emp.tReason
             },
             jobEducation:
             {
@@ -239,9 +245,6 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
                 raise : vm.data.emp.rPercent,
 
             }
-
-
-
         }
     }
     //$scope.progressValue = 0;
@@ -249,6 +252,8 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
     
     $scope.setProgress = function()
     {
+
+
         var index = 0;
       
         forEach($scope.addNewEmployee,function(k,v)
@@ -256,11 +261,8 @@ app.controller('addDetailController', ['$scope','dataService'   , function ($sco
             if (v == true)
             {
                 var obj = vm.getObj()
-                console.log(vm.data.emp.DOB)
                 forEach(obj[k],function(key,value)
                 {
-                    //console.log(value)
-                    //console.log(key)
                     if (value != '' && value != undefined && value != null) index++
                 })
 

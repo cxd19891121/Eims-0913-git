@@ -220,7 +220,6 @@ function deepSearch(request,response,callback)
     sqlCode = changeOpt(sqlCode,'visa_info.end_time','<=')
     sqlCode = sqlCode.substring(0,sqlCode.indexOf("order by emp_id"))
     if (sqlCode.substring(sqlCode.length-3) == "WHE") sqlCode += "RE"
-    if (sqlCode.substring(sqlCode.length-3) == "WH") sqlCode += "ERE";
     if (sqlCode.substring(sqlCode.length-3).indexOf("AND") < 0)sqlCode = sqlCode += " AND "
     if (searchObj['regional_subsides_start'] != undefined ) sqlCode += " regional_subsides >= " + searchObj['regional_subsides_start'] + ' AND';
     if (searchObj['regional_subsides_end'] != undefined ) sqlCode += " regional_subsides <= " + searchObj['regional_subsides_end'] + ' AND';

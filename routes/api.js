@@ -123,8 +123,17 @@ router.get('/all',function(req,res){
     dtLogicService.getAllBySql(function(e,o){
         if(e){
             res.send(e);
-        }else {
-            res.send(o);
+       }else {
+            var result = {};
+            result.rows = [];
+            o.rows.forEach(function(element){
+                console.log(element.first_name,element.delete_flag);
+                if(!element.delete_flag){
+                    result.rows.push(element);
+                }
+            })
+            res.send(result);
+
         }
     })
 })

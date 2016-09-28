@@ -14,7 +14,6 @@ var data = {
     type: {name: 'type', key: 'type', type: 'text', value: 'def type'},
     title: {name: 'title', key: 'title', type: 'text', value: 'def title'},
     location: {name: 'location', key: 'location', type: 'text', value: 'def location'},
-
 }
 
 var sample = {
@@ -29,10 +28,10 @@ var sample = {
 }
 
 var sql = {
-    selectAllWork: {name: "selectAllWork", text: "SELECT * FROM work_info"},
-    selectWorkById: {name: "selectWorkById", text: "SELECT * FROM work_info where w_id = $1", values: [1]},
-    selectWorkByEId: {name: "selectWorkByEId", text: "SELECT * FROM work_info where e_id = $1", values: [1]},
-    selectLastWork: {name: 'selectLastWork',text :"SELECT * FROM work_info ORDER BY w_id DESC LIMIT 1"},
+    selectAllWork: {name: "selectAllWork", text: "SELECT * FROM work_info WHERE delete_flag = false"},
+    selectWorkById: {name: "selectWorkById", text: "SELECT * FROM work_info where w_id = $1 AND delete_flag = false", values: [1]},
+    selectWorkByEId: {name: "selectWorkByEId", text: "SELECT * FROM work_info where e_id = $1 AND delete_flag = false", values: [1]},
+    selectLastWork: {name: 'selectLastWork',text :"SELECT * FROM work_info AND delete_flag = false ORDER BY w_id DESC LIMIT 1"},
     deleteWorkById: {name: "deleteWorkById", text: "DELETE FROM work_info WHERE w_id = $1", values: [1]},
     deleteWorkByEId: {name: "deleteWorkByEId", text: "DELETE FROM work_info WHERE e_id = $1", values: [1]},
 
@@ -60,7 +59,22 @@ var sql = {
         ,values: [ "some description", '2000-01-01', '2000-01-01', "java", "java programmer", "oversea",1]
     },
 
+    deleteFlagWorkById :{name:"deleteFlagWorkById", text :"UPDATE work_info SET delete_flag = true where w_id = $1", values :[0]},
+    undoDeleteWorkById :{name:"undoDeleteWorkById",text:"UPDATE work_info SET delete_flag = false where w_id = $1",values:[0]},
+    deleteFlagWorkByEId: {name:"deleteFlagWorkByEId",text:"UPDATE work_info SET delete_flag = true WHERE e_id = $1",value:[1]},
 }
+
+exports.deleteFlagById = function (id,callback){
+    return db.queryPresValue(sql["deleteFlagWorkById"].text,[id],function(e,o){callback(e,o)})
+}
+exports.deleteFlagByEId = function(id,callback){
+    return db.queryPresValue(sql["deleteFlagWorkByEId"].text,[id],function(e,o){callback(e,o)})
+}
+
+exports.undoDeleteById = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteWorkById"].text,[id],function(e,o){callback(e,o)});
+}
+//
 
 exports.selectAll = function (callback) {
     return db.queryPres(sql['selectAllWork'], function (e, o) {

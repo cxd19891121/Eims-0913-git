@@ -4,9 +4,9 @@
 
 var db = require('./../comm/database');
 var sql = {
-    selectAllOrder: { name: "selectAllOrder", text: "SELECT * FROM order_info" }, //test only
-    selectOrderById:{ name: "selectOrderById", text: "SELECT * FROM order_info where o_id = $1", values: [1] },
-    selectOrderByEId: {name: "selectAllByEId", text: "SELECT * FROM order_info where e_id = $1", values: [1]},
+    selectAllOrder: { name: "selectAllOrder", text: "SELECT * FROM order_info WHERE delete_flag = false"  }, //test only
+    selectOrderById:{ name: "selectOrderById", text: "SELECT * FROM order_info WHERE o_id = $1 AND delete_flag = false", values: [1] },
+    selectOrderByEId: {name: "selectAllByEId", text: "SELECT * FROM order_info WHERE e_id = $1 AND delete_flag = false", values: [1]},
 
 
     //need code
@@ -76,8 +76,27 @@ var sql = {
     "o_end_time date," +
     "owner text," +
     "extension_time text" +
-    ")"}
+    ")"},
+
+
+    deleteFlagOrderById :{name:"deleteFlagOrderById", text :"UPDATE order_info SET delete_flag = true where o_id = $1", values :[0]},
+    undoDeleteOrderById :{name:"undoDeleteOrderById",text:"UPDATE order_info SET delete_flag = false where o_id = $1",values:[0]},
+    deleteFlagOrderByEId: {name:"deleteFlagOrderByEId",text:"UPDATE order_info SET delete_flag = true WHERE e_id = $1",value:[1]},
+
 }
+
+exports.deleteFlagById = function (id,callback){
+    return db.queryPresValue(sql["deleteFlagOrderById"].text,[id],function(e,o){callback(e,o)})
+}
+exports.deleteFlagByEId = function(id,callback){
+    return db.queryPresValue(sql["deleteFlagOrderByEId"].text,[id],function(e,o){callback(e,o)})
+}
+
+exports.undoDeleteById = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteOrderById"].text,[id],function(e,o){callback(e,o)});
+}
+
+
 
 
 exports.selectAll = function (callback) {

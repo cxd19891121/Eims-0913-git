@@ -117,8 +117,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">DOB :</label>
-                                    <div class="col-sm-6">
+                                    <label class="col-sm-3 control-label">DOB :</label>
+                                    <div class="col-sm-3">
                                          <input name = "dob" min="1950-01-01" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB' ng-focus="open(1)" is-open="popup['1']" ng-blur="setProgress()"/>
 
                                         <div class="help-block" ng-messages="pTab.dob.$error" ng-show="pTab.dob.$touched">
@@ -130,8 +130,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">SSN :</label>
-                                    <div class="col-sm-4">
+                                    <label class="col-sm-3 control-label">SSN :</label>
+                                    <div class = "col-sm-2">
+
+                                        <button type="button" class="btn btn-success" ng-model="vm.data.other.ssnStatus" uib-btn-checkbox>
+                                            I have SSN.
+                                        </button>
+                                    </div>
+
+
+                                    <div class="col-sm-3" ng-show = "vm.data.other.ssnStatus">
                                         <input ng-model = 'vm.data.emp.SSN' class="form-control" type = 'number' maxlength="9" min = "0" placeholder="ssn" ng-blur="setProgress()" name = "ssn" >
 
 
@@ -145,23 +153,32 @@
                                         </div>
                                     </div>
 
-                                    <div class = "col-sm-2">
-                                        <div class="checkbox">
-                                            <label class = 'control-label'>
-                                                <input  type="checkbox" ng-model = "vm.data.emp.SSN" ng-true-value = "" ng-blur="setProgress()" > I have no SSN
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <!--<div class = "col-sm-3">-->
+                                        <!--<div class="checkbox">-->
+                                            <!--<label class = 'control-label'>-->
+                                                <!--<input  type="checkbox" ng-model = "vm.data.emp.SSN" ng-true-value = "" ng-blur="setProgress()" > I have no SSN-->
+                                            <!--</label>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                 </div>
 
+
+
+
                                 <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <div class="checkbox">
-                                            <label class = 'control-label'>
-                                                <input  type="checkbox" ng-model = 'vm.data.emp.mStatus' ng-blur="setProgress()"> Married
-                                            </label>
-                                        </div>
+                                    <label class="col-sm-3 control-label">Marriage Status:</label>
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-success" ng-model="vm.data.emp.mStatus" uib-btn-checkbox>
+                                           Married
+                                        </button>
+
+
+                                        <!--<div class="checkbox">-->
+                                            <!--<label class = 'control-label'>-->
+                                                <!--<input  class = "btn-primary" type="checkbox" ng-model = 'vm.data.emp.mStatus' ng-blur="setProgress()" uib-btn-radio="'Right'" uib-uncheckable> Married-->
+                                                <!--</label>-->
+                                        <!--</div>-->
                                     </div>
                                 </div>
 
@@ -318,6 +335,39 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
+                                <!--<div class = " form-group">-->
+                                    <!--<label class = "col-sm-2 control-label"> Cell-Phone</label>-->
+                                    <!--<div class = "col-sm-2">-->
+
+                                        <!--<select ng-model="selectedCountry">-->
+                                            <!--<option ng-repeat="x in vm.data.other.cPhoneLocation" value="{{x.toString}}">{{x.toString}}</option>-->
+                                        <!--</select>-->
+
+                                        <!--<h1>You selected: {{selectedCountry}}</h1>-->
+                                    <!--</div>-->
+                                    <!--<div class = "col-sm-1">-->
+                                        <!--<input  ng-required = "addNewEmployee.contactInfo"  class = 'form-control'-->
+                                          <!--type = 'number' min = '0' max = '999' maxlength="3" minlength="3" ng-model = "vm.data.other.cPhoneFP" placeholder = "515">-->
+                                    <!--</div>-->
+                                    <!--<div class = "col-sm-1" ng-show = "selectedCountry == 'USA'">-->
+                                          <!--<input  ng-required = "addNewEmployee.contactInfo"  class = 'form-control'-->
+                                         <!--type = 'number' min = '0' max = '999' maxlength="3" minlength="3"  placeholder = "618"  ng-model = "vm.data.other.cPhoneSP">-->
+                                    <!--</div>-->
+
+                                    <!--<div class = "col-sm-1" ng-show = "selectedCountry == 'China'">-->
+                                        <!--<input  ng-required = "addNewEmployee.contactInfo"  class = 'form-control'-->
+                                                <!--type = 'number' min = '0' max = '9999' maxlength="4" minlength="4"  placeholder = "1234"  ng-model = "vm.data.other.cPhoneSP">-->
+                                    <!--</div>-->
+
+                                    <!--<div class = "col-sm-2">-->
+                                        <!--<input ng-required = "addNewEmployee.contactInfo" ng-model = "vm.data.other.cPhoneThird" class = 'form-control'-->
+                                         <!--type = 'number' min = '0' max = '9999' size = "4" maxlength="4" minlength="4" placeholder = "3323" >-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">E-mail:</label>
@@ -738,7 +788,7 @@
                                             <small ng-message="min" class = "text-danger">Invalid number </small>
                                         </div>
                                     </div>
-                                    <label class = ' control-label'>%</label>
+                                    <label class = 'control-label'>%</label>
 
                                 </div>
 

@@ -21,19 +21,24 @@ app.controller('application', function($scope,dataService,$uibModal)
     $scope.addNew = false
     $scope.addNewUser = function()
     {
-        var add = window.location + 'add'
+        var add = 'admin#/' + 'add'
         window.location.href = add
     }
 
+    $scope.searchConfig = function()
+    {
+        var config = 'admin#/';
+        window.location.href = config;
+    }
     $scope.modifyConfig = function()
     {
-        var config = window.location + 'config';
+        var config = 'admin#/' + 'config';
         window.location.href = config;
     }
 
     $scope.userConfig = function()
     {
-        var userConfig = window.location + 'userConfig';
+        var userConfig = 'admin#/' + 'userConfig';
         window.location.href = userConfig;
     }
 
@@ -51,19 +56,28 @@ app.controller('application', function($scope,dataService,$uibModal)
                 $scope.messages = []
                 data.forEach(function(element)
                 {
-                    if(element.delete == undefined)
-                    {
+                    if(element.delete == undefined || element.delete == false)
+                    {   
                         $scope.messages.push(element)
                     }
                 })
-                //$scope.messages = data
-                $scope.messages.forEach(function(element,index)
+                $scope.messages.sort(function(ele1,ele2)
                 {
-                    $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+                    // console.log(Date.parse(ele1.sendTime))
+                    //console.log(Date.parse(ele1.sendTime)-Date.parse(ele2.sendTime));
+                    return Date.parse(ele2.sendTime)-Date.parse(ele1.sendTime)
                 })
+                //$scope.messages.forEach((a) => console.log(a));
+                $scope.messages.forEach(function(element)
+                {
+                    element.sendTime=parseISO8601(element.sendTime);
+                    //console.log(element)
+                    // $scope.messages[index].sendTime = parseISO8601($scope.messages[index].sendTime)
+                })
+               //console.log($scope.messages);
             }
         })
-        $scope.open()
+        $scope.open('lg')
 
     }
 
@@ -94,6 +108,7 @@ app.controller('application', function($scope,dataService,$uibModal)
 
 
 
+
     $scope.id = -1
     $scope.$on('editUser',function(event,data)
     {
@@ -105,16 +120,18 @@ app.controller('application', function($scope,dataService,$uibModal)
         $scope.$broadcast('setUserId',$scope.id)
     });
 
-    $scope.open = function ()
+
+    $scope.open = function (size)
     {
-        console.log($scope.letterNum)
+        //$scope.getMessage();
+        //console.log($scope.letterNum)
         //console.log($scope.messages)
         var modalInstance = $uibModal.open
         ({
             animation: $scope.animationsEnabled,
             templateUrl: 'message.html',
             controller: 'message',
-            //size: size,
+            size: size,
             resolve:
             {
                 items: function ()
@@ -152,10 +169,22 @@ app.controller('application', function($scope,dataService,$uibModal)
 app.controller('message', function ($scope, $uibModalInstance, items, nums ,dataService)
 {
     $scope.messages = items
+    $scope.totalItems = items.length
+    $scope.currentPage = 1
+    $scope.pageSize = 10
+
+    $scope.paginate = function (value)
+    {
+        var begin, end, index;
+        begin = ($scope.currentPage - 1) * $scope.pageSize;
+        end = begin + $scope.pageSize;
+        index = $scope.messages.indexOf(value);
+        return (begin <= index && index < end);
+    }
 
     $scope.ok = function ()
     {
-        $uibModalInstance.close()
+        //console.log($scope.messages)
         items.forEach(function(element,index)
         {
             if (element.flag == false)
@@ -167,12 +196,14 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
                 items.splice(index, 1);
             }
         })
-        console.log(items)
+        //console.log(items)
         nums = 0
         dataService.putMessage(items,function(d)
         {
-            console.log(d)
+            console.log("data putted")
+            //console.log(d)
         })
+        $uibModalInstance.close()
     }
 })
 
@@ -180,6 +211,23 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
 {
     $scope.data = ""
     $scope.users = []
+    $scope.disables = true;
+    $scope.disableSend = function()
+    {
+        var temp = true;
+        $scope.users.forEach(function(element,index)
+        {
+            if (element.flag == true) 
+            {
+                temp = false;
+                //console.log($scope.disables)
+                return;
+            }
+        })
+        
+        $scope.disables = temp;
+        return ;
+    }
     $scope.getAllUser = function()
     {
         dataService.getAllUser(function(data)
@@ -212,7 +260,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
         var packet = []
         $scope.users.forEach(function (element,index)
         {
-            console.log(2)
+            //console.log(2)
             if (element.flag == true)
             {
                 var obj =
@@ -233,8 +281,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
 
         dataService.sendMessage(packet,function()
         {
-            console.log(packet)
-
+            //console.log(packet)
             $uibModalInstance.close()
         })
 

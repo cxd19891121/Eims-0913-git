@@ -13,6 +13,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     $scope.alerts = []
     $scope.addAlert = function(type,msg) 
     {
+        if ($scope.alerts == [])
         $scope.alerts.push({type: type,msg: msg});
     }
     $scope.closeAlert = function(index) 
@@ -66,8 +67,8 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
     $scope.deepSearch = function()
     {
-        console.log(1)
-        console.log($scope.showMoreSearch)
+        //console.log(1)
+        //console.log($scope.showMoreSearch)
         $scope.showMoreSearch = false
         /*$http
         ({

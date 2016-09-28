@@ -27,10 +27,10 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
 
         forEach(vm.getObj(),function(key,value)
         {
-            if ($scope.addNewEmployee[key] == true)
-            {
+            // if ($scope.addNewEmployee[key] == true)
+            // {
                 forEach(value,function(k,v){ block++ })
-            }
+            //}
         })
 
         if (block != 0) $scope.block = Math.ceil(100/block)
@@ -45,6 +45,16 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
         edu :{},
         order: {},
         visa: {},
+        other:{
+            cPhoneLocation: [
+                {country: 'China', toString: 'China (+86)'},
+                {country: 'USA', toString: 'USA (+1)'}
+            ],
+            cPhoneFP:'',
+            cPhoneSP:'',
+            cPhoneThird:'',
+            ssnStatus: false,
+        },
     }
 
     vm.err = {
@@ -128,8 +138,20 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
         })
     }
 
+    vm.getPhone = function getCellPhone(phones){
+        var phoneNumString = "";
+        phones.forEach(function(phonePart){
+            phoneNumString += (phonePart + "");
+        })
+        return parseInt(phoneNumString);
+    }
+
+
+
     vm.insertData = function(){
         vm.data.emp.progress = $scope.progressValue;
+        //getCellPhone(vm.data.other.cPhoneLocation,[vm.data.other.cPhoneFP,vm.data.other.cPhoneSP,vm.data.other.cPhoneThird]);
+
         dataService.addAll(vm.data,function(e,o){
             if(e){
                 vm.message = e;

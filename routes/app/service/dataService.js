@@ -168,7 +168,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             url: config.message + username,
         }).success(function(data)
         {
-            console.log('getMessage',data);
+            //console.log('getMessage',data);
             if (data)
             {
                 callback(data)
@@ -204,13 +204,13 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             data: angular.toJson({message: obj}),
             headers: {'Content-Type': 'application/json'}
         }).then(function successCallback(data) {
-            console.log("in sucess callback");
-            console.log(data);
+            //console.log("in sucess callback");
+            //console.log(data);
             //alert('User Information has been updated');
             //window.location.href = url;
             callback(data)
         }, function errorCallback(data) {
-            console.log("in error callback");
+            //console.log("in error callback");
             console.log(data);
             callback(data);
         });

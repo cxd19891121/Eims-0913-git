@@ -13,8 +13,15 @@
 
 <body>
 <div style="position:absolute;top:0;right:0;">
-    <a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>
-    <a href="" ng-click="sendMessage()" class="control-label"> Send message </a>
+    Hello {{username}}
+    <button class="btn btn-primary" type="button" ng-click="getMessage()">
+        Messages<span class="badge">{{letterNum}}</span>
+    </button> 
+    <!--<a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>-->
+    <!--<a href="" ng-click="" class="control-label"> Send message </a>-->
+    <button class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
+
+    </button> 
 </div>
 <script type="text/ng-template" id="message.html">
     <div class="modal-header">

@@ -46,6 +46,7 @@ var sql = {
     deleteFlagVisaById :{name:"deleteFlagVisaById", text :"UPDATE visa_info SET delete_flag = true where v_id = $1", values :[0]},
     undoDeleteVisaById :{name:"undoDeleteVisaById",text:"UPDATE visa_info SET delete_flag = false where v_id = $1",values:[0]},
     deleteFlagVisaByEId: {name:"deleteFlagVisaByEId",text:"UPDATE visa_info SET delete_flag = true WHERE e_id = $1",value:[1]},
+    undoDeleteVisaByEId :{name:"undoDeleteVisaByEId",text:"UPDATE visa_info SET delete_flag = false where e_id = $1",values:[0]},
 
 }
 
@@ -58,6 +59,9 @@ exports.deleteFlagByEId = function(id,callback){
 
 exports.undoDeleteById = function(id,callback){
     return db.queryPresValue(sql["undoDeleteVisaById"].text,[id],function(e,o){callback(e,o)});
+}
+exports.undoDeleteByEId = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteVisaByEId"].text,[id],function(e,o){callback(e,o)});
 }
 
 

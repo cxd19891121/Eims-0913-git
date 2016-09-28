@@ -30,6 +30,7 @@ var sql = {
     deleteFlagEduById :{name:"deleteFlagEduById", text :"UPDATE education_info SET delete_flag = true where ed_id = $1", values :[0]},
     undoDeleteEduById :{name:"undoDeleteEduById",text:"UPDATE education_info SET delete_flag = false where ed_id = $1",values:[0]},
     deleteFlagEduByEId: {name:"deleteFlagEduByEId",text:"UPDATE education_info SET delete_flag = true WHERE e_id = $1",value:[1]},
+    undoDeleteEduByEId :{name:"undoDeleteEduByEId",text:"UPDATE education_info SET delete_flag = false where e_id = $1",values:[0]},
 
 }
 
@@ -42,6 +43,9 @@ exports.deleteFlagByEId = function(id,callback){
 
 exports.undoDeleteById = function(id,callback){
     return db.queryPresValue(sql["undoDeleteEduById"].text,[id],function(e,o){callback(e,o)});
+}
+exports.undoDeleteByEId = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteEduByEId"].text,[id],function(e,o){callback(e,o)});
 }
 
 

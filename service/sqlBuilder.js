@@ -219,15 +219,15 @@ function deepSearch(request,response,callback)
     sqlCode = changeOpt(sqlCode,'visa_info.start_time','>=')
     sqlCode = changeOpt(sqlCode,'visa_info.end_time','<=')
     sqlCode = sqlCode.substring(0,sqlCode.indexOf("order by emp_id"))
-    if (sqlCode.substring(sqlCode.length-3) == "WHE") sqlCode += "RE";
+    if (sqlCode.substring(sqlCode.length-3) == "WHE") sqlCode += "RE"
     if (sqlCode.substring(sqlCode.length-3) == "WH") sqlCode += "ERE";
-    //console.log(1)
+    if (sqlCode.substring(sqlCode.length-3).indexOf("AND") < 0)sqlCode = sqlCode += " AND "
     if (searchObj['regional_subsides_start'] != undefined ) sqlCode += " regional_subsides >= " + searchObj['regional_subsides_start'] + ' AND';
     if (searchObj['regional_subsides_end'] != undefined ) sqlCode += " regional_subsides <= " + searchObj['regional_subsides_end'] + ' AND';
     if (searchObj['payraise_start'] != undefined ) sqlCode += " payrise_percentage >= " + searchObj['payraise_start'] + ' AND';
     if (searchObj['payraise_end'] != undefined ) sqlCode += " payrise_percentage <= " + searchObj['payraise_end'] + ' AND';
-    sqlCode = sqlCode.substring(0,sqlCode.length-3)
-    sqlCode += "order by emp_id"
+    if (sqlCode.substring(sqlCode.length-5).indexOf("AND") > 0)sqlCode = sqlCode.substring(0,sqlCode.lastIndexOf("AND"))
+    sqlCode += " order by emp_id "
     console.log('sqlCode = ' + sqlCode)
 
     db.queryPres(sqlCode,function(e,o){

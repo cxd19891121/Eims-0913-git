@@ -68,28 +68,53 @@ router.delete('/message/all/:name',function(req,res){
 
 router.get('/all/:id', function (req, res) {
     dtLogicService.getAllById(req,function(e,o){
-       res.send(o)
+        if(e){
+            res.send(e)
+        }else{
+            res.send(o);
+        }
     })
 })
 
 
 router.post('/all/',function(req,res){
     dtLogicService.addAll(req,function(e,o){
-        console.log("error",e);
-        console.log('obj',o);
-        res.send(o);
+
+        if(e){
+            res.send(e);
+        }else{
+            res.send(o);
+        }
     })
 })
 
 router.put('/all/:id',function(req,res){
     dtLogicService.updateAllById(req,function(e,o){
         console.log(o);
-       res.send(o);
+        if(e){
+            res.send(e)
+        }else{
+            res.send(o);
+        }
+
     })
 })
 
 router.delete('/all/:id',function(req,res){
     dtLogicService.deleteAllById(req,function(e,o){
+        console.log(e,o)
+        if(e){
+            res.send(e);
+        }else{
+            res.send(o)
+        }
+
+    })
+})
+
+router.delete('/all/undo/:id',function(req,res){
+    dtLogicService.undoDeleteAllById(req,function(e,o){
+        console.log(e,o);
         res.send(o)
     })
 })
@@ -138,13 +163,21 @@ router.get('/user', function (req, res) {
 
 router.get('/user/first', function (req, res) {
     dtService.getFirstUser(function (e, o) {
-        res.send(o)
+        if(e){
+            res.send(e)
+        }else {
+            res.send(o)
+        }
     })
 })
 
 router.get('/user/last',function(req,res){
     dtService.getLast(userDAO,function(e,o){
-        res.send(o);
+        if(e){
+            res.send(e)
+        }else {
+            res.send(o);
+        }
     })
 })
 

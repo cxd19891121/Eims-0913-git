@@ -20,15 +20,21 @@ module.exports.getUserById = function(id,callback){
     userDAO.selectUserById(id,function(e,o){
         callback(e,o);
     })
-
 }
+
 module.exports.deleteFlagById= function(DAO,id,callback){
     DAO.deleteFlagById(id,function(e,o){
         callback(e,o);
     })
 }
-module.exports.deletefFlagByEId = function(DAO,id,callback){
-    DAO.deleteFalgByEId(id,function(e,o){
+module.exports.deleteFlagByEId = function(DAO,id,callback){
+    DAO.deleteFlagByEId(id,function(e,o){
+        callback(e,o);
+    })
+}
+
+module.exports.undoDeleteByEId = function(DAO,id,callback){
+    DAO.undoDeleteByEId(id,function(e,o){
         callback(e,o);
     })
 }

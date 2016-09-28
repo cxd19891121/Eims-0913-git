@@ -4,9 +4,9 @@
 
 var db = require('./../comm/database');
 var sql = {
-    selectAllVisa: { name: "selectAllVisa", text: "SELECT * FROM visa_info" }, //test only
-    selectVisaById:{ name: "selectVisaById", text: "SELECT * FROM visa_info where v_id = $1", values: [1] },
-    selectVisaByEId: {name: "selectVisaByEId", text: "SELECT * FROM visa_info where e_id = $1", values: [1]},
+    selectAllVisa: { name: "selectAllVisa", text: "SELECT * FROM visa_info WHERE delete_flag = false" }, //test only
+    selectVisaById:{ name: "selectVisaById", text: "SELECT * FROM visa_info where v_id = $1 AND delete_flag = false", values: [1] },
+    selectVisaByEId: {name: "selectVisaByEId", text: "SELECT * FROM visa_info where e_id = $1 AND delete_flag = false", values: [1]},
     deleteTable:{ name:"deleteTable", text:"delete from visa_info" },
     deleteVisaById: {name:"deleteVisaById",text:"DELETE FROM visa_info WHERE v_id = $1",value:[1]},
     deleteVisaByEId: {name:"deleteVisaByEId",text:"DELETE FROM visa_info WHERE e_id = $1",value:[1]},
@@ -42,6 +42,26 @@ var sql = {
         "status text" +
         ")",
     },
+
+    deleteFlagVisaById :{name:"deleteFlagVisaById", text :"UPDATE visa_info SET delete_flag = true where v_id = $1", values :[0]},
+    undoDeleteVisaById :{name:"undoDeleteVisaById",text:"UPDATE visa_info SET delete_flag = false where v_id = $1",values:[0]},
+    deleteFlagVisaByEId: {name:"deleteFlagVisaByEId",text:"UPDATE visa_info SET delete_flag = true WHERE e_id = $1",value:[1]},
+    undoDeleteVisaByEId :{name:"undoDeleteVisaByEId",text:"UPDATE visa_info SET delete_flag = false where e_id = $1",values:[0]},
+
+}
+
+exports.deleteFlagById = function (id,callback){
+    return db.queryPresValue(sql["deleteFlagVisaById"].text,[id],function(e,o){callback(e,o)})
+}
+exports.deleteFlagByEId = function(id,callback){
+    return db.queryPresValue(sql["deleteFlagVisaByEId"].text,[id],function(e,o){callback(e,o)})
+}
+
+exports.undoDeleteById = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteVisaById"].text,[id],function(e,o){callback(e,o)});
+}
+exports.undoDeleteByEId = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteVisaByEId"].text,[id],function(e,o){callback(e,o)});
 }
 
 

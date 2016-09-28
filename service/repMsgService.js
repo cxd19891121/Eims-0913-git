@@ -61,6 +61,16 @@ exports.buildDeleteMsg = function(repObj,tableName,e,data){
     }
 }
 
+exports.buildUndoDeleteMsg = function(repObj,tableName,e,data){
+    if(e){
+        repObj.msg = 'fail to get access to UNDO DELETE the table: '+ tableName;
+        repObj.err = e;
+    }else{
+        repObj.msg = 'success to UNDO DELETE data for table: '+ tableName;
+        repObj.data = data;
+    }
+}
+
 exports.normalizeMsg = function(ori,tar){
     tar = {
         msg: ori.emp.msg + '; ' + ori.edu.msg + '; ' + ori.work.msg +'; '+ ori.visa.msg + '; ' + ori.order.msg,

@@ -49,6 +49,7 @@ exports.getMsgByName = function(req,callback){
         if(o == null || o == ''){
             callback({errMsg: "0 message"})
         }else {
+
             callback(null, JSON.parse(o));
         }
     });
@@ -451,21 +452,68 @@ exports.deleteAllById = function (req, callback) {
 
         } else {
             repMsgGroupRefresh();
-            dtService.deleteElementById(empDAO, id, function (e, o) {
+            dtService.deleteFlagById(empDAO, id, function (e, o) {
                 repMsgService.buildDeleteMsg(repMsgGroup.emp, 'emp_info', e, o);
 
-                dtService.deleteElementByEId(workDAO, id, function (e, o) {
+                dtService.deleteFlagByEId(workDAO, id, function (e, o) {
                     repMsgService.buildDeleteMsg(repMsgGroup.work, 'work_info', e, o);
 
-                    dtService.deleteElementByEId(visaDAO, id, function (e, o) {
+                    dtService.deleteFlagByEId(visaDAO, id, function (e, o) {
                         repMsgService.buildDeleteMsg(repMsgGroup.visa, 'visa_info', e, o);
 
-                        dtService.deleteElementByEId(orderDAO, id, function (e, o) {
+                        dtService.deleteFlagByEId(orderDAO, id, function (e, o) {
                             repMsgService.buildDeleteMsg(repMsgGroup.order, 'order_info', e, o);
 
-                            dtService.deleteElementByEId(eduDAO, id, function (e, o) {
+                            dtService.deleteFlagByEId(eduDAO, id, function (e, o) {
                                 repMsgService.buildDeleteMsg(repMsgGroup.edu, 'education_info', e, o);
-                                callback(null, repMsg);
+                                callback(null, repMsgGroup);
+                            })
+                        })
+                    })
+                })
+            })
+        }
+
+    })
+}
+
+
+//UndoDeleteAllById
+exports.undoDeleteAllById = function (req, callback) {
+    var id = req.params['id'];
+
+    //check authority
+    auth.authCheck(req, function (authObj) {
+        if (authObj.level < 0) {
+            var error = {
+                msg: 'No session find, please login first',
+                type: 'no session'
+            }
+            callback(error);
+        } else if (authObj.level >0) {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            callback(error);
+
+        } else {
+            repMsgGroupRefresh();
+            dtService.undoDeleteById(empDAO, id, function (e, o) {
+                repMsgService.buildUndoDeleteMsg(repMsgGroup.emp, 'emp_info', e, o);
+
+                dtService.undoDeleteByEId(workDAO, id, function (e, o) {
+                    repMsgService.buildUndoDeleteMsg(repMsgGroup.work, 'work_info', e, o);
+
+                    dtService.undoDeleteByEId(visaDAO, id, function (e, o) {
+                        repMsgService.buildUndoDeleteMsg(repMsgGroup.visa, 'visa_info', e, o);
+
+                        dtService.undoDeleteByEId(orderDAO, id, function (e, o) {
+                            repMsgService.buildUndoDeleteMsg(repMsgGroup.order, 'order_info', e, o);
+
+                            dtService.undoDeleteByEId(eduDAO, id, function (e, o) {
+                                repMsgService.buildUndoDeleteMsg(repMsgGroup.edu, 'education_info', e, o);
+                                callback(null, repMsgGroup);
                             })
                         })
                     })

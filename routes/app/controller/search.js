@@ -4,17 +4,17 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
         $scope.popup[id] = true;
     }
-
+    $scope.displayAdvanceSearch = false
     $scope.popup = 
     {
         opened: false
     }
-
+    $scope.advanceSearchUrl = "advanceSearch.html"
+    $scope.dynamicPopover = 'myPopoverTemplate.html'
     $scope.alerts = []
     $scope.addAlert = function(type,msg) 
     {
-        if ($scope.alerts == [])
-        $scope.alerts.push({type: type,msg: msg});
+        if ($scope.alerts.length == 0) $scope.alerts.push({type: type,msg: msg});
     }
     $scope.closeAlert = function(index) 
     {
@@ -35,6 +35,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
     $scope.employeeName = ''
 
+    
     $scope.searchByName = function()
     {
         //console.log($scope.employeeName)
@@ -67,30 +68,15 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
     $scope.deepSearch = function()
     {
-        //console.log(1)
-        //console.log($scope.showMoreSearch)
-        $scope.showMoreSearch = false
-        /*$http
-        ({
-            method: 'POST',
-            url: 'http://localhost:3000/search',
-            data: $httpParamSerializerJQLike($scope.searchObject),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
-            .success(function(data)
-            {
-                if(!data)
-                {
-                    alert('fail')
-                }
-                else
-                {
-                    console.log(data)
-                    $scope.$parent.$broadcast('changeData',data)
-                }
-            })*/
+
+        console.log($scope.displayAdvanceSearch)
+    
+        $scope.displayAdvanceSearch = false
+        console.log($scope.displayAdvanceSearch)
+        
         dataService.search($scope.searchObject,function(data)
         {
+            console.log(data)
             if(!data)
             {
                 $scope.addAlert('danger','No feteched employee')

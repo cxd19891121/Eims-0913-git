@@ -48,13 +48,18 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     $scope.totalItems = 10
     $scope.currentPage = 1
-    $scope.pageSize = 10
+    $scope.pageSize = 5
     $scope.editInfo = true;
     $scope.predicate = 'name';
     $scope.reverse = true;
     $scope.all = Symbol("all")
     $scope.complete = Symbol("complete")
     $scope.incomplete = Symbol("incomplete")
+
+    $scope.changePageSize = function(num)
+    {
+        $scope.pageSize = num
+    }
 
     $scope.order = function (predicate)
     {

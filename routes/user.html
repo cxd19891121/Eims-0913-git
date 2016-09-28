@@ -12,34 +12,57 @@
 <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
 
 <body>
-<div style="position:absolute;top:0;right:0;">
-    Hello {{username}}
-    <button class="btn btn-primary" type="button" ng-click="getMessage()">
-        Messages<span class="badge">{{letterNum}}</span>
-    </button> 
-    <!--<a href="" ng-click="getMessage()" class="control-label">Hello {{username}} You have {{letterNum}} unread messages&emsp;</a> <br>-->
-    <!--<a href="" ng-click="" class="control-label"> Send message </a>-->
-    <button class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
-
-    </button> 
-</div>
-<script type="text/ng-template" id="message.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Message</h3>
-    </div>
-    <div class="modal-body" >
-        <div ng-repeat="message in messages">
-            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  message: </span> {{message.message}}
-            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}"> from: </span> {{message.from}}
-            <span ng-class="{'label label-default' : message.flag === true, 'label label-danger' : message.flag === false}">  send time: </span> {{message.sendTime}}
-
-            <hr>
+<nav class="navbar navbar-default navbar-fixed-top ">
+        <div class="navbar-left">
+            <h4 class="text-success"><em class="text-warning">Ames IT</em> Employee information manage system</h4>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    </div>
-</script>
+
+        <div class="navbar-right text-success">
+            Hello <em class="text-info">{{username}}</em>
+
+            <button uib-popover="read messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
+                Messages<span class="badge">{{letterNum}}</span>
+            </button>
+
+            <button uib-popover="send message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">        
+            </button>
+
+            <button uib-popover="logout" popover-placement="left-bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </button> &nbsp;&nbsp; &nbsp;&nbsp;
+        </div>
+    </nav>
+    <br><br>
+    <script type="text/ng-template" id="message.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Message</h3>
+        </div>
+
+
+        <table class="table table-striped modal-body">
+            <thead>
+                <tr>
+                    <th><a href="">Message </a></th>
+                    <th><a href="">From </a></th>
+                    <th><a href="">Send time </a></th>
+                    <th><a href="">Operation </a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-class="{'success' : message.flag === true, 'danger' : message.flag === false }" ng-repeat="message in messages | filter:paginate" ng-class-odd='odd'>
+                    <td>{{message.message}}</td>
+                    <td>{{message.from}} </td>
+                    <td>{{message.sendTime}}</td>
+                    <td><input type="checkbox" ng-model="message.delete"> delete </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" boundary-links="true" items-per-page="pageSize"></ul>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        </div>
+    </script>
 
 <script type="text/ng-template" id="send.html">
     <div class="modal-header">

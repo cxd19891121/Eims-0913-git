@@ -3,10 +3,10 @@
  */
 var db = require('./../comm/database');
 var sql = {
-    selectAllEmp : {name: "selectAllEmp", text: "SELECT * FROM employee_info"}, //test only
-    selectEmpById:{ name:"selectEmpById",text:"SELECT * FROM employee_info where emp_id = $1"},
-    selectEmpByEId:{ name:"selectEmpByEId",text:"SELECT * FROM employee_info where emp_id = $1"},
-    selectLastEmp :{name: "selectLastEmp", text: "SELECT * FROM employee_info ORDER BY emp_id DESC LIMIT 1"},
+    selectAllEmp : {name: "selectAllEmp", text: "SELECT * FROM employee_info where delete_flag = false"}, //test only
+    selectEmpById:{ name:"selectEmpById",text:"SELECT * FROM employee_info where emp_id = $1 AND delete_flag = false"},
+    selectEmpByEId:{ name:"selectEmpByEId",text:"SELECT * FROM employee_info where emp_id = $1 AND delete_flag = false"},
+    selectLastEmp :{name: "selectLastEmp", text: "SELECT * FROM employee_info where delete_flag = false ORDER BY emp_id DESC LIMIT 1 "},
     insertEmp: {
         name: "insertEmp",
         text: "INSERT INTO employee_info (first_name,last_name,middle_name,DOB,SSN,marital_status, job_title," +
@@ -65,8 +65,20 @@ var sql = {
     "progress = $29"+
     "where emp_id = $30",},
 
+    deleteFlagEmpById :{name:"deleteFlagUserById", text :"UPDATE employee_info SET delete_flag = true where emp_id = $1", values :[0]},
+    undoDeleteEmpById :{name:"undoDeleteUserById",text:"UPDATE employee_info SET delete_flag = false where emp_id = $1",values:[0]},
+
 
 }
+
+exports.deleteFlagById = function (id,callback){
+    return db.queryPresValue(sql["deleteFlagEmpById"].text,[id],function(e,o){callback(e,o)})
+}
+
+exports.undoDeleteById = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteEmpById"].text,[id],function(e,o){callback(e,o)});
+}
+
 
 
 exports.selectAll = function (callback) {

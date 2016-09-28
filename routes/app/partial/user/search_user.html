@@ -5,16 +5,16 @@
         <uib-accordion close-others="showMoreSearch">
             <div class="form-inline">
                 <label class="col-sm-2 control-label">Employee name:&emsp;</label>
-                <div class="col-md-4 input-group">
-                    <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" ng-click="searchByName()">
-                            <span class="glyphicon glyphicon-search"></span> 
-                        </button>
-                    </span>
+                <div class="col-md-4">
+                    <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name">&emsp;&emsp;
+                    <button class="btn btn-success" ng-click="searchByName()">
+                        <span class="glyphicon glyphicon-log-in"></span> Search
+                    </button>
+
                 </div>
             </div>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+
             <div uib-accordion-group class="panel-default" heading="Show More" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                 <div class="form-inline">
 

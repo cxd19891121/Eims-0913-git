@@ -14,12 +14,12 @@ exports.forget = function(username,callback)
         data: null
     }
     
-    console.log('inservice')
-    console.log(username)
+    //console.log('inservice')
+    //console.log(username)
 
     userDAO.selectEmailByUsername(username,function(e,o){
         if(o.rows[0]){
-                console.log(o.rows[0].email)
+                //console.log(o.rows[0].email)
                 var email = o.rows[0].email
                 var password = o.rows[0].password
 
@@ -31,7 +31,10 @@ exports.forget = function(username,callback)
                     //text: 'Hello world 🐴', // plaintext body
                     html: '<b>Hello Sir 🐴 Your Password is ' + password + '</b>' // html body
                 }
-                mail.sendMail('cyancloudcc','starcraft2','gmail',mailOptions)
+                mail.sendMail('cyancloudcc','starcraft2','gmail',mailOptions,function(err,info)
+                {
+                    
+                })
                 
             } else{
                     repMsg.msg = msg.getMsg("noMatch");

@@ -131,15 +131,16 @@
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">SSN :</label>
-                                    <div class = "col-sm-2">
+                                    <!--<div class = "col-sm-2">-->
 
-                                        <button type="button" class="btn btn-success" ng-model="vm.data.other.ssnStatus" uib-btn-checkbox>
-                                            I have SSN.
-                                        </button>
-                                    </div>
+                                        <!--<button type="button" class="btn btn-success" ng-model="vm.data.other.ssnStatus" uib-btn-checkbox>-->
+                                            <!--I have SSN.-->
+                                        <!--</button>-->
+                                    <!--</div>-->
 
 
-                                    <div class="col-sm-3" ng-show = "vm.data.other.ssnStatus">
+                                    <!--<div class="col-sm-3" ng-show = "vm.data.other.ssnStatus">-->
+                                        <div class="col-sm-3" >
                                         <input ng-model = 'vm.data.emp.SSN' class="form-control" type = 'number' maxlength="9" min = "0" placeholder="ssn" ng-blur="setProgress()" name = "ssn" >
 
 
@@ -153,13 +154,13 @@
                                         </div>
                                     </div>
 
-                                    <!--<div class = "col-sm-3">-->
-                                        <!--<div class="checkbox">-->
-                                            <!--<label class = 'control-label'>-->
-                                                <!--<input  type="checkbox" ng-model = "vm.data.emp.SSN" ng-true-value = "" ng-blur="setProgress()" > I have no SSN-->
-                                            <!--</label>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
+                                    <div class = "col-sm-3">
+                                        <div class="checkbox">
+                                            <label class = 'control-label'>
+                                                <input  type="checkbox" ng-model = "vm.data.emp.SSN" ng-true-value = "" ng-blur="setProgress()" > I have no SSN
+                                            </label>
+                                        </div>
+                                    </div>
 
                                 </div>
 
@@ -169,16 +170,16 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Marriage Status:</label>
                                     <div class="col-sm-4">
-                                        <button type="button" class="btn btn-success" ng-model="vm.data.emp.mStatus" uib-btn-checkbox>
-                                           Married
-                                        </button>
+                                        <!--<button type="button" class="btn btn-success" ng-model="vm.data.emp.mStatus" uib-btn-checkbox>-->
+                                           <!--Married-->
+                                        <!--</button>-->
 
 
-                                        <!--<div class="checkbox">-->
-                                            <!--<label class = 'control-label'>-->
-                                                <!--<input  class = "btn-primary" type="checkbox" ng-model = 'vm.data.emp.mStatus' ng-blur="setProgress()" uib-btn-radio="'Right'" uib-uncheckable> Married-->
-                                                <!--</label>-->
-                                        <!--</div>-->
+                                        <div class="checkbox">
+                                            <label class = 'control-label'>
+                                                <input  class = "btn-primary" type="checkbox" ng-model = 'vm.data.emp.mStatus' ng-blur="setProgress()" uib-btn-radio="'Right'" uib-uncheckable> Married
+                                                </label>
+                                        </div>
                                     </div>
                                 </div>
 

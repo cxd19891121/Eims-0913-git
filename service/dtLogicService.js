@@ -49,6 +49,7 @@ exports.getMsgByName = function(req,callback){
         if(o == null || o == ''){
             callback({errMsg: "0 message"})
         }else {
+
             callback(null, JSON.parse(o));
         }
     });

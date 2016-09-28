@@ -28,7 +28,15 @@ router.post('/', function (req, res) {
         if(e){
             res.send(e);
         }else{
-            res.send(o.rows);
+
+            var result = [];
+            o.rows.forEach(function(element){
+               // console.log(element.first_name,element.delete_flag);
+                if(!element.delete_flag){
+                    result.push(element);
+                }
+            })
+            res.send(result);
         }
     });
 })
@@ -38,8 +46,14 @@ router.post('/name',function(req,res){
         if(e){
             res.send(e);
         }else{
-
-            res.send(o.rows);
+            var result = [];
+            o.rows.forEach(function(element){
+                //console.log(element.first_name,element.delete_flag);
+                if(!element.delete_flag){
+                    result.push(element);
+                }
+            })
+            res.send(result);
         }
     })
 

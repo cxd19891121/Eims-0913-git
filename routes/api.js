@@ -123,17 +123,61 @@ router.get('/all',function(req,res){
     dtLogicService.getAllBySql(function(e,o){
         if(e){
             res.send(e);
-        }else {
-            res.send(o);
+       }else {
+            var result = {};
+            result.rows = [];
+            o.rows.forEach(function(element){
+                console.log(element.first_name,element.delete_flag);
+                if(!element.delete_flag){
+                    result.rows.push(element);
+                }
+            })
+            res.send(result);
+
         }
     })
 })
 
+//GET for all config
 router.get('/config',function(req,res){
     dtService.getConfig(function(o){
+        console.log(o);
         res.send(o);
     })
 })
+
+router.get('/config/database',function(req,res){
+    dtService.getConfig(function(o){
+        res.send(o.database);
+    })
+})
+
+router.get('/config/session',function(req,res){
+    dtService.getConfig(function(o){
+        res.send(o.session);
+    })
+})
+
+router.get('/config/redis',function(req,res){
+    dtService.getConfig(function(o){
+        res.send(o.redis);
+    })
+})
+
+router.get('/config/auth',function(req,res){
+    dtService.getConfig(function(o){
+        res.send(o.auth);
+    })
+})
+
+router.get('/config/filePath',function(req,res){
+    dtService.getConfig(function(o){
+        res.send(o.filePathList);
+    })
+})
+
+
+
 
 router.put('/config',function(req,res){
     dtService.writeConfig(req.body['config'],function(e,o){

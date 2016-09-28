@@ -216,7 +216,7 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
     $scope.disables = true;
     $scope.disableSend = function()
     {
-        let temp = true;
+        var temp = true;
         $scope.users.forEach(function(element,index)
         {
             if (element.flag == true) 

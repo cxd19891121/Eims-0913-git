@@ -7,11 +7,11 @@ app.controller('addCtrl',function($scope,$http,$httpParamSerializerJQLike)
 
     $scope.addNewEmployee = 
     {
-        personalInfo : false,
-        orderStatus: false,
-        contactInfo: false,
-        address: false,
-        visaInfo: false,
+        personalInfo : true,
+        orderStatus: true,
+        contactInfo: true,
+        address: true,
+        visaInfo: true,
         termination: false,
         jobEducation: false,
         salaryBenefit: false,
@@ -68,6 +68,6 @@ app.controller('addCtrl',function($scope,$http,$httpParamSerializerJQLike)
         }
     }
 
- 
+
 
 })

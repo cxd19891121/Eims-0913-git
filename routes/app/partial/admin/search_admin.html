@@ -1,133 +1,136 @@
 <div class="container">
-    <form class="form-horizontal" ng-controller="search" role="form">
-        <uib-accordion close-others="showMoreSearch">
-            <div class="form-inline ">
-                <label class="col-sm-2 control-label">Search:&emsp;</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" tabindex="-1">
-                                <span class="caret"></span>
-                            </button>                            
-                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
+    <div class="content-top clearfix">
+        <form class="form-horizontal" ng-controller="search" role="form">
+            <uib-accordion close-others="showMoreSearch">
+                <div class="form-inline ">
+                    <label class="col-sm-2 control-label">Search:&emsp;</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name"></input>
+                            <div class="input-group-btn">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" tabindex="-1">
+                                    <span class="caret"></span>
+                                </button>
+                                    <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+                <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
 
-            <div uib-accordion-group class="panel-default"  is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-                <div class="form-inline">
-
-                    <label class="col-sm-2 control-label">First name:&emsp;</label>
-                    <div class="col-md-4">
-                        <input type="text" ng-model="searchObject.first_name" class='form-control'>
-                    </div>
-                    <label class="col-sm-2 control-label">Last name:&emsp;</label>
-                    <div class="col-md-4">
-                        <input type="text" ng-model="searchObject.last_name" class='form-control'>
-                    </div>
-                </div>
-                <br><br><br>
-
-                <div class="form-inline">
-                    <label class="col-sm-2 control-label">Job title:&emsp;</label>
-                    <div class="col-md-4">
-                        <input type="text" ng-model="searchObject.job_title" class='form-control'>
-                    </div>
-                    <label class="col-sm-2 control-label">Visa status:&emsp;</label>
-                    <div class="col-md-4">
-                        <input type="text" ng-model="searchObject.status" class='form-control'>
-                    </div>
-                </div>
-                <br><br><br>
-
-                <div class="form-inline">
-                    <label class="col-sm-2 control-label">Major:&emsp;</label>
-                    <div class="col-md-4">
-                        <input type="text" ng-model="searchObject.major" class='form-control'>
-                    </div>
-                    <label class="col-sm-2 control-label">Education:&emsp;</label>
-                    <div class="col-md-4">
-                        <input type="text" ng-model="searchObject.degree" class='form-control'>
-                    </div>
-                </div>
-                <br><br><br>
-
-                <div uib-accordion-group class="panel-default" heading="Advance" is-open="status.isAdvanceOpen" is-disabled="status.isAdvanceDisabled">
-
+                <div uib-accordion-group class="panel-default" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="form-inline">
-                        <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']"
-                                ng-focus="open(1)" is-open="popup['1']" />
-                        </div>
-                        <label class="col-sm-2 control-label">Visa End:&emsp;</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']"
-                                ng-focus="open(0)" is-open="popup['0']" />
-                        </div>
 
+                        <label class="col-sm-2 control-label">First name:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.first_name" class='form-control'/>
+                        </div>
+                        <label class="col-sm-2 control-label">Last name:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.last_name" class='form-control'/>
+                        </div>
                     </div>
                     <br><br><br>
 
                     <div class="form-inline">
-                        <label class="col-sm-2 control-label">Salary:&emsp;</label>
+                        <label class="col-sm-2 control-label">Job title:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="number" ng-model="searchObject['salary']" class='form-control'>
+                            <input type="text" ng-model="searchObject.job_title" class='form-control'/>
                         </div>
-                        <label class="col-sm-2 control-label">Health Insurance:&emsp;</label>
+                        <label class="col-sm-2 control-label">Visa status:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="text" ng-model="searchObject['health_insurance']" class='form-control'>
+                            <input type="text" ng-model="searchObject.status" class='form-control'/>
                         </div>
-
                     </div>
                     <br><br><br>
 
                     <div class="form-inline">
-                        <label class="col-sm-2 control-label">Reimbursment:&emsp;</label>
+                        <label class="col-sm-2 control-label">Major:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="number" ng-model="searchObject['reimbursement']" class='form-control'>
+                            <input type="text" ng-model="searchObject.major" class='form-control'/>
                         </div>
-
-
+                        <label class="col-sm-2 control-label">Education:&emsp;</label>
+                        <div class="col-md-4">
+                            <input type="text" ng-model="searchObject.degree" class='form-control'/>
+                        </div>
                     </div>
                     <br><br><br>
 
-                    <div class="form-inline">
-                        <label class="col-sm-2 control-label">Regional subsides:&emsp;</label>
-                        <div class="col-md-4">
-                            <input type="text" ng-model="searchObject['regional_subsides_start']" class='form-control'>
-                            <input type="text" ng-model="searchObject['regional_subsides_end']" class='form-control'>
+                    <div uib-accordion-group class="panel-default" heading="Advance" is-open="status.isAdvanceOpen" is-disabled="status.isAdvanceDisabled">
+
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']"
+                                    ng-focus="open(1)" is-open="popup['1']" />
+                            </div>
+                            <label class="col-sm-2 control-label">Visa End:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']"
+                                    ng-focus="open(0)" is-open="popup['0']" />
+                            </div>
+
                         </div>
-                        <label class="col-sm-2 control-label">Payraise percent:&emsp;</label>
-                        <div class="col-md-4">
-                            <input type="text" ng-model="searchObject['payraise_start']" class='form-control'>
-                            <input type="text" ng-model="searchObject['payraise_end']" class='form-control'>
+                        <br><br><br>
+
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Salary:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="number" ng-model="searchObject['salary']" class='form-control'>
+                            </div>
+                            <label class="col-sm-2 control-label">Health Insurance:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="text" ng-model="searchObject['health_insurance']" class='form-control'>
+                            </div>
+
                         </div>
+                        <br><br><br>
 
-                    </div>
-                    <br><br><br>
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Reimbursment:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="number" ng-model="searchObject['reimbursement']" class='form-control'>
+                            </div>
 
-        </uib-accordion>
 
-    </form>
-    </div>
-    <br><br>
-    <div>
+                        </div>
+                        <br><br><br>
 
-        &emsp;&emsp;
-        <button class="btn btn-success " ng-click="deepSearch()">
+                        <div class="form-inline">
+                            <label class="col-sm-2 control-label">Regional subsides:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="text" ng-model="searchObject['regional_subsides_start']" class='form-control' />
+                                <input type="text" ng-model="searchObject['regional_subsides_end']" class='form-control' />
+                            </div>
+                            <label class="col-sm-2 control-label">Payraise percent:&emsp;</label>
+                            <div class="col-md-4">
+                                <input type="text" ng-model="searchObject['payraise_start']" class='form-control'>
+                                <input type="text" ng-model="searchObject['payraise_end']" class='form-control'>
+                            </div>
+
+                        </div>
+                        <br><br><br>
+
+            </uib-accordion>
+
+        </form>
+        </div>
+        <br><br>
+        <div>
+
+            &emsp;&emsp;
+            <button class="btn btn-success " ng-click="deepSearch()">
         <span class="glyphicon glyphicon-search"></span> DeepSearch
     </button>
-    </div>
+        </div>
 
-    </div>
+        </div>
 
-    </uib-accordion>
-    </form>
+        </uib-accordion>
+    </div>
 
 
     <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-success"
@@ -176,7 +179,7 @@
                     <span class="glyphicon glyphicon-pencil"></span>Edit
                 </button>
                         <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
-                    <span class="glyphicon glyphicon-pencil"></span>Detail
+                    <span class="glyphicon glyphicon-search"></span>Detail
                 </button>
                     </td>
                 </tr>

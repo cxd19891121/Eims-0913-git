@@ -186,19 +186,13 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
 
     $scope.ok = function ()
     {
-        //console.log(items)
         items.forEach(function(element,index)
         {
             if (element.flag == false || element.flag == undefined)
             {
                 items[index].flag = true
             }
-            /*
-            if (element.delete == true)
-            {
-                items.splice(index, 1);
-            }
-            */
+           
         })
         //console.log(items)
         nums = 0

@@ -4,18 +4,31 @@
 var db = require('./../comm/database');
 
 var sql = {
-    selectAllUsername:{name:'selectAllUsername',text:"select username from user_info"},
-    selectAllUser : { name:'selectAllFromUser', text: "select * from user_info"},
-    selectUserByName  :{name: "selectUserByName", text: "SELECT * FROM user_info where username = $1", values: ["default"] },
-    selectUserById: {name:'selectUserById',text:"select * from user_info where id = $1 "},
-    selectFirstUser : { name: 'selectFirstUser', text:"select * from user_info where id = $1",values:[1]},
+    selectAllUsername:{name:'selectAllUsername',text:"select username from user_info where delete_flag = false"},
+    selectAllUser : { name:'selectAllFromUser', text: "select * from user_info where delete_flag = false"},
+    selectUserByName  :{name: "selectUserByName", text: "SELECT * FROM user_info where username = $1 AND delete_flag = false" , values: ["default"] },
+    selectUserById: {name:'selectUserById',text:"select * from user_info where id = $1 AND delete_flag = false"},
+    selectFirstUser : { name: 'selectFirstUser', text:"select * from user_info where id = $1 ",values:[1]},
     deleteUserById: {name:"deleteUserById",text:"DELETE FROM user_info WHERE id = $1",values:[1]},
     insertUser:{name:'insertUser',text:'insert into user_info (username,password,e_id,level) VALUES ($1, $2, $3, $4)',
     values:['username','password',2333,2333]},
     updateUserById: {name:"updateUserById",text:"UPDATE user_info SET username = $1, password = $2, e_id = $3, level = $4 where id=$5"
         ,values: ["username", "password", 1, 0,1] },
-    selectLastUser: {name: "selectLastUser", text: "SELECT * FROM user_info ORDER BY id DESC LIMIT 1"},
-    selectEmailByUsername:{name:"selectEmailByUsername", text: "SELECT email,password FROM user_info LEFT JOIN employee_info on user_info.e_id=employee_info.e_id WHERE username=$1", values: ["default"]},
+    selectLastUser: {name: "selectLastUser", text: "SELECT * FROM user_info where delete_flag = false ORDER BY id DESC LIMIT 1"},
+    selectEmailByUsername:{name:"selectEmailByUsername", text: "SELECT email,password FROM user_info LEFT JOIN employee_info on user_info.e_id=employee_info.e_id WHERE username=$1 && delete_flag = false", values: ["default"]},
+
+    deleteFlagUserById :{name:"deleteFlagUserById", text :"UPDATE user_info SET delete_flag = true where id = $1", values :[0]},
+    undoDeleteUserById :{name:"undoDeleteUserById",text:"UPDATE user_info SET delete_flag = false where id = $1",values:[0]}
+
+
+}
+
+exports.deleteFlagById = function (id,callback){
+    return db.queryPresValue(sql["deleteFlagUserById"].text,[id],function(e,o){callback(e,o)})
+}
+
+exports.undoDeleteById = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteUserById"].text,[id],function(e,o){callback(e,o)});
 }
 
 exports.selectAllUsername = function(callback){

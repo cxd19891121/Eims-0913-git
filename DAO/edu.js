@@ -1,9 +1,9 @@
 
 var db = require('./../comm/database');
 var sql = {
-    selectAllEdu: {name: "selectAllEdu", text: "SELECT * FROM education_info"}, //test only
-    selectEduById: {name: "selectEduById", text: "SELECT * FROM education_info where ed_id = $1", values: [1]},
-    selectEduByEId: {name: "selectEduByEId", text: "SELECT * FROM education_info where e_id = $1", values: [1]},
+    selectAllEdu: {name: "selectAllEdu", text: "SELECT * FROM education_info where delete_flag = false"}, //test only
+    selectEduById: {name: "selectEduById", text: "SELECT * FROM education_info where ed_id = $1 AND delete_flag = false", values: [1]},
+    selectEduByEId: {name: "selectEduByEId", text: "SELECT * FROM education_info where e_id = $1 AND delete_flag = false", values: [1]},
     deleteEduById: {name:"deleteEduById",text:"DELETE FROM education_info WHERE ed_id = $1",value:[1]},
     deleteEduByEId: {name:"deleteEduByEId",text:"DELETE FROM education_info WHERE e_id = $1",value:[1]},
 
@@ -25,8 +25,25 @@ var sql = {
         values: [ "bachelor", "cs", "ISU",1]
     },
 
-    selectLastEdu: {name: "selectLastEdu", text: "SELECT * FROM education_info ORDER BY ed_id DESC LIMIT 1"},
+    selectLastEdu: {name: "selectLastEdu", text: "SELECT * FROM education_info WHERE delete_flag = false ORDER BY ed_id DESC LIMIT 1"},
+
+    deleteFlagEduById :{name:"deleteFlagEduById", text :"UPDATE education_info SET delete_flag = true where ed_id = $1", values :[0]},
+    undoDeleteEduById :{name:"undoDeleteEduById",text:"UPDATE education_info SET delete_flag = false where ed_id = $1",values:[0]},
+    deleteFlagEduByEId: {name:"deleteFlagEduByEId",text:"UPDATE education_info SET delete_flag = true WHERE e_id = $1",value:[1]},
+
 }
+
+exports.deleteFlagById = function (id,callback){
+    return db.queryPresValue(sql["deleteFlagEduById"].text,[id],function(e,o){callback(e,o)})
+}
+exports.deleteFlagByEId = function(id,callback){
+    return db.queryPresValue(sql["deleteFlagEduByEId"].text,[id],function(e,o){callback(e,o)})
+}
+
+exports.undoDeleteById = function(id,callback){
+    return db.queryPresValue(sql["undoDeleteEduById"].text,[id],function(e,o){callback(e,o)});
+}
+
 
 
 exports.selectAll = function (callback) {

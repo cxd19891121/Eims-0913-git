@@ -22,6 +22,20 @@ module.exports.getUserById = function(id,callback){
     })
 
 }
+module.exports.deleteFlagById= function(DAO,id,callback){
+    DAO.deleteFlagById(id,function(e,o){
+        callback(e,o);
+    })
+}
+module.exports.deletefFlagByEId = function(DAO,id,callback){
+    DAO.deleteFalgByEId(id,function(e,o){
+        callback(e,o);
+    })
+}
+
+module.exports.undoDeleteById = function(DAO,id,callback){
+    DAO.undoDeleteById(id,function(e,o){callback(e,o)})
+}
 
 module.exports.getFirstUser = function(callback){
     userDAO.selectFirst(function(e,o){callback(e,o)})

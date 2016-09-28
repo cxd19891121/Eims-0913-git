@@ -13,8 +13,14 @@ var dtLogicService = require('./../service/dtLogicService')
 var sql = {
     insertColProgress: {
         name:'insertColProgress',
-        text:'ALTER TABLE employee_info ADD COLUMN progress int;'
+        text:'ALTER TABLE work_info ADD COLUMN progress int;'
     },
+
+    insertColDeleteFlag:{
+        name:'insertDeleteFlag',
+        text:'ALTER TABLE order_info ADD COLUMN delete_flag boolean DEFAULT false'
+    },
+
 
     removeColpayrise_precentage:{
         name:'removeColpayrise_precentage',
@@ -80,6 +86,19 @@ var sql = {
 // console.log(typeof(nn) === "boolean");
 // console.log(isNaN(l),isNaN(n));
 
+//insertCol();
+
+function insertCol() {
+    db.queryPres(sql['insertColDeleteFlag'], function (e, o) {
+        if (e) {
+            console.log(e);
+        } else {
+            console.log(o);
+        }
+    })
+}
+
+
 function removeCol(){
     db.queryPres(sql['removeCol_p_citty'], function (e, o) {
         if (e) {
@@ -129,15 +148,7 @@ function calculateProgress(emp){
 }
 
 
-function insertCol() {
-    db.queryPres(sql['insertColProgress'], function (e, o) {
-        if (e) {
-            console.log(e);
-        } else {
-            console.log(o);
-        }
-    })
-}
+
 
 function checkTableColType (){
     db.queryPres(sql['checkTableColType'], function (e, o) {

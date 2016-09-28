@@ -27,6 +27,7 @@
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
 
+
            
             <script type="text/ng-template" id="advanceSearch.html">
                 <div class="row">
@@ -128,6 +129,8 @@
 
 
     <div class="row" ng-controller="edit">
+        <div uib-alert dismiss-on-timeout="3000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+
         <div>
             <button class="btn btn-primary " type="button" ng-click="changeUser(all)">All</button>
             <button class="btn btn-primary " type="button" ng-click="changeUser(incomplete)">Incomplete</button>
@@ -175,6 +178,10 @@
                     <td>{{ user.end_time }}</td>
                     <td>{{ user.job_title }}</td>
                     <td>
+
+                    <button class="btn btn-primary" ng-click="deleteUser(user.e_id)">
+                        <span class="glyphicon glyphicon-pencil"></span>Delete
+                    </button>
 
                         <button class="btn btn-primary" ng-click="editUser(user.e_id)">
                     <span class="glyphicon glyphicon-pencil"></span>Edit

@@ -56,6 +56,11 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.complete = Symbol("complete")
     $scope.incomplete = Symbol("incomplete")
 
+    $scope.changePageSize = function(num)
+    {
+        $scope.pageSize = num
+    }
+
     $scope.order = function (predicate)
     {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;

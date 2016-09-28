@@ -68,8 +68,13 @@
                     <form>
                         <label>Username</label>
                         <input type="text" class="span12" ng-model="forgetUsername" placeholder="Username">
-                        
-                        <a ng-click="forget()" class="btn btn-primary pull-right">Send Password</a>
+                        <div class="row">
+                            <a ng-click="forget()" class="btn btn-primary pull-right">Send Password</a>
+                            <a ng-click="cancel()" class="btn btn-primary pull-right">Cancel</a> 
+                        </div><br>
+                        <div class="row">
+                            
+                        </div>
                         <div class="clearfix"></div>
                     </form>
             </div>
@@ -141,6 +146,12 @@
                     }
                 })
 
+            }
+
+            $scope.cancel = function()
+            {
+                $scope.showLogin = true;
+                $scope.showForget = false;
             }
 
             $scope.displayForget = function()

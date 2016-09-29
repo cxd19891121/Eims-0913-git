@@ -23,8 +23,11 @@
             <td> <input type="radio" ng-model = "user.level" value = '1'>User
                 <input type="radio" ng-model = "user.level" value = '0'>Admin</td>
             <td>
-                <button class="btn btn-primary" ng-click="editUser(user.e_id)">
+                <button class="btn btn-primary" ng-click="editUser(user.id)">
                     <span class="glyphicon glyphicon-pencil"></span>Update
+                </button>
+                <button class="btn btn-primary" ng-click="deleteUser(user.id)">
+                    <span class="glyphicon glyphicon-pencil"></span>Delete
                 </button>
                 
             </td>

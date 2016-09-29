@@ -20,10 +20,18 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         $scope.alerts.push({type:'success',msg: 'Success add!'});
     };
 
+    $scope.deleteAlert = function(){
+        $scope.alerts.push({type:"success",msg:"user has been delete"});
+    }
+    $scope.deleteFailAlert = function(){
+        $scope.alerts.push({type:"danger",msg:"fail to delete"});
+}
+
     $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
     };
    
+
 
 
     $scope.createUser = function()
@@ -41,12 +49,23 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         })
     }
 
+    $scope.deleteUser = function(id){
+        dataService.deleteUser(id, function(e,o){
+            if(e){
+                $scope.deleteAlert();
+            }else{
+                $scope.deleteFailAlert();
+            }
+        })
+    }
+
     $scope.editUser = function(id)
     {
         var newUser = {};
         $scope.users.forEach(function(element){
             if(element.id == id){
                 newUser = element;
+
             }
         })
         newUser.eid = newUser.e_id;
@@ -56,9 +75,10 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
                 $scope.msg = e;
             }else{
                 $scope.msg = o;
-                var config = configService.getConfig();
-                var url = config.route.index;
-                window.history.back();
+                $scope.addAlert();
+                // var config = configService.getConfig();
+                // var url = config.route.index;
+                // window.history.back();
             }
         });
 

@@ -11,7 +11,7 @@ var workDAO = require('./../DAO/work')
 var eduDAO = require('./../DAO/edu');
 var orderDAO = require('./../DAO/order');
 var visaDAO = require('./../DAO/visa');
-
+var msgService = require('./../service/messageService');
 
 router.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -24,9 +24,9 @@ router.all('*', function (req, res, next) {
 //api for website-message:
 //get message by id
 router.get('/message/:name',function(req,res){
-    dtLogicService.getMsgByName(req,function(e,o){
+    msgService.getMsgByName(req,function(e,o){
 
-        console.log("get message:", e,o);
+  //      console.log("get message:", e,o);
         if(e){
             res.send(e)
         }else{
@@ -36,7 +36,7 @@ router.get('/message/:name',function(req,res){
 })
 //send website-message to multi user:
 router.post('/message/',function(req,res){
-    dtLogicService.sendMsg(req,function(e,o){
+    msgService.sendMsg(req,function(e,o){
         if(e){
             res.send(e);
         }else{
@@ -46,7 +46,7 @@ router.post('/message/',function(req,res){
 })
 
 router.put('/message/:name',function(req,res){
-    dtLogicService.updateMsgByName(req,function(e,o){
+    msgService.updateMsgByName(req,function(e,o){
         if(e){
             res.send(e)
         }else{
@@ -56,7 +56,8 @@ router.put('/message/:name',function(req,res){
 })
 
 router.delete('/message/all/:name',function(req,res){
-    dtLogicService.deleteAllMessage(req,function(e,o){
+
+    msgService.deleteAllMessage(req,function(e,o){
 
         if(e){
             res.send(e)

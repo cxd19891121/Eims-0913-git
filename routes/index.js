@@ -257,5 +257,7 @@ router.get('/images/furley_bg.png',function(req,res){
     res.sendFile(__dirname + '/images/furley_bg.png')
 })
 
-
+router.get('/lib/*',function(req,res){
+    res.sendFile(__dirname + req.path)
+})
 module.exports = router;

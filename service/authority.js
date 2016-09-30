@@ -4,23 +4,27 @@ var config = require('./../config/appConfig')
 
 
 exports.authCheck = function(req,callback) {
+    var authArray = config.auth;
+    var noSession = authArray[0];
+    var user = authArray[1];
+    var admin = authArray[2];
 
-    if (!req.session.user) {
-        var auth = config.auth.noSess;
-        callback(auth);
+    if(!req.session.user){
+
+        callback(noSession);
     }
 
     else if (req.session.user) {
 
         var level = req.session.user.level;
-        if (level == config.auth.user.level) {
-            callback(config.auth.user);
-        } else if (level == config.auth.admin.level) {
-            callback(config.auth.admin);
+        if (level == user.level) {
+            callback(user);
+        } else if (level == admin.level) {
+            callback(admin);
         }
     }
     else{
-        callback(config.auth.noSess);
+        callback(noSession);
     }
 }
 

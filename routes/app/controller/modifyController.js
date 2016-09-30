@@ -4,10 +4,7 @@
 app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibModal,dataService)
 {
 
-    $scope.print = function()
-    {
-        console.log($scope.config.auth)
-    }
+
     $scope.config = {};
     $scope.newLevel = {}
     $scope.msg = {}

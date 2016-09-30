@@ -83,13 +83,17 @@
     </table>-->
 
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-        <button class="btn btn-primary" ng-click="updateConfig()">
-            <span class="glyphicon glyphicon-pencil"></span>Update Config
-        </button>
 
         <button class="btn btn-primary" ng-click="back()">
             <span class="glyphicon glyphicon-arrow-left"></span> Back
         </button>
+        <div style="float:right">
+        <button class="btn btn-primary" ng-click="updateConfig()">
+            <span class="glyphicon glyphicon-pencil"></span>Update Config
+        </button>
+        </div>
+
+        
     <br>
         <hr>
         <br><br>
@@ -101,7 +105,7 @@
                     <input type="text" ng-model="newLevel.name" size="80"><br>
                 
                 <label class="col-sm-2 control-label"> Level:</label>
-                    <input type="number" ng-model="newLevel.level" size="80"><br>
+                    <input type="number" ng-model="newLevel.level" size="80" readonly><br>
             
                 <label class="col-sm-2 control-label"> Tag:</label>
                     <input type="text" ng-model="newLevel.tag" size="80"><br>
@@ -109,22 +113,27 @@
                 <label class="col-sm-2 control-label"> Operation:</label>
                     <input type="text" ng-model="newLevel.ops" size="80"><br>
                 
-                <label class="col-sm-2 control-label"> filePath:</label>  
+                <label class="col-sm-2 control-label"> FilePath:</label>  
                     <input type="text" ng-model="newLevel.filePath" size="80"><br>
+                
+                <label class="col-sm-2 control-label"> Url:</label>  
+                    <input type="text" ng-model="newLevel.url" size="80"><br>
             
             </div>
         </uib-accordion>
 
 
 
-    <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeLevelAlert($index)">{{levelAlert.msg}}</div>    
+    <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeLevelAlert($index)">{{alert.msg}}</div>    
 
+    <button class="btn btn-primary" ng-click="back()">
+            <span class="glyphicon glyphicon-arrow-left"></span> Back
+    </button>
+    <div style="float:right">
     <button class="btn btn-primary" ng-click="createLevel()">
         <span class="glyphicon glyphicon-pencil"></span>Add level
     </button>
-        <button class="btn btn-primary" ng-click="back()">
-            <span class="glyphicon glyphicon-arrow-left"></span> Back
-        </button>
+    </div>    
 
 
 

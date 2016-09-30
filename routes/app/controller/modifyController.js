@@ -8,7 +8,25 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
     $scope.msg = {}
     $scope.alerts = []
     $scope.levelAlert = []
+    $scope.newLevel = 
+    {
+        name: undefined,
+        level: undefined,
+        tag: undefined,
+        ops: undefined,
+        filePath: undefined,
+        url: undefined
+    }
 
+    $scope.getHighest = function(array,property)
+    {
+        var highest = 0
+        for (var i = 0 ; i < array.length ; i++)
+        {
+            if (array[i].property > highest) highest = array[i].property
+        }
+        return highest
+    }
     $scope.addAlert = function(type,msg) 
     {
         $scope.alerts.push({type: type,msg: msg});
@@ -16,12 +34,13 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
 
     $scope.addLevelAlert = function(type,msg)
     {
-        $scope.levelAlert.push({type: type,msg:msg})
+        $scope.levelAlert.push({type:type,msg:msg})
     }
 
     $scope.closeLevelAlert = function(index)
     {
-        $scope.alerts.splice(index ,1);
+        //console.log("close")
+        $scope.levelAlert.splice(index ,1);
     }
 
     $scope.closeAlert = function(index) 
@@ -34,21 +53,40 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         console.log($scope.config.database)
     }
 
-    $scope.back= function(){
+    $scope.back = function(){
         window.history.back();
     }
 
     $scope.createLevel = function()
     {
-        $scope.config.auth[$scope.newLevel.name] =
+        var count = true
+        console.log($scope.newLevel)
+        forEach($scope.newLevel,function(key,value)
         {
-            level: $scope.newLevel.level,
-            tag: $scope.newLevel.tag,
-            ops: $scope.newLevel.ops,
-            filePath: $scope.newLevel.filePath
+            if(value == "" || value == undefined) 
+            {
+                //console.log(1)
+                $scope.addLevelAlert("danger","must fill " + key)
+                count = false
+            }
+        })
+        //console.log($scope.levelAlert)
+        if (count)
+        {
+            $scope.config.auth[$scope.newLevel.name] =
+            {
+                level: $scope.newLevel.level,
+                tag: $scope.newLevel.tag,
+                ops: $scope.newLevel.ops,
+                filePath: $scope.newLevel.filePath,
+                fileName: $scope.newLevel.name,
+                url: $scope.newLevel.url
+            }
+
+            $scope.addLevelAlert("success","success add level")
+            console.log($scope.config.auth)
+            $scope.updateConfig()
         }
-        addLevelAlert("success","success add level")
-        console.log($scope.config.auth)
     }
 
     getConfig();
@@ -56,6 +94,8 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
     function getConfig(){
         dataService.getConfig(function(e,o){
            $scope.config = o.data;
+           console.log($scope.config)
+           $scope.getHighest($scope.config,"authority")
         })
     }
 

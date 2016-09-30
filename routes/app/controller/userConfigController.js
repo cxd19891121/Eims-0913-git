@@ -3,11 +3,31 @@
  */
 app.controller('userConfigController', function($scope,$http,$httpParamSerializerJQLike, $uibModal,dataService,configService,$timeout)
 {
+    $scope.levels = []
+    var init = function()
+    {
+        dataService.getConfigDetail('auth',function(data)
+        {
+            console.log(data)
+            forEach(data,function(key,value)
+            {
+                if (value.level >=0) $scope.levels.push(value)
+            })
+            console.log($scope.levels)
+        })
+    }()
+    
     $scope.users = [{id:1,level:1,username:"hi",password:"hello"}]
 
     $scope.msg = {};
 
-    $scope.alert = {
+    $scope.changeAuth = function(user,auth)
+    {
+        console.log(user)
+        user.level = auth
+    }
+    $scope.alert = 
+    {
         good: "New User Added",
         fail:"Add Fail",
     }
@@ -31,7 +51,7 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         $scope.users.push($scope.newUser)
         dataService.insertUser({user: $scope.newUser},function(data)
         {
-            //console.log(data)
+            console.log(data)
             $scope.goodAdd = true;
             $scope.addAlert();
             $timeout(function(){
@@ -67,7 +87,7 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
     {
         dataService.getAllUser(function(data)
         {
-            console.log(data);
+            //console.log(data);
             $scope.users = data;
             $scope.totalItems = $scope.users.length
         })

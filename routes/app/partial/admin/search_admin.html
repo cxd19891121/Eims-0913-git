@@ -11,14 +11,14 @@
     <form class="form-horizontal" ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
             <div class="form-inline ">
-                <label class="col-sm-2 control-label">Search:&emsp;</label>
+                <label class="col-sm-2 control-label">Employee Name:&emsp;</label>
                 <div class="col-md-4">
                     <div class="input-group">
                         <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
                         <div class="input-group-btn">
-                             <button popover-placement="bottom" uib-popover-template="advanceSearchUrl" popover-is-open="displayAdvanceSearch" type="button" class="btn btn-default" tabindex="-1"><span class="caret"></span></button>
+                             <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open" type="button" class="btn btn-default" tabindex="-1"><span class="caret"></span></button>
                                                      
-                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search{{displayAdvanceSearch}}</button>
+                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <input type="number" placeholder="Max payraise" ng-model="searchObject['payraise_end']">
                     </div>
                 </div>
-                <button class="btn btn-success " ng-click="deepSearch()">
+                <button class="btn btn-default " ng-click="deepSearch()">
                     <span class="glyphicon glyphicon-search"></span> DeepSearch
                 </button>
             </script>

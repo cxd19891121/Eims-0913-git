@@ -95,7 +95,6 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             method: 'GET',
             url: baseUrl + 'config',
         }).then(function successCallback(data) {
-
             callback(null,data)
         }, function errorCallback(data) {
             console.log("in error callback");
@@ -118,6 +117,18 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             console.log(data);
             //callback(data);
         });
+    }
+
+    vm.getConfigDetail = function (path,callback)
+    {
+        $http
+        ({
+            method: 'GET',
+            url: baseUrl + 'config/' + path
+        }).success (function (data)
+        {
+            callback(data)
+        })
     }
 
 

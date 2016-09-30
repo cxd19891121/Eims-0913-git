@@ -8,86 +8,95 @@
         <br>
 
         <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><a href="" ng-click="order('id')">Employee Id</a></th>
+                    <th><a href="" ng-click="order('username')">UserName</a></th>
+                    <th><a href="" ng-click="order('password')">Password</a></th>
+                    <th><a href="" ng-click="order('level')">Level</a></th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
+                    <td>{{ user .id }}</td>
+                    <td><input type="text" ng-model="user.username"></td>
+                    <td><input type="text" ng-model="user.password"></td>
+                    <td>
 
-  
+                    <div ng-repeat="element in levels" class="btn-group">
+                        <button class="btn btn-success" ng-model="user.level" uib-btn-radio="element.level" uncheckable>{{element.fileName}}</button>
+                        
+                    </div>
 
-        <thead><tr>
-            <th><a href="" ng-click="order('id')">Employee Id</a></th>
-            <th><a href="" ng-click="order('username')">UserName</a></th>
-            <th><a href="" ng-click="order('password')">Password</a></th>
-            <th><a href="" ng-click="order('level')">Level</a></th>
-            <th>Operation</th>
-        </tr></thead>
-        <tbody><tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
-            <td>{{ user .id }}</td>
-            <td><input type="text" ng-model="user.username" > </td>
-            <td><input type="text" ng-model="user.password" ></td>
-            <td> <input type="radio" ng-model = "user.level" value = '1'>User
-                <input type="radio" ng-model = "user.level" value = '0'>Admin</td>
-            <td>
-                <button class="btn btn-primary" ng-click="editUser(user.id)">
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" ng-click="editUser(user.e_id)">
                     <span class="glyphicon glyphicon-pencil"></span>Update
                 </button>
-                <button class="btn btn-primary" ng-click="deleteUser(user.id)">
-                    <span class="glyphicon glyphicon-pencil"></span>Delete
-                </button>
-                
-            </td>
-        </tr></tbody>
+
+                    </td>
+                </tr>
+            </tbody>
         </table>
         <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="20" boundary-links="true" items-per-page="pageSize"></ul>
 
-         <hr>
+        <hr>
 
-         <h2> Create New User </h2>
-            <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        <h2> Create New User </h2>
+        <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
-         <br>
-         <form class="form-horizontal" role="form">
-             <div class="form-group">
-                 <label class="col-sm-2 control-label">username:</label>
-                 <div class="col-sm-8">
-                     <input type="text" ng-model="newUser.username">
-                 </div>
-             </div>
+        <br>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">username:</label>
+                <div class="col-sm-8">
+                    <input type="text" ng-model="newUser.username">
+                </div>
+            </div>
 
-             <div class="form-group">
-                 <label class="col-sm-2 control-label">password:</label>
-                 <div class="col-sm-8">
-                     <input type="text" ng-model="newUser.password">
-                 </div>
-             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">password:</label>
+                <div class="col-sm-8">
+                    <input type="text" ng-model="newUser.password">
+                </div>
+            </div>
 
-             <div class="form-group">
-                 <label class="col-sm-2 control-label">Level:  </label>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Level:  </label>
+                <div class="col-sm-8">
+                    
+                    <div class="btn-group" ng-repeat="element in levels">
+                        <button class="btn btn-primary" ng-model="newUser.level" uib-btn-radio="element.level" uncheckable>{{element.fileName}}</button>
+                    </div>
+                </div>
 
-                 <div class="radio">
-                     <label><input type="radio" ng-model = "newUser.level" value = '1'>User</label>
-                     <label><input type="radio" ng-model = "newUser.level" value = '0'>Admin</label>
-                 </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Employee Id:</label>
+                <div class="col-sm-8">
+                    <input type="text" ng-model="newUser.eid">
+                </div>
+            </div>
 
 
-             </div>
+            <div class='form-group'>
+                <button class="btn btn-primary" ng-click="back()">
+                <span class="glyphicon glyphicon-arrow-left"></span> Back
+            </button>
+                <button class="btn btn-primary" ng-click="createUser()">
+                <span class="glyphicon glyphicon-pencil"></span>Create
+            </button>
 
-             <div class="form-group">
-                 <label class="col-sm-2 control-label">Employee Id:</label>
-                 <div class="col-sm-8">
-                     <input type="text" ng-model="newUser.eid">
-                 </div>
-             </div>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>
 
 
-             <div class = 'form-group'>
-                 <button class="btn btn-primary" ng-click="createUser()">
-                     <span class="glyphicon glyphicon-pencil"></span>Create
-                 </button>
-                 <button class="btn btn-primary" ng-click="back()">
-                 <span class="glyphicon glyphicon-arrow-left"></span> Back
-             </button>
-                 <br>
-             </div>
-         </form>
-
+         
 
     </div>
  </div>

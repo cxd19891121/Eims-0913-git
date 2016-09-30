@@ -3,6 +3,8 @@
  */
 app.controller('userConfigController', function($scope,$http,$httpParamSerializerJQLike, $uibModal,dataService,configService,$timeout)
 {
+    $scope.newUser = {}
+
     $scope.levels = []
     var init = function()
     {

@@ -7,7 +7,7 @@
 }
 </style>
 <div class="container">
-    
+
     <form class="form-horizontal" ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
             <div class="form-inline ">
@@ -16,6 +16,7 @@
                     <div class="input-group">
                         <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
                         <div class="input-group-btn">
+
                              <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open" type="button" class="btn btn-default" tabindex="-1"><span class="caret"></span></button>
                                                      
                             <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
@@ -27,7 +28,7 @@
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
 
-           
+
             <script type="text/ng-template" id="advanceSearch.html">
                 <div class="row">
                     <label class="col-sm-2 control-label">First name:</label>
@@ -40,7 +41,7 @@
                         <input type="text" ng-model="searchObject.last_name">
                     </div>
                 </div>
-               
+
                 <div class="row">
                     <label class="col-sm-2 control-label">Job title:&emsp;</label>
                     <div class="col-md-4">
@@ -94,12 +95,12 @@
                 <br>
                 <div class="row">
                     <label class="col-sm-2 control-label">Regional subsides:&emsp;</label>
-                   
+
                     <div class="col-md-4">
                         <input type="number" placeholder="Min subside" ng-model="searchObject['regional_subsides_start']">
                         <input type="number" placeholder="Max subside" ng-model="searchObject['regional_subsides_end']">
                     </div>
-                
+
                     <label class="col-sm-2 control-label">Payraise percent:&emsp;</label>
                     <div class="col-md-4">
                         <input type="number" placeholder="Min payraise" ng-model="searchObject['payraise_start']">
@@ -111,12 +112,12 @@
                 </button>
             </script>
 
-                
 
 
-        
-   
-    
+
+
+
+
 
     <div class="row">
     <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-success" ng-click="addNewUser()">
@@ -128,6 +129,7 @@
 
 
     <div class="row" ng-controller="edit">
+        <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <div>
             <button class="btn btn-primary " type="button" ng-click="changeUser(all)">All</button>
             <button class="btn btn-primary " type="button" ng-click="changeUser(incomplete)">Incomplete</button>
@@ -144,15 +146,15 @@
                 </ul>
             </div>
             </div>
-                
-            
+
+
         </div>
         <div ng-show="displayDownload">
             <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
             <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
         </div>
- 
-        
+
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -179,6 +181,11 @@
                         <button class="btn btn-primary" ng-click="editUser(user.e_id)">
                     <span class="glyphicon glyphicon-pencil"></span>Edit
                 </button>
+
+                        <button class="btn btn-primary" ng-click="deleteUser(user.e_id)">
+                            <span class="glyphicon glyphicon-pencil"></span>Delete
+                        </button>
+
                         <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
                     <span class="glyphicon glyphicon-pencil"></span>Detail
                 </button>
@@ -333,4 +340,3 @@
         </div>
     </script>
 
-    

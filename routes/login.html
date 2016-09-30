@@ -1,113 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
 
-        <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+<head>
+
+    <!--<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-responsive.css">
         <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
-        <meta charset = 'utf-8'>
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/css/vendor.css">
+    <link rel="stylesheet" href="lib/css/auth.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic"
+        rel="stylesheet" type="text/css">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
-        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
-        <script type='text/javascript' src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
-       
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
-        
-    
-    </head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
+    <script type='text/javascript' src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 
-    <body ng-app="myApp" ng-controller="login">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">-->
+
+
+</head>
+
+<body ng-app="myApp" ng-controller="login">
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
                 <ul class="nav pull-right">
-                
                 </ul>
- 
-                <a class="brand" href="index.html"><span class="first">Ames IT </span> <span class="second">Employee information manage system </span></a>
-                <a>{{showLogin}}  {{showForget}}</a>
+                <a class="brand" href="index.html"><span class="first">Ames IT </span> <span class="second">Employee information manage system</span></a>
             </div>
         </div>
     </div>
-    <div class="container" ng-show="showLogin">
-        <div class="container-fluid">  
-            <div class="row-fluid">
-            <div class="dialog span4">
-                <div class="block">
-                    <div class="block-heading">Sign In</div>
-                    <div class="block-body">
-                        <form>
-                            <label>Username</label>
-                            <input type="text" class="span12" ng-model="username" placeholder="Username">
-                            <label>Password</label>
-                            <input type="password" ng-model="password" class="span12" placeholder="Password">
-                           
-                            <a ng-click="login()" class="btn btn-primary pull-right">Sign In</a>
-                            
-                            <div class="clearfix"></div>
-                        </form>
+    <main class="auth-main">
+        <div class="auth-block" ng-show="showLogin">
+            <h1>Sign In</h1>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="username" placeholder="Username" />
                     </div>
-                    </div>
-                <p><a ng-click="displayForget()">Forgot your password?</a></p>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" ng-model="password" placeholder="Password" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button ng-click="login()" type="submit" class="btn btn-default btn-auth">Sign in</button>
+                        <a href="#" ng-click="displayForget()" class="forgot-pass">Forgot password?</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </form>
         </div>
-    </div>  
-        
-   
-    <div class="container" ng-show="showForget">
-        
-        <div class="container-fluid">
-            <div class="row-fluid">
-            <div class="dialog span4">
-            <div class="block">
-                    <div class="block-heading">Forget</div>
-                    <div class="block-body">
-                    <form>
-                        <label>Username</label>
-                        <input type="text" class="span12" ng-model="forgetUsername" placeholder="Username">
-                        <div class="row">
-                            <a ng-click="forget()" class="btn btn-primary pull-right">Send Password</a>
-                            <a ng-click="cancel()" class="btn btn-primary pull-right">Cancel</a> 
-                        </div><br>
-                        <div class="row">
-                            
-                        </div>
-                        <div class="clearfix"></div>
-                    </form>
-            </div>
-            </div>
-            </div>
-        </div>
-    </div>
-
-
-    <script type="text/ng-template" id="myModalContent.html">
-                <div class="modal-header">
-                    <h3 class="modal-title">Forget Password</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" heading="">Username:&emsp;</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" ng-model="username" placeholder="Username">
-                        </div>
+        <div class="auth-block" ng-show="showForget">
+            <h1>Forget Password</h1>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="forgetUsername" placeholder="Username">
                     </div>
-
                 </div>
-                <br><br>
-                <div class="modal-footer">
-                        <button class="btn btn-success" type="button" ng-click="ok()">OK</button>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                <div class="form-group row">
+                    <button ng-click="forget()" class="btn btn-default btn-auth col-md-offset-4">Send</button>
+                    <button ng-click="cancel()" class="btn btn-default btn-auth col-md-offset-2">Cancel</button>
                 </div>
-                <br><br>
-
-    </script>
-
-    <script>
-        var app = angular.module('myApp', ['ngAnimate', 'ui.bootstrap'])
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <script>
+         var app = angular.module('myApp', ['ngAnimate', 'ui.bootstrap'])
         app.controller('login', function($scope,$http,$httpParamSerializerJQLike, $uibModal,$log,dataService) 
         {
             $scope.showLogin = true
@@ -183,26 +154,33 @@
 
         
         })
-
         
     </script>
-    <script src='app/service/dataService.js'></script>
-    <style type="text/css">
-        #line-chart {
-            height:300px;
-            width:800px;
-            margin: 0px auto;
-            margin-top: 1em;
-        }
-        .brand { font-family: georgia, serif; }
-        .brand .first {
-            color: #ccc;
-            font-style: italic;
-        }
-        .brand .second {
-            color: #fff;
-            font-weight: bold;
-        }
-    </style>
+        <script src='app/service/dataService.js'></script>
+        <style type="text/css">
+            #line-chart {
+                height: 300px;
+                width: 800px;
+                margin: 0px auto;
+                margin-top: 1em;
+            }
+            
+            .brand {
+                font-family: georgia, serif;
+            }
+            
+            .brand .first {
+                color: #ccc;
+                font-style: italic;
+            }
+            
+            .brand .second {
+                color: #fff;
+                font-weight: bold;
+            }
+        </style>
+
+    </main>
 </body>
+
 </html>

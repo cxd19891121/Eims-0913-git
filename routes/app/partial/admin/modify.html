@@ -1,86 +1,77 @@
-
 <div ng-controller="modify" data-ng-init="init()">
-    <div class = "container">
-         
+    <div class="container">
+
         <h1>System Config</h1>
         <br>
         <button class="btn btn-primary" ng-click="back()">
             <span class="glyphicon glyphicon-arrow-left"></span> Back
         </button>
-        <hr>
-        <uib-accordion close-others="oneAtATime" class="table table-striped">
-            <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="true">
-                <label class="col-sm-2 control-label">baseUrl:</label>
-                    <input type="text" ng-model="config.baseUrl" size="80"><br>
-                <label class="col-sm-2 control-label">port:</label>
-                    <input type="number" ng-model="config.port" size="80"><br>
-                <div ng-repeat="(key, value) in config.database">
-                    <label class="col-sm-2 control-label">{{key}}:</label> 
-                        <input type="text" ng-model="config.database[key]" size="80"><br>
-                </div>
-            </div>
+        <table class="table table-striped">
 
-            <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="true">
-                <div ng-repeat="(key, value) in config.redis">
-                    <label class="col-sm-2 control-label">{{key}}:</label> 
-                        <input type="text" ng-model="config.redis[key]" size="80">
-                </div>
-            </div>
+            <tbody>
 
-            <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="true">
-                <div ng-repeat="(key, value) in config.session">
-                <label class="col-sm-2 control-label">{{key}}:</label> 
-                    <input type="text" ng-model="config.session[key]" size="80">
-                </div>
-            </div>
+                <hr>
+                <br><br>
+                <tr>
+                    <td rowspan="9" class="center"><strong>Database Config :</strong></td>
+                    <td>baseUrl:</td>
+                    <td><input type="text" class="form-control" ng-model="config.baseUrl" size="80"></td>
+                </tr>
+                <tr>
+                    <td>port:</td>
+                    <td><input type="number" class="form-control" ng-model="config.port" size="80"></td>
+                </tr>
+                <tr ng-repeat="(key, value) in config.database">
+                    <td>{{key}}:</td>
+                    <td><input type="text" class="form-control" ng-model="config.database[key]" size="80"></td>
+                </tr>
 
-            <div uib-accordion-group class="panel-primary" heading="Authority Config:" is-open="true">
-                <div ng-repeat="(key, value) in config.auth">
-                    <label class="col-sm-2 control-label">{{key}}:</label><br><br>
-                    <div ng-repeat="(k,v) in value">
-                        <label class="col-sm-2 control-label">{{ key }}.{{ k }}:</label> 
-                            <input type="text" ng-model="value[k]" size="80">
-                    </div>
-                </div>
-            </div>
+                <br>
+                <tr>
+                    <td> <label>Redis Config:</label></td>
+                </tr>
+                <tr ng-repeat="(key, value) in config.redis">
+                    <td>{{key}}:</td>
+                    <td><input type="text" class="form-control" ng-model="config.redis[key]" size="80"></td>
+                </tr>
 
-            <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="true">
-                <div ng-repeat="(key, value) in config.service">
-                    <div ng-repeat="(k,v) in value">
-                        <label class="col-sm-2 control-table">{{ key }}.{{ k }}:</label>
-                            <input type="text" ng-model="value[k]"  size="80">
-                    </div>
-                </div>
-            </div>
+                <tr>
+                    <td> <label>Session Config:</label></td>
+                </tr>
+                <tr ng-repeat="(key, value) in config.session">
+                    <td>{{key}}:</td>
+                    <td><input type="text" class="form-control" ng-model="config.session[key]" size="80"></td>
+                </tr>
 
+            </tbody>
+            <tbody>
+                <tr>
+                    <td> <label>Authority Config: </label></td>
+                </tr>
+            </tbody>
+            <tbody ng-repeat="(key, value) in config.auth">
 
-        </uib-accordion>
-    <!--<table class="table table-striped">
+                <tr>
+                    <td> <label>{{key}}:</label></td>
+                </tr>
+                <tr ng-repeat="(k,v) in value">
+                    <td>{{ key }}.{{ k }}:</td>
+                    <td><input type="text" class="form-control" ng-model="value[k]" size="80"> </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td><label> Service Config:</label></td>
+                </tr>
+            </tbody>
+            <tbody ng-repeat="(key, value) in config.service">
 
-        <tbody>
-
-        
-
-        
-        </tbody>
-        <tbody><tr><td> <label>Authority Config: </label></td></tr></tbody>
-        <tbody ng-repeat="(key, value) in config.auth">
-
-        <tr><td> <label>{{key}}:</label></td></tr>
-        <tr ng-repeat="(k,v) in value">
-            <td>{{ key }}.{{ k }}:</td> <td><input type="text" ng-model="value[k]" size="80"> </td>
-        </tr>
-        </tbody>
-        <tbody>
-        <tr><td><label> Service Config:</label></td></tr>
-        </tbody>
-        <tbody ng-repeat="(key, value) in config.service">
-
-            <tr ng-repeat="(k,v) in value">
-                <td>{{ key }}.{{ k }}:</td> <td><input type="text" ng-model="value[k]"  size="80"> </td>
-            </tr>
-        </tbody>
-    </table>-->
+                <tr ng-repeat="(k,v) in value">
+                    <td>{{ key }}.{{ k }}:</td>
+                    <td><input type="text" class="form-control" ng-model="value[k]" size="80"> </td>
+                </tr>
+            </tbody>
+        </table>
 
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
@@ -88,57 +79,83 @@
             <span class="glyphicon glyphicon-arrow-left"></span> Back
         </button>
         <div style="float:right">
-        <button class="btn btn-primary" ng-click="updateConfig()">
+            <button class="btn btn-primary" ng-click="updateConfig()">
             <span class="glyphicon glyphicon-pencil"></span>Update Config
         </button>
         </div>
 
-        
-    <br>
+
+        <br>
         <hr>
         <br><br>
-    
-        <uib-accordion close-others="oneAtATime" class="table table-striped">
-            <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="true">
-        
-                <label class="col-sm-2 control-label">Level name:</label>
-                    <input type="text" ng-model="newLevel.name" size="80"><br>
-                
-                <label class="col-sm-2 control-label"> Level:</label>
-                    <input type="number" ng-model="newLevel.level" size="80" readonly><br>
-            
-                <label class="col-sm-2 control-label"> Tag:</label>
-                    <input type="text" ng-model="newLevel.tag" size="80"><br>
-            
-                <label class="col-sm-2 control-label"> Operation:</label>
-                    <input type="text" ng-model="newLevel.ops" size="80"><br>
-                
-                <label class="col-sm-2 control-label"> FilePath:</label>  
-                    <input type="text" ng-model="newLevel.filePath" size="80"><br>
-                
-                <label class="col-sm-2 control-label"> Url:</label>  
-                    <input type="text" ng-model="newLevel.url" size="80"><br>
-            
-            </div>
-        </uib-accordion>
+                <uib-accordion close-others="oneAtATime" class="table table-striped">
+                    <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="true">
+                       
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">  Level name:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" ng-model="newLevel.name" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> Level:</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" ng-model="newLevel.level" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> Tag:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" ng-model="newLevel.tag" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> Operation:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" ng-model="newLevel.ops" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> FilePath:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" ng-model="newLevel.filePath" size="80">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> Url:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" ng-model="newLevel.url" size="80">
+
+                                </div>
+                            </div>
+                        </div>
+                    </uib-accordion>
 
 
 
-    <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeLevelAlert($index)">{{alert.msg}}</div>    
+                        <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')"
+                            close="closeLevelAlert($index)">{{alert.msg}}</div>
 
-    <button class="btn btn-primary" ng-click="back()">
+                        <button class="btn btn-primary" ng-click="back()">
             <span class="glyphicon glyphicon-arrow-left"></span> Back
     </button>
-    <div style="float:right">
-    <button class="btn btn-primary" ng-click="createLevel()">
+                        <div style="float:right">
+                            <button class="btn btn-primary" ng-click="createLevel()">
         <span class="glyphicon glyphicon-pencil"></span>Add level
     </button>
-    </div>    
+                        </div>
 
 
 
-        <hr>
-        <br><br>
+                        <hr>
+                        <br><br>
 
-    </div>
-</div>
+                    </div>
+            </div>

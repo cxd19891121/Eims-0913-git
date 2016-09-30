@@ -274,6 +274,28 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     }
 
+    $scope.alerts = []
+    $scope.addAlert = function(type,msg)
+    {
+        if ($scope.alerts.length == 0) $scope.alerts.push({type: type,msg: msg});
+    }
+    $scope.closeAlert = function(index)
+    {
+        $scope.alerts.splice(index, 1);
+        init();
+    }
+
+    $scope.deleteUser = function(id){
+        dataService.deleteAllById(id,function(e,o){
+            if(e){
+                $scope.addAlert('danger','Fail to delete the employee');
+            }else{
+                $scope.addAlert('success','Employee has been deleted');
+            }
+        })
+
+    }
+
     $scope.editUser = function(id)
     {        
         //console.log('id = ' + id)

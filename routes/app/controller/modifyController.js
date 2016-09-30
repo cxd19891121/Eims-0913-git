@@ -18,13 +18,10 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         url: undefined
     }
 
-    $scope.getHighest = function(array,property)
+    $scope.getHighestLevel = function(obj,property)
     {
         var highest = 0
-        for (var i = 0 ; i < array.length ; i++)
-        {
-            if (array[i].property > highest) highest = array[i].property
-        }
+        //var 
         return highest
     }
     $scope.addAlert = function(type,msg) 
@@ -95,7 +92,7 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         dataService.getConfig(function(e,o){
            $scope.config = o.data;
            console.log($scope.config)
-           $scope.getHighest($scope.config,"authority")
+           $scope.getHighestLevel($scope.config,"authority")
         })
     }
 

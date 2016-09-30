@@ -13,6 +13,10 @@ var orderDAO = require('./../DAO/order');
 var visaDAO = require('./../DAO/visa');
 var msgService = require('./../service/messageService');
 
+/* Authority Check for Every API call right before entering other service.
+* But for those complicated operation which will call dataLogicService, the auth check will be done in dataLogicService phase*/
+var auth = require('./../service/authority')
+
 router.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -21,50 +25,92 @@ router.all('*', function (req, res, next) {
     next();
 });
 
-//api for website-message:
-//get message by id
+/* api for website-message: get message by id */
 router.get('/message/:name',function(req,res){
-    msgService.getMsgByName(req,function(e,o){
-
-  //      console.log("get message:", e,o);
-        if(e){
-            res.send(e)
-        }else{
-            res.send(o);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['message']) {
+            msgService.getMsgByName(req,function(e,o){
+                if(e){
+                    res.send(e)
+                }else{
+                    res.send(o);
+                }
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
         }
     })
+
 })
 //send website-message to multi user:
 router.post('/message/',function(req,res){
-    msgService.sendMsg(req,function(e,o){
-        if(e){
-            res.send(e);
-        }else{
-            res.send(o);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['message']) {
+            msgService.sendMsg(req,function(e,o){
+                if(e){
+                    res.send(e);
+                }else{
+                    res.send(o);
+                }
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
         }
     })
 })
 
 router.put('/message/:name',function(req,res){
-    msgService.updateMsgByName(req,function(e,o){
-        if(e){
-            res.send(e)
-        }else{
-            res.send(o);
+
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['message']) {
+            msgService.updateMsgByName(req,function(e,o){
+                if(e){
+                    res.send(e)
+                }else{
+                    res.send(o);
+                }
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
         }
     })
+
+
 })
 
 router.delete('/message/all/:name',function(req,res){
 
-    msgService.deleteAllMessage(req,function(e,o){
-
-        if(e){
-            res.send(e)
-        }else{
-            res.send(o)
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['message']) {
+            msgService.deleteAllMessage(req,function(e,o){
+                if(e){
+                    res.send(e)
+                }else{
+                    res.send(o)
+                }
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
         }
     })
+
+
 })
 
 router.get('/all/:id', function (req, res) {
@@ -141,39 +187,120 @@ router.get('/all',function(req,res){
 
 //GET for all config
 router.get('/config',function(req,res){
-    dtService.getConfig(function(o){
-        console.log(o);
-        res.send(o);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
     })
+
 })
 
 router.get('/config/database',function(req,res){
-    dtService.getConfig(function(o){
-        res.send(o.database);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o.database);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
     })
 })
 
 router.get('/config/session',function(req,res){
-    dtService.getConfig(function(o){
-        res.send(o.session);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o.session);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
     })
 })
 
 router.get('/config/redis',function(req,res){
-    dtService.getConfig(function(o){
-        res.send(o.redis);
+
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o.redis);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
     })
+
 })
 
 router.get('/config/auth',function(req,res){
-    dtService.getConfig(function(o){
-        res.send(o.auth);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o.auth);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
     })
+
 })
 
 router.get('/config/filePath',function(req,res){
-    dtService.getConfig(function(o){
-        res.send(o.filePathList);
+
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o.filePathList);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
+    })
+
+})
+
+router.get('/config/operation',function(req,res){
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.getConfig(function(o){
+                res.send(o.operationList);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
     })
 })
 
@@ -181,14 +308,24 @@ router.get('/config/filePath',function(req,res){
 
 
 router.put('/config',function(req,res){
-    dtService.writeConfig(req.body['config'],function(e,o){
-        if(e){
-            res.send(e)
-        }else{
-            res.send(o);
-        }
-    });
 
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['setting']) {
+            dtService.writeConfig(req.body['config'],function(e,o){
+                if(e){
+                    res.send(e)
+                }else{
+                    res.send(o);
+                }
+            });
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            res.send(error);
+        }
+    })
 })
 
 

@@ -50,10 +50,9 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
                 {country: 'China', toString: 'China (+86)'},
                 {country: 'USA', toString: 'USA (+1)'}
             ],
-            cPhoneFP:'',
-            cPhoneSP:'',
-            cPhoneThird:'',
-            ssnStatus: false,
+            chinesePhone: false,
+            chineseHomePhone: false,
+
         },
     }
 
@@ -64,6 +63,7 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
         order:{},
         visa:{},
     }
+
 
 
     //autoFill();

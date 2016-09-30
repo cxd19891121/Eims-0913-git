@@ -40,59 +40,54 @@ var normalizeMsg = {
 }
 
 // get all the website-message by username.
-exports.getMsgByName = function(req,callback){
+exports.getMsgByName = function (req, callback) {
     var name = req.params['name'];
     console.log(name);
 
-    client.get(name,function(e,o){
+    client.get(name, function (e, o) {
         console.log(o)
-        if(o == null || o == ''){
+        if (o == null || o == '') {
             callback({errMsg: "0 message"})
-        }else {
+        } else {
 
             callback(null, JSON.parse(o));
         }
     });
 }
 
-exports.updateMsgByName = function(req,callback){
+exports.updateMsgByName = function (req, callback) {
     var msgArr = req.body['message'];
     var name = req.params['name'];
-    console.log('update msg', msgArr);
 
-    client.set(name,JSON.stringify(msgArr),function(e,o){
-        callback(e,{msg: o});
+    client.set(name, JSON.stringify(msgArr), function (e, o) {
+        callback(e, {msg: o});
     })
-
-
 }
 
-exports.sendMsg = function(req,callback){
+exports.sendMsg = function (req, callback) {
     var msgMulti = req.body['message'];
-
-
-    msgMulti.forEach(function(msg,index){
-       // console.log('for each msg: ', msg);
-        client.get(msg.to,function(e,o){
+    msgMulti.forEach(function (msg, index) {
+        // console.log('for each msg: ', msg);
+        client.get(msg.to, function (e, o) {
             // console.log("o"+index+ ":",o);
             // console.log("msg"+index +":",msg);
-            if(e){
+            if (e) {
                 callback(e);
                 return;
 
-            }else{
+            } else {
                 var msgArr = []
-                if(o == null || o == "") {
+                if (o == null || o == "") {
                     msgArr = [];
-                }else{
+                } else {
 
                     msgArr = JSON.parse(o);
                 }
 
                 msgArr.push(msg);
-         //       console.log('msgArr',msgArr);
-                client.set(msg.to,JSON.stringify(msgArr),function(e,o){
-                    if(e){
+                //       console.log('msgArr',msgArr);
+                client.set(msg.to, JSON.stringify(msgArr), function (e, o) {
+                    if (e) {
                         callback(e);
                         return;
                     }
@@ -100,21 +95,16 @@ exports.sendMsg = function(req,callback){
             }
         })
     })
-    callback(null,{msg: 'All messages have been send'});
-
+    callback(null, {msg: 'All messages have been send'});
 }
 
-exports.deleteAllMessage = function(req,callback){
-
+exports.deleteAllMessage = function (req, callback) {
     var name = req.params['name'];
     console.log(name);
-    client.set(name,"",function(e,o){
-        callback(e,{msg:o});
+    client.set(name, "", function (e, o) {
+        callback(e, {msg: o});
     });
-
 }
-
-
 
 //check auth and send back the correct client.
 exports.reach = function (req, callback) {
@@ -158,28 +148,28 @@ exports.mail = function (req, callback) {
     })
 }
 
-exports.getAllUser = function(req,callback){
-
+exports.getAllUser = function (req, callback) {
     auth.authCheck(req, function (authObj) {
-        if (authObj.level == 0) {
-            dtService.getAllUser(function(e,o){
-                callback(e,o);
+        var getAllUser = authObj.ops["getAllUser"];
+        var getAllUsername = authObj.ops["getAllUsername"];
+        if (getAllUser) {
+            dtService.getAllUser(function (e, o) {
+                callback(e, o);
             })
 
-        } else if (authObj.level > 0) {
-            dtService.getAllUsername(function(e,o){
-                callback(e,o);
+        } else if (getAllUsername) {
+            dtService.getAllUsername(function (e, o) {
+                callback(e, o);
             })
         } else {
             var error = {
-                msg: 'No session find, please login first',
-                type: 'no session'
+                msg: "Higher level need for request.",
+                type: "level error"
             }
             callback(error);
         }
     })
 }
-
 
 
 //login service: check validation of username and password, check the authority, send the right html file back.
@@ -210,67 +200,89 @@ exports.login = function (req, callback) {
         else if (o.rows[0].password == password) {
 
             req.session.user = o.rows[0];
-            console.log(req.session.user);
-            //check auth.( authObj: level, ops, tag, filePath.)
             auth.authCheck(req, function (authObj) {
                 callback(null, authObj.fileName);
             })
         }
         else {
             callback({error: "error", msg: 'unknown error'});
-        };
+        }
+        ;
     })
 }
 
 //logout: clear session.
 exports.logout = function (req, callback) {
-    console.log('in logout dt service')
+
     req.session.user = null;
-    auth.authCheck(req,function(authObj){
-        console.log(authObj);
+    auth.authCheck(req, function (authObj) {
         callback(authObj.fileName);
     })
 }
 
 //refresh all the file.
-exports.backToIndex = function(req,callback){
-    auth.authCheck(req,function(authObj){
+exports.backToIndex = function (req, callback) {
+    auth.authCheck(req, function (authObj) {
         callback(authObj.fileName);
     })
 }
 
 //get all data into an array.
 exports.getAllBySql = function (callback) {
-    search.getAll(function (e, o) {
-        callback(e, o);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['search']) {
+            search.getAll(function (e, o) {
+                callback(e, o);
+            })
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            callback(error);
+        }
     })
 }
 
 //get all data into an object
 exports.getAllTable = function (callback) {
-    dtService.getAll(userDAO, function (e, o) {
-        repMsgService.buildGetAllMsg(repMsgGroup.user, 'user_info', e, o);
 
-        dtService.getAll(empDAO, function (e, o) {
-            repMsgService.buildGetAllMsg(repMsgGroup.emp, 'emp_info', e, o);
-            dtService.getAll(workDAO, function (e, o) {
-                repMsgService.buildGetAllMsg(repMsgGroup.work, 'work_info', e, o);
+    auth.authCheck(req, function (authObj) {
+        if (authObj.ops['search']) {
 
-                dtService.getAll(visaDAO, function (e, o) {
-                    repMsgService.buildGetAllMsg(repMsgGroup.visa, 'visa_info', e, o);
+            dtService.getAll(userDAO, function (e, o) {
+                repMsgService.buildGetAllMsg(repMsgGroup.user, 'user_info', e, o);
 
-                    dtService.getAll(orderDAO, function (e, o) {
-                        repMsgService.buildGetAllMsg(repMsgGroup.order, 'order_info', e, o);
+                dtService.getAll(empDAO, function (e, o) {
+                    repMsgService.buildGetAllMsg(repMsgGroup.emp, 'emp_info', e, o);
+                    dtService.getAll(workDAO, function (e, o) {
+                        repMsgService.buildGetAllMsg(repMsgGroup.work, 'work_info', e, o);
 
-                        dtService.getAll(eduDAO, function (e, o) {
-                            repMsgService.buildGetAllMsg(repMsgGroup.edu, 'education_info', e, o);
-                            callback(repMsgGroup);
+                        dtService.getAll(visaDAO, function (e, o) {
+                            repMsgService.buildGetAllMsg(repMsgGroup.visa, 'visa_info', e, o);
+
+                            dtService.getAll(orderDAO, function (e, o) {
+                                repMsgService.buildGetAllMsg(repMsgGroup.order, 'order_info', e, o);
+
+                                dtService.getAll(eduDAO, function (e, o) {
+                                    repMsgService.buildGetAllMsg(repMsgGroup.edu, 'education_info', e, o);
+                                    callback(repMsgGroup);
+                                })
+                            })
                         })
                     })
                 })
             })
-        })
+
+        } else {
+            var error = {
+                msg: "Higher level need for request.",
+                type: "level error"
+            }
+            callback(error);
+        }
     })
+
 
 }
 
@@ -279,13 +291,7 @@ exports.addAll = function (req, callback) {
 
     // check the authority
     auth.authCheck(req, function (authObj) {
-        if (authObj.level < 0) {
-            var error = {
-                msg: 'No session find, please login first',
-                type: 'no session'
-            }
-            callback(error);
-        } else if (authObj.level > 0) {
+        if (authObj.ops["addEmp"] == undefined || !authObj.ops["addEmp"]) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"
@@ -346,10 +352,10 @@ exports.getAllById = function (req, callback) {
     var id = req.params['id'];
 
     auth.authCheck(req, function (authObj) {
-        if (authObj.level < 0) {
+        if (authObj.ops["search"] == undefined || !authObj.ops["search"] ) {
             var error = {
-                msg: 'No session find. please login first',
-                type: 'no session'
+                msg: "Higher level need for request.",
+                type: "level error"
             }
             callback(error);
         } else {
@@ -388,16 +394,9 @@ exports.updateAllById = function (req, callback) {
     validation.orderValidate(req.body['order']);
     validation.visaValidate(req.body['visa']);
 
-    console.log("after validation: ",req.body);
     //check the authority
     auth.authCheck(req, function (authObj) {
-        if (authObj.level < 0) {
-            var error = {
-                msg: 'No session find, please login first',
-                type: 'no session'
-            }
-            callback(error);
-        } else if (authObj.level > 0) {
+       if (authObj.ops["editEmp"] == undefined || !authObj.ops["editEmp"]) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"
@@ -420,7 +419,7 @@ exports.updateAllById = function (req, callback) {
 
                             dtService.updateElementByEId(eduDAO, id, req.body['edu'], function (e, o) {
                                 repMsgService.buildUpdateMsg(repMsgGroup.edu, 'education_info', e, o);
-                                console.log("return msg:",repMsgGroup);
+                                console.log("return msg:", repMsgGroup);
                                 callback(null, repMsgGroup);
                             })
                         })
@@ -437,13 +436,7 @@ exports.deleteAllById = function (req, callback) {
 
     //check authority
     auth.authCheck(req, function (authObj) {
-        if (authObj.level < 0) {
-            var error = {
-                msg: 'No session find, please login first',
-                type: 'no session'
-            }
-            callback(error);
-        } else if (authObj.level >0) {
+        if (authObj.ops["delEmp"] == undefined || !authObj.ops["delEmp"]) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"
@@ -484,13 +477,7 @@ exports.undoDeleteAllById = function (req, callback) {
 
     //check authority
     auth.authCheck(req, function (authObj) {
-        if (authObj.level < 0) {
-            var error = {
-                msg: 'No session find, please login first',
-                type: 'no session'
-            }
-            callback(error);
-        } else if (authObj.level >0) {
+        if (authObj.ops["recEmp"] == undefined || !authObj.ops["recEmp"]) {
             var error = {
                 msg: "Higher level need for request.",
                 type: "level error"

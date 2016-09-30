@@ -314,12 +314,18 @@
                                 <Strong> Contact Info</Strong>
                             </uib-tab-heading>
 
+                            {{cTab.hphone.$valid}}
+                            {{cTab.email.$valid}}
+                            {{cTab.cphone.$valid}}
+                            {{cTab.cphone2.$valid}}
+
+
                             <form name ="cTab" class="form-horizontal" role="form" novalidate >
                                 <br>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">E-mail:</label>
                                     <div class="col-sm-5">
-                                        <input name = "email" placeholder="xxx@gmail.com" ng-required = "addNewEmployee.contactInfo" ng-model = "vm.data.emp.email" class="form-control" ng-blur="setProgress()">
+                                        <input name = "email" placeholder="xxx@gmail.com" ng-required = "addNewEmployee.contactInfo" ng-model = "vm.data.emp.email" class="form-control" ng-blur="setProgress()" type = "email">
                                         <div class="help-block" ng-messages="cTab.email.$error" ng-show="cTab.email.$touched">
                                             <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
                                             <small ng-message = "email" class = "text-danger">Invalid Email </small>
@@ -330,15 +336,15 @@
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Cell-Phone:</label>
-                                    <div class = "col-sm-2">
-                                        <div class="checkbox">
-                                            <label class = 'control-label'>
-                                                <input  type="checkbox" ng-model = "vm.data.other.chinesePhone"> Chinese Phone
-                                            </label>
-                                        </div>
-                                    </div>
+                                    <!--<div class = "col-sm-2">-->
+                                        <!--<div class="checkbox">-->
+                                            <!--<label class = 'control-label'>-->
+                                                <!--<input  type="checkbox" ng-model = "vm.data.other.chinesePhone"> Chinese Phone-->
+                                            <!--</label>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                     <div class="col-sm-2" ng-show = "!(vm.data.other.chinesePhone)">
-                                       <input name = "cphone" ng-required = "addNewEmployee.contactInfo && vm.data.other.USAphone" ng-model = 'vm.data.emp.cPhone' class="form-control" type = 'number' maxlength="10" minlength="10" ng-blur="setProgress()" placeholder="5157081111">
+                                       <input name = "cphone" ng-required = "addNewEmployee.contactInfo && !(vm.data.other.chinesePhone)" ng-model = 'vm.data.emp.cPhone' class="form-control" type = 'number' maxlength="10" minlength="10" ng-blur="setProgress()" placeholder="5157081111">
                                         <div class="help-block" ng-messages="cTab.cphone.$error" ng-show="cTab.cphone.$touched">
                                             <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
                                             <small ng-message="number" class = "text-danger">Phone number must be 10 digit</small>
@@ -346,15 +352,15 @@
                                             <small ng-message="minlength" class = "text-danger">Phone number must be 10 digit</small>
                                         </div>
                                     </div>
-                                    <div class = "col-sm-3" ng-show = "(vm.data.other.chinesePhone)">
+                                    <div class = "col-sm-2" ng-show = "(vm.data.other.chinesePhone)">
 
-                                        <input  name = "cphone2" ng-required = "addNewEmployee.contactInfo && !vm.data.other.USAphone" ng-model = 'vm.data.emp.cPhone' class="form-control" type = 'number' maxlength="11" minlength="11" ng-blur="setProgress()" placeholder="13506666777">
-                                        <div class="help-block" ng-messages="cTab.cphone2.$error" ng-show="cTab.cphone2.$touched">
-                                            <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
-                                            <small ng-message="number" class = "text-danger">Phone number must be 11 digit</small>
-                                            <small ng-message="maxlength" class = "text-danger">Phone number must be 11 digit</small>
-                                            <small ng-message="minlength" class = "text-danger">Phone number must be 11 digit</small>
-                                        </div>
+                                        <!--<input  name = "cphone2" ng-required = "addNewEmployee.contactInfo && vm.data.other.chinesePhone" ng-model = 'vm.data.emp.cPhone' class="form-control" type = 'number' maxlength="11" minlength="11" ng-blur="setProgress()" placeholder="13506666777">-->
+                                        <!--<div class="help-block" ng-messages="cTab.cphone2.$error" ng-show="cTab.cphone2.$touched">-->
+                                            <!--<small ng-message="required" class = "text-danger">You cannot leave this empty</small>-->
+                                            <!--<small ng-message="number" class = "text-danger">Phone number must be 11 digit</small>-->
+                                            <!--<small ng-message="maxlength" class = "text-danger">Phone number must be 11 digit</small>-->
+                                            <!--<small ng-message="minlength" class = "text-danger">Phone number must be 11 digit</small>-->
+                                        <!--</div>-->
 
                                     </div>
                                 </div>
@@ -548,7 +554,7 @@
                                     <label class="col-sm-2 control-label">State:</label>
 
                                     <div class="col-sm-2">
-                                        <select ng-model = 'vm.data.emp.bState' ng-required = "addNewEmployee.address" class="form-control">
+                                        <select ng-model = 'vm.data.emp.bState' class="form-control">
                                             <option value="AL">Alabama</option>
                                             <option value="AK">Alaska</option>
                                             <option value="AZ">Arizona</option>
@@ -602,9 +608,6 @@
                                             <option value="WY">Wyoming</option>
                                         </select>
 
-                                        <div class="help-block" ng-messages="adTab.pState.$error" ng-show="adTab.pState.$touched">
-                                            <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
-                                        </div>
                                     </div>
 
 

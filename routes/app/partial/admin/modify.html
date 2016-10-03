@@ -82,9 +82,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"> saveUninitialized:</label>
                             <div class="col-sm-4">
-                                <div class="switch switch-large">
-                                    <input type="checkbox" ng-model="config.session.saveUninitialized" />
-                                </div>
+                            
                                 <div class="btn-group">
                                     <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized==true , 'btn btn-default': config.session.saveUninitialized!=true}" uib-btn-radio="true" ng-model="config.session.saveUninitialized" uncheckable>Open </button>
                                     <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized!=true , 'btn btn-default': config.session.saveUninitialized==true}" uib-btn-radio="false" ng-model="config.session.saveUninitialized" uncheckable>Close </button>

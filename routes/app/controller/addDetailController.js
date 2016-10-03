@@ -51,9 +51,9 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
                 {country: 'USA', toString: 'USA (+1)'}
             ],
             chinesePhone: false,
-            chineseHomePhone: false,
+            chineseHomePhone: false
 
-        },
+        }
     }
 
     vm.err = {
@@ -62,6 +62,27 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
         edu:{},
         order:{},
         visa:{},
+    }
+
+    vm.tabValidate = {
+        pTab:false,
+        oTab:false,
+        cTab:false,
+        adTab:false,
+        vTab:false,
+        tTab:false,
+        jTab:false,
+        sTab:false,
+    }
+    vm.tabVerify = function(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab){
+        vm.tabValidate.pTab = pTab;
+        vm.tabValidate.oTab = oTab;
+        vm.tabValidate.cTab = cTab;
+        vm.tabValidate.adTab = adTab;
+        vm.tabValidate.vTab = vTab;
+        vm.tabValidate.tTab = tTab;
+        vm.tabValidate.jTab = jTab;
+        vm.tabValidate.sTab = sTab;
     }
 
 
@@ -149,17 +170,20 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
 
 
     vm.insertData = function(){
-        vm.data.emp.progress = $scope.progressValue;
-        //getCellPhone(vm.data.other.cPhoneLocation,[vm.data.other.cPhoneFP,vm.data.other.cPhoneSP,vm.data.other.cPhoneThird]);
 
-        dataService.addAll(vm.data,function(e,o){
-            if(e){
-                vm.message = e;
-            }else{
-                vm.message = o;
-            }
-           // dataService.backToIndex();
-        });
+
+        if(vm.tabValidate.pTab && vm.tabValidate.oTab && vm.tabValidate.cTab && vm.tabValidate.adTab &&
+        vm.tabValidate.vTab && vm.tabValidate.tTab && vm.tabValidate.jTab && vm.tabValidate.sTab) {
+            vm.data.emp.progress = $scope.progressValue;
+            dataService.addAll(vm.data, function (e, o) {
+                if (e) {
+                    vm.message = e;
+                } else {
+                    vm.message = o;
+                }
+                // dataService.backToIndex();
+            });
+        }
     }
 
     vm.back= function(){

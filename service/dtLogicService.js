@@ -315,6 +315,12 @@ exports.addAll = function (req, callback) {
                         req.body['order'].eid = empId;
                         req.body['visa'].eid = empId;
 
+                        req.body['emp'].delete_flag = false;
+                        req.body['work'].delete_flag = false;
+                        req.body['edu'].delete_flag = false;
+                        req.body['order'].delete_flag = false;
+                        req.body['visa'].delete_flag = false;
+
                         validation.eduValidate(req.body['edu']);
                         validation.workValidate(req.body['work']);
                         validation.orderValidate(req.body['order']);

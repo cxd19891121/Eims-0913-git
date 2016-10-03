@@ -22,6 +22,8 @@ router.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("Content-Type", "application/json;charset=utf-8");
+
+    console.log('checkSession: ',req.session.user);
     next();
 });
 
@@ -167,7 +169,7 @@ router.delete('/all/undo/:id',function(req,res){
 })
 
 router.get('/all',function(req,res){
-    dtLogicService.getAllBySql(function(e,o){
+    dtLogicService.getAllBySql(req,function(e,o){
         if(e){
             res.send(e);
        }else {

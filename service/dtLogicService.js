@@ -200,6 +200,7 @@ exports.login = function (req, callback) {
         else if (o.rows[0].password == password) {
 
             req.session.user = o.rows[0];
+          //  console.log("login",req.session.user.level);
             auth.authCheck(req, function (authObj) {
                 callback(null, authObj.fileName);
             })
@@ -228,7 +229,8 @@ exports.backToIndex = function (req, callback) {
 }
 
 //get all data into an array.
-exports.getAllBySql = function (callback) {
+exports.getAllBySql = function (req,callback) {
+    console.log("getAllBySql",req.session);
     auth.authCheck(req, function (authObj) {
         if (authObj.ops['search']) {
             search.getAll(function (e, o) {

@@ -4,6 +4,8 @@
 var redis = require('redis');
 var config = require('./../config/appConfig');
 
-var client = redis.createClient(config.redis.client);
 
+
+var client = redis.createClient(config.redis.client);
+//console.log('redis connection:',client);
 module.exports = client;

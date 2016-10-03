@@ -8,14 +8,15 @@ exports.authCheck = function(req,callback) {
     var noSession = authArray[0];
     var user = authArray[1];
     var admin = authArray[2];
+    console.log("req.session",req.session);
 
-    if(!req.session.user){
+    if(req.session.user == undefined){
 
         callback(noSession);
     }
 
     else if (req.session.user) {
-
+        console.log(req.session.user);
         var level = req.session.user.level;
         if (level == user.level) {
             callback(user);

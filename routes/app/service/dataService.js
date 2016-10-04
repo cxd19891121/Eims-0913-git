@@ -506,18 +506,18 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             console.log(data);
 
             if(data.msg){
-                alert('fail to insert data');
+               // alert('fail to insert data');
                 callback(data);
             }else {
                 var data = data.data;
-                alert("New Employee Info Added");
+                // alert("New Employee Info Added");
                 window.history.back();
                 callback(null, data)
             }
         }, function errorCallback(data) {
             console.log("in error callback");
             console.log(data);
-            alert("fail to add user");
+            //alert("fail to add user");
             callback(data);
         });
     }
@@ -535,13 +535,13 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         }).success(function successCallback(e,data) {
             console.log("in sucess callback");
             console.log(data);
-            alert('user has been updated');
+           // alert('user has been updated');
             window.location.href= url;
             callback(null, data)
         }, function errorCallback(data) {
             console.log("in error callback");
             console.log(data);
-            alert(data);
+           // alert(data);
             callback(data);
         });
         callback(null, 'done')

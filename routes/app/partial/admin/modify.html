@@ -1,6 +1,7 @@
+<!--This page was been used to modify the system configuration. It all user to change the system config, database config, cache config , session config, service config and authority config-->
+<!--It also allow user to add new level and change the authority of this level -->
 <div ng-controller="modify" data-ng-init="init()">
     <div class="container">
-
         <h1>System Config</h1>
         <br>
         <div class="row">
@@ -12,8 +13,10 @@
         <br>
 
         <div class="row">
+          
             <uib-accordion close-others="oneAtATime" class="table table-striped">
 
+                <!--System config's panel-->
                 <div uib-accordion-group class="panel-primary" heading="System Config:" is-open="true">
                     <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.url">
                         <div class="form-group">
@@ -25,6 +28,7 @@
                     </form>
                 </div>
 
+                <!--Database config's panel-->
                 <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="true">
                     <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.database">
                         <div class="form-group">
@@ -36,6 +40,7 @@
                     </form>
                 </div>
 
+                <!--Redis cache config's panel-->
                 <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="true">
                     <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.redis">
                         <div class="form-group">
@@ -47,6 +52,7 @@
                     </form>
                 </div>
 
+                <!--Session's panel-->
                 <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="true">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
@@ -94,6 +100,7 @@
                     </form>
                 </div>
 
+                <!--Service's panel-->
                 <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="true">
                     <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.service">
                         <div ng-repeat="(k,v) in value">
@@ -107,6 +114,7 @@
                     </form>
                 </div>
 
+                <!--User's authority's config panel-->
                 <div ng-repeat="user in config.auth">
                     <div uib-accordion-group class="panel-primary" is-open="true">
                         <form class="form-horizontal" role="form">

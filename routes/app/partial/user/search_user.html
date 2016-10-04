@@ -1,3 +1,6 @@
+<!--This page was the main page of the EIMS system. Administrator will use this HTML to search and manage the user's information-->
+<!---->
+
 <style>
 .search_popover {
     max-width: 800px; /* optional max width */
@@ -27,9 +30,10 @@
             </div>
             <br><br><br>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        </form>
 
 
-
+            <!--Advance search popover which will display all the advance search information and a Deepsearch button-->
             <script type="text/ng-template" id="advanceSearch.html">
                 <div class="row">
                     <label class="col-sm-2 control-label">First name:</label>
@@ -115,8 +119,9 @@
                 </div>
             </script>
     </div>
+    </div>
 
-
+    <!--Edit table and filter-->
     <div class="row" ng-controller="edit">
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <div>
@@ -129,9 +134,6 @@
              <button uib-popover="display completed Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(complete)">
                 <span class="glyphicon "></span> Complete
              </button> 
-            <!--<button class="btn btn-primary " type="button" ng-click="changeUser(all)">All</button>
-            <button class="btn btn-primary " type="button" ng-click="changeUser(incomplete)">Incomplete</button>
-            <button class="btn btn-primary " type="button" ng-click="changeUser(complete)">Completed</button>-->
             <div style="float:right">
             <div class="btn-group" uib-dropdown keyboard-nav>
                 <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
@@ -144,20 +146,15 @@
                 </ul>
             </div>
             </div>
-
-
         </div>
         <div ng-show="displayDownload">
             <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
             <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
         </div>
-
-
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
-
                     <th><a href="" ng-click="order('e_id')">Employee Id</a></th>
                     <th><a href="" ng-click="order('first_name')">Name</a></th>
                     <th><a href="" ng-click="order('status')">Visa Status</a></th>
@@ -175,9 +172,18 @@
                     <td>{{ user.end_time }}</td>
                     <td>{{ user.job_title }}</td>
                     <td>
-                        <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
-                            <span class="glyphicon glyphicon-pencil"></span>Detail
+
+                        <button class="btn btn-primary" ng-click="editUser(user.e_id)">
+                    <span class="glyphicon glyphicon-pencil"></span>Edit
+                </button>
+
+                        <button class="btn btn-primary" ng-click="deleteUser(user.e_id)">
+                            <span class="glyphicon glyphicon-pencil"></span>Delete
                         </button>
+
+                        <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
+                    <span class="glyphicon glyphicon-pencil"></span>Detail
+                </button>
                     </td>
                 </tr>
             </tbody>

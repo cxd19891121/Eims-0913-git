@@ -7,6 +7,7 @@
 }
 </style>
 <div class="container">
+    <div class="section-block">
     <div class="row">
     <form class="form-horizontal" ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
@@ -107,9 +108,11 @@
                         <input type="number" placeholder="Max payraise" ng-model="searchObject['payraise_end']">
                     </div>
                 </div>
-                <button class="btn btn-default " ng-click="deepSearch()">
-                    <span class="glyphicon glyphicon-search"></span> DeepSearch
-                </button>
+                <div style="float:right">
+                    <button class="btn btn-default " ng-click="deepSearch()">
+                        <span class="glyphicon glyphicon-search"></span> DeepSearch
+                    </button>
+                </div>
             </script>
     </div>
 
@@ -129,9 +132,18 @@
     <div class="row" ng-controller="edit">
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <div>
-            <button class="btn btn-primary " type="button" ng-click="changeUser(all)">All</button>
+            <button uib-popover="display all Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(all)">
+                <span class="glyphicon "></span> All
+             </button>
+             <button uib-popover="display incompleted Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(incomplete)">
+                <span class="glyphicon "></span> Incomplete
+             </button>
+             <button uib-popover="display completed Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(complete)">
+                <span class="glyphicon "></span> Complete
+             </button> 
+            <!--<button class="btn btn-primary " type="button" ng-click="changeUser(all)">All</button>
             <button class="btn btn-primary " type="button" ng-click="changeUser(incomplete)">Incomplete</button>
-            <button class="btn btn-primary " type="button" ng-click="changeUser(complete)">Completed</button>
+            <button class="btn btn-primary " type="button" ng-click="changeUser(complete)">Completed</button>-->
             <div style="float:right">
             <div class="btn-group" uib-dropdown keyboard-nav>
                 <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
@@ -337,4 +349,5 @@
             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
         </div>
     </script>
+    </div>
 

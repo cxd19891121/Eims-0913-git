@@ -92,6 +92,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
             {
                 //console.log(1)
                 $scope.users = $scope.allUsers
+                $scope.totalItems = $scope.users.length
                 return
             }
             case $scope.complete: 
@@ -101,6 +102,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
                 {
                     return element.progress == 100
                 })
+                $scope.totalItems = $scope.users.length
                 return 
             }
             case $scope.incomplete:
@@ -110,6 +112,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
                 {
                     return element.progress != 100
                 })
+                $scope.totalItems = $scope.users.length
                 return
             }
         }

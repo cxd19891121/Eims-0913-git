@@ -20,7 +20,7 @@
 <script src="https://rawgit.com/gilf/ngPrint/master/ngPrint.min.js"></script>
 <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.js"></script>
-
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-switch.css">
 <!--<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-responsive.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
@@ -37,17 +37,17 @@
         <div class="navbar-right text-success">
             Hello <em class="text-info">{{username}}</em>
 
-            <button uib-popover="read messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
+            <button uib-popover="Read Messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
                 Messages<span class="badge">{{letterNum}}</span>
             </button>
 
-            <button uib-popover="send message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
+            <button uib-popover="Send Message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
             </button>
             <!--<button  class="btn btn-primary" ng-click="searchConfig()">
                 <span class="glyphicon glyphicon-search"></span> Search
             </button>-->
 
-            <button uib-popover="setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">
+            <button uib-popover="Setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">
                 <span class="glyphicon glyphicon-off"></span>
             </button>
 
@@ -55,7 +55,7 @@
                 <span class="glyphicon glyphicon-briefcase"></span>
             </button>
 
-            <button uib-popover="logout" popover-placement="left-bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="logout()">
+            <button uib-popover="Logout" popover-placement="left-bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="logout()">
                 <span class="glyphicon glyphicon-log-out"></span>
             </button> &nbsp;&nbsp; &nbsp;&nbsp;
         </div>
@@ -63,6 +63,7 @@
    <br>
    <br>
    <br>
+   <br><br>
     <script type="text/ng-template" id="message.html">
         <div class="modal-header">
             <h3 class="modal-title">Message</h3>

@@ -229,9 +229,13 @@ exports.backToIndex = function (req, callback) {
 }
 
 //get all data into an array.
+
 exports.getAllBySql = function (req,callback) {
     console.log("getAllBySql",req.session);
+
+
     auth.authCheck(req, function (authObj) {
+        console.log(3)
         if (authObj.ops['search']) {
             search.getAll(function (e, o) {
                 callback(e, o);

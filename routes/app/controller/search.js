@@ -4,7 +4,16 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
         $scope.popup[id] = true;
     }
-    $scope.displayAdvanceSearch = false
+    $scope.popover = 
+    {
+        open: false
+    }
+    
+
+    $scope.toggle = function()
+    {
+        $scope.displayAdvanceSearch = !$scope.displayAdvanceSearch
+    }
     $scope.popup = 
     {
         opened: false
@@ -69,10 +78,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     $scope.deepSearch = function()
     {
 
-        console.log($scope.displayAdvanceSearch)
-    
-        $scope.displayAdvanceSearch = false
-        console.log($scope.displayAdvanceSearch)
+        $scope.popover.open = false
         
         dataService.search($scope.searchObject,function(data)
         {

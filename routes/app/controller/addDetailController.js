@@ -6,6 +6,28 @@
 app.controller('addDetailController', ['$scope','dataService', function ($scope, dataService) {
     var vm = this;
 
+    $scope.alert = {
+        good: "New User Added",
+        fail:"Add Fail",
+    }
+    $scope.goodAdd = false;
+    $scope.failAdd = false;
+
+
+    $scope.alerts = []
+    $scope.addAlert = function() {
+        $scope.alerts.push({type:'success',msg: 'Success add!'});
+    };
+
+    $scope.addFailAlert = function(){
+        $scope.alerts.push({type:"danger",msg:"fail to add"});
+    }
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
+
+
     $scope.open = function(id) 
     {
         $scope.popup[id] = true;
@@ -171,15 +193,18 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
 
     vm.insertData = function(){
 
-
         if(vm.tabValidate.pTab && vm.tabValidate.oTab && vm.tabValidate.cTab && vm.tabValidate.adTab &&
         vm.tabValidate.vTab && vm.tabValidate.tTab && vm.tabValidate.jTab && vm.tabValidate.sTab) {
             vm.data.emp.progress = $scope.progressValue;
             dataService.addAll(vm.data, function (e, o) {
                 if (e) {
                     vm.message = e;
+                    $scope.addFailAlert();
+
+
                 } else {
                     vm.message = o;
+                    $scope.addAlert();
                 }
                 // dataService.backToIndex();
             });
@@ -243,8 +268,8 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
             },
             termination:
             {
-         //       t_data : vm.data.emp.tDate,
-          //      t_reason : vm.data.emp.tReason
+                t_data : vm.data.emp.tDate,
+                t_reason : vm.data.emp.tReason
             },
             jobEducation:
             {

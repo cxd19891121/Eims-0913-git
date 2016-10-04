@@ -73,6 +73,7 @@
     <div class = "container" ng-controller="addDetailController as vm" ng-show="addDetail">
         <h3>Add html</h3>
         <pre> Please input employee information here: </pre><hr>
+        <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
         <div class="row">
             <div class="col-sm-12"><uib-progressbar value="progressValue" class="progress-striped" >{{progressValue}}%</uib-progressbar></div>

@@ -12,23 +12,26 @@
 <div class="container">
     <div class="section-block">
     <div class="row">
-    <form class="form-horizontal" ng-controller="search" role="form">
+    <form class="form-horizontal form-inline " ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
-            <div class="form-inline ">
+            <div>
                 <label class="col-sm-2 control-label">Employee Name:&emsp;</label>
                 <div class="col-md-4">
-                    <div class="input-group">
-                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
-                        <div class="input-group-btn">
+                    <div class="input-group" role="group">
+                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name"></input>
+                        <div class="input-group-btn" role="group">
+                            <div class="btn-group" role="group">
+                                <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open"
+                                    type="button" class="btn btn-default " popover-class="search_popover" tabindex="-1"><span class="caret"></span></button>
 
-                             <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open" type="button" class="btn btn-default" tabindex="-1" popover-class="search_popover"><span class="caret"></span></button>
-                                                     
-                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
+                                <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <br><br><br>
+        </uib-accordion>
+    </form>
             <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
 

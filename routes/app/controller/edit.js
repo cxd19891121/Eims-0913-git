@@ -59,7 +59,15 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.changePageSize = function(num)
     {
         $scope.pageSize = num
+        window.localStorage.pageSize = num
     }
+
+    var initial = function()
+    {
+        //console.log(window.localStorage.pageSize)
+        if (window.localStorage.pageSize != undefined) $scope.pageSize = window.localStorage.pageSize
+    }()
+    
 
     $scope.order = function (predicate)
     {

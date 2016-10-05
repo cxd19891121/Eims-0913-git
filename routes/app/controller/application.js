@@ -207,6 +207,10 @@ app.controller('message', function ($scope, $uibModalInstance, items, nums ,data
         })
         $uibModalInstance.close()
     }
+    $scope.close = function()
+    {
+        $uibModalInstance.close();
+    }
 })
 
 app.controller('send', function ($scope, $uibModalInstance,dataService)
@@ -287,6 +291,10 @@ app.controller('send', function ($scope, $uibModalInstance,dataService)
             $uibModalInstance.close()
         })
 
+    }
+    $scope.close = function()
+    {
+        $uibModalInstance.close();
     }
     $scope.getAllUser()
 })

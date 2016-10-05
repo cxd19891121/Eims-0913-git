@@ -22,7 +22,7 @@ router.get('/:id',function(req,res){
   dtService.getUserById(req.params['id'],function(e,o){
     if(e){
       res.send(e);
-    }
+    } 
     res.send(o);})
 })
 

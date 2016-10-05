@@ -320,53 +320,6 @@
                 </div>
             </uib-accordion>
 
-            <uib-accordion close-others="addressInformation">
-                <div uib-accordion-group class="panel-default" heading="Address Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-                    <div class="container">
-                        <table>
-                            <tbody>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Billing Address:</label> </td>
-                                <td><span class="form-control">{{ detail.b_add || 'None'}} </span></td>
-                                <td><label>City: </label> </td>
-                                <td><span class="form-control">{{ detail.b_city || 'None'}} </span></td>
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>State:</label> </td>
-                                <td><span class="form-control">{{ detail.b_state || 'None'}} </span></td>
-                                <td><label>Zip: </label> </td>
-                                <td><span class="form-control">{{ detail.b_zip || 'None'}} </span></td>
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Country:</label> </td>
-                                <td><span class="form-control">{{ detail.b_country || 'None'}} </span></td>
-                                
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Permanent Address: </label> </td>
-                                <td><span class="form-control">{{ detail.p_add || 'None'}} </span></td>
-                                <td><label>Permanent City: </label> </td>
-                                <td><span class="form-control">{{ detail.p_city || 'None'}} </span></td>
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Permanent State: </label> </td>
-                                <td><span class="form-control">{{ detail.p_state || 'None'}} </span></td>
-                                <td><label>Permanent Zip: </label> </td>
-                                <td><span class="form-control">{{ detail.p_zip || 'None'}} </span></td>
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Permanent Country: </label> </td>
-                                <td><span class="form-control">{{ detail.p_country || 'None'}} </span></td>
-                                
-                            </tr>
-                            </tbody>
-                        </table>
-
-
-                    </div>
-                </div>
-            </uib-accordion>
-
             <uib-accordion>
                 <div uib-accordion-group class="panel-default" heading="Visa" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
@@ -398,18 +351,6 @@
                         <table>
                             <tbody>
                             <tr ng-class-odd='odd'>
-                                <td><label>Education ID:</label> </td>
-                                <td><span class="form-control">{{ detail.ed_id || 'None'}} </span></td>
-                                <td><label>University:</label> </td>
-                                <td><span class="form-control">{{ detail.university || 'None'}} </span></td>
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Major: </label> </td>
-                                <td><span class="form-control">{{ detail.major || 'None'}} </span></td>
-                                <td><label>Degree:</label> </td>
-                                <td><span class="form-control">{{ detail.degree || 'None'}} </span></td>               
-                            </tr>
-                            <tr ng-class-odd='odd'>
                                 <td><label>Job Title: </label> </td>
                                 <td><span class="form-control">{{ detail.title || 'None'}} </span></td>
                                 <td><label>Job Type:</label> </td>
@@ -434,41 +375,6 @@
 
 
 
-                    </div>
-                </div>
-            </uib-accordion>
-
-            <uib-accordion close-others="salaryInfomation">
-                <div uib-accordion-group class="panel-default" heading="Salary & Benefit Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-                    <div class="container">
-                        <table>
-                            <tbody>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Job Title:</label> </td>
-                                <td><span class="form-control">{{ detail.job_title || 'None'}} </span></td>
-                                <td><label>Job Level:</label> </td>
-                                <td><span class="form-control">{{ detail.job_level || 'None'}} </span></td>
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Salary: </label> </td>
-                                <td><span class="form-control">{{ detail.salary || 'None'}} </span></td>
-                                <td><label>Health Insurance:</label> </td>
-                                <td><span class="form-control">{{ detail.health_ins || 'None'}} </span></td>               
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Regional Subsides: </label> </td>
-                                <td><span class="form-control">{{ detail.regional_subsides || 'None'}} </span></td>
-                                <td><label>Reimbursement:</label> </td>
-                                <td><span class="form-control">{{ detail.reimbursement || 'None'}} </span></td>               
-                            </tr>
-                            <tr ng-class-odd='odd'>
-                                <td><label>Pay Raise Percentage: </label> </td>
-                                <td><span class="form-control">{{ detail.payrise_percentage || 'None'}} </span></td>
-                                        
-                            </tr>
-                            </tbody>
-                        </table>
-                        
                     </div>
                 </div>
             </uib-accordion>

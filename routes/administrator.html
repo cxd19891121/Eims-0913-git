@@ -50,7 +50,6 @@
             <img class="img-rounded" src="lib/bootstrap/css/mainLogo.png" height="60" width="240" >
           
             </a>
-            <!--<h4 class="text-success"><em class="text-warning">Ames IT</em> Employee information manage system</h4>-->
         </div>
 
         <div class="navbar-right text-success">
@@ -83,7 +82,7 @@
    <br>
    <br>
    <br>
-   <br>
+   <br><br>
    </page-top>
 
    <!--This is the message template which will display all the message in that template-->
@@ -147,12 +146,16 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row"></div>
             <div class="modal-body">
                 <label>Message : </label>
                 <div>
                     <textarea rows="10" cols="50" ng-model="data"></textarea>
                 </div>
+                
+                
+            </div>
+            <div style="float:right">
                 <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
             </div>
             

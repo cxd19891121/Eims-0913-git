@@ -27,7 +27,7 @@
                         <td>
 
                             <div ng-repeat="element in levels" class="btn-group">
-                                <button class="btn btn-success" ng-model="user.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
+                                <button ng-class="{'btn btn-primary': element.level==user.level , 'btn btn-default': element.level!=user.level}" ng-model="user.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
 
                             </div>
 
@@ -69,7 +69,7 @@
                     <div class="col-sm-4">
 
                         <div class="btn-group" ng-repeat="element in levels">
-                            <button class="btn btn-primary" ng-model="newUser.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
+                            <button ng-class="{'btn btn-primary': element.level==newUser.level , 'btn btn-default': element.level!=newUser.level}" ng-model="newUser.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
                         </div>
                     </div>
 

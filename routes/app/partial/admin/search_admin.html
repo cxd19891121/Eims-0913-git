@@ -14,6 +14,11 @@
 {
     color:black;
 }
+.btn-black
+{
+    border-color:black;
+    background-color: white;
+}
 </style>
 <div class="panel panel-blur ">
     <div class="container">
@@ -42,6 +47,7 @@
 
             <!--Advance search popover which will display all the advance search information and a Deepsearch button-->
             <script type="text/ng-template" id="advanceSearch.html">
+           
                 <div class="row">
                     <label class="col-sm-2 ">First name:</label>
                     <div class="col-md-4">
@@ -120,11 +126,13 @@
                         <input class="col-md-4" type="number" placeholder="Max" ng-model="searchObject['payraise_end']">
                     </div>
                 </div>
-                <div style="float:right">
-                    <button class="btn btn-default " ng-click="deepSearch()">
-                        <span class="glyphicon glyphicon-search"></span> DeepSearch
+                <div style="float:right;">
+                    <button class="btn btn-black " ng-click="deepSearch()">
+                        
+                        <span class="glyphicon glyphicon-search" style="color:black;">DeepSearch</span> 
                     </button>
                 </div>
+            
             </script>
     </div>
 
@@ -164,9 +172,16 @@
             </div>
             </div>
         </div>
+        
         <div ng-show="displayDownload">
-            <button class="btn btn-warning" type="button" ng-click="printAll()">Print</button>
-            <button class="btn btn-warning" type="button" ng-click="downloadAll()">Download</button>
+            <p></p>
+            <button uib-popover="print" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-warning" type="button" ng-click="printAll()" popover-class="black_word">
+                <span class="glyphicon glyphicon-print "> </span>
+            </button>
+
+            <button uib-popover="download" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-warning" type="button" ng-click="downloadAll()" popover-class="black_word">
+                <span class="glyphicon glyphicon-download "> </span>
+            </button>
         </div>
         <table class="table table-striped">
             <thead>

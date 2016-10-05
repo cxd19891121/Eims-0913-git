@@ -19,6 +19,22 @@
     border-color:black;
     background-color: white;
 }
+
+.uib-datepicker-popup  .text-info {
+    font-size: 14px;
+    color: black;
+}
+/* .datpicker .btn-info contains selected date */
+
+
+
+.uib-datepicker-popup  .btn:enabled 
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+ 
 </style>
 <div class="panel panel-blur ">
     <div class="container">
@@ -85,7 +101,9 @@
                 <div class="row">
                         <label class="col-sm-2 ">Visa Start:&emsp;</label>
                         <div class="col-md-4">
+                            <div class="black_word">
                             <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']" ng-focus="open(1)" is-open="popup['1']" />
+                            </div>
                         </div>
                         <label class="col-sm-2 ">Visa End:&emsp;</label>
                         <div class="col-md-4">
@@ -210,11 +228,11 @@
                 </button>
 
                         <button class="btn btn-primary" ng-click="deleteUser(user.e_id)">
-                            <span class="glyphicon glyphicon-pencil"></span>Delete
+                            <span class="glyphicon glyphicon-trash"></span>Delete
                         </button>
 
                         <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
-                    <span class="glyphicon glyphicon-pencil"></span>Detail
+                    <span class="glyphicon glyphicon-paperclip"></span>Detail
                 </button>
                     </td>
                 </tr>

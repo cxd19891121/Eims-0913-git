@@ -8,9 +8,15 @@
     width: intrinsic; /* Safari/WebKit uses a non-standard name */
     width: -moz-max-content; /* Firefox/Gecko */
     width: 800px; /* Chrome */
+    color: black;
+}
+.black_word
+{
+    color:black;
 }
 </style>
-<div class="panel panel-blur container">
+<div class="panel panel-blur ">
+    <div class="container">
     <div class="animated zoomIn">
     <div class="row">
     <form class="form-horizontal" ng-controller="search" role="form">
@@ -33,9 +39,6 @@
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         </form>
         
-       
-            
-
 
             <!--Advance search popover which will display all the advance search information and a Deepsearch button-->
             <script type="text/ng-template" id="advanceSearch.html">
@@ -127,7 +130,7 @@
 
     <!--Add new user which will redirect to a new page allow user to add new employee-->
     <div class="row">
-        <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-success" ng-click="addNewUser()">
+        <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-success" ng-click="addNewUser()" popover-class="black_word">
             <span class="glyphicon glyphicon-user"></span> Add
         </button> 
         <br><br>
@@ -139,13 +142,13 @@
     <div class="row" ng-controller="edit">
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <div>
-            <button uib-popover="display all Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(all)">
+            <button uib-popover="display all Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(all)" popover-class="black_word">
                 <span class="glyphicon "></span> All
              </button>
-             <button uib-popover="display incompleted Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(incomplete)">
+             <button uib-popover="display incompleted Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(incomplete)" popover-class="black_word">
                 <span class="glyphicon "></span> Incomplete
              </button>
-             <button uib-popover="display completed Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(complete)">
+             <button uib-popover="display completed Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(complete)" popover-class="black_word">
                 <span class="glyphicon "></span> Complete
              </button> 
             <div style="float:right">
@@ -506,5 +509,6 @@
             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
         </div>
     </script>
+    </div>
     </div>
 

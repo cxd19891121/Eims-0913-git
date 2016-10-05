@@ -1,7 +1,7 @@
 <!--This page is the main page for the admin partial html it also support a nav bar for all the partial html. The nav bar support redirect link and logout -->
 
 
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="en-US" ng-app="myApp" ng-controller="application">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,10 +25,24 @@
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/main.css">
 <link rel="stylesheet" href="lib/css/vendor-f0a6e6463a.css">
 <link rel="stylesheet" href="lib/css/app-b989473ce9.css">
+<style>
 
+.close_button
+{
+    top:0px;
+    right:0px;
+    float:right;
+
+}
+.black_word
+{
+    color:black;
+}
+</style>
 
 <body>
-    <div class="page-top clearfix ng-isolate-scope ">
+    <page-top>
+    <div class="page-top clearfix ng-isolate-scope " scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
         
         <div class="navbar-left">
             <a href="/#/">
@@ -40,8 +54,9 @@
         </div>
 
         <div class="navbar-right text-success">
-            Hello <em class="text-info">{{username}}</em>
-
+           
+            <label style="font-size:150%">  Hello <em class="text-info">{{username}}</em></label>
+            
             <button uib-popover="Read Messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
                 Messages <span class="badge">{{letterNum}}</span>
             </button>
@@ -62,16 +77,26 @@
             </button> &nbsp;&nbsp; &nbsp;&nbsp;
         </div>
     </div>
+<div class="row">
+    <p></p>
+</div>
    <br>
    <br>
    <br>
-   <br><br>
+   <br>
+   </page-top>
 
    <!--This is the message template which will display all the message in that template-->
     <script type="text/ng-template" id="message.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Message</h3>
+        <div class="panel panel-blur">
+        <div class="close_button">
+        <button uib-popover="Close" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-remove" type="button" ng-click="close()" popover-class="black_word">
+        </button>
         </div>
+        <div class="modal-header">
+            <h3 class="">Message</h3>
+        </div>
+
 
 
         <table class="table table-striped modal-body">
@@ -97,33 +122,47 @@
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
         </div>
+        </div>
     </script>
 
     <!--This is the send template which will display the sending bar in this template-->
     <script type="text/ng-template" id="send.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Send</h3>
-        </div>
-        <div class="container">
-            <div ng-repeat="user in users" style="margin:8px;">
-                <div>
-                    <input type="checkbox" ng-model="user.flag" ng-click="disableSend()"> &nbsp;&nbsp;{{user.username}}
+        <div class="panel panel-blur">
+            <div class="close_button">
+                <button uib-popover="Close" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-remove" type="button" ng-click="close()" popover-class="black_word">
+                </button>
+            </div>
+            
+            <div class="modal-header">
+                <h3 >Send</h3>
+            </div>
+            
+            <div class="container col-md-12">
+                <div class="row">   
+                    <div ng-repeat="user in users" style="margin:8px;">
+                        <div class="col-md-4">
+                            <input  type="checkbox" ng-model="user.flag" ng-click="disableSend()"> 
+                            <span>{{user.username}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <br>
-            <label><strong>Message : </strong></label>
-            <br>
-            <textarea rows="10" cols="60" ng-model="data"></textarea>
-            <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
-
-            <br/><br/>
-            <br/><br/>
+            <div class="modal-body">
+                <label>Message : </label>
+                <div>
+                    <textarea rows="10" cols="50" ng-model="data"></textarea>
+                </div>
+                <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
+            </div>
+            
+            
+            
         </div>
     </script>
 
 
-    <div ng-view>        
+    <div ng-view class="row">        
     </div>
 
 

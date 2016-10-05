@@ -83,14 +83,14 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         dataService.search($scope.searchObject,function(data)
         {
             console.log(data)
-            if(!data)
+            if(data.length == 0)
             {
                 $scope.addAlert('danger','No feteched employee')
             }
             else
             {
                 $scope.addAlert('success','Search success')
-                console.log(data)
+                //console.log(data)
                 $scope.$parent.$broadcast('changeData',{data:data})
             }
         })

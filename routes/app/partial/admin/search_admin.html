@@ -2,7 +2,8 @@
 <!---->
 
 <style>
-.search_popover {
+.search_popover 
+{
     max-width: 800px; /* optional max width */
     width: intrinsic; /* Safari/WebKit uses a non-standard name */
     width: -moz-max-content; /* Firefox/Gecko */
@@ -12,82 +13,83 @@
 <div class="container">
     <div class="section-block">
     <div class="row">
-    <form class="form-horizontal form-inline " ng-controller="search" role="form">
+    <form class="form-horizontal" ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
-            <div>
+            <div class="form-inline ">
                 <label class="col-sm-2 control-label">Employee Name:&emsp;</label>
                 <div class="col-md-4">
-                    <div class="input-group" role="group">
-                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name"></input>
-                        <div class="input-group-btn" role="group">
-                            <div class="btn-group" role="group">
-                                <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open"
-                                    type="button" class="btn btn-default " popover-class="search_popover" tabindex="-1"><span class="caret"></span></button>
+                    <div class="input-group">
+                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
+                        <div class="input-group-btn">
 
-                                <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1"><span class="glyphicon glyphicon-search"></span></button>
-                            </div>
+                             <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open" type="button" class="btn btn-default" tabindex="-1" popover-class="search_popover"><span class="caret"></span></button>
+                                                     
+                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
                         </div>
                     </div>
                 </div>
             </div>
         </uib-accordion>
-    </form>
-            <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        </form>
+        
+       
+            
 
 
             <!--Advance search popover which will display all the advance search information and a Deepsearch button-->
             <script type="text/ng-template" id="advanceSearch.html">
                 <div class="row">
-                    <label class="col-sm-2 control-label">First name:</label>
+                    <label class="col-sm-2 ">First name:</label>
                     <div class="col-md-4">
                         <input type="text" ng-model="searchObject.first_name">
                     </div>
 
-                    <label class="col-sm-2 control-label">Last name:</label>
+                    <label class="col-sm-2 ">Last name:</label>
                     <div class="col-md-4">
                         <input type="text" ng-model="searchObject.last_name">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 control-label">Job title:&emsp;</label>
+                    <label class="col-sm-2 ">Job title:&emsp;</label>
                     <div class="col-md-4">
                         <input type="text" ng-model="searchObject.job_title">
                     </div>
-                    <label class="col-sm-2 control-label">Visa status:&emsp;</label>
+                    <label class="col-sm-2 ">Visa status:&emsp;</label>
                     <div class="col-md-4">
                         <input type="text" ng-model="searchObject.status">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 control-label">Major:&emsp;</label>
+                    <label class="col-sm-2 ">Major:&emsp;</label>
                     <div class="col-md-4">
                         <input type="text" ng-model="searchObject.major">
                     </div>
-                    <label class="col-sm-2 control-label">Education:&emsp;</label>
+                    <label class="col-sm-2 ">Education:&emsp;</label>
                     <div class="col-md-4">
                         <input type="text" ng-model="searchObject.degree">
                     </div>
                 </div>
 
                 <div class="row">
-                        <label class="col-sm-2 control-label">Visa Start:&emsp;</label>
+                        <label class="col-sm-2 ">Visa Start:&emsp;</label>
                         <div class="col-md-4">
                             <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']" ng-focus="open(1)" is-open="popup['1']" />
                         </div>
-                        <label class="col-sm-2 control-label">Visa End:&emsp;</label>
+                        <label class="col-sm-2 ">Visa End:&emsp;</label>
                         <div class="col-md-4">
                             <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']" ng-focus="open(0)" is-open="popup['0']" />
                         </div>
                 </div>
 
                 <div class="row">
-                        <label class="col-sm-2 control-label">Salary:&emsp;</label>
+                        <label class="col-sm-2 ">Salary:&emsp;</label>
                         <div class="col-md-4">
-                            <input type="number" ng-model="searchObject['salary']">
+                            <input  type="number" ng-model="searchObject['salary']">
                         </div>
-                        <label class="col-sm-2 control-label">Insurance:&emsp;</label>
+                        <label class="col-sm-2 ">Insurance:&emsp;</label>
                         <div class="col-md-4">
                             <input type="text" ng-model="searchObject['health_insurance']">
                         </div>
@@ -99,19 +101,20 @@
                             <input type="number" ng-model="searchObject['reimbursement']">
                         </div>
                 </div>
-                <br>
+           
                 <div class="row">
-                    <label class="col-sm-2 control-label">Regional subsides:&emsp;</label>
+                    <label class="col-sm-2 ">Regional:</label>
 
                     <div class="col-md-4">
-                        <input type="number" placeholder="Min subside" ng-model="searchObject['regional_subsides_start']">
-                        <input type="number" placeholder="Max subside" ng-model="searchObject['regional_subsides_end']">
+                        <input class="col-md-4" type="number" placeholder="Min" ng-model="searchObject['regional_subsides_start']">
+                        <input class="col-md-4 type="number" placeholder="Max" ng-model="searchObject['regional_subsides_end']">
                     </div>
 
-                    <label class="col-sm-2 control-label">Payraise percent:&emsp;</label>
+                    <label class="col-sm-2 ">Payraise:</label>
                     <div class="col-md-4">
-                        <input type="number" placeholder="Min payraise" ng-model="searchObject['payraise_start']">
-                        <input type="number" placeholder="Max payraise" ng-model="searchObject['payraise_end']">
+
+                        <input class="col-md-4" type="number" placeholder="Min" ng-model="searchObject['payraise_start']">
+                        <input class="col-md-4" type="number" placeholder="Max" ng-model="searchObject['payraise_end']">
                     </div>
                 </div>
                 <div style="float:right">
@@ -207,17 +210,44 @@
             <h3 class="modal-title">Detail</h3>
         </div>
         <div class="modal-body">
-
+            <style>
+                .modal-body .table
+                {
+                    table-layout:fixed;
+                }
+            </style>
             <uib-accordion close-others="personalInformation">
                 <div uib-accordion-group class="panel-default" heading="Personal Information" is-open="true" is-disabled="status.isFirstDisabled">
                     <div class="container">
-                        <span class="label label-info">Employee ID:</span> &emsp; {{ detail.e_id }} <br>
-                        <span class="label label-info">First Name: </span> &emsp; {{ detail.first_name }} <br>
-                        <span class="label label-info">Last Name: </span> &emsp; {{ detail.last_name }} <br>
-                        <span class="label label-info">Middle Name: </span> &emsp; {{ detail.middle_name }} <br>
-                        <span class="label label-info">DOB: </span> &emsp; {{ detail.dob }} <br>
-                        <span class="label label-info">SSN: </span> &emsp; {{ detail.ssn }} <br>
-                        <span class="label label-info">Marriage: </span> &emsp; {{ detail.marital_status }}<br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Employee ID:</label> </td>
+                                <td><span class="form-control">{{ detail.e_id || 'None'}} </span></td>
+                                <td><label> First Name: </label> </td>
+                                <td><span class="form-control">{{ detail.first_name || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Middle Name:</label> </td>
+                                <td><span class="form-control">{{ detail.middle_name || 'None'}}</span></td>
+                                <td><label>Last Name: </label> </td>
+                                <td><span class="form-control">{{ detail.last_name || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>DOB:</label> </td>
+                                <td><span class="form-control">{{ detail.dob || 'None'}} </span></td>
+                                <td><label>SSN: </label> </td>
+                                <td><span class="form-control">{{ detail.ssn || 'None'}}</span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Marriage:</span> </label>
+                                <td><span class="form-control">{{ detail.marital_status || 'None'}} </span></td>
+                                <td><label></label></td>
+                                <td><span></span></td>
+                            </tr>
+                            </tobdy>
+                        </table>
+                 
                     </div>
 
                 </div>
@@ -226,17 +256,43 @@
             <uib-accordion close-others="orderInformation">
                 <div uib-accordion-group class="panel-default" heading="Order Information" is-open="true" is-disabled="status.isFirstDisabled">
                     <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Order Number:</label> </td>
+                                <td><span class="form-control">{{ detail.o_id || 'None'}} </span></td>
+                                <td><label>Job Location: </label> </td>
+                                <td><span class="form-control">{{ detail.location || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Company Name:</label> </td>
+                                <td><span class="form-control">{{ detail.company_name || 'None'}}</span></td>
+                                <td><label>Description: </label> </td>
+                                <td><span class="form-control">{{ detail.order_description || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Type:</label> </td>
+                                <td><span class="form-control">{{ detail.type || 'None'}} </span></td>
+                                <td><label>Title: </label> </td>
+                                <td><span class="form-control">{{ detail.title || 'None'}}</span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Start Time:</label> </td>
+                                <td><span class="form-control">{{ detail.o_start_time || 'None'}} </span></td>
+                                <td><label>End Time:</label> </td>
+                                <td><span class="form-control">{{ detail.o_end_time || 'None'}}</span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Owner:</label> </td>
+                                <td><span class="form-control">{{ detail.owner || 'None'}} </span></td>
+                                <td><label>Extension Time:</label> </td>
+                                <td><span class="form-control">{{ detail.extension_time || 'None'}}</span></td>
+                            </tr>
+                            </tobdy>
+                        </table>
 
-                        <span class="label label-info">Order Number:</span> &emsp; {{ detail.o_id }} <br>
-                        <span class="label label-info">Job Location:</span> &emsp; {{ detail.location }} <br>
-                        <span class="label label-info">Company Name:</span> &emsp; {{ detail.company_name }} <br>
-                        <span class="label label-info">Description:</span> &emsp; {{ detail.order_description }} <br>
-                        <span class="label label-info">Type:</span> &emsp; {{ detail.type }} <br>
-                        <span class="label label-info">Title:</span> &emsp; {{ detail.title }} <br>
-                        <span class="label label-info">Start Time:</span> &emsp; {{ detail.o_start_time }} <br>
-                        <span class="label label-info">End Time:</span> &emsp; {{ detail.o_end_time}} <br>
-                        <span class="label label-info">Owner:</span> &emsp; {{ detail.owner }} <br>
-                        <span class="label label-info">Extension Time:</span> &emsp; {{ detail.extension_time }}<br>
+
+                     
                     </div>
                 </div>
             </uib-accordion>
@@ -245,9 +301,21 @@
             <uib-accordion close-others="contactInformation">
                 <div uib-accordion-group class="panel-default" heading="Contact Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
-                        <span class="label label-info">Phone Number:</span> &emsp; {{ detail.cellphone }} <br>
-                        <span class="label label-info">Home Number:</span> &emsp; {{ detail.home_phone }} <br>
-                        <span class="label label-info">Email:</span> &emsp; {{ detail.email }} <br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Phone Number:</label> </td>
+                                <td><span class="form-control">{{ detail.cellphone || 'None'}} </span></td>
+                                <td><label>Home Number: </label> </td>
+                                <td><span class="form-control">{{ detail.home_phone || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Email:</label> </td>
+                                <td><span class="form-control">{{ detail.email || 'None'}} </span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                       
                     </div>
                 </div>
             </uib-accordion>
@@ -255,18 +323,45 @@
             <uib-accordion close-others="addressInformation">
                 <div uib-accordion-group class="panel-default" heading="Address Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
-                        <span class="label label-info">Billing Address:</span> &emsp; {{ detail.b_add }} <br>
-                        <span class="label label-info">City:</span> &emsp; {{ detail.b_city }} <br>
-                        <span class="label label-info">State:</span> &emsp; {{ detail.b_state }} <br>
-                        <span class="label label-info">Zip:</span> &emsp; {{ detail.b_zip }} <br>
-                        <span class="label label-info">Country:</span> &emsp; {{ detail.b_country }} <br>
-                        <br><br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Billing Address:</label> </td>
+                                <td><span class="form-control">{{ detail.b_add || 'None'}} </span></td>
+                                <td><label>City: </label> </td>
+                                <td><span class="form-control">{{ detail.b_city || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>State:</label> </td>
+                                <td><span class="form-control">{{ detail.b_state || 'None'}} </span></td>
+                                <td><label>Zip: </label> </td>
+                                <td><span class="form-control">{{ detail.b_zip || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Country:</label> </td>
+                                <td><span class="form-control">{{ detail.b_country || 'None'}} </span></td>
+                                
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Permanent Address: </label> </td>
+                                <td><span class="form-control">{{ detail.p_add || 'None'}} </span></td>
+                                <td><label>Permanent City: </label> </td>
+                                <td><span class="form-control">{{ detail.p_city || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Permanent State: </label> </td>
+                                <td><span class="form-control">{{ detail.p_state || 'None'}} </span></td>
+                                <td><label>Permanent Zip: </label> </td>
+                                <td><span class="form-control">{{ detail.p_zip || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Permanent Country: </label> </td>
+                                <td><span class="form-control">{{ detail.p_country || 'None'}} </span></td>
+                                
+                            </tr>
+                            </tbody>
+                        </table>
 
-                        <span class="label label-info">Permanent Address:</span> &emsp; {{ detail.p_add }} <br>
-                        <span class="label label-info">City:</span> &emsp; {{ detail.p_city }} <br>
-                        <span class="label label-info">State:</span> &emsp; {{ detail.p_state }} <br>
-                        <span class="label label-info">Zip:</span> &emsp; {{ detail.p_zip }} <br>
-                        <span class="label label-info">Country:</span> &emsp; {{ detail.p_country }} <br>
 
                     </div>
                 </div>
@@ -275,10 +370,23 @@
             <uib-accordion>
                 <div uib-accordion-group class="panel-default" heading="Visa" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
-                        <span class="label label-info">Visa ID:</span> &emsp; {{ detail.v_id}} <br>
-                        <span class="label label-info">Visa Start:</span> &emsp; {{ detail.start_time }} <br>
-                        <span class="label label-info">Visa End:</span> &emsp; {{ detail.end_time }} <br>
-                        <span class="label label-info">Visa Type:</span> &emsp; {{ detail.status }} <br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Visa ID:</label> </td>
+                                <td><span class="form-control">{{ detail.v_id || 'None'}} </span></td>
+                                <td><label>Visa Type:</label> </td>
+                                <td><span class="form-control">{{ detail.status || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Visa Start: </label> </td>
+                                <td><span class="form-control">{{ detail.start_time || 'None'}} </span></td>
+                                <td><label>Visa End:</label> </td>
+                                <td><span class="form-control">{{ detail.end_time || 'None'}} </span></td>               
+                            </tr>
+                            </tbody>
+                        </table>
+                        
                     </div>
                 </div>
             </uib-accordion>
@@ -287,19 +395,44 @@
                 <div uib-accordion-group class="panel-default" heading="Education & Work Experience Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
 
-                        <span class="label label-info">Education ID:</span> &emsp; {{ detail.ed_id }} <br>
-                        <span class="label label-info">University:</span> &emsp; {{ detail.university }} <br>
-                        <span class="label label-info">Major:</span> &emsp; {{ detail.major }} <br>
-                        <span class="label label-info">Degree:</span> &emsp; {{ detail.degree }} <br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Education ID:</label> </td>
+                                <td><span class="form-control">{{ detail.ed_id || 'None'}} </span></td>
+                                <td><label>University:</label> </td>
+                                <td><span class="form-control">{{ detail.university || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Major: </label> </td>
+                                <td><span class="form-control">{{ detail.major || 'None'}} </span></td>
+                                <td><label>Degree:</label> </td>
+                                <td><span class="form-control">{{ detail.degree || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Title: </label> </td>
+                                <td><span class="form-control">{{ detail.title || 'None'}} </span></td>
+                                <td><label>Job Type:</label> </td>
+                                <td><span class="form-control">{{ detail.type || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Location: </label> </td>
+                                <td><span class="form-control">{{ detail.location || 'None'}} </span></td>
+                                <td><label>Job Description:</label> </td>
+                                <td><span class="form-control">{{ detail.description || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Start: </label> </td>
+                                <td><span class="form-control">{{ detail.w_start_time || 'None'}} </span></td>
+                                <td><label>Job End:</label> </td>
+                                <td><span class="form-control">{{ detail.w_end_time || 'None'}} </span></td>               
+                            </tr>
 
-                        <br><br>
 
-                        <span class="label label-info">Job Title:</span> &emsp; {{ detail.title }} <br>
-                        <span class="label label-info">Job Type:</span> &emsp; {{ detail.type }} <br>
-                        <span class="label label-info">Job Location:</span> &emsp; {{ detail.location }} <br>
-                        <span class="label label-info">Job Description:</span> &emsp; {{ detail.description }} <br>
-                        <span class="label label-info">Job Start:</span> &emsp; {{ detail.w_start_time }} <br>
-                        <span class="label label-info">Job End:</span> &emsp; {{ detail.w_end_time }} <br>
+                            </tbody>
+                        </table>
+
+
 
                     </div>
                 </div>
@@ -308,14 +441,34 @@
             <uib-accordion close-others="salaryInfomation">
                 <div uib-accordion-group class="panel-default" heading="Salary & Benefit Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
-
-                        <span class="label label-info">Job Title:</span> &emsp; {{ detail.job_title }} <br>
-                        <span class="label label-info">Job Level:</span> &emsp; {{ detail.job_level }} <br>
-                        <span class="label label-info">Salary:</span> &emsp; {{ detail.salary }} <br>
-                        <span class="label label-info">Health Insurance:</span> &emsp; {{ detail.health_ins }} <br>
-                        <span class="label label-info">Regional Subsides:</span> &emsp; {{ detail.regional_subsides}} <br>
-                        <span class="label label-info">Reimbursement:</span> &emsp; {{ detail.reimbursement }} <br>
-                        <span class="label label-info">Pay Raise Percentage:</span> &emsp; {{ detail.payrise_percentage }}% <br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Title:</label> </td>
+                                <td><span class="form-control">{{ detail.job_title || 'None'}} </span></td>
+                                <td><label>Job Level:</label> </td>
+                                <td><span class="form-control">{{ detail.job_level || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Salary: </label> </td>
+                                <td><span class="form-control">{{ detail.salary || 'None'}} </span></td>
+                                <td><label>Health Insurance:</label> </td>
+                                <td><span class="form-control">{{ detail.health_ins || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Regional Subsides: </label> </td>
+                                <td><span class="form-control">{{ detail.regional_subsides || 'None'}} </span></td>
+                                <td><label>Reimbursement:</label> </td>
+                                <td><span class="form-control">{{ detail.reimbursement || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Pay Raise Percentage: </label> </td>
+                                <td><span class="form-control">{{ detail.payrise_percentage || 'None'}} </span></td>
+                                        
+                            </tr>
+                            </tbody>
+                        </table>
+                        
                     </div>
                 </div>
             </uib-accordion>
@@ -323,9 +476,17 @@
             <uib-accordion close-others="Termination">
                 <div uib-accordion-group class="panel-default" heading="Termination" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
                     <div class="container">
-
-                        <span class="label label-info">Termination Date:</span> &emsp; {{ detail.termn_date }} <br>
-                        <span class="label label-info">Reason:</span> &emsp; {{ detail.termn_reason }} <br>
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Termination Date:</label> </td>
+                                <td><span class="form-control">{{ detail.termn_date || 'None'}} </span></td>
+                                <td><label>Reason:</label> </td>
+                                <td><span class="form-control">{{ detail.termn_reason || 'None'}} </span></td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>

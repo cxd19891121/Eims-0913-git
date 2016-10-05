@@ -29,21 +29,26 @@
     <div class="page-top clearfix ng-isolate-scope ">
         
         <div class="navbar-left">
-            <h4 class="text-success"><em class="text-warning">Ames IT</em> Employee information manage system</h4>
+            <a href="/#/">
+          
+            <img class="img-rounded" src="lib/bootstrap/css/mainLogo.png" height="60" width="240" >
+          
+            </a>
+            <!--<h4 class="text-success"><em class="text-warning">Ames IT</em> Employee information manage system</h4>-->
         </div>
 
         <div class="navbar-right text-success">
             Hello <em class="text-info">{{username}}</em>
 
             <button uib-popover="Read Messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
-                Messages<span class="badge">{{letterNum}}</span>
+                Messages <span class="badge">{{letterNum}}</span>
             </button>
 
             <button uib-popover="Send Message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
             </button>
 
-            <button uib-popover="Setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">
-                <span class="glyphicon glyphicon-off"></span>
+            <button uib-popover="Setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">  
+                <span class="glyphicon glyphicon-cog"></span>
             </button>
 
             <button uib-popover="Account Management" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="userConfig()">

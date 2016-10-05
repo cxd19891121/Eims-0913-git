@@ -3,6 +3,32 @@
 <div class = "container" ng-controller="editController as vm" >
 
 
+    <div class = "panel-blur">
+
+        <div class="form-group">
+            <div class="btn-group bootstrap-select form-control ng-pristine ng-untouched ng-valid">
+                <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"  aria-expanded="false">
+                    <span class="filter-option pull-left">Standard Select</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span>
+                </button>
+                <div class="dropdown-menu open" style="max-height: 464px; overflow: hidden; min-height: 89px;">
+                    <ul class="dropdown-menu inner" role="menu" style="max-height: 453px; overflow-y: auto; min-height: 78px;">
+                        <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 1</span><span
+                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                        <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 2</span><span
+                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                        <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 3</span><span
+                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                        <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 4</span><span
+                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
 
         <h3>Edit</h3>
 
@@ -392,6 +418,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">State:</label>
                             <div class="col-sm-2">
+
+                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                                    <li role="menuitem"><a href="" ng-click="changePageSize(5)">5</a></li>
+                                    <li role="menuitem"><a href="" ng-click="changePageSize(10)">10</a></li>
+                                    <li role="menuitem"><a href="" ng-click="changePageSize(15)">15</a></li>
+                                </ul>
+
                                 <select ng-model = 'vm.data.emp.pState' ng-required = "true" class="form-control" title = "State">
                                     <option class="bs-title-option" value="">State</option>
                                     <option value="AL">Alabama</option>
@@ -461,6 +494,9 @@
                                     <small ng-message="maxlength" class = "text-danger"> Zip code error </small>
                                     <small ng-message="min" class = "text-danger"> Invalid format</small>
                                 </div>
+
+
+
                             </div>
                         </div>
 
@@ -494,9 +530,10 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">State:</label>
 
+
                             <div class="col-sm-2">
-                                <select ng-model = 'vm.data.emp.bState' class="form-control" title = "State">
-                                    <option class="bs-title-option" value="">State</option>
+                                <select ng-model = 'vm.data.emp.bState' class = "form-control" title = "State">
+                                    <option class = "form-control" value="">State</option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
                                     <option value="AZ">Arizona</option>

@@ -309,7 +309,7 @@ exports.addAll = function (req, callback) {
             dtService.addElement(empDAO, req.body['emp'], function (e, o) {
                 repMsgService.buildAddMsg(repMsgGroup.emp, 'emp_info', e, o);
                 if (e) {
-                    callback(repMsg);
+                    callback(repMsgGroup);
                 } else {
                     dtService.getLast(empDAO, function (e, o) {
                         var empId = o.rows[0].emp_id;
@@ -330,6 +330,8 @@ exports.addAll = function (req, callback) {
                         validation.orderValidate(req.body['order']);
                         validation.visaValidate(req.body['visa']);
                         //console.log('empId', empId);
+
+                        console.log()
 
                         dtService.addElement(workDAO, req.body['work'], function (e, o) {
                             repMsgService.buildAddMsg(repMsgGroup.work, 'work_info', e, o)
@@ -484,8 +486,8 @@ exports.deleteAllById = function (req, callback) {
 
 
 //UndoDeleteAllById
-exports.undoDeleteAllById = function (req, callback) {
-    var id = req.params['id'];
+exports.undoDeleteAllById = function (req,id, callback) {
+
 
     //check authority
     auth.authCheck(req, function (authObj) {

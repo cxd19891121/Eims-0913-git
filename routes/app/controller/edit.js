@@ -1,47 +1,7 @@
 /**
  * Created by mooner00 on 8/23/2016.
  */
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items)
-{
-    $scope.detail = items
 
-    $scope.ok = function ()
-    {
-        $uibModalInstance.close()
-    }
-
-    $scope.cancel = function ()
-    {
-        $uibModalInstance.dismiss('cancel')
-    }
-
-    $scope.print = function()
-    {
-        printdiv('printElement')
-    }
-    function printdiv(printdivname)
-    {
-        var headstr = "<html><head><title>Booking Details</title></head><body>";
-        var footstr = "</body>";
-        var newstr = document.getElementById(printdivname).innerHTML;
-        var newWindow = window.open('');
-        newWindow.document.body.innerHTML = headstr+newstr+footstr;
-        newWindow.print();
-        return false;
-    }
-
-    $scope.download = function()
-    {
-        downloadDiv('printElement','data.html')
-    }
-
-    function downloadDiv(divName,filename)
-    {
-        var data = document.getElementById(divName).innerHTML
-        var file = new File([data], filename, {type: "text/html;charset=utf-8"});
-        saveAs(file);
-    }
-})
 
 app.controller('edit',function($scope,$uibModal, dataService)
 {
@@ -73,7 +33,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
-        console.log($scope.predicate)
+        //console.log($scope.predicate)
     }
 
     $scope.displayDownload = false
@@ -92,8 +52,6 @@ app.controller('edit',function($scope,$uibModal, dataService)
 
     $scope.changeUser = function (symbol)
     {
-        console.log($scope.users)
-        //$scope.allUsers[0].progress = 100
         switch (symbol)
         {
             case $scope.all: 
@@ -244,23 +202,27 @@ app.controller('edit',function($scope,$uibModal, dataService)
     }
 
     $scope.detail = {}
-
+    $scope.wholeDetail = {}
+    
     $scope.showEmployeeDetail = function(id)
     {
-        if($scope.employeeDetail == false)
+        
+        //console.log(1)
+        $scope.employeeDetail = true
+        $scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = JSON.parse(JSON.stringify(element))})
+        console.log($scope.users)
+        $scope.wholeDetail = JSON.parse(JSON.stringify($scope.detail));
+        Object.keys($scope.detail).forEach(key =>
         {
-            //console.log('first')
-            $scope.employeeDetail = true
-            //console.log('second')
-            $scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = element})
-            //console.log('third')
-            $scope.open()
-        }
-        else
-        {
-            $scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = element})
-            $scope.open()
-        }
+            if (typeof $scope.detail[key] == 'string')
+            {
+                if ($scope.detail[key].length > 24)
+                {
+                    $scope.detail[key] = $scope.detail[key].substring(0,24) + '...'
+                }
+            }
+        })
+        $scope.open() 
     }
 
     $scope.animationsEnabled = true
@@ -279,6 +241,10 @@ app.controller('edit',function($scope,$uibModal, dataService)
                 items: function ()
                 {
                     return $scope.detail
+                },
+                wholeItems: function()
+                {
+                    return $scope.wholeDetail
                 }
             }
         })

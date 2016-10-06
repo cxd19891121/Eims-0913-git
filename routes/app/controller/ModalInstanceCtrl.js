@@ -1,13 +1,19 @@
 /**
  * Created by mooner00 on 8/24/2016.
  */
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items)
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items ,wholeItems)
 {
     $scope.detail = items
-
+    $scope.wholeDetail = wholeItems
     $scope.ok = function ()
     {
         $uibModalInstance.close()
+    }
+
+    $scope.display = function(key)
+    {
+        if ($scope.wholeDetail[key] != $scope.detail[key]) return "mouseenter"
+        else return "none"
     }
 
     $scope.cancel = function ()

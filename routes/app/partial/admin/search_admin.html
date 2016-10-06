@@ -1,6 +1,11 @@
 <!--This page was the main page of the EIMS system. Administrator will use this HTML to search and manage the user's information-->
 <!---->
-
+<style>
+.popover 
+{
+word-break: break-all;
+}
+</style>
 
 <div class="panel panel-blur ">
     <div class="container">
@@ -14,8 +19,7 @@
                     <div class="input-group">
                         <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee name" ></input>
                         <div class="input-group-btn">
-
-                             <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" popover-is-open="popover.open" type="button" class="btn btn-default" tabindex="-1" popover-class="search_popover"><span class="caret"></span></button>
+                             <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" type="button" class="btn btn-default" tabindex="-1" popover-class="search_popover" popover-trigger="outsideClick"><span class="caret"></span></button>
                                                      
                             <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
                         </div>
@@ -219,31 +223,32 @@
                 }
             </style>
             <uib-accordion close-others="personalInformation">
+                
                 <div uib-accordion-group class="panel-default" heading="Personal Information" is-open="true" is-disabled="status.isFirstDisabled">
                     <div class="container">
                         <table>
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Employee ID:</label> </td>
-                                <td><span class="form-control">{{ detail.e_id || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.e_id}} popover-placement="bottom" popover-trigger="display('e_id')" class="form-control">{{ detail.e_id || 'None'}}</span></td>
                                 <td><label> First Name: </label> </td>
-                                <td><span class="form-control">{{ detail.first_name || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.first_name}} popover-placement="bottom" popover-trigger="display('first_name')" class="form-control">{{ detail.first_name || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Middle Name:</label> </td>
-                                <td><span class="form-control">{{ detail.middle_name || 'None'}}</span></td>
+                                <td><span uib-popover={{wholeDetail.middle_name}} popover-placement="bottom" popover-trigger="display('middle_name')" class="form-control">{{ detail.middle_name || 'None'}}</span></td>
                                 <td><label>Last Name: </label> </td>
-                                <td><span class="form-control">{{ detail.last_name || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.last_name}} popover-placement="bottom" popover-trigger="display('last_name')" class="form-control">{{ detail.last_name || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>DOB:</label> </td>
-                                <td><span class="form-control">{{ detail.dob || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.dob}} popover-placement="bottom" popover-trigger="display('dob')" class="form-control">{{ detail.dob || 'None'}} </span></td>
                                 <td><label>SSN: </label> </td>
-                                <td><span class="form-control">{{ detail.ssn || 'None'}}</span></td>
+                                <td><span uib-popover={{wholeDetail.ssn}} popover-placement="bottom" popover-trigger="display('ssn')" class="form-control">{{ detail.ssn || 'None'}}</span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Marriage:</span> </label>
-                                <td><span class="form-control">{{ detail.marital_status || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.marital_status}} popover-placement="bottom" popover-trigger="display('marital_status')" class="form-control">{{ detail.marital_status || 'None'}} </span></td>
                                 <td><label></label></td>
                                 <td><span></span></td>
                             </tr>
@@ -262,33 +267,33 @@
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Order Number:</label> </td>
-                                <td><span class="form-control">{{ detail.o_id || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.o_id}} popover-placement="bottom" popover-trigger="display('o_id')" class="form-control">{{ detail.o_id || 'None'}} </span></td>
                                 <td><label>Job Location: </label> </td>
-                                <td><span class="form-control">{{ detail.location || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.location}} popover-placement="bottom" popover-trigger="display('location')" class="form-control">{{ detail.location || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Company Name:</label> </td>
-                                <td><span class="form-control">{{ detail.company_name || 'None'}}</span></td>
+                                <td><span uib-popover={{wholeDetail.company_name}} popover-placement="bottom" popover-trigger="display('company_name')" class="form-control">{{ detail.company_name || 'None'}}</span></td>
                                 <td><label>Description: </label> </td>
-                                <td><span class="form-control">{{ detail.order_description || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.order_description}} popover-placement="bottom" popover-trigger="display('order_description')" class="form-control">{{ detail.order_description || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Type:</label> </td>
-                                <td><span class="form-control">{{ detail.type || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.type}} popover-placement="bottom" popover-trigger="display('type')" class="form-control">{{ detail.type || 'None'}} </span></td>
                                 <td><label>Title: </label> </td>
-                                <td><span class="form-control">{{ detail.title || 'None'}}</span></td>
+                                <td><span uib-popover={{wholeDetail.title}} popover-placement="bottom" popover-trigger="display('title')" class="form-control">{{ detail.title || 'None'}}</span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Start Time:</label> </td>
-                                <td><span class="form-control">{{ detail.o_start_time || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.o_start_time}} popover-placement="bottom" popover-trigger="display('o_start_time')" class="form-control">{{ detail.o_start_time || 'None'}} </span></td>
                                 <td><label>End Time:</label> </td>
-                                <td><span class="form-control">{{ detail.o_end_time || 'None'}}</span></td>
+                                <td><span uib-popover={{wholeDetail.o_end_time}} popover-placement="bottom" popover-trigger="display('o_end_time')" class="form-control">{{ detail.o_end_time || 'None'}}</span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Owner:</label> </td>
-                                <td><span class="form-control">{{ detail.owner || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.owner}} popover-placement="bottom" popover-trigger="display('owner')" class="form-control">{{ detail.owner || 'None'}} </span></td>
                                 <td><label>Extension Time:</label> </td>
-                                <td><span class="form-control">{{ detail.extension_time || 'None'}}</span></td>
+                                <td><span uib-popover={{wholeDetail.extension_time}} popover-placement="bottom" popover-trigger="display('extension_time')" class="form-control">{{ detail.extension_time || 'None'}}</span></td>
                             </tr>
                             </tobdy>
                         </table>
@@ -302,18 +307,18 @@
 
             <uib-accordion close-others="contactInformation">
                 <div uib-accordion-group class="panel-default" heading="Contact Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-                    <div class="container">
+                    <div class="container col-md-12">
                         <table>
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Phone Number:</label> </td>
-                                <td><span class="form-control">{{ detail.cellphone || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.cellphone}} popover-placement="bottom" popover-trigger="display('cellphone')" class="form-control col-md-4">{{ detail.cellphone || 'None'}} </span></td>
                                 <td><label>Home Number: </label> </td>
-                                <td><span class="form-control">{{ detail.home_phone || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.home_phone}} popover-placement="bottom" popover-trigger="display('home_phone')" class="form-control col-md-4">{{ detail.home_phone || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Email:</label> </td>
-                                <td><span class="form-control">{{ detail.email || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.email}} popover-placement="bottom" popover-trigger="display('email')" class="form-control">{{ detail.email || 'None'}} </span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -329,36 +334,36 @@
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Billing Address:</label> </td>
-                                <td><span class="form-control">{{ detail.b_add || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.b_add}} popover-placement="bottom" popover-trigger="display('b_add')" class="form-control">{{ detail.b_add || 'None'}} </span></td>
                                 <td><label>City: </label> </td>
-                                <td><span class="form-control">{{ detail.b_city || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.b_city}} popover-placement="bottom" popover-trigger="display('b_city')" class="form-control">{{ detail.b_city || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>State:</label> </td>
-                                <td><span class="form-control">{{ detail.b_state || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.b_state}} popover-placement="bottom" popover-trigger="display('b_state')" class="form-control">{{ detail.b_state || 'None'}} </span></td>
                                 <td><label>Zip: </label> </td>
-                                <td><span class="form-control">{{ detail.b_zip || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.b_zip}} popover-placement="bottom" popover-trigger="display('b_zip')" class="form-control">{{ detail.b_zip || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Country:</label> </td>
-                                <td><span class="form-control">{{ detail.b_country || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.b_country}} popover-placement="bottom" popover-trigger="display('b_country')" class="form-control">{{ detail.b_country || 'None'}} </span></td>
                                 
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Permanent Address: </label> </td>
-                                <td><span class="form-control">{{ detail.p_add || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.p_add}} popover-placement="bottom" popover-trigger="display('p_add')" class="form-control">{{ detail.p_add || 'None'}} </span></td>
                                 <td><label>Permanent City: </label> </td>
-                                <td><span class="form-control">{{ detail.p_city || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.p_city}} popover-placement="bottom" popover-trigger="display('p_city')" class="form-control">{{ detail.p_city || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Permanent State: </label> </td>
-                                <td><span class="form-control">{{ detail.p_state || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.p_state}} popover-placement="bottom" popover-trigger="display('p_state')" class="form-control">{{ detail.p_state || 'None'}} </span></td>
                                 <td><label>Permanent Zip: </label> </td>
-                                <td><span class="form-control">{{ detail.p_zip || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.p_zip}} popover-placement="bottom" popover-trigger="display('p_zip')" class="form-control">{{ detail.p_zip || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Permanent Country: </label> </td>
-                                <td><span class="form-control">{{ detail.p_country || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.p_country}} popover-placement="bottom" popover-trigger="display('p_country')" class="form-control">{{ detail.p_country || 'None'}} </span></td>
                                 
                             </tr>
                             </tbody>
@@ -376,15 +381,15 @@
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Visa ID:</label> </td>
-                                <td><span class="form-control">{{ detail.v_id || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.v_id}} popover-placement="bottom" popover-trigger="display('v_id')" class="form-control">{{ detail.v_id || 'None'}} </span></td>
                                 <td><label>Visa Type:</label> </td>
-                                <td><span class="form-control">{{ detail.status || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.status}} popover-placement="bottom" popover-trigger="display('status')" class="form-control">{{ detail.status || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Visa Start: </label> </td>
-                                <td><span class="form-control">{{ detail.start_time || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.start_time}} popover-placement="bottom" popover-trigger="display('start_time')" class="form-control">{{ detail.start_time || 'None'}} </span></td>
                                 <td><label>Visa End:</label> </td>
-                                <td><span class="form-control">{{ detail.end_time || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.end_time}} popover-placement="bottom" popover-trigger="display('end_time')" class="form-control">{{ detail.end_time || 'None'}} </span></td>               
                             </tr>
                             </tbody>
                         </table>
@@ -401,33 +406,33 @@
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Education ID:</label> </td>
-                                <td><span class="form-control">{{ detail.ed_id || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.ed_id}} popover-placement="bottom" popover-trigger="display('ed_id')" class="form-control">{{ detail.ed_id || 'None'}} </span></td>
                                 <td><label>University:</label> </td>
-                                <td><span class="form-control">{{ detail.university || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.university}} popover-placement="bottom" popover-trigger="display('university')" class="form-control">{{ detail.university || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Major: </label> </td>
-                                <td><span class="form-control">{{ detail.major || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.major}} popover-placement="bottom" popover-trigger="display('major')" class="form-control">{{ detail.major || 'None'}} </span></td>
                                 <td><label>Degree:</label> </td>
-                                <td><span class="form-control">{{ detail.degree || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.degree}} popover-placement="bottom" popover-trigger="display('degree')" class="form-control">{{ detail.degree || 'None'}} </span></td>               
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Job Title: </label> </td>
-                                <td><span class="form-control">{{ detail.title || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.title}} popover-placement="bottom" popover-trigger="display('title')" class="form-control">{{ detail.title || 'None'}} </span></td>
                                 <td><label>Job Type:</label> </td>
-                                <td><span class="form-control">{{ detail.type || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.type}} popover-placement="bottom" popover-trigger="display('type')" class="form-control">{{ detail.type || 'None'}} </span></td>               
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Job Location: </label> </td>
-                                <td><span class="form-control">{{ detail.location || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.location}} popover-placement="bottom" popover-trigger="display('location')" class="form-control">{{ detail.location || 'None'}} </span></td>
                                 <td><label>Job Description:</label> </td>
-                                <td><span class="form-control">{{ detail.description || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.description}} popover-placement="bottom" popover-trigger="display('description')" class="form-control">{{ detail.description || 'None'}} </span></td>               
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Job Start: </label> </td>
-                                <td><span class="form-control">{{ detail.w_start_time || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.w_start_time}} popover-placement="bottom" popover-trigger="display('w_start_time')" class="form-control">{{ detail.w_start_time || 'None'}} </span></td>
                                 <td><label>Job End:</label> </td>
-                                <td><span class="form-control">{{ detail.w_end_time || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.w_end_time}} popover-placement="bottom" popover-trigger="display('w_end_time')" class="form-control">{{ detail.w_end_time || 'None'}} </span></td>               
                             </tr>
 
 
@@ -447,25 +452,25 @@
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Job Title:</label> </td>
-                                <td><span class="form-control">{{ detail.job_title || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.job_title}} popover-placement="bottom" popover-trigger="display('job_title')" class="form-control">{{ detail.job_title || 'None'}} </span></td>
                                 <td><label>Job Level:</label> </td>
-                                <td><span class="form-control">{{ detail.job_level || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.job_level}} popover-placement="bottom" popover-trigger="display('job_level')" class="form-control">{{ detail.job_level || 'None'}} </span></td>
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Salary: </label> </td>
-                                <td><span class="form-control">{{ detail.salary || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.salary}} popover-placement="bottom" popover-trigger="display('salary')" class="form-control">{{ detail.salary || 'None'}} </span></td>
                                 <td><label>Health Insurance:</label> </td>
-                                <td><span class="form-control">{{ detail.health_ins || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.health_ins}} popover-placement="bottom" popover-trigger="display('health_ins')" class="form-control">{{ detail.health_ins || 'None'}} </span></td>               
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Regional Subsides: </label> </td>
-                                <td><span class="form-control">{{ detail.regional_subsides || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.regional_subsides}} popover-placement="bottom" popover-trigger="display('regional_subsides')" class="form-control">{{ detail.regional_subsides || 'None'}} </span></td>
                                 <td><label>Reimbursement:</label> </td>
-                                <td><span class="form-control">{{ detail.reimbursement || 'None'}} </span></td>               
+                                <td><span uib-popover={{wholeDetail.reimbursement}} popover-placement="bottom" popover-trigger="display('reimbursement')" class="form-control">{{ detail.reimbursement || 'None'}} </span></td>               
                             </tr>
                             <tr ng-class-odd='odd'>
                                 <td><label>Pay Raise Percentage: </label> </td>
-                                <td><span class="form-control">{{ detail.payrise_percentage || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.payrise_percentage}} popover-placement="bottom" popover-trigger="display('payrise_percentage')" class="form-control">{{ detail.payrise_percentage || 'None'}} </span></td>
                                         
                             </tr>
                             </tbody>
@@ -482,9 +487,9 @@
                             <tbody>
                             <tr ng-class-odd='odd'>
                                 <td><label>Termination Date:</label> </td>
-                                <td><span class="form-control">{{ detail.termn_date || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.termn_date}} popover-placement="bottom" popover-trigger="display('termn_date')" class="form-control">{{ detail.termn_date || 'None'}} </span></td>
                                 <td><label>Reason:</label> </td>
-                                <td><span class="form-control">{{ detail.termn_reason || 'None'}} </span></td>
+                                <td><span uib-popover={{wholeDetail.termn_reason}} popover-placement="bottom" popover-trigger="display('termn_reason')" class="form-control">{{ detail.termn_reason || 'None'}} </span></td>
                             </tr>
                             
                             </tbody>

@@ -510,8 +510,8 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
                 callback(data);
             }else {
                 var data = data.data;
-                // alert("New Employee Info Added");
-                window.history.back();
+                alert("New Employee Info Added");
+             //   window.history.back();
                 callback(null, data)
             }
         }, function errorCallback(data) {
@@ -535,8 +535,8 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         }).success(function successCallback(e,data) {
             console.log("in sucess callback");
             console.log(data);
-           // alert('user has been updated');
-            window.location.href= url;
+            alert('user has been updated');
+            //window.location.href= url;
             callback(null, data)
         }, function errorCallback(data) {
             console.log("in error callback");

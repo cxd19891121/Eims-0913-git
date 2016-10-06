@@ -162,7 +162,7 @@ router.delete('/all/:id',function(req,res){
 })
 
 router.delete('/all/undo/:id',function(req,res){
-    dtLogicService.undoDeleteAllById(req,function(e,o){
+    dtLogicService.undoDeleteAllById(req,req.params['id'],function(e,o){
         console.log(e,o);
         res.send(o)
     })

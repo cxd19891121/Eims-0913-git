@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="lib/css/vendor.css">
-<link rel="stylesheet" href="lib/css/app.css">    
+<link rel="stylesheet" href="lib/css/app.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="lib/css/auth.css">
 
@@ -21,10 +21,24 @@
 <script src="https://rawgit.com/gilf/ngPrint/master/ngPrint.min.js"></script>
 <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-switch.css">
 <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/main.css">
 <link rel="stylesheet" href="lib/css/vendor-f0a6e6463a.css">
 <link rel="stylesheet" href="lib/css/app-b989473ce9.css">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>
+
+
 <style>
 .search_popover 
 {
@@ -57,6 +71,39 @@
     color: black;
 }
 
+.search_popover
+{
+    max-width: 800px; /* optional max width */
+    width: intrinsic; /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content; /* Firefox/Gecko */
+    width: 800px; /* Chrome */
+    color: black;
+}
+.black_word
+{
+    color:black;
+}
+.btn-black
+{
+    border-color:black;
+    background-color: white;
+}
+
+.uib-datepicker-popup  .text-info {
+    font-size: 14px;
+    color: black;
+}
+/* .datpicker .btn-info contains selected date */
+
+
+
+.uib-datepicker-popup  .btn:enabled
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+}
+
 .close_button
 {
     top:0px;
@@ -64,15 +111,25 @@
     float:right;
 
 }
-.black_word
-{
-    color:black;
+.text-danger{
+    color:#ffff00;
 }
+
+option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+    background-color: #333333;
+}
+
 textarea
 {
     resize:none;
 }
 </style>
+
 
 <body>
     <page-top>
@@ -237,6 +294,8 @@ textarea
 
     <!-- partial -->
 
+    <script src='app/script/app-58275e885d.js'></script>
+    <script src='app/script/vendor-035620cd8a.js'></script>
 
 
 

@@ -30,8 +30,8 @@ var sql = {
         "health_ins," +
         "regional_subsides," +
         "reimbursement," +
-        "payrise_percentage)" +
-        "progress"+
+        "payrise_percentage," +
+        "progress)"+
         "VALUES ($1, $2, $3, $4, $5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25,$26,$27,$28,$29)",
         values: ["testname","testF",null,'1999-9-9', 0,false, "test_title","test_level",8,1111,2222,"test@gmail.com",'2001-01-01',"test" +
         " reason","666 p street","ames","IA",50010,"USA","233 B road", "beijing","beijing",100000,"China","test healthIns","test rs","test rs",10,0]
@@ -61,9 +61,9 @@ var sql = {
     "health_ins = $25," +
     "regional_subsides = $26," +
     "reimbursement = $27," +
-    "payrise_percentage = $28 "+
+    "payrise_percentage = $28, "+
     "progress = $29"+
-    "where emp_id = $30",},
+    "where e_id = $30",},
 
     deleteFlagEmpById :{name:"deleteFlagUserById", text :"UPDATE employee_info SET delete_flag = true where emp_id = $1", values :[0]},
     undoDeleteEmpById :{name:"undoDeleteUserById",text:"UPDATE employee_info SET delete_flag = false where emp_id = $1",values:[0]},

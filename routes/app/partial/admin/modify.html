@@ -71,27 +71,33 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label"> proxy:</label>
                             <div class="col-sm-4">
-                                <div class="btn-group">
+                                <!--<div class="btn-group">
                                     <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>True </button>
                                     <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>False </button>
+                                </div>-->
+                                <div class="btn-group">
+                                    <button type="button" ng-class="{'btn btn-primary': config.session.proxy==true , 'btn btn-default': config.session.proxy!=true}" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>Open </button>
+                                    <button type="button" ng-class="{'btn btn-primary': config.session.proxy!=true , 'btn btn-default': config.session.proxy==true}" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>Close </button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label"> resave:</label>
                             <div class="col-sm-4">
-                                <div class="btn-group">
+                                <!--<div class="btn-group">
                                     <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.resave" uncheckable>True </button>
                                     <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.resave" uncheckable>False </button>
+                                </div>-->
+                                <div class="btn-group">
+                                    <button type="button" ng-class="{'btn btn-primary': config.session.resave==true , 'btn btn-default': config.session.resave!=true}" uib-btn-radio="true" ng-model="config.session.resave" uncheckable>Open </button>
+                                    <button type="button" ng-class="{'btn btn-primary': config.session.resave!=true , 'btn btn-default': config.session.resave==true}" uib-btn-radio="false" ng-model="config.session.resave" uncheckable>Close </button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label"> saveUninitialized:</label>
                             <div class="col-sm-4">
-                                <div class="col-xs-4">
-                                    <switch color="primary" ng-model="config.session.saveUninitialized"></switch>
-                                </div>
+                                
                                 <div class="btn-group">
                                     <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized==true , 'btn btn-default': config.session.saveUninitialized!=true}" uib-btn-radio="true" ng-model="config.session.saveUninitialized" uncheckable>Open </button>
                                     <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized!=true , 'btn btn-default': config.session.saveUninitialized==true}" uib-btn-radio="false" ng-model="config.session.saveUninitialized" uncheckable>Close </button>

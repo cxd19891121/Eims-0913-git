@@ -166,6 +166,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
              
             }
         })
+        newstr = newstr.replace(/_/g," ")
 
         var data = headstr+newstr+footstr;
         var newWindow = window.open("");
@@ -195,7 +196,8 @@ app.controller('edit',function($scope,$uibModal, dataService)
                 data += "<br><br>"
              
             }
-    })
+        })
+        data = data.replace(/_/g," ")
         var file = new File([data], filename, {type: "text/html;charset=utf-8"});
         saveAs(file);
 

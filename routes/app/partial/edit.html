@@ -1,37 +1,7 @@
 
-
 <div class = "container" ng-controller="editController as vm" >
 
-
-    <div class = "panel-blur">
-
-        <div class="form-group">
-            <div class="btn-group bootstrap-select form-control ng-pristine ng-untouched ng-valid">
-                <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown"  aria-expanded="false">
-                    <span class="filter-option pull-left">Standard Select</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span>
-                </button>
-                <div class="dropdown-menu open" style="max-height: 464px; overflow: hidden; min-height: 89px;">
-                    <ul class="dropdown-menu inner" role="menu" style="max-height: 453px; overflow-y: auto; min-height: 78px;">
-                        <li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 1</span><span
-                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                        <li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 2</span><span
-                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                        <li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 3</span><span
-                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                        <li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Option 4</span><span
-                                class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
         <h3>Edit</h3>
-
         <pre> Please input employee information here: </pre>
      <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <!--<div class="row">-->
@@ -61,36 +31,37 @@
                     </uib-tab-heading>
 
 
-                    <form name ="pTab" class="form-horizontal" role="form" novalidate>
-                        <br>
-                        <div class="form-group">
+                    <form name ="pTab" class="form-horizontal" role="form"  novalidate>
+
+
+                        <div class="form-group" >
                             <label class="col-sm-2 control-label">Name :</label>
-                            <div class="col-sm-2">
-                                <input name ="fname" ng-model = 'vm.data.emp.fName' type="text" class="form-control"  placeholder="First" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" ng-required = "true">
+                            <div class="col-sm-2" ng-class = "{ 'has-error' : pTab.fname.$invalid && pTab.fname.$touched }">
+                                <input name ="fname" ng-model = 'vm.data.emp.fName' type="text" class="form-control"  placeholder="eg: First " ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" ng-required = "true">
 
                                 <!-- ng-message to show the error msg -->
                                 <div class="help-block" ng-messages="pTab.fname.$error" ng-show="pTab.fname.$touched">
-                                    <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                    <!--<small ng-message="required" class = "text-danger">You cannot leave this empty</small>-->
                                 </div>
 
                             </div>
 
                             <div class="col-sm-2">
-                                <input ng-model="vm.data.emp.mName" type="text" class="form-control"  placeholder="Middle" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
+                                <input ng-model="vm.data.emp.mName" type="text" class="form-control"  placeholder="eg: Middle" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
                             </div>
-                            <div class="col-sm-2">
-                                <input name = "lname" ng-required = "true" ng-model="vm.data.emp.lName" type="text" class="form-control"  placeholder="Last" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" >
+                            <div class="col-sm-2" ng-class = "{ 'has-error' : pTab.lname.$invalid && pTab.lname.$touched }">
+                                <input name = "lname" ng-required = "true" ng-model="vm.data.emp.lName" type="text" class="form-control"  placeholder="eg: Last" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" >
 
                                 <div class="help-block" ng-messages="pTab.lname.$error" ng-show="pTab.lname.$touched">
-                                    <small ng-message="required" class = "text-danger">You cannot leave this empty</small>
+                                    <!--<small ng-message="required" class = "text-danger">You cannot leave this empty</small>-->
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" ng-class = "{ 'has-error' : pTab.dob.$invalid && pTab.dob.$touched }">
                             <label class="col-sm-2 control-label">DOB :</label>
                             <div class="col-sm-3">
-                                <input name = "dob" placeholder="01-01-1990" min="01-01-1950" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB' ng-focus="open(1)" is-open="popup['1']" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                <input name = "dob" placeholder="eg : 01-01-1990" min="01-01-1950" type="text" class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB' ng-focus="open(1)" is-open="popup['1']" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
 
                                 <div class="help-block" ng-messages="pTab.dob.$error" ng-show="pTab.dob.$touched">
                                     <small ng-message="date" class = "text-danger">Invalid date</small>
@@ -100,7 +71,7 @@
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" ng-class = "{ 'has-error' : pTab.ssn.$invalid && pTab.ssn.$touched }">
                             <label class="col-sm-2 control-label">SSN :</label>
                             <!--<div class = "col-sm-2">-->
 
@@ -111,13 +82,13 @@
 
 
                             <!--<div class="col-sm-3" ng-show = "vm.data.other.ssnStatus">-->
-                            <div class="col-sm-3" >
-                                <input ng-model = 'vm.data.emp.SSN' class="form-control" type = 'number' maxlength="9" min = "0" placeholder="123456789" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" name = "ssn" >
+                            <div class="col-sm-3"  >
+                                <input ng-disabled = "vm.data.other.ssnDisabled" ng-model = 'vm.data.emp.SSN' class="form-control" type = 'number' maxlength="9" minlength = "9" placeholder="eg: 123456789" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" name = "ssn" > {{vm.data.emp.SSN}}
 
 
                                 <div class="help-block" ng-messages="pTab.ssn.$error" ng-show="pTab.ssn.$touched">
                                     <small ng-message="number" class = "text-danger">Invalid SSN</small>
-                                    <small ng-message="required" class = "text-danger">You cannot leave this empty </small>
+                                    <!--<small ng-message="required" class = "text-danger">You cannot leave this empty </small>-->
                                     <small ng-message="number" class = "text-danger">invalid format </small>
                                     <small ng-message="maxlength" class = "text-danger"> invalid format </small>
                                     <small ng-message="min" class = "text-danger"> invalid format </small>
@@ -128,7 +99,7 @@
                             <div class = "col-sm-2">
                                 <div class="checkbox">
                                     <label class = 'control-label'>
-                                        <input  type="checkbox" ng-model = "vm.data.emp.SSN" ng-true-value = "" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" > I have no SSN
+                                        <input  type="checkbox" ng-model="vm.data.other.ssnDisabled" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)" > I have no SSN
                                     </label>
                                 </div>
                             </div>
@@ -419,14 +390,7 @@
                             <label class="col-sm-2 control-label">State:</label>
                             <div class="col-sm-2">
 
-                                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
-                                    <li role="menuitem"><a href="" ng-click="changePageSize(5)">5</a></li>
-                                    <li role="menuitem"><a href="" ng-click="changePageSize(10)">10</a></li>
-                                    <li role="menuitem"><a href="" ng-click="changePageSize(15)">15</a></li>
-                                </ul>
-
-                                <select ng-model = 'vm.data.emp.pState' ng-required = "true" class="form-control" title = "State">
-                                    <option class="bs-title-option" value="">State</option>
+                                <select ng-model = 'vm.data.emp.pState' class = "form-control" ng-required = "true"  title = "State">
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
                                     <option value="AZ">Arizona</option>
@@ -533,7 +497,6 @@
 
                             <div class="col-sm-2">
                                 <select ng-model = 'vm.data.emp.bState' class = "form-control" title = "State">
-                                    <option class = "form-control" value="">State</option>
                                     <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
                                     <option value="AZ">Arizona</option>

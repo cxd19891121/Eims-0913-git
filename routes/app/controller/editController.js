@@ -43,6 +43,9 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
         edu :{},
         order: {},
         visa: {},
+        other:{
+            ssnDisabled : false,
+        }
     }
 
     $scope.open = function(id)

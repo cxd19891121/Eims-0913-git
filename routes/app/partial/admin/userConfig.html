@@ -43,6 +43,7 @@
             </table>
             <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="20" boundary-links="true" items-per-page="pageSize"></ul>
         </div>
+
         <hr>
         <div class="row">
 
@@ -81,17 +82,18 @@
                         <input type="text" class="form-control" ng-model="newUser.eid">
                     </div>
                 </div>
-
-
-                <div class='form-group'>
-                    <button class="btn btn-primary" ng-click="back()">
-                        <span class="glyphicon glyphicon-arrow-left"></span> Back
-                    </button>
-                            <button class="btn btn-primary" ng-click="createUser()">
-                        <span class="glyphicon glyphicon-pencil"></span>Create
-                    </button>
-                </div>
             </form>
+        </div>
+
+        <div class='form-group'>
+
+            <button class="btn btn-primary" ng-click="back()">
+                <span class="glyphicon glyphicon-arrow-left"></span> Back
+            </button>
+
+            <button class="btn btn-primary" ng-click="createUser()">
+                <span class="glyphicon glyphicon-pencil"></span>Create
+            </button>
         </div>
         </div>
     </div>

@@ -128,7 +128,6 @@ app.controller('edit',function($scope,$uibModal, dataService)
         }
         else
         {
-            //console.log(info)
             info.data.forEach(function(element)
             {
                 for (i in element)
@@ -137,6 +136,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
                     else element[i] = parseISO8601(element[i])
                 }
                 element.flag = false
+                //console.log(element)
             })
         }
         $scope.users = info.data
@@ -163,8 +163,8 @@ app.controller('edit',function($scope,$uibModal, dataService)
                     }
                 })
                 newstr += "<br><br>"
-             
             }
+            
         })
         newstr = newstr.replace(/_/g," ")
 
@@ -289,6 +289,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
         dataService.getAllBySql(function(e,o){
             if(o){
                 $scope.users = o;
+                console.log($scope.users)
                 $scope.users.forEach(function(element)
                 {
                     for (i in element)
@@ -297,6 +298,8 @@ app.controller('edit',function($scope,$uibModal, dataService)
                         else element[i] = parseISO8601(element[i])
                     }
                     element.flag = false
+                    if (element.marital_status == true) element.marital_status = "yes";
+                    else if (element.marital_status == false) element.marital_status = "no";
                 })
                 $scope.totalItems = o.length;
                 $scope.allUsers = $scope.users

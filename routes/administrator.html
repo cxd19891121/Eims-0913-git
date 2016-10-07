@@ -40,7 +40,7 @@
 
 
 <style>
-.search_popover 
+.search_popover
 {
     max-width: 800px; /* optional max width */
     width: intrinsic; /* Safari/WebKit uses a non-standard name */
@@ -48,6 +48,8 @@
     width: 800px; /* Chrome */
     color: black;
 }
+
+
 .black_word
 {
     color:black;
@@ -64,7 +66,7 @@
 }
 /* .datpicker .btn-info contains selected date */
 
-.uib-datepicker-popup  .btn:enabled 
+.uib-datepicker-popup  .btn:enabled
 {
     font-size: 14px;
     font-weight: bold;
@@ -128,25 +130,38 @@ textarea
 {
     resize:none;
 }
+
+label.custom-checkbox, label.custom-radio {
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+    font-weight: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    max-width: 100%;
+}
 </style>
 
 
 <body>
     <page-top>
     <div class="page-top clearfix ng-isolate-scope " scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
-        
+
         <div class="navbar-left">
             <a href="/#/">
-          
+
             <img class="img-rounded" src="lib/bootstrap/css/mainLogo.png" height="60" width="240" >
-          
+
             </a>
         </div>
 
         <div class="navbar-right text-success">
-           
+
             <label style="font-size:150%">  Hello <em class="text-info">{{username}}</em></label>
-            
+
             <button uib-popover="Read Messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
                 Messages <span class="badge">{{letterNum}}</span>
             </button>
@@ -154,7 +169,7 @@ textarea
             <button uib-popover="Send Message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
             </button>
 
-            <button uib-popover="Setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">  
+            <button uib-popover="Setting" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="modifyConfig()">
                 <span class="glyphicon glyphicon-cog"></span>
             </button>
 
@@ -222,16 +237,16 @@ textarea
                 <button uib-popover="Close" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-remove" type="button" ng-click="close()" popover-class="black_word">
                 </button>
             </div>
-            
+
             <div class="modal-header">
                 <h3 >Send</h3>
             </div>
-            
+
             <div class="container col-md-12">
-                <div class="row">   
+                <div class="row">
                     <div ng-repeat="user in users" style="margin:8px;">
                         <div class="col-md-4">
-                            <input  type="checkbox" ng-model="user.flag" ng-click="disableSend()"> 
+                            <input  type="checkbox" ng-model="user.flag" ng-click="disableSend()">
                             <span>{{user.username}}</span>
                         </div>
                     </div>
@@ -240,27 +255,27 @@ textarea
             <div class="row"></div>
             <div class="modal-body">
                 <label>Message : </label>
-                
+
                 <div>
                     <textarea rows="10" cols="70" ng-model="data"></textarea>
                 </div>
-                
-               
+
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
             </div>
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
         </div>
     </script>
 
 
-    <div ng-view class="row">        
+    <div ng-view class="row">
     </div>
 
 

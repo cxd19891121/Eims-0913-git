@@ -110,12 +110,12 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
                 vm.data.emp.pAdd = data.emp.data.p_add;
                 vm.data.emp.pCity = data.emp.data.p_city;
                 vm.data.emp.pState = data.emp.data.p_state;
-                vm.data.emp.pZip = data.emp.data.p_zip;
+                vm.data.emp.pZip =  parseInt(data.emp.data.p_zip);
                 vm.data.emp.pCountry = data.emp.data.p_country;
                 vm.data.emp.bAdd = data.emp.data.b_add;
                 vm.data.emp.bCity = data.emp.data.b_city;
                 vm.data.emp.bState = data.emp.data.b_state;
-                vm.data.emp.bZip = data.emp.data.b_zip;
+                vm.data.emp.bZip = parseInt(data.emp.data.b_zip);
                 vm.data.emp.bCountry = data.emp.data.b_country;
                 vm.data.emp.hInsurance = data.emp.data.health_ins
                 vm.data.emp.rSubside = data.emp.data.regional_subsides

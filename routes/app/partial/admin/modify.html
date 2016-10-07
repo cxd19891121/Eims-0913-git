@@ -6,9 +6,9 @@
         <h1>System Config</h1>
         <br>
         <div class="row">
-            <button class="btn btn-primary" ng-click="back()">
-                <span class="glyphicon glyphicon-arrow-left"></span> Back
-            </button>
+            <a href="/#/">
+                <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+            </a>
 
         </div>
         <br>
@@ -163,9 +163,9 @@
 
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <br>
-        <button class="btn btn-primary" ng-click="back()">
-            <span class="glyphicon glyphicon-arrow-left"></span> Back
-        </button>
+            <a href="/#/">
+                <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+            </a>
         <div style="float:right">
             <button class="btn btn-primary" ng-click="updateConfig()">
             <span class="glyphicon glyphicon-pencil"></span>Update Config
@@ -231,9 +231,9 @@
             <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')"
                 close="closeLevelAlert($index)">{{alert.msg}}</div>
 
-            <button class="btn btn-primary" ng-click="back()">
-            <span class="glyphicon glyphicon-arrow-left"></span> Back
-    </button>
+            <a href="/#/">
+                <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+            </a>
             <div style="float:right">
                 <button class="btn btn-primary" ng-click="createLevel()">
         <span class="glyphicon glyphicon-pencil"></span>Add level

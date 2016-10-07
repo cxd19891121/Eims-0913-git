@@ -73,7 +73,8 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
                 {country: 'USA', toString: 'USA (+1)'}
             ],
             chinesePhone: false,
-            chineseHomePhone: false
+            chineseHomePhone: false,
+            ssnDisabled: false,
 
         }
     }
@@ -136,12 +137,12 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
                 vm.data.emp.pAdd = emp.p_add;
                 vm.data.emp.pCity = emp.p_city;
                 vm.data.emp.pState = emp.p_state;
-                vm.data.emp.pZip = emp.p_zip;
+                vm.data.emp.pZip = parseInt(emp.p_zip);
                 vm.data.emp.pCountry = emp.p_country;
                 vm.data.emp.bAdd = emp.b_add;
                 vm.data.emp.bCity = emp.b_city;
                 vm.data.emp.bState = emp.b_state;
-                vm.data.emp.bZip = emp.b_zip;
+                vm.data.emp.bZip =  parseInt(emp.b_zip);
                 vm.data.emp.bCountry = emp.b_country;
                 vm.data.emp.hInsurance = emp.health_ins
                 vm.data.emp.rSubside = emp.regional_subsides

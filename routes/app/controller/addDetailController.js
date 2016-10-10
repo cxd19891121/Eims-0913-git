@@ -197,6 +197,9 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
         if(vm.tabValidate.pTab && vm.tabValidate.oTab && vm.tabValidate.cTab && vm.tabValidate.adTab &&
         vm.tabValidate.vTab && vm.tabValidate.tTab && vm.tabValidate.jTab && vm.tabValidate.sTab) {
             vm.data.emp.progress = $scope.progressValue;
+            vm.data.other = {};
+            console.log(vm.data.other);
+
             dataService.addAll(vm.data, function (e, o) {
                 if (e) {
                     vm.message = e;

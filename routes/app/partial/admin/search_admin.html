@@ -9,7 +9,7 @@ word-break: break-all;
 
 <div class="panel panel-blur ">
     <div class="container">
-    <div class="animated zoomIn">
+    <div >
     <div class="row">
     <form class="form-horizontal" ng-controller="search" role="form">
         <uib-accordion close-others="showMoreSearch">
@@ -138,9 +138,11 @@ word-break: break-all;
     <div class="row" ng-controller="edit">
         <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
         <div>
-            <button uib-popover="display all Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(all)" popover-class="black_word">
+            <button uib-popover="display all Employee" popover-placement="" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(all)" popover-class="black_word">
                 <span class="glyphicon "></span> All
              </button>
+
+
              <button uib-popover="display incompleted Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(incomplete)" popover-class="black_word">
                 <span class="glyphicon "></span> Incomplete
              </button>

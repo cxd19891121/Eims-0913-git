@@ -3,6 +3,11 @@
  */
 app.controller('application', function($scope,dataService,$uibModal)
 {
+    $scope.homePage = function()
+    {
+        console.log(window.location.href)
+        $scope.$broadcast('refresh',{});
+    }
     $scope.messages = []
     $scope.username = window.localStorage.username
     $scope.unreadNumber = function(messges)
@@ -109,8 +114,6 @@ app.controller('application', function($scope,dataService,$uibModal)
     $scope.refresh();
 
 
-
-
     $scope.id = -1
     $scope.$on('editUser',function(event,data)
     {
@@ -125,9 +128,6 @@ app.controller('application', function($scope,dataService,$uibModal)
 
     $scope.open = function (size)
     {
-        //$scope.getMessage();
-        //console.log($scope.letterNum)
-        //console.log($scope.messages)
         var modalInstance = $uibModal.open
         ({
             animation: $scope.animationsEnabled,

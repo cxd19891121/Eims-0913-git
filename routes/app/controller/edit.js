@@ -16,6 +16,10 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.complete = Symbol("complete")
     $scope.incomplete = Symbol("incomplete")
 
+    $scope.$on("refresh",function(e,i)
+    {
+        init()
+    })
     $scope.changePageSize = function(num)
     {
         $scope.pageSize = num

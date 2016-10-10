@@ -1,5 +1,6 @@
 app.controller('search',['$scope','dataService',function($scope,dataService,$http,$httpParamSerializerJQLike)
 {
+    $scope.myPopover = {}
     $scope.open = function(id) 
     {
         $scope.popup[id] = true;
@@ -8,12 +9,21 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
         open: false
     }
+    $scope.keyPressSearch = function(event)
+    {
+        if (event.keyCode == 13)$scope.searchByName()
+    }
+    $scope.keyPressDeepSearch = function(event)
+    {
+        if (event.keyCode == 13)$scope.deepSearch()
+    }
     
 
     $scope.toggle = function()
     {
         $scope.displayAdvanceSearch = !$scope.displayAdvanceSearch
     }
+
     $scope.popup = 
     {
         opened: false
@@ -47,18 +57,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     
     $scope.searchByName = function()
     {
-        //console.log($scope.employeeName)
-        /*$http
-        ({
-            method: 'POST',
-            url: 'http://localhost:3000/search/name',
-            data: $httpParamSerializerJQLike({name :$scope.employeeName}),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-        })
-            .success(function(data)
-            {
-                
-            })*/
+       
         dataService.searchByName($scope.employeeName,function(data)
         {
             console.log(data)
@@ -74,6 +73,11 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
                 $scope.$parent.$broadcast('changeData',{data:data});
             }
         })
+    }
+    $scope.advanceSearch = function()
+    {
+        $scope.myPopover.isOpen = false
+        $scope.deepSearch()
     }
     $scope.deepSearch = function()
     {
@@ -98,3 +102,4 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
 
 }])
+

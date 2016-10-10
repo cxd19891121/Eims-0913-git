@@ -252,7 +252,6 @@ router.get('/config/redis',function(req,res){
             res.send(error);
         }
     })
-
 })
 
 router.get('/config/auth',function(req,res){

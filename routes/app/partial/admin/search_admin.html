@@ -35,83 +35,83 @@ word-break: break-all;
             <script type="text/ng-template" id="advanceSearch.html">
            
                 <div class="row">
-                    <label class="col-sm-2 ">First name:</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">First name:</label>
+                    <div class="col-md-3">
                         <input type="text" ng-model="searchObject.first_name" ng-keypress="keyPressDeepSearch($event)">
                     </div>
 
-                    <label class="col-sm-2 ">Last name:</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">Last name:</label>
+                    <div class="col-md-3">
                         <input type="text" ng-model="searchObject.last_name" ng-keypress="keyPressDeepSearch($event)">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 ">Job title:&emsp;</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">Job title:&emsp;</label>
+                    <div class="col-md-3">
                         <input type="text" ng-model="searchObject.job_title" ng-keypress="keyPressDeepSearch($event)">
                     </div>
-                    <label class="col-sm-2 ">Visa status:&emsp;</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">Visa status:&emsp;</label>
+                    <div class="col-md-3">
                         <input type="text" ng-model="searchObject.status" ng-keypress="keyPressDeepSearch($event)">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-sm-2 ">Major:&emsp;</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">Major:&emsp;</label>
+                    <div class="col-md-3">
                         <input type="text" ng-model="searchObject.major" ng-keypress="keyPressDeepSearch($event)">
                     </div>
-                    <label class="col-sm-2 ">Education:&emsp;</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">Education:&emsp;</label>
+                    <div class="col-md-3">
                         <input type="text" ng-model="searchObject.degree" ng-keypress="keyPressDeepSearch($event)">
                     </div>
                 </div>
 
                 <div class="row">
-                        <label class="col-sm-2 ">Visa Start:&emsp;</label>
-                        <div class="col-md-4">
+                        <label class="col-sm-3 ">Visa Start:&emsp;</label>
+                        <div class="col-md-3">
                             <div class="black_word">
                             <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']" ng-focus="open(1)" is-open="popup['1']" ng-keypress="keyPressDeepSearch($event)" />
                             </div>
                         </div>
-                        <label class="col-sm-2 ">Visa End:&emsp;</label>
-                        <div class="col-md-4">
+                        <label class="col-sm-3 ">Visa End:&emsp;</label>
+                        <div class="col-md-3">
                             <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']" ng-focus="open(0)" is-open="popup['0']" ng-keypress="keyPressDeepSearch($event)" />
                         </div>
                 </div>
 
                 <div class="row">
-                        <label class="col-sm-2 ">Salary:&emsp;</label>
-                        <div class="col-md-4">
+                        <label class="col-sm-3 ">Salary:&emsp;</label>
+                        <div class="col-md-3">
                             <input  type="number" ng-model="searchObject['salary']" ng-keypress="keyPressDeepSearch($event)">
                         </div>
-                        <label class="col-sm-2 ">Insurance:&emsp;</label>
-                        <div class="col-md-4">
+                        <label class="col-sm-3 ">Insurance:&emsp;</label>
+                        <div class="col-md-3">
                             <input type="text" ng-model="searchObject['health_insurance']" ng-keypress="keyPressDeepSearch($event)">
                         </div>
                 </div>
 
                 <div class="row">
-                        <label class="col-sm-2 control-label">Reimbursment:&emsp;</label>
-                        <div class="col-md-4">
+                        <label class="col-sm-3">Reimbursement:&emsp;</label>
+                        <div class="col-md-3">
                             <input type="number" ng-model="searchObject['reimbursement']" ng-keypress="keyPressDeepSearch($event)">
                         </div>
                 </div>
            
                 <div class="row">
-                    <label class="col-sm-2 ">Regional:</label>
+                    <label class="col-sm-3 ">Regional:</label>
 
-                    <div class="col-md-4">
-                        <input class="col-md-4" type="number" placeholder="Min" ng-model="searchObject['regional_subsides_start']" ng-keypress="keyPressDeepSearch($event)">
-                        <input class="col-md-4 type="number" placeholder="Max" ng-model="searchObject['regional_subsides_end']" ng-keypress="keyPressDeepSearch($event)">
+                    <div class="col-md-3">
+                        <input class="col-md-6" type="number" placeholder="Min" ng-model="searchObject['regional_subsides_start']" ng-keypress="keyPressDeepSearch($event)">
+                        <input class="col-md-6" type="number" placeholder="Max" ng-model="searchObject['regional_subsides_end']" ng-keypress="keyPressDeepSearch($event)">
                     </div>
 
-                    <label class="col-sm-2 ">Payraise:</label>
-                    <div class="col-md-4">
+                    <label class="col-sm-3 ">Payraise:</label>
+                    <div class="col-md-3">
 
-                        <input class="col-md-4" type="number" placeholder="Min" ng-model="searchObject['payraise_start']" ng-keypress="keyPressDeepSearch($event)">
-                        <input class="col-md-4" type="number" placeholder="Max" ng-model="searchObject['payraise_end']" ng-keypress="keyPressDeepSearch($event)">
+                        <input class="col-md-6" type="number" placeholder="Min" ng-model="searchObject['payraise_start']" ng-keypress="keyPressDeepSearch($event)">
+                        <input class="col-md-6" type="number" placeholder="Max" ng-model="searchObject['payraise_end']" ng-keypress="keyPressDeepSearch($event)">
                     </div>
                 </div>
                 <div style="float:right;">

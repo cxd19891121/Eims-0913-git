@@ -148,7 +148,7 @@
                 <uib-tab-heading>
                     <i ng-show="oTab.$invalid" class="glyphicon glyphicon-pencil"></i>
                     <i ng-show="oTab.$valid" class="glyphicon glyphicon-ok"></i>
-                    <Strong>Order Info</Strong>
+                    <Strong>Project Info</Strong>
                 </uib-tab-heading>
 
                 <form name="oTab" class="form-horizontal" role="form" novalidate>
@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Owner:</label>
+                        <label class="col-sm-2 control-label">Sales Contact:</label>
                         <div class="col-sm-5" ng-class="{ 'has-error' : oTab.owner.$invalid && oTab.owner.$touched }">
                             <input name="owner" ng-model='vm.data.order.owner' class="form-control"
                                    placeholder="eg: logan"
@@ -651,14 +651,22 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Visa Type:</label>
-                        <div class="col-sm-5" ng-class="{ 'has-error' : vTab.vType.$invalid && vTab.bType.$touched }">
-                            <input placeholder="eg: F1 OPT **" name="vType" ng-required="true"
-                                   ng-model='vm.data.visa.type' class="form-control"
-                                   ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
-                            <div class="help-block" ng-messages="vTab.vType.$error" ng-show="vTab.vType.$touched">
-                                <!--<small ng-message="required" class = "text-danger">You cannot leave this empty </small>-->
+                            <div class ="col-sm-5" ng-class="{ 'has-error' : vTab.type.$invalid && vTab.type.$touched }">
+                                <select name = "type" ng-model='vm.data.visa.type' ng-required="addNewEmployee.visaInfo"
+                                        class="form-control" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
+                                    <option value="F1 OPT">F1 OPT</option>
+                                    <option value="OPT ext">OPT ext.</option>
+                                    <option value="Green Card">Green Card</option>
+                                    <option value="US citizen">US citizen</option>
+                                    <option value="Other">Other</option>
+                                </select>
+
+                                <div class="help-block" ng-messages="vTab.vType.$error"
+                                     ng-show="vTab.vType.$touched">
+                                    <!--<small ng-message="required" class="text-danger">You cannot leave this empty-->
+                                    <!--</small>-->
+                                </div>
                             </div>
-                        </div>
                     </div>
 
                     <div class="form-group">
@@ -696,8 +704,7 @@
                         <label class="col-sm-2 control-label">Status:</label>
                         <div class="col-sm-5"
                              ng-class="{ 'has-error' : vTab.vStatus.$invalid && vTab.vStatus.$touched }">
-                            <input name="vStatus" placeholder="eg: H1B Authoring **" ng-required="true"
-                                   ng-model="vm.data.visa.status" class="form-control"
+                            <input name="vStatus" placeholder="eg: H1B Authoring" ng-model="vm.data.visa.status" class="form-control"
                                    ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
 
                             <div class="help-block" ng-messages="vTab.vStatus.$error" ng-show="vTab.vStatus.$touched">
@@ -786,17 +793,22 @@
                         <div class="col-sm-5" ng-class="{ 'has-error' : jTab.major.$invalid && jTab.major.$touched }">
                             <input name="major" placeholder="eg: CS" ng-model='vm.data.edu.major' class="form-control"
                                    ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
-
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Degree:</label>
-                        <div class="col-sm-5" ng-class="{ 'has-error' : jTab.degree.$invalid && jTab.degree.$touched }">
-                            <input name="degree" placeholder="eg: bachelor" ng-model='vm.data.edu.degree'
-                                   class="form-control"
-                                   ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
+
+                        <div class="col-sm-5"
+                             ng-class="{ 'has-error' : jTab.degree.$invalid && jTab.degree.$touched }">
+                            <select name ="degree" ng-model='vm.data.edu.degree'  ng-required="addNewEmployee.jobEducation"
+                                    class="form-control" ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
+                                <option value="BS">BS</option>
+                                <option value="MS">MS</option>
+                                <option value="PhD">PhD</option>
+                            </select>
                         </div>
+
                     </div>
 
 

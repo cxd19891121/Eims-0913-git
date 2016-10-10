@@ -97,13 +97,13 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
                 vm.data.emp.lName = data.emp.data.last_name;
                 vm.data.emp.mName = data.emp.data.middle_name;
                 vm.data.emp.DOB = new Date(data.emp.data.dob);
-                vm.data.emp.SSN = data.emp.data.ssn;
+                vm.data.emp.SSN = parseInt(data.emp.data.ssn);
                 vm.data.emp.mStatus = data.emp.data.marital_status;
                 vm.data.emp.jTitle = data.emp.data.job_title;
                 vm.data.emp.jLevel = data.emp.data.job_level;
                 vm.data.emp.salary = moneyToInt(data.emp.data.salary);
-                vm.data.emp.hPhone = data.emp.data.home_phone
-                vm.data.emp.cPhone = data.emp.data.cellphone
+                vm.data.emp.hPhone = parseInt(data.emp.data.home_phone);
+                vm.data.emp.cPhone = parseInt(data.emp.data.cellphone);
                 vm.data.emp.email = data.emp.data.email
                 vm.data.emp.tDate = new Date(data.emp.data.termn_date);
                 vm.data.emp.tReason = data.emp.data.termn_reason

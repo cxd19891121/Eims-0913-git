@@ -7,8 +7,7 @@
 
 
 var db = require('./../comm/database');
-var empDAO = require('./emp');
-var dtLogicService = require('./../service/dtLogicService')
+//var dtLogicService = require('./../service/dtLogicService')
 
 var sql = {
     insertColProgress: {
@@ -21,6 +20,20 @@ var sql = {
         text:'ALTER TABLE order_info ADD COLUMN delete_flag boolean DEFAULT false'
     },
 
+    changeColDataTypeSSN:{
+        name:"changeColDataTypeSSN",
+        text: 'ALTER TABLE employee_info ALTER COLUMN ssn TYPE text ',
+    },
+
+    changeColDataTypeHomePhone:{
+        name:"changeColDataTypeHomePhone",
+        text: 'ALTER TABLE employee_info ALTER COLUMN home_phone TYPE text ',
+    },
+
+    changeColDataTypeCellphone:{
+        name:"changeColDataTypeSSN",
+        text: 'ALTER TABLE employee_info ALTER COLUMN cellphone TYPE text ',
+    },
 
     removeColpayrise_precentage:{
         name:'removeColpayrise_precentage',
@@ -87,6 +100,18 @@ var sql = {
 // console.log(isNaN(l),isNaN(n));
 
 //insertCol();
+
+query(sql['changeColDataTypeHomePhone']);
+
+function query(sql){
+    db.queryPres(sql,function(e,o){
+        if(e){
+            console.log(e)
+        }else{
+            console.log(o);
+        }
+    })
+}
 
 function insertCol() {
     db.queryPres(sql['insertColDeleteFlag'], function (e, o) {

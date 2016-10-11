@@ -10,12 +10,12 @@ var sql = {
     selectUserById: {name:'selectUserById',text:"select * from user_info where id = $1 AND delete_flag = false"},
     selectFirstUser : { name: 'selectFirstUser', text:"select * from user_info where id = $1 ",values:[1]},
     deleteUserById: {name:"deleteUserById",text:"DELETE FROM user_info WHERE id = $1",values:[1]},
-    insertUser:{name:'insertUser',text:'insert into user_info (username,password,e_id,level) VALUES ($1, $2, $3, $4)',
+    insertUser:{name:'insertUser',text:'insert into user_info (username,password,e_id,level,email) VALUES ($1, $2, $3, $4, $5)',
     values:['username','password',2333,2333]},
-    updateUserById: {name:"updateUserById",text:"UPDATE user_info SET username = $1, password = $2, e_id = $3, level = $4 where id=$5"
-        ,values: ["username", "password", 1, 0,1] },
+    updateUserById: {name:"updateUserById",text:"UPDATE user_info SET username = $1, password = $2, e_id = $3, level = $4, email = $5 where id=$6"
+        ,values: ["username", "password", 1, 0,"amesIT@example.com",1] },
     selectLastUser: {name: "selectLastUser", text: "SELECT * FROM user_info where delete_flag = false ORDER BY id DESC LIMIT 1"},
-    selectEmailByUsername:{name:"selectEmailByUsername", text: "SELECT email,password FROM user_info LEFT JOIN employee_info on user_info.e_id=employee_info.e_id WHERE username=$1 && delete_flag = false", values: ["default"]},
+    selectEmailByUsername:{name:"selectEmailByUsername", text: "SELECT email,password FROM user_info WHERE username = $1 AND delete_flag = false", values: ["default"]},
 
     deleteFlagUserById :{name:"deleteFlagUserById", text :"UPDATE user_info SET delete_flag = true where id = $1", values :[0]},
     undoDeleteUserById :{name:"undoDeleteUserById",text:"UPDATE user_info SET delete_flag = false where id = $1",values:[0]}
@@ -73,13 +73,13 @@ exports.deleteElementById = function(id,callback){
 
 exports.insertElement = function(dt,callback){
     console.log(dt)
-    sql['insertUser'].values = [dt.username,dt.password,dt.eid,dt.level];
+    sql['insertUser'].values = [dt.username,dt.password,dt.eid,dt.level,dt.email];
     return db.queryPres(sql['insertUser'],function(e,o){callback(e,o)});
 }
 
 exports.updateElementById = function(id,dt,callback){
     console.log(dt);
-    sql['updateUserById'].values = [dt.username,dt.password,dt.eid,dt.level,id];
+    sql['updateUserById'].values = [dt.username,dt.password,dt.eid,dt.level,dt.email,id];
     return db.queryPres(sql['updateUserById'],function(e,o){callback(e,o)});
 }
 

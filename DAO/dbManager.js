@@ -7,6 +7,8 @@
 
 
 var db = require('./../comm/database');
+var userDAO = require('./../DAO/user');
+
 //var dtLogicService = require('./../service/dtLogicService')
 
 var sql = {
@@ -18,6 +20,11 @@ var sql = {
     insertColDeleteFlag:{
         name:'insertDeleteFlag',
         text:'ALTER TABLE order_info ADD COLUMN delete_flag boolean DEFAULT false'
+    },
+
+    insertColEmail:{
+        name:'insertColEmail',
+        text:'ALTER TABLE user_info ADD COLUMN email text'
     },
 
     changeColDataTypeSSN:{
@@ -33,6 +40,12 @@ var sql = {
     changeColDataTypeCellphone:{
         name:"changeColDataTypeSSN",
         text: 'ALTER TABLE employee_info ALTER COLUMN cellphone TYPE text ',
+    },
+
+    removeEidConsForUser:{
+        name:"removeEidConsForUser",
+        text:'ALTER TABLE user_info ALTER COLUMN e_id DROP NOT NULL',
+
     },
 
     removeColpayrise_precentage:{
@@ -101,7 +114,18 @@ var sql = {
 
 //insertCol();
 
-query(sql['changeColDataTypeHomePhone']);
+//query(sql['removeEidConsForUser']);
+//testDAO();
+
+function testDAO(){
+    userDAO.selectEmailByUsername('logan',function(e,o){
+        if(e){
+            console.log(e);
+        }else{
+            console.log(o);
+        }
+    })
+}
 
 function query(sql){
     db.queryPres(sql,function(e,o){

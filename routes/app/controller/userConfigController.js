@@ -1,101 +1,98 @@
 /**
  * Created by mooner00 on 9/6/2016.
  */
-app.controller('userConfigController', function($scope,$http,$httpParamSerializerJQLike, $uibModal,dataService,configService,$timeout)
-{
+app.controller('userConfigController', function ($scope, $http, $httpParamSerializerJQLike, $uibModal, dataService, configService, $timeout) {
     $scope.newUser = {}
 
     $scope.levels = []
-    var init = function()
-    {
-        dataService.getConfigDetail('auth',function(data)
-        {
+    var init = function () {
+        dataService.getConfigDetail('auth', function (data) {
             console.log(data)
-            forEach(data,function(key,value)
-            {
-                if (value.level >=0) $scope.levels.push(value)
+            forEach(data, function (key, value) {
+                if (value.level >= 0) $scope.levels.push(value)
             })
             console.log($scope.levels)
         })
     }()
-    
-    $scope.users = [{id:1,level:1,username:"hi",password:"hello"}]
+
+    $scope.users = [{id: 1, level: 1, username: "hi", password: "hello", emial: "xxx@xxx.com"}]
 
     $scope.msg = {};
 
-    $scope.changeAuth = function(user,auth)
-    {
+    $scope.changeAuth = function (user, auth) {
         console.log(user)
         user.level = auth
     }
-    $scope.alert = 
+    $scope.alert =
     {
         good: "New User Added",
-        fail:"Add Fail",
+        fail: "Add Fail",
     }
     $scope.goodAdd = false;
     $scope.failAdd = false;
 
 
     $scope.alerts = []
-    $scope.addAlert = function() {
-        $scope.alerts.push({type:'success',msg: 'Success add!'});
+    $scope.addAlert = function () {
+        $scope.alerts.push({type: 'success', msg: 'Success add!'});
     };
 
-    $scope.deleteAlert = function(){
-        $scope.alerts.push({type:"success",msg:"user has been delete"});
+    $scope.deleteAlert = function () {
+        $scope.alerts.push({type: "success", msg: "user has been delete"});
     }
-    $scope.deleteFailAlert = function(){
-        $scope.alerts.push({type:"danger",msg:"fail to delete"});
-}
+    $scope.deleteFailAlert = function () {
+        $scope.alerts.push({type: "danger", msg: "fail to delete"});
+    }
 
-    $scope.closeAlert = function(index) {
-    $scope.alerts.splice(index, 1);
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
     };
-   
 
 
-
-    $scope.createUser = function()
-    {
+    $scope.createUser = function () {
         $scope.users.push($scope.newUser)
-        dataService.insertUser({user: $scope.newUser},function(data)
-        {
-            console.log(data)
-            $scope.goodAdd = true;
-            $scope.addAlert();
-            $timeout(function(){
-                $scope.goodAdd = false;
-            }, 2000);
+        dataService.insertUser({user: $scope.newUser}, function (e, data) {
 
-        })
-    }
+            if (e) {
+                $scope.addFailAlert();
+                console.log('Error in Create User',e);
+            } else {
+                console.log('Success in Create User',data)
+                $scope.addAlert();
+                //$scope.newUser = {};
+                setTimeout(function(){ location.reload(); }, 1000)
 
-    $scope.deleteUser = function(id){
-        dataService.deleteUserById(id, function(e,o){
-            if(e){
-                $scope.deleteAlert();
-            }else{
-                $scope.deleteFailAlert();
             }
         })
     }
 
-    $scope.editUser = function(id)
-    {
+    $scope.deleteUser = function (id) {
+        dataService.deleteUserById(id, function (e, o) {
+            if (e) {
+                console.log("error", e);
+                $scope.deleteFailAlert();
+            } else {
+                console.log("success delete", o);
+                $scope.deleteAlert();
+                setTimeout(function(){ location.reload(); }, 1000)
+            }
+        })
+    }
+
+    $scope.editUser = function (id) {
         var newUser = {};
-        $scope.users.forEach(function(element){
-            if(element.id == id){
+        $scope.users.forEach(function (element) {
+            if (element.id == id) {
                 newUser = element;
 
             }
         })
         newUser.eid = newUser.e_id;
 
-        dataService.updateUserById(id,{user:newUser},function(e,o){
-            if(e){
+        dataService.updateUserById(id, {user: newUser}, function (e, o) {
+            if (e) {
                 $scope.msg = e;
-            }else{
+            } else {
                 $scope.msg = o;
                 $scope.addAlert();
                 // var config = configService.getConfig();
@@ -105,10 +102,8 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         });
 
     }
-    $scope.init = function()
-    {
-        dataService.getAllUser(function(data)
-        {
+    $scope.init = function () {
+        dataService.getAllUser(function (data) {
             //console.log(data);
             $scope.users = data;
             $scope.totalItems = $scope.users.length
@@ -121,14 +116,12 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
     $scope.predicate = 'name';
     $scope.reverse = true;
 
-    $scope.order = function (predicate)
-    {
+    $scope.order = function (predicate) {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
     }
 
-    $scope.paginate = function (value)
-    {
+    $scope.paginate = function (value) {
         var begin, end, index;
         begin = ($scope.currentPage - 1) * $scope.pageSize;
         end = begin + $scope.pageSize;
@@ -136,7 +129,7 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
         return (begin <= index && index < end);
     }
 
-    $scope.back = function(){
+    $scope.back = function () {
         window.history.back();
     }
 

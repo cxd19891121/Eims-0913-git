@@ -2,20 +2,21 @@
     <div class="panel panel-blur ">
     <div class="container">
         <div class="row">
-            <h1>User Management System </h1>
+            <h1>Account Management </h1>
             <hr>
 
-            <h2>Change user Information</h2>
+            <h2>Change User Information</h2>
 
         </div>
         <div class="row">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th><a href="" ng-click="order('id')">Employee Id</a></th>
+                        <th><a href="" ng-click="order('id')">User Id</a></th>
                         <th><a href="" ng-click="order('username')">UserName</a></th>
                         <th><a href="" ng-click="order('password')">Password</a></th>
                         <th><a href="" ng-click="order('level')">Level</a></th>
+                        <th><a href="" ng-click="order('email')">Email</a></th>
                         <th>Operation</th>
                     </tr>
                 </thead>
@@ -32,6 +33,7 @@
                             </div>
 
                         </td>
+                        <td><input type ="text" class="form-control" ng-model="user.email"></td>
                         <td>
                             <button class="btn btn-primary" ng-click="editUser(user.e_id)">
                     <span class="glyphicon glyphicon-pencil"></span>Update
@@ -40,7 +42,7 @@
 
 
 
-                            <button class="btn btn-primary" ng-click="deleteUser(user.e_id)">
+                            <button class="btn btn-primary" ng-click="deleteUser(user.id)">
                                 <span class="glyphicon glyphicon-pencil"></span>Delete
                             </button>
 
@@ -59,23 +61,23 @@
             <h2> Create New User </h2>
             <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" name="userForm">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">username:</label>
+                    <label class="col-sm-2 control-label">Name:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" ng-model="newUser.username">
+                        <input ng-required="true" type="text" class="form-control" ng-model="newUser.username" placeholder="eg: username **">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">password:</label>
+                    <label class="col-sm-2 control-label">Password:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" ng-model="newUser.password">
+                        <input type="text" ng-required="true" class="form-control" ng-model="newUser.password" placeholder="eg: password **">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Level:  </label>
+                    <label class="col-sm-2 control-label">Level: </label>
                     <div class="col-sm-4">
 
                         <div class="btn-group" ng-repeat="element in levels">
@@ -86,9 +88,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Employee Id:</label>
+                    <label class="col-sm-2 control-label">Email:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" ng-model="newUser.eid">
+                        <input type="email" ng-required="true" class="form-control" ng-model="newUser.email" placeholder="eg: xxx@example.com **">
                     </div>
                 </div>
             </form>
@@ -100,7 +102,7 @@
                 <span class="glyphicon glyphicon-arrow-left"></span> Back
             </button>
 
-            <button class="btn btn-primary" ng-click="createUser()">
+            <button class="btn btn-primary" ng-click="createUser()" ng-disabled ="userForm.$invalid">
                 <span class="glyphicon glyphicon-pencil"></span>Create
             </button>
         </div>

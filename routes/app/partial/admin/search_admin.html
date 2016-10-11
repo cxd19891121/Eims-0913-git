@@ -193,18 +193,19 @@ word-break: break-all;
                     <td>{{ user.end_time }}</td>
                     <td>{{ user.job_title }}</td>
                     <td>
+                        <button class="btn btn-success" ng-click="showEmployeeDetail(user.e_id)" )>
+                            <span class="glyphicon glyphicon-paperclip"></span>Detail
+                        </button>
 
                         <button class="btn btn-primary" ng-click="editUser(user.e_id)">
-                    <span class="glyphicon glyphicon-pencil"></span>Edit
-                </button>
+                            <span class="glyphicon glyphicon-pencil"></span>Edit
+                        </button>
 
-                        <button class="btn btn-primary" ng-click="deleteUser(user.e_id)">
+                        <button class="btn btn-danger" ng-click="deleteUser(user.e_id)">
                             <span class="glyphicon glyphicon-trash"></span>Delete
                         </button>
 
-                        <button class="btn btn-primary" ng-click="showEmployeeDetail(user.e_id)" )>
-                    <span class="glyphicon glyphicon-paperclip"></span>Detail
-                </button>
+                        
                     </td>
                 </tr>
             </tbody>

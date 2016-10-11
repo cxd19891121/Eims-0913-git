@@ -72,7 +72,7 @@ app.controller('userConfigController', function($scope,$http,$httpParamSerialize
     }
 
     $scope.deleteUser = function(id){
-        dataService.deleteUser(id, function(e,o){
+        dataService.deleteUserById(id, function(e,o){
             if(e){
                 $scope.deleteAlert();
             }else{

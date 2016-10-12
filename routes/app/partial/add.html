@@ -144,12 +144,25 @@
                         <div class="form-group" ng-class="{ 'has-error' : pTab.dob.$invalid && pTab.dob.$touched }">
                             <label class="col-sm-2 control-label">DOB :</label>
                             <div class="col-sm-3">
-                                <input name="dob" placeholder="eg : 01-01-1990" min="01-01-1950" min="01-01-1950"
-                                       type="text"
-                                       class="form-control" show-button-bar="false"
-                                       uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB'
-                                       ng-focus="open(1)" is-open="popup['1']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                <p class="input-group">
+                                    <input name="dob" placeholder="eg: 1995-4-19 (yyyy-mm-dd)" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.emp.DOB"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+
+                                <!--<input name="dob" placeholder="eg : 01-01-1990" min="01-01-1950" min="01-01-1950"-->
+                                       <!--type="text"-->
+                                       <!--class="form-control" show-button-bar="false"-->
+                                       <!--uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.emp.DOB'-->
+                                       <!--ng-focus="open(1)" is-open="popup['1']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                                 <div class="help-block" ng-messages="pTab.dob.$error" ng-show="pTab.dob.$touched">
                                     <small ng-message="date" class="text-danger">Invalid date</small>
@@ -325,11 +338,26 @@
                             <label class="col-sm-2 control-label">Start:</label>
                             <div class="col-sm-2"
                                  ng-class="{ 'has-error' : oTab.sTime.$invalid && oTab.sTime.$touched }">
-                                <input name="sTime" placeholder="eg: 2001-01-01 **"
-                                       ng-required="addNewEmployee.orderStatus" type="text" class="form-control"
-                                       show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"
-                                       ng-model='vm.data.order.sTime' ng-focus="open(5)" is-open="popup['5']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+
+                                <p class="input-group">
+                                    <input name="sTime" placeholder="eg: yyyy-mm-dd" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.order.sTime"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+
+
+                                <!--<input name="sTime" placeholder="eg: 2001-01-01 **"-->
+                                       <!--ng-required="addNewEmployee.orderStatus" type="text" class="form-control"-->
+                                       <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                                       <!--ng-model='vm.data.order.sTime' ng-focus="open(5)" is-open="popup['5']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
                                 <div class="help-block" ng-messages="oTab.sTime.$error"
                                      ng-show="oTab.sTime.$touched">
                                     <!--<small ng-message="required" class="text-danger">You cannot leave this empty-->
@@ -344,11 +372,24 @@
                             <label class="col-sm-1 control-label">End:</label>
                             <div class="col-sm-2"
                                  ng-class="{ 'has-error' : oTab.eTime.$invalid && oTab.eTime.$touched }">
-                                <input name="eTime" placeholder="eg: 2001-01-01 **"
-                                       ng-required="addNewEmployee.orderStatus" type="text" class="form-control"
-                                       show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"
-                                       ng-model='vm.data.order.eTime' ng-focus="open(6)" is-open="popup['6']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+
+                                <p class="input-group">
+                                    <input name="eTime" placeholder="eg: yyyy-mm-dd" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.order.eTime"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+                                <!--<input name="eTime" placeholder="eg: 2001-01-01 **"-->
+                                       <!--ng-required="addNewEmployee.orderStatus" type="text" class="form-control"-->
+                                       <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                                       <!--ng-model='vm.data.order.eTime' ng-focus="open(6)" is-open="popup['6']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
                                 <div class="help-block" ng-messages="oTab.eTime.$error"
                                      ng-show="oTab.eTime.$touched">
                                     <!--<small ng-message="required" class="text-danger">You cannot leave this empty-->
@@ -745,10 +786,21 @@
                             <label class="col-sm-2 control-label">Start:</label>
                             <div class="col-sm-2"
                                  ng-class="{ 'has-error' : vTab.vStart.$invalid && vTab.vStart.$touched }">
-                                <input name="vStart" placeholder="eg: 01-01-2000" type="text" class="form-control"
-                                       show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"
-                                       ng-model='vm.data.visa.sTime' ng-focus="open(7)" is-open="popup['7']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                <p class="input-group">
+                                    <input name="vStart" placeholder="eg: yyyy-mm-dd" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.visa.sTime"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+                                <!--<input name="vStart" placeholder="eg: 01-01-2000" type="text" class="form-control"-->
+                                       <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                                       <!--ng-model='vm.data.visa.sTime' ng-focus="open(7)" is-open="popup['7']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                                 <div class="help-block" ng-messages="vTab.vStart.$error"
                                      ng-show="vTab.vStart.$touched">
@@ -760,11 +812,23 @@
 
                             <label class="col-sm-1 control-label">Expired:</label>
                             <div class="col-sm-2" ng-class="{ 'has-error' : vTab.vEnd.$invalid && vTab.vEnd.$touched }">
-                                <input name="vEnd" placeholder="eg: 01-01-2001 **" ng-required="addNewEmployee.visaInfo"
-                                       type="text" class="form-control" show-button-bar="false"
-                                       uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.visa.eTime'
-                                       ng-focus="open(8)" is-open="popup['8']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                <p class="input-group">
+                                    <input name="vEnd" placeholder="eg: yyyy-mm-dd" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.visa.eTime"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+                                <!--<input name="vEnd" placeholder="eg: 01-01-2001 **" ng-required="addNewEmployee.visaInfo"-->
+                                       <!--type="text" class="form-control" show-button-bar="false"-->
+                                       <!--uib-datepicker-popup="dd-MMMM-yyyy" ng-model='vm.data.visa.eTime'-->
+                                       <!--ng-focus="open(8)" is-open="popup['8']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                                 <div class="help-block" ng-messages="vTab.vEnd.$error" ng-show="vTab.vEnd.$touched">
                                     <small ng-message="date" class="text-danger">Invalid Date Type</small>
@@ -809,10 +873,23 @@
                             <label class="col-sm-2 control-label">Termination Date:</label>
                             <div class="col-sm-4"
                                  ng-class="{ 'has-error' : tTab.tDate.$invalid && tTab.tDate.$touched }">
-                                <input name='tDate' type="text" placeholder="eg: 01-01-2001" class="form-control"
-                                       show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"
-                                       ng-model='vm.data.emp.tDate' ng-focus="open(2)" is-open="popup['2']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+
+                                <p class="input-group">
+                                    <input name="tDate" placeholder="eg: 2000-4-19 (yyyy-mm-dd)" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.emp.tDate"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+                                <!--<input name='tDate' type="text" placeholder="eg: 01-01-2001" class="form-control"-->
+                                       <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                                       <!--ng-model='vm.data.emp.tDate' ng-focus="open(2)" is-open="popup['2']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
 
                                 <div class="help-block" ng-messages="tTab.tDate.$error"
@@ -924,10 +1001,24 @@
                             <label class="col-sm-2 control-label">Start:</label>
                             <div class="col-sm-2"
                                  ng-class="{ 'has-error' : jTab.jStart.$invalid && jTab.jStart.$touched }">
-                                <input type="text" placeholder="eg: 01-01-2000" name="jStart" class="form-control"
-                                       show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"
-                                       ng-model='vm.data.work.sTime' ng-focus="open(3)" is-open="popup['3']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+
+
+                                <p class="input-group">
+                                    <input name="jStart" placeholder="eg: yyyy-mm-dd" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.work.sTime"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+                                <!--<input type="text" placeholder="eg: 01-01-2000" name="jStart" class="form-control"-->
+                                       <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                                       <!--ng-model='vm.data.work.sTime' ng-focus="open(3)" is-open="popup['3']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                                 <div class="help-block" ng-messages="jTab.jStart.$error"
                                      ng-show="jTab.jStart.$touched">
@@ -940,10 +1031,23 @@
 
                             <label class="col-sm-1 control-label">End:</label>
                             <div class="col-sm-2" ng-class="{ 'has-error' : jTab.jEnd.$invalid && jTab.jEnd.$touched }">
-                                <input type="text" placeholder="eg: 01-01-2001" name="jEnd" class="form-control"
-                                       show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"
-                                       ng-model='vm.data.work.eTime' ng-focus="open(4)" is-open="popup['4']"
-                                       ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+
+                                <p class="input-group">
+                                    <input name="jEnd" placeholder="eg: yyyy-mm-dd" type="text"
+                                           class="form-control" uib-datepicker-popup ng-model="vm.data.work.eTime"
+                                           is-open="popup['1']" datepicker-options="dateOptions" ng-required="true" close-t
+                                           ext="Close"
+                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                    <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+                                </p>
+
+                                <!--<input type="text" placeholder="eg: 01-01-2001" name="jEnd" class="form-control"-->
+                                       <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                                       <!--ng-model='vm.data.work.eTime' ng-focus="open(4)" is-open="popup['4']"-->
+                                       <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                                 <div class="help-block" ng-messages="jTab.jEnd.$error" ng-show="jTab.jEnd.$touched">
                                     <small ng-message="date" class="text-danger">Invalid date</small>

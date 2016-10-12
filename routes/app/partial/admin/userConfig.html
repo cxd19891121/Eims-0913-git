@@ -35,7 +35,7 @@
                         </td>
                         <td><input type ="text" class="form-control" ng-model="user.email"></td>
                         <td>
-                            <button class="btn btn-primary" ng-click="editUser(user.e_id)">
+                            <button class="btn btn-primary" ng-click="editUser(user.id)">
                     <span class="glyphicon glyphicon-pencil"></span>Update
                 </button>
 
@@ -59,9 +59,9 @@
         <div class="row">
 
             <h2> Create New User </h2>
-            <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+            <div uib-alert dismiss-on-timeout="1000" ng-repeat="alert in alerts" ng-class="'alert-warning black_word'" close="closeAlert($index)">{{alert.msg}}</div>
 
-            <form class="form-horizontal" role="form" name="userForm">
+            <form class="form-horizontal" role="form" name="userForm" novalidate>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Name:</label>
                     <div class="col-sm-4">

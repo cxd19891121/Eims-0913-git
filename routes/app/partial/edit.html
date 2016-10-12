@@ -498,12 +498,12 @@
                             <input name="pZip" placeholder="eg: 50010 **" ng-required="true" ng-model='vm.data.emp.pZip'
                                    class="form-control" type="number"
                                    ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"
-                                   maxlength="5" min="0">
+                                   maxlength="5" minlength="5">
                             <div class="help-block" ng-messages="adTab.pZip.$error" ng-show="adTab.pZip.$touched">
                                 <!--<small ng-message="required" class = "text-danger">You cannot leave this empty </small>-->
                                 <small ng-message="number" class="text-danger">Invalid format</small>
-                                <small ng-message="maxlength" class="text-danger"> Zip code error</small>
-                                <small ng-message="min" class="text-danger"> Invalid format</small>
+                                <small ng-message="maxlength" class="text-danger"> zip code error</small>
+                                <small ng-message="minlength" class="text-danger"> zip code error</small>
                             </div>
 
 
@@ -612,12 +612,12 @@
                             <input name="bZip" placeholder="eg: 50010" ng-model='vm.data.emp.bZip' class="form-control"
                                    type="tel"
                                    ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"
-                                   maxlength="5">
+                                   maxlength="5" minlength="5">
                             <div class="help-block" ng-messages="adTab.bZip.$error" ng-show="adTab.bZip.$touched">
                                 <!--<small ng-message="required" class = "text-danger">You cannot leave this empty </small>-->
                                 <small ng-message="number" class="text-danger">Invalid format</small>
-                                <small ng-message="maxlength" class="text-danger"> Zip code error</small>
-                                <small ng-message="min" class="text-danger">Invalid format</small>
+                                <small ng-message="maxlength" class="text-danger"> zip code error</small>
+                                <small ng-message="minlength" class="text-danger">zip code error</small>
                             </div>
                         </div>
                     </div>

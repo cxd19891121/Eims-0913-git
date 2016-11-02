@@ -108,7 +108,9 @@ var sqlBuilderOO =
         return this;
     },
 
-    orderByCode : function(){return orderByCode}
+    orderByCode : function(){return orderByCode},
+
+
 
 }
 
@@ -152,12 +154,8 @@ function isJSON(str)
 function searchByName(request,response,callback)
 {
     var name = request.body.name
-    var sqlCode = sqlBuilderOO.select(['*'])
-                              .from(['employee_info','education_info','order_info','visa_info'],'left join','e_id')
-                              //.from([])
-                              .where(['first_name'],[name],['string'])
-                              .build()
-    console.log('sqlCode = ' + sqlCode)
+    
+    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE first_name='" + name + "' OR last_name='" + name + "' order by emp_id"
     db.queryPres(sqlCode,function(e,o){
 
         if(e){
@@ -212,22 +210,25 @@ function deepSearch(request,response,callback)
     //console.log(queryColumnArray)
     var sqlCode =
     sqlBuilderOO.select(['*'])
-                .from(['user_info','employee_info','education_info','order_info','visa_info'],'left join','e_id')
+                .from(['employee_info','education_info','order_info','visa_info'],'left join','e_id')
                 .where(queryColumnArray,queryDataArray,queryTypeArray)
                 .build()
     //console.log(0)
     sqlCode = changeOpt(sqlCode,'visa_info.start_time','>=')
     sqlCode = changeOpt(sqlCode,'visa_info.end_time','<=')
+
     sqlCode = sqlCode.substring(0,sqlCode.indexOf("order by emp_id"))
+    
     if (sqlCode.substring(sqlCode.length-3) == "WHE") {sqlCode += "RE"}
     else if (sqlCode.substring(sqlCode.length-3) == "WH") { sqlCode += "ERE" };
-    if (sqlCode.substring(sqlCode.length-3).indexOf("AND") < 0)sqlCode = sqlCode += " AND "
+    if (sqlCode.substring(sqlCode.length-3).indexOf("AND") < 0 && sqlCode.endsWith('WHERE') === false)sqlCode = sqlCode += " AND "
     if (searchObj['regional_subsides_start'] != undefined ) sqlCode += " regional_subsides >= " + searchObj['regional_subsides_start'] + ' AND';
     if (searchObj['regional_subsides_end'] != undefined ) sqlCode += " regional_subsides <= " + searchObj['regional_subsides_end'] + ' AND';
     if (searchObj['payraise_start'] != undefined ) sqlCode += " payrise_percentage >= " + searchObj['payraise_start'] + ' AND';
     if (searchObj['payraise_end'] != undefined ) sqlCode += " payrise_percentage <= " + searchObj['payraise_end'] + ' AND';
     if (sqlCode.substring(sqlCode.length-5).indexOf("AND") > 0)sqlCode = sqlCode.substring(0,sqlCode.lastIndexOf("AND"))
     sqlCode += " order by emp_id "
+    
     console.log('sqlCode = ' + sqlCode)
 
     db.queryPres(sqlCode,function(e,o){
@@ -236,9 +237,9 @@ function deepSearch(request,response,callback)
         if(e){
             return console.error('error running query', e);
         }else {
-
+            console.log(o.rows[0])
             if(o.rows[0]){
-
+                
                 callback(null,o);
 
             }else{
@@ -248,6 +249,8 @@ function deepSearch(request,response,callback)
         }
     });
 }
+
+
 
 function search(request,response,callback)
 {
@@ -266,19 +269,6 @@ function search(request,response,callback)
         console.log(i)
     }
 
-
-    /*forEach(searchObject,function(key,value)
-    {
-        console.log(3)
-        if (value != undefined)
-        {
-            queryDataArray.push(value)
-            queryColumnArray.push(key)
-            queryTypeArray.push(typeof(value))
-            console.log(queryTypeArray)
-        }
-    })*/
-   // console.log(2)
 
     var sqlCode =
     sqlBuilderOO.select(['*'])
@@ -307,7 +297,7 @@ exports.build = search;
 exports.search = deepSearch;
 exports.searchByName = searchByName;
 exports.sqlBuilder = sqlBuilderOO;
-
+exports.searchByWholeName = searchByWholeName;
 exports.getAll =  function(callback){
 
     var sqlCode = sqlBuilderOO.select(['*'])
@@ -323,4 +313,29 @@ exports.getAll =  function(callback){
     })
 
 
+}
+function searchByWholeName(request,response,callback)
+{
+    var name = request.body.name
+    console.log(name)
+    var firstname = name[0]
+    var lastname = name[1]
+    
+    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE (first_name='" + firstname + "' AND last_name='" + lastname + "') OR (first_name='" +lastname + "' AND last_name='" + firstname + "') order by emp_id"
+    console.log(sqlCode)
+    db.queryPres(sqlCode,function(e,o){
+        if(e){
+            return console.error('error running query', e);
+        }else {
+
+            if(o.rows[0]){
+
+                callback(null,o);
+
+            }else{
+                callback(o);
+            }
+
+        }
+    });
 }

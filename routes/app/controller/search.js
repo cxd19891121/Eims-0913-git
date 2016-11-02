@@ -57,22 +57,42 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     
     $scope.searchByName = function()
     {
-       
-        dataService.searchByName($scope.employeeName,function(data)
+        if ($scope.employeeName.indexOf(' ') < 0)
         {
-            console.log(data)
-            if(data.length == 0)
+            dataService.searchByName($scope.employeeName,function(data)
             {
-                //alert('No feteched employee');
-                $scope.addAlert('danger','No feteched employee')
-            }
-            else
-            {
-                $scope.addAlert('success','Search success')
                 console.log(data)
-                $scope.$parent.$broadcast('changeData',{data:data});
-            }
-        })
+                if(data.length == 0)
+                {
+                    //alert('No feteched employee');
+                    $scope.addAlert('danger','No feteched employee')
+                }
+                else
+                {
+                    $scope.addAlert('success','Search success')
+                    console.log(data)
+                    $scope.$parent.$broadcast('changeData',{data:data});
+                }
+            })
+        }
+        else 
+        {
+            var login = $scope.employeeName.split(' ')
+            dataService.searchByWholeName(login,function(data)
+            {
+                console.log(data)
+                if(data.length == 0)
+                {
+                    $scope.addAlert('danger','No feteched employee')
+                }
+                else
+                {
+                    $scope.addAlert('success','Search success')
+                    console.log(data)
+                    $scope.$parent.$broadcast('changeData',{data:data});
+                }
+            })
+        }
     }
     $scope.advanceSearch = function()
     {
@@ -86,7 +106,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         
         dataService.search($scope.searchObject,function(data)
         {
-            console.log(data)
+            console.log($scope.searchObject)
             if(data.length == 0)
             {
                 $scope.addAlert('danger','No feteched employee')

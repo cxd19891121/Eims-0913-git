@@ -57,16 +57,23 @@ app.controller('application', function($scope,dataService,$uibModal)
         //$scope.messages = []
         dataService.getMessage(window.localStorage.username,function(data)
         {
-            if(data)
+            if(data != undefined)
             {
                 $scope.messages = []
-                data.forEach(function(element)
+                if (Array.isArray(data))
                 {
-                    //if(element.delete == undefined || element.delete == false)
-                    //{   
-                        $scope.messages.push(element)
-                    //}
-                })
+                    data.forEach(function(element)
+                    {
+                        //if(element.delete == undefined || element.delete == false)
+                        //{   
+                            $scope.messages.push(element)
+                        //}
+                    })
+                }
+                else
+                {
+                    $scope.messages.push(data)
+                }
                 $scope.messages.sort(function(ele1,ele2)
                 {
                     // console.log(Date.parse(ele1.sendTime))

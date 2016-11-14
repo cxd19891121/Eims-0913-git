@@ -181,6 +181,7 @@ word-break: break-all;
                     <th><a href="" ng-click="order('status')">Visa Status</a></th>
                     <th><a href="" ng-click="order('end_time')">Visa Expire Date</a></th>
                     <th><a href="" ng-click="order('job_title')">Job Title</a></th>
+                    <th><a href="" ng-click="order('progress')">Progress</a></th>
                     <th>Operation</th>
                 </tr>
             </thead>
@@ -192,6 +193,7 @@ word-break: break-all;
                     <td>{{ user.status }}</td>
                     <td>{{ user.end_time }}</td>
                     <td>{{ user.job_title }}</td>
+                    <td>{{ user.progress }}</td>
                     <td>
                         <button class="btn btn-success" ng-click="showEmployeeDetail(user.e_id)" )>
                             <span class="glyphicon glyphicon-paperclip"></span>Detail

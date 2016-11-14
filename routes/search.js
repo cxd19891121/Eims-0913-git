@@ -59,6 +59,23 @@ router.post('/name',function(req,res){
 
 })
 
+router.post('/wholeName',function(req,res){
+    search.searchByWholeName(req,res,function(e,o){
+        if(e){
+            res.send(e);
+        }else{
+            var result = [];
+            o.rows.forEach(function(element){
+                //console.log(element.first_name,element.delete_flag);
+                if(!element.delete_flag){
+                    result.push(element);
+                }
+            })
+            res.send(result);
+        }
+    })
+})
+
 
 
 module.exports = router;

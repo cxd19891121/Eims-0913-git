@@ -11,8 +11,8 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         refresh: url + 'backToIndex',
         logout: url + 'logout',
         message: url + 'api/message/',
-        update: url + 'api/message/'
-
+        update: url + 'api/message/',
+        searchByWholeName: url + 'search/wholeName'
     }
 
 
@@ -560,6 +560,21 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             })
     }
 
+    vm.searchByWholeName = function (name, callback) {
+        console.log(angular.toJson({name:name}))
+        $http
+        ({
+            method: 'POST',
+            url: config.searchByWholeName,
+            data: angular.toJson({name: name}),
+            headers: {'Content-Type': 'application/json'}
+        })
+        .success(function (data) {
+                callback(data)
+        })
+    }
+    
+
     vm.search = function (searchObj, callback) {
         $http
         ({
@@ -573,6 +588,8 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
                 callback(data)
             })
     }
+
+
 
 
 }])

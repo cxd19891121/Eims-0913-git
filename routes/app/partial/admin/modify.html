@@ -11,15 +11,25 @@
                 <a href="/#/">
                     <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                 </a>
-                <br>
+                <div style="float:right">
+                <button class="btn btn-primary" ng-click="closeAllBasic()"><span class="glyphicon glyphicon-pencil"></span>Hide</button>
+            </div>
+                <div style="float:right">
+                    <button class="btn btn-primary" ng-click="openAllBasic()"><span class="glyphicon glyphicon-pencil"></span>Show All Panel</button>
+                </div>
+
+
+
+
             </div>
 
         <!--Basic Config Panels: System, Database, Redis cache, Session, Service-->
             <div class="row">
-                <uib-accordion close-others="true" class="table table-striped">
+                <br>
+                <uib-accordion close-others="false" class="table table-striped">
 
                     <!--System config's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="System Config:" is-open="false">
+                    <div uib-accordion-group class="panel-primary" heading="System Config:" is-open="uib.system.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.url">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> {{key}}:</label>
@@ -31,7 +41,7 @@
                     </div>
 
                     <!--Database config's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="false">
+                    <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="uib.database.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.database">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> {{key}}:</label>
@@ -43,7 +53,7 @@
                     </div>
 
                     <!--Redis cache config's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="false">
+                    <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="uib.redis.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.redis">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> {{key}}:</label>
@@ -55,7 +65,7 @@
                     </div>
 
                     <!--Session's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="false">
+                    <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="uib.session.open">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> secret:</label>
@@ -109,7 +119,7 @@
                     </div>
 
                     <!--Service's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="false">
+                    <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="uib.service.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.service">
                             <div ng-repeat="(k,v) in value">
                                 <div class="form-group">
@@ -131,10 +141,11 @@
                 <uib-accordion close-others="false" class="table table-striped">
 
                     <!--User's authority's config panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Authority Config" is-open="false">
+                    <div uib-accordion-group class="panel-primary" heading="Authority Config" is-open="uib.authority.open">
                         <uib-accordion close-others="true" class="table table-striped">
+
                             <div ng-repeat="user in config.auth">
-                                <div uib-accordion-group class="panel-info" is-open="false" heading= "{{user.name}}:" >
+                                <div uib-accordion-group class="panel-info" is-open="true" heading= "{{user.name}}:" >
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"> name:</label>
@@ -149,19 +160,19 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label"> tag:</label>
+                                            <label class="col-sm-2 control-label"> Description:</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control" ng-model="user.tag" size="80">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label"> path:</label>
+                                            <label class="col-sm-2 control-label"> File Path:</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control" ng-model="user.filePath" size="80">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label"> operation:</label>
+                                            <label class="col-sm-2 control-label"> Operation:</label>
                                             <div class = "col-sm-10">
                                                 <div class="btn-group" ng-repeat="operation in config.operationList">
                                                     <button type="button" ng-class="{'btn btn-primary': user.ops[operation.tag]==true ,'btn btn-default': user.ops[operation.tag]!=true}" uib-btn-radio="true" ng-model="user.ops[operation.tag]" ng-click="print()"
@@ -211,11 +222,11 @@
 
         <!--Create New Level Panel: Custom New Authority -->
             <div class="row">
-                <br>
+                <br><hr>
 
                 <!--Create New Level -->
-                <uib-accordion close-others="oneAtATime" class="table table-striped">
-                    <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="false">
+                <uib-accordion close-others="false" class="table table-striped">
+                    <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="uib.newLevel.open">
 
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
@@ -228,12 +239,12 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> Level:</label>
                                 <div class="col-sm-1">
-                                    <input type="number" class="form-control" ng-model="newLevel.level" size="80">
+                                    <input type="number" class="form-control" ng-model="newLevel.level" size="80" disabled = "true">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label"> Tag:</label>
+                                <label class="col-sm-2 control-label"> Description:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" ng-model="newLevel.tag" size="80">
                                 </div>
@@ -241,10 +252,12 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> operation:</label>
-                                <div class="btn-group" ng-repeat="operation in config.operationList">
-                                    <button type="button" ng-class="{'btn btn-primary': newLevel.ops[operation.tag]==true ,'btn btn-default': newLevel.ops[operation.tag]!=true}" uib-btn-radio="true" ng-model="newLevel.ops[operation.tag]" ng-click="print()"
-                                            uncheckable> {{operation.name}} </button>
-                                </div>
+                                    <div class = "col-sm-10">
+                                        <div class="btn-group" ng-repeat="operation in config.operationList">
+                                        <button type="button" ng-class="{'btn btn-primary': newLevel.ops[operation.tag]==true ,'btn btn-default': newLevel.ops[operation.tag]!=true}" uib-btn-radio="true" ng-model="newLevel.ops[operation.tag]" ng-click="print()"
+                                                uncheckable> {{operation.name}} </button>
+                                    </div>
+                                    </div>
                             </div>
 
                             <div class="form-group">

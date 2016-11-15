@@ -289,9 +289,9 @@
                             </p>
 
                             <!--<input name="eTime" placeholder="eg: 2001-01-01 **" ng-required="true" type="text"-->
-                                   <!--class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                   <!--ng-model='vm.data.order.eTime' ng-focus="open(6)" is-open="popup['6']"-->
-                                   <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
+                            <!--class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                            <!--ng-model='vm.data.order.eTime' ng-focus="open(6)" is-open="popup['6']"-->
+                            <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
                             <div class="help-block" ng-messages="oTab.eTime.$error" ng-show="oTab.eTime.$touched">
                                 <!--<small ng-message="required" class="text-danger">You cannot leave this empty</small>-->
                                 <small ng-message="date" class="text-danger">Invalid date</small>
@@ -722,9 +722,9 @@
                             </p>
 
                             <!--<input name="vStart" placeholder="eg: 01-01-2000" type="text" class="form-control"-->
-                                   <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                   <!--ng-model='vm.data.visa.sTime' ng-focus="open(7)" is-open="popup['7']"-->
-                                   <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
+                            <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                            <!--ng-model='vm.data.visa.sTime' ng-focus="open(7)" is-open="popup['7']"-->
+                            <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                             <div class="help-block" ng-messages="vTab.vStart.$error" ng-show="vTab.vStart.$touched">
                                 <small ng-message="date" class="text-danger">Invalid Date Type</small>
@@ -748,9 +748,9 @@
                             </p>
 
                             <!--<input name="vEnd" placeholder="eg: 01-01-2001 **" ng-required="true" type="text"-->
-                                   <!--class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                   <!--ng-model='vm.data.visa.eTime' ng-focus="open(8)" is-open="popup['8']"-->
-                                   <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
+                            <!--class="form-control" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                            <!--ng-model='vm.data.visa.eTime' ng-focus="open(8)" is-open="popup['8']"-->
+                            <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                             <div class="help-block" ng-messages="vTab.vEnd.$error" ng-show="vTab.vEnd.$touched">
                                 <small ng-message="date" class="text-danger">Invalid Date Type</small>
@@ -784,6 +784,7 @@
                 </form>
             </uib-tab>
 
+            <!-- Termination Tab -->
 
             <uib-tab heading='Termination' index=5>
                 <uib-tab-heading>
@@ -810,11 +811,6 @@
           </span>
                             </p>
 
-
-                            <!--<input name='tDate' type="text" placeholder="eg: 01-01-2001" class="form-control"-->
-                                   <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                   <!--ng-model='vm.data.emp.tDate' ng-focus="open(2)" is-open="popup['2']"-->
-                                   <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                             <div class="help-block" ng-messages="tTab.tDate.$error" ng-show="oTab.tDate.$touched">
                                 <small ng-message="date" class="text-danger">Invalid date</small>
@@ -845,6 +841,8 @@
 
             </uib-tab>
 
+
+            <!-- Job && Education Tab -->
             <uib-tab index=6>
                 <uib-tab-heading>
                     <i ng-show="jTab.$invalid" class="glyphicon glyphicon-pencil"></i>
@@ -953,9 +951,9 @@
           </span>
                             </p>
                             <!--<input type="text" placeholder="eg: 01-01-2001" name="jEnd" class="form-control"-->
-                                   <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                   <!--ng-model='vm.data.work.eTime' ng-focus="open(4)" is-open="popup['4']"-->
-                                   <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
+                            <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->
+                            <!--ng-model='vm.data.work.eTime' ng-focus="open(4)" is-open="popup['4']"-->
+                            <!--ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>-->
 
                             <div class="help-block" ng-messages="jTab.jEnd.$error" ng-show="jTab.jEnd.$touched">
                                 <small ng-message="date" class="text-danger">Invalid date</small>
@@ -994,6 +992,7 @@
 
             </uib-tab>
 
+            <!-- Salary && Benefit  Tap-->
             <uib-tab index=7>
                 <uib-tab-heading>
                     <i ng-show=" sTab.$invalid" class="glyphicon glyphicon-pencil"></i>
@@ -1109,8 +1108,8 @@
             <button class=" btn btn-primary"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
         </a>
         <button class=" btn btn-primary" ng-click="vm.updateAllById()" ng-disabled="!(vm.tabValidate.pTab &&
-                    vm.tabValidate.oTab && vm.tabValidate.cTab && vm.tabValidate.adTab && vm.tabValidate.vTab && vm.tabValidate.tTab
-                    && vm.tabValidate.jTab && vm.tabValidate.sTab)"><span class="glyphicon glyphicon-pencil"></span>
+                    vm.tabValidate.oTab && vm.tabValidate.cTab && vm.tabValidate.adTab && vm.tabValidate.vTab)"><span
+                class="glyphicon glyphicon-pencil"></span>
             Update
         </button>
 

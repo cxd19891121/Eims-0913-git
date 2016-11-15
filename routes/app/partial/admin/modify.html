@@ -2,253 +2,277 @@
 <!--It also allow user to add new level and change the authority of this level -->
 <div ng-controller="modify" data-ng-init="init()">
     <div class=" panel-blur ">
-    <div class="container">
-        <h1>System Config</h1>
-        <br>
-        <div class="row">
-            <a href="/#/">
-                <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
-            </a>
+        <div class="container">
+            <h1>System Config</h1>
 
-        </div>
-        <br>
+        <!-- Button at top : Back -->
+            <div class="row">
+                <br>
+                <a href="/#/">
+                    <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+                </a>
+                <br>
+            </div>
 
-        <div class="row">
-          
-            <uib-accordion close-others="oneAtATime" class="table table-striped">
+        <!--Basic Config Panels: System, Database, Redis cache, Session, Service-->
+            <div class="row">
+                <uib-accordion close-others="true" class="table table-striped">
 
-                <!--System config's panel-->
-                <div uib-accordion-group class="panel-primary" heading="System Config:" is-open="true">
-                    <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.url">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> {{key}}:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="config.url[key]" size="80">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--Database config's panel-->
-                <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="true">
-                    <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.database">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> {{key}}:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="config.database[key]" size="80">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--Redis cache config's panel-->
-                <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="true">
-                    <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.redis">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> {{key}}:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="config.redis[key]" size="80">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--Session's panel-->
-                <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="true">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> secret:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="config.session.secret" size="80">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> maxAge:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="config.session.maxAge" size="80">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> proxy:</label>
-                            <div class="col-sm-4">
-                                <!--<div class="btn-group">
-                                    <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>True </button>
-                                    <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>False </button>
-                                </div>-->
-                                <div class="btn-group">
-                                    <button type="button" ng-class="{'btn btn-primary': config.session.proxy==true , 'btn btn-default': config.session.proxy!=true}" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>Open </button>
-                                    <button type="button" ng-class="{'btn btn-primary': config.session.proxy!=true , 'btn btn-default': config.session.proxy==true}" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>Close </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> resave:</label>
-                            <div class="col-sm-4">
-                                <!--<div class="btn-group">
-                                    <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.resave" uncheckable>True </button>
-                                    <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.resave" uncheckable>False </button>
-                                </div>-->
-                                <div class="btn-group">
-                                    <button type="button" ng-class="{'btn btn-primary': config.session.resave==true , 'btn btn-default': config.session.resave!=true}" uib-btn-radio="true" ng-model="config.session.resave" uncheckable>Open </button>
-                                    <button type="button" ng-class="{'btn btn-primary': config.session.resave!=true , 'btn btn-default': config.session.resave==true}" uib-btn-radio="false" ng-model="config.session.resave" uncheckable>Close </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> saveUninitialized:</label>
-                            <div class="col-sm-4">
-                                
-                                <div class="btn-group">
-                                    <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized==true , 'btn btn-default': config.session.saveUninitialized!=true}" uib-btn-radio="true" ng-model="config.session.saveUninitialized" uncheckable>Open </button>
-                                    <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized!=true , 'btn btn-default': config.session.saveUninitialized==true}" uib-btn-radio="false" ng-model="config.session.saveUninitialized" uncheckable>Close </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--Service's panel-->
-                <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="true">
-                    <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.service">
-                        <div ng-repeat="(k,v) in value">
+                    <!--System config's panel-->
+                    <div uib-accordion-group class="panel-primary" heading="System Config:" is-open="false">
+                        <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.url">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label"> {{key}}.{{k}}:</label>
+                                <label class="col-sm-2 control-label"> {{key}}:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" ng-model="value[k]" size="80">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!--User's authority's config panel-->
-                <div ng-repeat="user in config.auth">
-                    <div uib-accordion-group class="panel-primary" is-open="true">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> name:</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" ng-model="user.name" size="80">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> level:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="user.level" size="80">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> tag:</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" ng-model="user.tag" size="80">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> path:</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" ng-model="user.filePath" size="80">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"> operation:</label>
-                                <div class="btn-group" ng-repeat="operation in config.operationList">
-                                    <button type="button" ng-class="{'btn btn-primary': user.ops[operation.tag]==true ,'btn btn-default': user.ops[operation.tag]!=true}" uib-btn-radio="true" ng-model="user.ops[operation.tag]" ng-click="print()"
-                                        uncheckable> {{operation.name}} </button>
-
+                                    <input type="text" class="form-control" ng-model="config.url[key]" size="80">
                                 </div>
                             </div>
                         </form>
+                    </div>
+
+                    <!--Database config's panel-->
+                    <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="false">
+                        <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.database">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> {{key}}:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="config.database[key]" size="80">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--Redis cache config's panel-->
+                    <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="false">
+                        <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.redis">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> {{key}}:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="config.redis[key]" size="80">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--Session's panel-->
+                    <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="false">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> secret:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="config.session.secret" size="80">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> maxAge:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="config.session.maxAge" size="80">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> proxy:</label>
+                                <div class="col-sm-4">
+                                    <!--<div class="btn-group">
+                                        <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>True </button>
+                                        <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>False </button>
+                                    </div>-->
+                                    <div class="btn-group">
+                                        <button type="button" ng-class="{'btn btn-primary': config.session.proxy==true , 'btn btn-default': config.session.proxy!=true}" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>Open </button>
+                                        <button type="button" ng-class="{'btn btn-primary': config.session.proxy!=true , 'btn btn-default': config.session.proxy==true}" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>Close </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> resave:</label>
+                                <div class="col-sm-4">
+                                    <!--<div class="btn-group">
+                                        <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.resave" uncheckable>True </button>
+                                        <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.resave" uncheckable>False </button>
+                                    </div>-->
+                                    <div class="btn-group">
+                                        <button type="button" ng-class="{'btn btn-primary': config.session.resave==true , 'btn btn-default': config.session.resave!=true}" uib-btn-radio="true" ng-model="config.session.resave" uncheckable>Open </button>
+                                        <button type="button" ng-class="{'btn btn-primary': config.session.resave!=true , 'btn btn-default': config.session.resave==true}" uib-btn-radio="false" ng-model="config.session.resave" uncheckable>Close </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> saveUninitialized:</label>
+                                <div class="col-sm-4">
+
+                                    <div class="btn-group">
+                                        <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized==true , 'btn btn-default': config.session.saveUninitialized!=true}" uib-btn-radio="true" ng-model="config.session.saveUninitialized" uncheckable>Open </button>
+                                        <button type="button" ng-class="{'btn btn-primary': config.session.saveUninitialized!=true , 'btn btn-default': config.session.saveUninitialized==true}" uib-btn-radio="false" ng-model="config.session.saveUninitialized" uncheckable>Close </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--Service's panel-->
+                    <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="false">
+                        <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.service">
+                            <div ng-repeat="(k,v) in value">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"> {{key}}.{{k}}:</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" ng-model="value[k]" size="80">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </uib-accordion>
+            </div>
+
+        <!--Authority Config Panel-->
+            <div class="row">
+                <uib-accordion close-others="false" class="table table-striped">
+
+                    <!--User's authority's config panel-->
+                    <div uib-accordion-group class="panel-primary" heading="Authority Config" is-open="false">
+                        <uib-accordion close-others="true" class="table table-striped">
+                            <div ng-repeat="user in config.auth">
+                                <div uib-accordion-group class="panel-info" is-open="false" heading= "{{user.name}}:" >
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> name:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" ng-model="user.name" size="80">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> level:</label>
+                                            <div class="col-sm-4">
+                                                <input type="number" class="form-control" ng-model="user.level" size="80">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> tag:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" ng-model="user.tag" size="80">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> path:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control" ng-model="user.filePath" size="80">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> operation:</label>
+                                            <div class = "col-sm-10">
+                                                <div class="btn-group" ng-repeat="operation in config.operationList">
+                                                    <button type="button" ng-class="{'btn btn-primary': user.ops[operation.tag]==true ,'btn btn-default': user.ops[operation.tag]!=true}" uib-btn-radio="true" ng-model="user.ops[operation.tag]" ng-click="print()"
+                                                            uncheckable> {{operation.name}} </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"> Hidden</label>
+                                            <div class="col-sm-4">
+                                                <!--<div class="btn-group">
+                                                    <button type="button" class="btn btn-primary" uib-btn-radio="true" ng-model="config.session.proxy" uncheckable>True </button>
+                                                    <button type="button" class="btn btn-primary" uib-btn-radio="false" ng-model="config.session.proxy" uncheckable>False </button>
+                                                </div>-->
+                                                <div class="btn-group">
+                                                    <button type="button" ng-class="{'btn btn-primary': user.hidden == true , 'btn btn-default': user.hidden!=true}" uib-btn-radio="true" ng-model="user.hidden" uncheckable>Hide </button>
+                                                    <button type="button" ng-class="{'btn btn-primary': user.hidden!=true , 'btn btn-default': user.hidden==true}" uib-btn-radio="false" ng-model="user.hidden" uncheckable>Show </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </uib-accordion>
 
                     </div>
-                </div>
 
-
-
-            </uib-accordion>
-        </div>
-
-        <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-        <br>
-            <a href="/#/">
-                <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
-            </a>
-        <div style="float:right">
-            <button class="btn btn-primary" ng-click="updateConfig()">
-            <span class="glyphicon glyphicon-pencil"></span>Update Config
-        </button>
-        </div>
-
-
-        <br>
-        <hr>
-        <div class="row">
-            <uib-accordion close-others="oneAtATime" class="table table-striped">
-                <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="true">
-
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">  Level name:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="newLevel.name" size="80">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> Level:</label>
-                            <div class="col-sm-1">
-                                <input type="number" class="form-control" ng-model="newLevel.level" size="80">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> Tag:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="newLevel.tag" size="80">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> Operation:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="newLevel.ops" size="80">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> FilePath:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="newLevel.filePath" size="80">
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"> Url:</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" ng-model="newLevel.url" size="80">
-
-                            </div>
-                        </div>
-                </div>
-            </uib-accordion>
-
-
-
-            <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')"
-                close="closeLevelAlert($index)">{{alert.msg}}</div>
-
-            <a href="/#/">
-                <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
-            </a>
-            <div style="float:right">
-                <button class="btn btn-primary" ng-click="createLevel()">
-        <span class="glyphicon glyphicon-pencil"></span>Add level
-    </button>
+                </uib-accordion>
             </div>
-        </div>
+
+        <!--Alert Panel: can be ignored -->
+            <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+
+        <!-- Button: Back and Submit-->
+            <div class = "row">
+                <a href="/#/">
+                        <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+                    </a>
+                <div style="float:right">
+                    <button class="btn btn-primary" ng-click="updateConfig()">
+                    <span class="glyphicon glyphicon-pencil"></span>Update Config
+                </button>
+                </div>
+            </div>
+
+        <!--Create New Level Panel: Custom New Authority -->
+            <div class="row">
+                <br>
+
+                <!--Create New Level -->
+                <uib-accordion close-others="oneAtATime" class="table table-striped">
+                    <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="false">
+
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">  Level name:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="newLevel.name" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> Level:</label>
+                                <div class="col-sm-1">
+                                    <input type="number" class="form-control" ng-model="newLevel.level" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> Tag:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="newLevel.tag" size="80">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> operation:</label>
+                                <div class="btn-group" ng-repeat="operation in config.operationList">
+                                    <button type="button" ng-class="{'btn btn-primary': newLevel.ops[operation.tag]==true ,'btn btn-default': newLevel.ops[operation.tag]!=true}" uib-btn-radio="true" ng-model="newLevel.ops[operation.tag]" ng-click="print()"
+                                            uncheckable> {{operation.name}} </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"> File Path:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" ng-model="newLevel.filePath" size="80">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </uib-accordion>
 
 
-        
+                <!--Alert Panel For Create New Level: can be ignored -->
+                <div uib-alert ng-repeat="alert in levelAlert" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')"
+                    close="closeLevelAlert($index)">{{alert.msg}}</div>
+
+
+                <!--Button: Add -->
+                <div>
+                    <a href="/#/">
+                        <button class=" btn btn-primary">  <span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+                    </a>
+                    <div style="float:right">
+                        <button class="btn btn-primary" ng-click="createLevel()"><span class="glyphicon glyphicon-pencil"></span>Add level</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

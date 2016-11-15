@@ -17,7 +17,7 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         tag: undefined,
         ops: undefined,
         filePath: undefined,
-        url: undefined
+        hidden:false,
     }
 
     $scope.getHighestLevel = function(obj,property)
@@ -56,6 +56,14 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         window.history.back();
     }
 
+    $scope.deleteLevel = function(levelName){
+        $scope.auth.forEach(function(level){
+            if(level.name == levelName){
+                level.delete = true;
+            }
+        })
+    }
+
     $scope.createLevel = function()
     {
         var count = true
@@ -72,15 +80,16 @@ app.controller('modify', function($scope,$http,$httpParamSerializerJQLike, $uibM
         //console.log($scope.levelAlert)
         if (count)
         {
-            $scope.config.auth[$scope.newLevel.name] =
-            {
-                level: $scope.newLevel.level,
-                tag: $scope.newLevel.tag,
-                ops: $scope.newLevel.ops,
-                filePath: $scope.newLevel.filePath,
-                fileName: $scope.newLevel.name,
-                url: $scope.newLevel.url
-            }
+            // $scope.config.auth[$scope.newLevel.name] =
+            // {
+            //     level: $scope.newLevel.level,
+            //     tag: $scope.newLevel.tag,
+            //     ops: $scope.newLevel.ops,
+            //     filePath: $scope.newLevel.filePath,
+            //     fileName: $scope.newLevel.name,
+            //     url: $scope.newLevel.url
+            // }
+            $scope.config.auth.push($scope.newLevel);
 
             $scope.addLevelAlert("success","success add level")
             console.log($scope.config.auth)

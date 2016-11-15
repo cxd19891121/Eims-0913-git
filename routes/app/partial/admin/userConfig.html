@@ -28,12 +28,25 @@
                         <td>
 
                             <div ng-repeat="element in levels" class="btn-group">
+                                <div ng-show = "{{!element.hidden}}">
                                 <button ng-class="{'btn btn-primary': element.level==user.level , 'btn btn-default': element.level!=user.level}" ng-model="user.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
-
+                                </div>
                             </div>
 
                         </td>
-                        <td><input type ="text" class="form-control" ng-model="user.email"></td>
+                        <td>
+
+
+
+                            <form role="form" name="emailForm" novalidate>
+                                <div  ng-class="{ 'has-error' : emailForm.email.$invalid && emailForm.email.$touched }">
+                                    <input name ="email" type="email" ng-required="true" class="form-control" ng-model="user.email" placeholder="eg: xxx@example.com **">
+                                </div>
+                                <div class="help-block" ng-messages="emailForm.email.$error" ng-show="emailForm.email.$touched">
+                                    <small ng-message="email" class="text-danger">Invalid Email</small>
+                                </div>
+                            </form>
+                        </td>
                         <td>
                             <button class="btn btn-primary" ng-click="editUser(user.id)">
                     <span class="glyphicon glyphicon-pencil"></span>Update
@@ -81,7 +94,9 @@
                     <div class="col-sm-4">
 
                         <div class="btn-group" ng-repeat="element in levels">
-                            <button ng-class="{'btn btn-primary': element.level==newUser.level , 'btn btn-default': element.level!=newUser.level}" ng-model="newUser.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
+                            <div ng-show = "{{!element.hidden}}">
+                                <button ng-class="{'btn btn-primary': element.level==newUser.level , 'btn btn-default': element.level!=newUser.level}" ng-model="newUser.level" uib-btn-radio="element.level" uncheckable>{{element.name}}</button>
+                            </div>
                         </div>
                     </div>
 
@@ -89,9 +104,17 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email:</label>
-                    <div class="col-sm-4">
-                        <input type="email" ng-required="true" class="form-control" ng-model="newUser.email" placeholder="eg: xxx@example.com **">
+                    <div class="col-sm-4" ng-class="{ 'has-error' : userForm.email.$invalid && userForm.email.$touched }">
+                        <input name ="email" type="email" ng-required="true" class="form-control" ng-model="newUser.email" placeholder="eg: xxx@example.com **">
                     </div>
+
+                    <div class="help-block" ng-messages="userForm.email.$error" ng-show="userForm.email.$touched">
+                        <!--<small ng-message="required" class = "text-danger">You cannot leave this empty </small>-->
+                        <small ng-message="email" class="text-danger">Invalid Email</small>
+                    </div>
+
+
+
                 </div>
             </form>
         </div>

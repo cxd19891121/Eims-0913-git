@@ -17,6 +17,11 @@ app.controller('addCtrl',function($scope,$http,$httpParamSerializerJQLike)
         salaryBenefit: false,
     }
 
+    $scope.pattern = {
+        letters: "[a-zA-Z]+",
+        digits:"\"d+",
+    }
+
     $scope.$emit('addDetail',{data: $scope.addNewEmployee})
 
     $scope.addUser = function()

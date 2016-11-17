@@ -228,6 +228,62 @@
             "tag": "getAllUsername",
             "description": "Show Username List",
             "group": 3
+        },
+        {
+            "id": 18,
+            "name": "Display personal information",
+            "tag": "personalInfo",
+            "description": "Display personal information on this user",
+            "group": 0
+        },
+        {
+            "id": 19,
+            "name": "Contact information",
+            "tag": "contactInfo",
+            "description": "Display contact information on this user",
+            "group": 0
+        },
+        {
+            "id": 20,
+            "name": "Order information",
+            "tag": "orderInfo",
+            "description": "Display order information on this user",
+            "group": 0
+        },
+        {
+            "id": 21,
+            "name": "Address information",
+            "tag": "addressInfo",
+            "description": "Display address information on this user",
+            "group": 0
+        },
+        {
+            "id": 22,
+            "name": "Visa information",
+            "tag": "visaInfo",
+            "description": "Display visa information on this user",
+            "group": 0
+        },
+        {
+            "id": 23,
+            "name": "Education information",
+            "tag": "educationInfo",
+            "description": "Display education information on this user",
+            "group": 0
+        },
+        {
+            "id": 24,
+            "name": "Salary information",
+            "tag": "salaryInfo",
+            "description": "Display salary information on this user",
+            "group": 0
+        },
+        {
+            "id": 25,
+            "name": "Termination",
+            "tag": "termination",
+            "description": "Display termination on this user",
+            "group": 0
         }
     ],
     "filePathList": [

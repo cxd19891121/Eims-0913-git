@@ -28,6 +28,46 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
         opened: false
     }
+    $scope.update = function(id)
+    {
+
+    }
+    $scope.jobLevel = 
+    {
+        account:{name:"Accounting manager" , value:false},
+        srJava:{name:"Sr.Software Engineer/Java" , value:false},
+        jrJava:{name:"Jr.Software Engineer/Java" , value:false},
+        Java:{name:"Software Engineer/Java" , value:false},
+        arch:{name:"Enterprise Architect" , value:false},
+        market:{name:"Marketing and Placement Manager" , value:false},
+        ba:{name:"Business Analyst" , value:false},
+        srBa:{name:"Sr.Business Analyst" , value:false},
+        jrBa:{name:"Jr.Business Analyst" , value:false},
+        hr:{name:"HR manager" , value:false},
+        recruiter:{name:"IT Recruiter" , value:false},
+        assHr:{name:"HR assistant" , value:false},
+        marketManager:{name:"Product and Marketing Manager" , value:false},
+        devLead:{name:"Development Lead" , value:false},
+        trainLead:{name:"Technical Training Lead,Architecture" , value:false},
+        trainBa:{name:"BA Trainer" , value:false},
+        busDev:{name:"Business Development Manager" , value:false},
+        director:{name:"Managing Director" , value:false},
+    }
+
+    $scope.visaLevel = 
+    [
+        {name:"F1-OPT" , value:false},
+        {name:"F1-Extension" , value:false},
+        {name:"F1-CPT" , value:false},
+        {name:"H1B" , value:false},
+        {name:"Green Card" , value:false},
+        {name:"US Citizen" , value:false},
+        {name:"Other" , value:false},
+    ]
+
+
+    $scope.jobUrl = "job.html"
+    $scope.visaUrl = "visa.html"
     $scope.advanceSearchUrl = "advanceSearch.html"
     $scope.dynamicPopover = 'myPopoverTemplate.html'
     $scope.alerts = []
@@ -45,7 +85,8 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
         first_name: '',
         last_name: '',
-        job_title: '',
+        job_title: [],
+        visa_status: [],
         status: '',
         major: '',
         degree: '',
@@ -103,7 +144,19 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     {
 
         $scope.popover.open = false
-        
+        $scope.visaLevel.forEach(function(e)
+        {
+            if (e.value == true) {$scope.searchObject.visa_status.push(e.name)}
+            e.value = false
+        })
+        forEach($scope.jobLevel,function(k,v)
+        {
+            if (v.value == true) {$scope.searchObject.job_title.push(v.name)}
+            v.value = false
+        })
+        console.log($scope.visaLevel),
+        console.log($scope.jobLevel)
+        console.log($scope.searchObject)
         dataService.search($scope.searchObject,function(data)
         {
             console.log($scope.searchObject)

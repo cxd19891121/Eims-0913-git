@@ -218,7 +218,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
         $scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = JSON.parse(JSON.stringify(element))})
         console.log($scope.users)
         $scope.wholeDetail = JSON.parse(JSON.stringify($scope.detail));
-        Object.keys($scope.detail).forEach(key =>
+        Object.keys($scope.detail).forEach(function(key)
         {
             if (typeof $scope.detail[key] == 'string')
             {

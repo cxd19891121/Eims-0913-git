@@ -1,3 +1,7 @@
+/**
+ * Created by mooner00 on 8/30/2016.
+ */
+
 var fs = require('fs');
 
 
@@ -112,3 +116,4 @@ var writeJsonFromConfig = function(configObj,callback){
 module.exports = config;
 module.exports.readConfig = readConfigFromJson;
 module.exports.writeConfig = writeJsonFromConfig;
+

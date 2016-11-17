@@ -190,8 +190,21 @@ function changeRate(sqlCode,name,val1,val2)
 
 function deepSearch(request,response,callback)
 {
+    var searchObj = JSON.parse(JSON.stringify(request.body))
+    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE "
+    if(searchObj.first_name == undefined) searchObj.first_name = "first_name" 
+    if(searchObj.last_name == undefined) searchObj.last_name = "last_name"
+
+    sqlCode += " first_name=" + searchObj.first_name + " AND last_name=" + searchObj.last_name + " ";
+    
+    
+
+}
+
+function deepSearchV1(request,response,callback)
+{
     var searchObj = JSON.parse(JSON.stringify(request.body));
-   // console.log(searchObj);
+   
     var queryColumnArray = []
     var queryDataArray = []
     var queryTypeArray = []

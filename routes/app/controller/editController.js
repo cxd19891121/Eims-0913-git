@@ -151,6 +151,10 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
                 vm.data.order.eTime = new Date(data.order.data.o_end_time);
                 vm.data.order.owner = data.order.data.owner;
                 vm.data.order.ext = data.order.data.extension_time;
+
+
+
+
             }
         })
     }
@@ -166,6 +170,15 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
         termination:true,
         jobEducation: true,
         salaryBenefit: true,
+    }
+
+    $scope.pattern = {
+        letters: "[a-zA-Z]+",
+        digits:"\"d+",
+    }
+
+    $scope.clearSSN = function(){
+        vm.data.emp.SSN = null;
     }
 
     $scope.setProgress = function()
@@ -194,14 +207,14 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
     }
 
     vm.tabValidate = {
-        pTab:false,
-        oTab:false,
-        cTab:false,
-        adTab:false,
-        vTab:false,
-        tTab:false,
-        jTab:false,
-        sTab:false,
+        pTab:true,
+        oTab:true,
+        cTab:true,
+        adTab:true,
+        vTab:true,
+        tTab:true,
+        jTab:true,
+        sTab:true,
     }
     vm.tabVerify = function(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab){
         vm.tabValidate.pTab = pTab;

@@ -34,6 +34,7 @@ app.controller('modify', function ($scope, $http, $httpParamSerializerJQLike, $u
         redis: {
             heading: "Redis Config",
             open: false,
+            default:"//192.168.1.86:6379",
         },
 
         session: {

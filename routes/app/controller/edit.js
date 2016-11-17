@@ -94,7 +94,8 @@ app.controller('edit',function($scope,$uibModal, dataService)
         begin = ($scope.currentPage - 1) * $scope.pageSize;
         end = begin + $scope.pageSize;
         index = $scope.users.indexOf(value);
-        return (begin <= index && index < end);
+        return (begin <= index && index < end)
+    
     }
 
     $scope.employeeDetail = false
@@ -122,10 +123,15 @@ app.controller('edit',function($scope,$uibModal, dataService)
         return $scope.select = !$scope.select
     }
 
-
+    $scope.print = function()
+    {
+        console.log($scope.users)
+    }
 
     $scope.$on('changeData',function(event,info)
     {
+     
+        console.log("changeData")
         if(info.data == null || info.data == '')
         {
             return //alert('Error: no fetched employee')
@@ -143,7 +149,9 @@ app.controller('edit',function($scope,$uibModal, dataService)
                 //console.log(element)
             })
         }
+        
         $scope.users = info.data
+        console.log($scope.users)
         $scope.totalItems = $scope.users.length
     })
 

@@ -36,6 +36,7 @@ router.post('/', function (req, res) {
                     result.push(element);
                 }
             })
+            
             res.send(result);
         }
     });

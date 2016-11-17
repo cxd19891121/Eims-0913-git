@@ -110,8 +110,6 @@ var sqlBuilderOO =
 
     orderByCode : function(){return orderByCode},
 
-
-
 }
 
 function getObject(searchObject,request)
@@ -149,13 +147,11 @@ function isJSON(str)
     return true;
 }
 
-
-
 function searchByName(request,response,callback)
 {
     var name = request.body.name
     
-    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE first_name='" + name + "' OR last_name='" + name + "' order by emp_id"
+    var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE first_name='" + name + "' OR last_name='" + name + "' order by emp_id;"
     db.queryPres(sqlCode,function(e,o){
 
         if(e){
@@ -192,7 +188,7 @@ function changeRate(sqlCode,name,val1,val2)
 
 function deepSearchBuilder(sqlCode,searchObj)
 {
-    console.log(searchObj)
+
     sqlCode += "1=1 AND"
     if (searchObj.first_name != "") sqlCode += " first_name='" + searchObj.first_name + "' AND"
     if (searchObj.last_name != "") sqlCode += " last_name='" + searchObj.last_name + "' AND"
@@ -214,7 +210,7 @@ function deepSearchBuilder(sqlCode,searchObj)
         sqlCode += "("
         searchObj.visa_status.forEach(function(e)
         {
-            sqlCode += " status='" + e + "' OR"
+            sqlCode += " visa_info.type='" + e + "' OR"
         })
         sqlCode = sqlCode.substring(0,sqlCode.length-2)
         sqlCode +=") AND"
@@ -231,20 +227,19 @@ function deepSearch(request,response,callback)
 {
     console.log(request.body)
     var searchObj = JSON.parse(JSON.stringify(request.body))
-    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE  "
+    var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE  "
 
-   
-    //console.log(typeof searchObj.last_name)
     sqlCode = deepSearchBuilder(sqlCode,searchObj)
-    console.log(sqlCode)
+    sqlCode += " ORDER BY visa_type,visa_info.end_time desc"
+    
    
 
     db.queryPres(sqlCode,function(e,o){
         if(e){
             return console.error('error running query', e);
         }else {
-            console.log(o.rows[0])
             if(o.rows[0]){
+                //console.log(o.rows)
                 callback(null,o);
             }else{
                 callback(null,o);
@@ -367,7 +362,7 @@ exports.sqlBuilder = sqlBuilderOO;
 exports.searchByWholeName = searchByWholeName;
 exports.getAll =  function(callback){
 
-    var sqlCode = sqlBuilderOO.select(['*'])
+    var sqlCode = sqlBuilderOO.select(['visa_info.type as visa_type,*'])
         .from(['employee_info','education_info','order_info','visa_info','work_info'],'left join','e_id')
         .whereNone()
         .orderBy()

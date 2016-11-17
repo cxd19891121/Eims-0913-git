@@ -49,7 +49,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         {
 
             if(data.error){
-                alert(data.msg)
+              //  alert(data.msg)
             }else {
                 window.localStorage.username = loginForm.username
             }
@@ -74,17 +74,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         .success(function(data)
         {
             callback(data)
-            /*if(!data)
-            {
-                alert('fail')
-            }
-            else
-            {
-                $uibModalInstance.close()
-                console.log(data)
-                
-                //$scope.$parent.$broadcast('changeData',data)
-            }*/
+
         })
     }
 
@@ -510,7 +500,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
                 callback(data);
             }else {
                 var data = data.data;
-                alert("New Employee Info Added");
+              //  alert("New Employee Info Added");
              //   window.history.back();
                 callback(null, data)
             }
@@ -535,7 +525,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         }).success(function successCallback(e,data) {
             console.log("in sucess callback");
             console.log(data);
-            alert('user has been updated');
+          //  alert('user has been updated');
             //window.location.href= url;
             callback(null, data)
         }, function errorCallback(data) {

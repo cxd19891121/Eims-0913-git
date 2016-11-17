@@ -302,7 +302,13 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
     }
     //$scope.progressValue = 0;
 
-    
+    $scope.clearSSN = function(){
+
+        vm.data.emp.SSN = null;
+    }
+
+
+
     $scope.setProgress = function()
     {
 

@@ -229,16 +229,27 @@ exports.backToIndex = function (req, callback) {
 }
 
 //get all data into an array.
-
+//
 exports.getAllBySql = function (req,callback) {
     console.log("getAllBySql",req.session);
-
 
     auth.authCheck(req, function (authObj) {
         console.log(3)
         if (authObj.ops['search']) {
             search.getAll(function (e, o) {
-                callback(e, o);
+
+                //Filter : verify the "show salary"
+                //Hide salary if need.
+                if(!authObj.ops['showSalary']){
+                    o.rows.forEach(function(info){
+                        info.salary = "****";
+                        console.log("change warning: ",info.salary);
+
+                    })
+                }
+                callback(e,o);
+
+
             })
         } else {
             var error = {

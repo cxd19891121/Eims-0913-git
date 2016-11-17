@@ -188,16 +188,70 @@ function changeRate(sqlCode,name,val1,val2)
     return sqlCode
 }
 
+
+
+function deepSearchBuilder(sqlCode,searchObj)
+{
+    console.log(searchObj)
+    sqlCode += "1=1 AND"
+    if (searchObj.first_name != "") sqlCode += " first_name='" + searchObj.first_name + "' AND"
+    if (searchObj.last_name != "") sqlCode += " last_name='" + searchObj.last_name + "' AND"
+    if (searchObj.job_title != "" && Array.isArray(searchObj.job_title))
+    {
+        console.log("is array")
+        sqlCode += "("
+        searchObj.job_title.forEach(function(e)
+        {
+            sqlCode += " job_title='" + e + "' OR"
+        })
+        sqlCode = sqlCode.substring(0,sqlCode.length-2)
+        sqlCode +=") AND"
+    }
+
+    if (searchObj.visa_status != "" && Array.isArray(searchObj.visa_status))
+    {
+        console.log("is array")
+        sqlCode += "("
+        searchObj.visa_status.forEach(function(e)
+        {
+            sqlCode += " status='" + e + "' OR"
+        })
+        sqlCode = sqlCode.substring(0,sqlCode.length-2)
+        sqlCode +=") AND"
+    }
+
+    if (sqlCode.endsWith("AND")) sqlCode = sqlCode.substring(0,sqlCode.lastIndexOf("AND"))
+    
+
+
+    return sqlCode
+}
+
 function deepSearch(request,response,callback)
 {
+    console.log(request.body)
     var searchObj = JSON.parse(JSON.stringify(request.body))
-    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE "
-    if(searchObj.first_name == undefined) searchObj.first_name = "first_name" 
-    if(searchObj.last_name == undefined) searchObj.last_name = "last_name"
+    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE  "
 
-    sqlCode += " first_name=" + searchObj.first_name + " AND last_name=" + searchObj.last_name + " ";
-    
-    
+   
+    //console.log(typeof searchObj.last_name)
+    sqlCode = deepSearchBuilder(sqlCode,searchObj)
+    console.log(sqlCode)
+   
+
+    db.queryPres(sqlCode,function(e,o){
+        if(e){
+            return console.error('error running query', e);
+        }else {
+            console.log(o.rows[0])
+            if(o.rows[0]){
+                callback(null,o);
+            }else{
+                callback(null,o);
+            }
+
+        }
+    });
 
 }
 

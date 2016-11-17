@@ -87,11 +87,6 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         last_name: '',
         job_title: [],
         visa_status: [],
-        status: '',
-        major: '',
-        degree: '',
-        'visa_info.start_time':'',
-
     }
     $scope.employeeName = ''
 
@@ -142,7 +137,8 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
     $scope.deepSearch = function()
     {
-
+        $scope.searchObject.job_title = []
+        $scope.searchObject.visa_status = []
         $scope.popover.open = false
         $scope.visaLevel.forEach(function(e)
         {
@@ -154,12 +150,11 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
             if (v.value == true) {$scope.searchObject.job_title.push(v.name)}
             v.value = false
         })
-        console.log($scope.visaLevel),
-        console.log($scope.jobLevel)
-        console.log($scope.searchObject)
+
+        $scope.searchObject.first_name = ""
+        $scope.searchObject.last_name = ""
         dataService.search($scope.searchObject,function(data)
         {
-            console.log($scope.searchObject)
             if(data.length == 0)
             {
                 $scope.addAlert('danger','No feteched employee')
@@ -167,7 +162,6 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
             else
             {
                 $scope.addAlert('success','Search success')
-                //console.log(data)
                 $scope.$parent.$broadcast('changeData',{data:data})
             }
         })

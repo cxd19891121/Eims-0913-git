@@ -580,13 +580,13 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
         ({
             method: 'POST',
             url: config.search,
-            data: $httpParamSerializerJQLike(searchObj),
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            data: angular.toJson(searchObj),
+            headers: {'Content-Type': 'application/json'}
         })
-            .success(function (data) {
-                console.log('search back data',data);
-                callback(data)
-            })
+        .success(function (data) {
+            console.log('search back data',data);
+            callback(data)
+        })
     }
 
 

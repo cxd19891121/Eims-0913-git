@@ -76,13 +76,15 @@
                             
                             <tr ng-repeat="(k,v) in jobLevel track by $index">
                                 <td>
-                                    <span >{{v.name}}</span>
                                     <input type="checkbox" ng-model="v.value">
+                                    <span>{{v.name}}</span>
+                                    
                                 </td>
                                 <td>
                                     <div ng-if="$index < visaLevel.length">
-                                    <span>{{visaLevel[$index].name}}</span>
-                                    <input type="checkbox" ng-model="visaLevel[$index].value">
+                                        <input type="checkbox" ng-model="visaLevel[$index].value">
+                                        <span>{{visaLevel[$index].name}}</span>
+                                    
                                     </div>
                                 </td>
                                 

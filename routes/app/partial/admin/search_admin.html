@@ -1,6 +1,13 @@
 <!--This page was the main page of the EIMS system. Administrator will use this HTML to search and manage the user's information-->
 <!---->
 <style>
+.search_popover
+{
+    max-width: 550px; /* optional max width */
+    
+    width: 550px; /* Chrome */
+    color: black;
+}
 .popover 
 {
     word-break: break-all;
@@ -11,15 +18,22 @@
 }
 .job_popover
 {
-    max-width: 350px; /* optional max width */
+    max-width: 300px; /* optional max width */
     width: intrinsic; /* Safari/WebKit uses a non-standard name */
     width: -moz-max-content; /* Firefox/Gecko */
-    width: 350px; /* Chrome */
+    width: 300px; /* Chrome */
     color: black;
 }
 .absolute
 {
     position:absolute;
+}
+.stable {
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #dddddd;
+    border-collapse: collapse !important;
+    border-radius: 1px;
+    border-spacing:0px 1px;
 }
 
 </style>
@@ -49,10 +63,10 @@
         
             <!--Advance search popover which will display all the advance search information and a Deepsearch button-->
             <script type="text/ng-template" id="advanceSearch.html">
-
+                <table class="table">
                 <div class="row">
                     
-                    <table class="table ">
+                    <table class="stable">
                         <thead>
                             <tr>
                                 <td align="left">
@@ -71,7 +85,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
                             <tr ng-repeat="(k,v) in jobLevel track by $index">
                                 <td align="left">
                                     <div align="left">
@@ -91,9 +104,11 @@
                         </tbody>
                         
                     </table>
+                
     
                     
                 </div>
+                </table>
              
 <!--
                 <div class="row">
@@ -222,7 +237,7 @@
                     <th><a href="" ng-click="order('end_time')">Visa Expire Date</a></th>
                     <th><a href="" ng-click="order('job_title')">Job Title</a></th>
                     <th><a href="" ng-click="order('progress')">Progress</a></th>
-                    <th><a href="" ng-click="print()">Operation</a</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody>

@@ -10,8 +10,8 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.currentPage = 1
     $scope.pageSize = 5
     $scope.editInfo = true;
-    $scope.predicate = 'name';
-    $scope.reverse = true;
+    $scope.predicate = 'visa_type';
+    $scope.reverse = false;
     $scope.all = Symbol("all")
     $scope.complete = Symbol("complete")
     $scope.incomplete = Symbol("incomplete")
@@ -37,7 +37,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     {
         $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
-        //console.log($scope.predicate)
+        
     }
 
     $scope.displayDownload = false
@@ -94,8 +94,9 @@ app.controller('edit',function($scope,$uibModal, dataService)
         begin = ($scope.currentPage - 1) * $scope.pageSize;
         end = begin + $scope.pageSize;
         index = $scope.users.indexOf(value);
-        return (begin <= index && index < end)
+
     
+        return (begin <= index && index < end)
     }
 
     $scope.employeeDetail = false
@@ -131,7 +132,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
     $scope.$on('changeData',function(event,info)
     {
      
-        console.log("changeData")
+        //console.log("changeData")
         if(info.data == null || info.data == '')
         {
             return //alert('Error: no fetched employee')
@@ -151,7 +152,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
         }
         
         $scope.users = info.data
-        console.log($scope.users)
+        //console.log($scope.users)
         $scope.totalItems = $scope.users.length
     })
 
@@ -224,7 +225,7 @@ app.controller('edit',function($scope,$uibModal, dataService)
         //console.log(1)
         $scope.employeeDetail = true
         $scope.users.forEach(function(element) {if (element.e_id == id) $scope.detail = JSON.parse(JSON.stringify(element))})
-        console.log($scope.users)
+        //console.log($scope.users)
         $scope.wholeDetail = JSON.parse(JSON.stringify($scope.detail));
         Object.keys($scope.detail).forEach(function(key)
         {

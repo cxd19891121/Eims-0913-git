@@ -566,6 +566,7 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
     
 
     vm.search = function (searchObj, callback) {
+        console.log(searchObj)
         $http
         ({
             method: 'POST',

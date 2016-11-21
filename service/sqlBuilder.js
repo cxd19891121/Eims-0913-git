@@ -228,11 +228,11 @@ function deepSearch(request,response,callback)
     console.log(request.body)
     var searchObj = JSON.parse(JSON.stringify(request.body))
     var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE  "
-
+    
     sqlCode = deepSearchBuilder(sqlCode,searchObj)
     sqlCode += " ORDER BY visa_type,visa_info.end_time"
     
-   
+   console.log(sqlCode)
 
     db.queryPres(sqlCode,function(e,o){
         if(e){

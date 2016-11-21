@@ -151,8 +151,7 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
             v.value = false
         })
 
-        $scope.searchObject.first_name = ""
-        $scope.searchObject.last_name = ""
+        
         dataService.search($scope.searchObject,function(data)
         {
             if(data.length == 0)
@@ -164,7 +163,10 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
                 $scope.addAlert('success','Search success')
                 $scope.$parent.$broadcast('changeData',{data:data})
             }
+            $scope.searchObject.first_name = ""
+            $scope.searchObject.last_name = ""
         })
+        
 
     }
 

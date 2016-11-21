@@ -252,10 +252,30 @@
                         <label class="col-sm-2 control-label">Title:</label>
                         <div class="col-sm-5"
                              ng-class="{ 'has-error' : oTab.title.$invalid && oTab.title.$touched }">
-                            <input name="title" ng-required="addNewEmployee.orderStatus"
-                                   ng-model='vm.data.order.title' class="form-control"
-                                   placeholder="eg: Senior Java Programmer **"
-                                   ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
+
+                            <select name="title" ng-model='vm.data.order.title' ng-required="addNewEmployee.orderStatus"
+                                    class="form-control"
+                                    ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
+                                <option value="Accounting Manager">Accounting Manager</option>
+                                <option value="Sr. Software Enginner/Java">Sr. Software Enginner/Java</option>
+                                <option value="Jr. Software Engineer/Java">Jr. Software Engineer/Java</option>
+                                <option value="Software Engineer/Java">Software Engineer/Java</option>
+                                <option value="Enterprise Architect">Enterprise Architect</option>
+                                <option value="Marketing and Placement Manager">Marketing and Placement Manager</option>
+                                <option value="Business Analyst">Business Analyst</option>
+                                <option value="Sr. Business Analyst">Sr. Business Analyst</option>
+                                <option value="Jr. Business Analyst">Jr. Business Analyst</option>
+                                <option value="HR Manager">HR Manager</option>
+                                <option value="IT Recruiter">IT Recruiter</option>
+                                <option value="Account Manager">Account Manager</option>
+                                <option value="HR Assistant">HR Assistant</option>
+                                <option value="Product and Marketing Manager">Product and Marketing Manager</option>
+                                <option value="Development Lead">Development Lead</option>
+                                <option value="Technical Training Lead, Architecture">Technical Training Lead, Architecture</option>
+                                <option value="BA Trainer">BA Trainer</option>
+                                <option value="Business Development Manager">Business Development Manager</option>
+                                <option value="Managing Director">Managing Director</option>
+                            </select>
 
                             <div class="help-block" ng-messages="oTab.title.$error"
                                  ng-show="oTab.title.$touched">
@@ -704,13 +724,16 @@
                         <label class="col-sm-2 control-label">Visa Type:</label>
 
                         <div class="col-sm-5" ng-class="{ 'has-error' : vTab.type.$invalid && vTab.type.$touched }">
+
                             <select name="type" ng-model='vm.data.visa.type' ng-required="addNewEmployee.visaInfo"
                                     class="form-control"
                                     ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)">
-                                <option value="F1 OPT">F1 OPT</option>
-                                <option value="OPT ext">OPT ext.</option>
+                                <option value="F1-OPT">F1-OPT</option>
+                                <option value="F1-Extension ">OPT-Extension</option>
+                                <option value="F1-CPT ">F1-CPT</option>
+                                <option value="H1B ">H1B</option>
                                 <option value="Green Card">Green Card</option>
-                                <option value="US citizen">US citizen</option>
+                                <option value="US Citizen">US Citizen</option>
                                 <option value="Other">Other</option>
                             </select>
 
@@ -734,9 +757,10 @@
                                        ng-max = "vm.data.visa.eTime"
                                        ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
                                 <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open(0)" is-open="popup['0']"><i
-                    class="glyphicon glyphicon-calendar"></i></button>
-          </span>
+                                        <button type="button" class="btn btn-default" ng-click="open(0)" is-open="popup['0']">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
                             </p>
                             <!--<input name="vStart" placeholder="eg: 01-01-2000" type="text" class="form-control"-->
                             <!--show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy"-->

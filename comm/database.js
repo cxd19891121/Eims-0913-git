@@ -7,6 +7,7 @@ var dbConfig = appConfig.database;
 
 var pool = new pg.Pool(dbConfig);
 
+
 module.exports.query = function (text, value, callback) {
     return pool.query(text, value, function (err, result) {
         if (err) {

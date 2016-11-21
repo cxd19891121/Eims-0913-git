@@ -373,9 +373,8 @@ exports.getAll =  function(callback){
         console.log(e);
         callback(e,o);
     })
-
-
 }
+
 function searchByWholeName(request,response,callback)
 {
     var name = request.body.name

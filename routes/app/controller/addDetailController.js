@@ -75,6 +75,7 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
             chinesePhone: false,
             chineseHomePhone: false,
             ssnDisabled: false,
+            ssnCheck:false,
 
         }
     }
@@ -305,6 +306,15 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
     $scope.clearSSN = function(){
 
         vm.data.emp.SSN = null;
+    }
+
+    $scope.ssnChange =function(){
+        console.log("ssn Change")
+        if(vm.data.emp.ssn !=null || vm.data.emp.ssn!= undefined){
+            vm.data.other.ssnCheck = true;
+        }else{
+            vm.data.other.ssnCheck = false;
+        }
     }
 
 

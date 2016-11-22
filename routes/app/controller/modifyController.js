@@ -118,8 +118,12 @@ app.controller('modify', function ($scope, $http, $httpParamSerializerJQLike, $u
         forEach($scope.newLevel, function (key, value) {
             if (value == "" || value == undefined) {
                 //console.log(1)
-                $scope.addLevelAlert("danger", "must fill " + key)
-                count = false
+                if(key == "hidden"){
+                    //do nothing
+                }else {
+                    $scope.addLevelAlert("danger", "must fill " + key)
+                    count = false
+                }
             }
         })
         //console.log($scope.levelAlert)

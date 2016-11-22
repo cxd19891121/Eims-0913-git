@@ -850,10 +850,10 @@
                             <div class="col-sm-2"
                                  ng-class="{ 'has-error' : vTab.vStart.$invalid && vTab.vStart.$touched }">
                                 <p class="input-group">
-                                    <input name="vStart" placeholder="eg: yyyy-mm-dd" type="text"
+                                    <input name="vStart" placeholder="eg: yyyy-mm-dd" type="date"
                                            class="form-control" uib-datepicker-popup ng-model="vm.data.visa.sTime"
                                            is-open="popup['0']" datepicker-options="dateOptions" ng-required="true"
-                                           close-t ext="Close"
+                                           close-text="Close"
                                            ng-max = "vm.data.visa.eTime"
                                            ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
                                     <span class="input-group-btn">
@@ -879,12 +879,12 @@
                             <label class="col-sm-1 control-label">Expired:</label>
                             <div class="col-sm-2" ng-class="{ 'has-error' : vTab.vEnd.$invalid && vTab.vEnd.$touched }">
                                 <p class="input-group">
-                                    <input name="vEnd" placeholder="eg: yyyy-mm-dd" type="text"
+                                    <input name="vEnd" placeholder="eg: yyyy-mm-dd" type="date"
                                            class="form-control" uib-datepicker-popup ng-model="vm.data.visa.eTime"
                                            is-open="popup['1']" datepicker-options="dateOptions" ng-required="true"
                                            close-text="Close"
                                            ng-min = "vm.data.visa.sTime"
-                                           ng-blur="setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
+                                           ng-blur = "setProgress();vm.tabVerify(pTab.$valid,oTab.$valid,cTab.$valid,adTab.$valid,vTab.$valid,tTab.$valid,jTab.$valid,sTab.$valid)"/>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default" ng-click="open(1)" is-open="popup['1']">
                                             <i class="glyphicon glyphicon-calendar"></i>

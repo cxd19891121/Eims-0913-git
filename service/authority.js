@@ -24,6 +24,15 @@ exports.authCheck = function(req,callback) {
             callback(user);
         } else if (level == admin.level) {
             callback(admin);
+        }else{
+
+            authArray.forEach(function(targetAuth){
+                if(level == targetAuth.level){
+                    callback(targetAuth);
+                }
+            })
+
+
         }
     }
     else{

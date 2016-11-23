@@ -151,7 +151,7 @@ function searchByName(request,response,callback)
 {
     var name = request.body.name
     
-    var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE first_name='" + name + "' OR last_name='" + name + "' order by emp_id;"
+    var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE LOWER(first_name)='" + name.toLowerCase() + "' OR LOWER(last_name)='" + name.toLowerCase() + "' order by emp_id;"
     db.queryPres(sqlCode,function(e,o){
 
         if(e){
@@ -190,8 +190,8 @@ function deepSearchBuilder(sqlCode,searchObj)
 {
 
     sqlCode += "1=1 AND"
-    if (searchObj.first_name != "") sqlCode += " first_name='" + searchObj.first_name + "' AND"
-    if (searchObj.last_name != "") sqlCode += " last_name='" + searchObj.last_name + "' AND"
+    if (searchObj.first_name != "") sqlCode += " LOWER(first_name)='" + searchObj.first_name.toLowerCase() + "' AND"
+    if (searchObj.last_name != "") sqlCode += " LOWER(last_name)='" + searchObj.last_name.toLowerCase() + "' AND"
     if (searchObj.job_title != "" && Array.isArray(searchObj.job_title))
     {
         console.log("is array")
@@ -219,7 +219,7 @@ function deepSearchBuilder(sqlCode,searchObj)
     if (sqlCode.endsWith("AND")) sqlCode = sqlCode.substring(0,sqlCode.lastIndexOf("AND"))
     
 
-
+    console.log(sqlCode)
     return sqlCode
 }
 
@@ -232,7 +232,7 @@ function deepSearch(request,response,callback)
     sqlCode = deepSearchBuilder(sqlCode,searchObj)
     sqlCode += " ORDER BY visa_type,visa_info.end_time"
     
-   console.log(sqlCode)
+    console.log(sqlCode)
 
     db.queryPres(sqlCode,function(e,o){
         if(e){
@@ -382,7 +382,7 @@ function searchByWholeName(request,response,callback)
     var firstname = name[0]
     var lastname = name[1]
     
-    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE (first_name='" + firstname + "' AND last_name='" + lastname + "') OR (first_name='" +lastname + "' AND last_name='" + firstname + "') order by emp_id"
+    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE (LOWER(first_name)='" + firstname.toLowerCase() + "' AND LOWER(last_name)='" + lastname.toLowerCase() + "') OR (LOWER(first_name)='" +lastname.toLowerCase() + "' AND LOWER(last_name)='" + firstname.toLowerCase() + "') order by emp_id"
     console.log(sqlCode)
     db.queryPres(sqlCode,function(e,o){
         if(e){

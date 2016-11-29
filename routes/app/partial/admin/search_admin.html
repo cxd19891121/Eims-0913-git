@@ -58,7 +58,9 @@
                 </div>
             </div>
         </uib-accordion>
-        <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        
+        <div class="blackButton" uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        
         </form>
         
             <!--Advance search popover which will display all the advance search information and a Deepsearch button-->

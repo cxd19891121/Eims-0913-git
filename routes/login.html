@@ -34,9 +34,11 @@
         </div>
     </div>
     <main class="auth-main">
+        
         <div class="auth-block" ng-show="showLogin">
             <h1>Sign In</h1>
             <form class="form-horizontal">
+                <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
                     <div class="col-sm-10">
@@ -56,6 +58,7 @@
                         <a href="#" ng-click="displayForget()" class="forgot-pass">Forgot password?</a>
                     </div>
                 </div>
+                
                 <div class="clearfix"></div>
             </form>
         </div>
@@ -109,12 +112,27 @@
                 }
                 dataService.login(loginForm,function(data)
                 {
-                    if(!data.error) {
+                    
+                    if(!data.error) 
+                    {
                         console.log(data);
                         window.location.href = data;
                     }
+                    else
+                    {
+                        $scope.addAlert("warning","Invalid username & password")
+                    }
                 })
 
+            }
+            $scope.alerts = []
+            $scope.addAlert = function(type,msg) 
+            {
+                if ($scope.alerts.length == 0) $scope.alerts.push({type: type,msg: msg});
+            }
+            $scope.closeAlert = function(index) 
+            {
+                $scope.alerts.splice(index, 1);
             }
 
             $scope.cancel = function()

@@ -216,16 +216,30 @@ app.controller('editController', ['$scope','dataService' , function ($scope, dat
         jTab:true,
         sTab:true,
     }
-    vm.tabVerify = function(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab){
-        vm.tabValidate.pTab = pTab;
-        vm.tabValidate.oTab = oTab;
-        vm.tabValidate.cTab = cTab;
-        vm.tabValidate.adTab = adTab;
-        vm.tabValidate.vTab = vTab;
-        vm.tabValidate.tTab = tTab;
-        vm.tabValidate.jTab = jTab;
-        vm.tabValidate.sTab = sTab;
+
+
+    vm.tabUpdate = function(pForm,oForm,cForm,adForm,vForm,tForm,jForm,sForm){
+        vm.tabValidate.pTab = pForm.$valid
+        vm.tabValidate.oTab = oForm.$valid
+        vm.tabValidate.cTab = cForm.$valid
+        vm.tabValidate.adTab = adForm.$valid
+        vm.tabValidate.vTab = vForm.$valid
+        console.log("dirty",tForm.$dirty,jForm.$dirty,sForm.$dirty);
+        vm.tabValidate.tTab = !(tForm.$invalid && tForm.$dirty)
+        vm.tabValidate.jTab = !(jForm.$invalid && jForm.$dirty)
+        vm.tabValidate.sTab = !(sForm.$invalid && sForm.$dirty)
     }
+
+    // vm.tabVerify = function(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab){
+    //     vm.tabValidate.pTab = pTab;
+    //     vm.tabValidate.oTab = oTab;
+    //     vm.tabValidate.cTab = cTab;
+    //     vm.tabValidate.adTab = adTab;
+    //     vm.tabValidate.vTab = vTab;
+    //     vm.tabValidate.tTab = tTab;
+    //     vm.tabValidate.jTab = jTab;
+    //     vm.tabValidate.sTab = sTab;
+    // }
 
     vm.back = function(){
         window.history.back();

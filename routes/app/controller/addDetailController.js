@@ -98,16 +98,71 @@ app.controller('addDetailController', ['$scope','dataService', function ($scope,
         jTab:false,
         sTab:false,
     }
-    vm.tabVerify = function(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab){
-        vm.tabValidate.pTab = pTab;
-        vm.tabValidate.oTab = oTab;
-        vm.tabValidate.cTab = cTab;
-        vm.tabValidate.adTab = adTab;
-        vm.tabValidate.vTab = vTab;
-        vm.tabValidate.tTab = tTab;
-        vm.tabValidate.jTab = jTab;
-        vm.tabValidate.sTab = sTab;
+
+    vm.tabUpdate = function(pForm,oForm,cForm,adForm,vForm,tForm,jForm,sForm){
+
+        if($scope.addNewEmployee.personalInfo){
+            vm.tabValidate.pTab = pForm.$valid;
+        }else{
+            vm.tabValidate.pTab = !(pForm.$invalid && pForm.$dirty)
+        }
+
+        if($scope.addNewEmployee.orderStatus){
+            vm.tabValidate.oTab = oForm.$valid;
+        }else{
+            vm.tabValidate.oTab = !(oForm.$invalid && oForm.$dirty)
+        }
+
+        if($scope.addNewEmployee.contactInfo){
+            vm.tabValidate.cTab = cForm.$valid;
+        }else{
+            vm.tabValidate.cTab = !(cForm.$invalid && cForm.$dirty)
+        }
+
+        if($scope.addNewEmployee.address){
+            vm.tabValidate.adTab = adForm.$valid;
+        }else{
+            vm.tabValidate.adTab = !(adForm.$invalid && adForm.$dirty)
+        }
+
+        if($scope.addNewEmployee.visaInfo){
+            vm.tabValidate.vTab = vForm.$valid;
+        }else{
+            vm.tabValidate.vTab = !(vForm.$invalid && vForm.$dirty)
+        }
+
+        if($scope.addNewEmployee.termination){
+
+            vm.tabValidate.tTab = tForm.$valid;
+        }else{
+            vm.tabValidate.tTab = !(tForm.$invalid && tForm.$dirty)
+            //console.log("terminal",$scope.addNewEmployee,tForm.$invalid,tForm.$touched)
+        }
+
+        if($scope.addNewEmployee.jobEducation){
+            vm.tabValidate.jTab = jForm.$valid;
+        }else{
+            vm.tabValidate.jTab = !(jForm.$invalid && jForm.$touched)
+        }
+
+        if($scope.addNewEmployee.salaryBenefit){
+            vm.tabValidate.sTab = sForm.$valid;
+        }else{
+            vm.tabValidate.sTab = !(sForm.$invalid && sForm.$touched)
+        }
     }
+
+    //
+    // vm.tabVerify = function(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab){
+    //     vm.tabValidate.pTab = pTab;
+    //     vm.tabValidate.oTab = oTab;
+    //     vm.tabValidate.cTab = cTab;
+    //     vm.tabValidate.adTab = adTab;
+    //     vm.tabValidate.vTab = vTab;
+    //     vm.tabValidate.tTab = tTab;
+    //     vm.tabValidate.jTab = jTab;
+    //     vm.tabValidate.sTab = sTab;
+    // }
 
 
 

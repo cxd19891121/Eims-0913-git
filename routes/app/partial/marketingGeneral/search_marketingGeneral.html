@@ -1,0 +1,567 @@
+<!--This page was the main page of the EIMS system. Administrator will use this HTML to search and manage the user's information-->
+<!---->
+<style>
+.search_popover
+{
+    max-width: 550px; /* optional max width */
+    
+    width: 550px; /* Chrome */
+    color: black;
+}
+.popover 
+{
+    word-break: break-all;
+}
+.blackButton
+{
+    color:black;
+    font-weight:bold;
+}
+.job_popover
+{
+    max-width: 300px; /* optional max width */
+    width: intrinsic; /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content; /* Firefox/Gecko */
+    width: 300px; /* Chrome */
+    color: black;
+}
+.absolute
+{
+    position:absolute;
+}
+.stable {
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #dddddd;
+    border-collapse: collapse !important;
+    border-radius: 1px;
+    border-spacing:0px 1px;
+}
+
+</style>
+
+<div class="panel panel-blur ">
+    <div class="container">
+    <div class="">
+    <div class="row">
+    <form class="form-horizontal" ng-controller="search" role="form">
+        <uib-accordion close-others="showMoreSearch">
+            <div class="form-inline ">
+                <label class="col-sm-2 control-label">Employee Name:&emsp;</label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" ng-model="ctrlScope.employeeName" class='form-control' placeholder="employee first name" ng-keypress="keyPressSearch($event)" >
+                        <div class="input-group-btn">
+                             <button popover-placement="bottom" popover-title="Deep Search" uib-popover-template="advanceSearchUrl" type="button" class="btn btn-default" tabindex="-1" popover-class="search_popover" popover-trigger="'outsideClick'" popover-is-open="myPopover.isOpen"  popover-elem><span class="caret" ></span></button>
+                                                     
+                            <button class="btn btn-default" ng-click="searchByName()" type="button" tabindex="-1">search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </uib-accordion>
+        
+        <div class="blackButton" uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="3000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        
+        </form>
+        
+            <!--Advance search popover which will display all the advance search information and a Deepsearch button-->
+            <script type="text/ng-template" id="advanceSearch.html">
+                <table class="table">
+                <div class="row">
+                    
+                    <table class="stable">
+                        <thead>
+                            <tr>
+                                <td align="left">
+                                    <label >First Name:&emsp;</label>
+                                    <input type="text" ng-model="searchObject.first_name" ng-keypress="keyPressDeepSearch($event)">
+                                </td>
+                                <td align="left">
+                                    <label >Last name:</label>
+                                    <input type="text" ng-model="searchObject.last_name" ng-keypress="keyPressDeepSearch($event)">  
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left"><label >Job title:&emsp;</label></td>
+                                <td align="left"><label >Visa Status:&emsp;</label></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(k,v) in jobLevel track by $index">
+                                <td align="left">
+                                    <div align="left">
+                                        <input type="checkbox" ng-model="v.value">
+                                        <span>{{v.name}}</span>
+                                    </div>
+                                </td>
+                                <td> 
+                                    <div ng-if="$index < visaLevel.length">
+                                        <input type="checkbox" ng-model="visaLevel[$index].value">
+                                        <span>{{visaLevel[$index].name}}</span>
+                                    
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                
+    
+                    
+                </div>
+                </table>
+             
+<!--
+                <div class="row">
+                    <label class="col-sm-3 ">Major:&emsp;</label>
+                    <div class="col-md-3">
+                        <input type="text" ng-model="searchObject.major" ng-keypress="keyPressDeepSearch($event)">
+                    </div>
+                    <label class="col-sm-3 ">Education:&emsp;</label>
+                    <div class="col-md-3">
+                        <input type="text" ng-model="searchObject.university" ng-keypress="keyPressDeepSearch($event)">
+                    </div>
+                </div>
+
+                <div class="row">
+                        <label class="col-sm-3 ">Visa Start:&emsp;</label>
+                        <div class="col-md-3">
+                            <div class="black_word">
+                            <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.start_time']" ng-focus="open(1)" is-open="popup['1']" ng-keypress="keyPressDeepSearch($event)" />
+                            </div>
+                        </div>
+                        <label class="col-sm-3 ">Visa End:&emsp;</label>
+                        <div class="col-md-3">
+                            <input type="text" show-button-bar="false" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="searchObject['visa_info.end_time']" ng-focus="open(0)" is-open="popup['0']" ng-keypress="keyPressDeepSearch($event)" />
+                        </div>
+                </div>
+
+                <div class="row">
+                        <label class="col-sm-3 ">Salary:&emsp;</label>
+                        <div class="col-md-3">
+                            <input  type="number" ng-model="searchObject['salary']" ng-keypress="keyPressDeepSearch($event)">
+                        </div>
+                        <label class="col-sm-3 ">Insurance:&emsp;</label>
+                        <div class="col-md-3">
+                            <input type="text" ng-model="searchObject['health_ins']" ng-keypress="keyPressDeepSearch($event)">
+                        </div>
+                </div>
+
+                <div class="row">
+                        <label class="col-sm-3">Reimbursement:&emsp;</label>
+                        <div class="col-md-3">
+                            <input type="number" ng-model="searchObject['reimbursement']" ng-keypress="keyPressDeepSearch($event)">
+                        </div>
+                </div>
+           
+                <div class="row">
+                    <label class="col-sm-3 ">Regional:</label>
+
+                    <div class="col-md-3">
+                        <input class="col-md-6" type="number" placeholder="Min" ng-model="searchObject['regional_subsides_start']" ng-keypress="keyPressDeepSearch($event)">
+                        <input class="col-md-6" type="number" placeholder="Max" ng-model="searchObject['regional_subsides_end']" ng-keypress="keyPressDeepSearch($event)">
+                    </div>
+
+                    <label class="col-sm-3 ">Payraise:</label>
+                    <div class="col-md-3">
+
+                        <input class="col-md-6" type="number" placeholder="Min" ng-model="searchObject['payraise_start']" ng-keypress="keyPressDeepSearch($event)">
+                        <input class="col-md-6" type="number" placeholder="Max" ng-model="searchObject['payraise_end']" ng-keypress="keyPressDeepSearch($event)">
+                    </div>
+                </div>
+-->
+                <div style="float:right;">
+                    <button class="btn btn-black " ng-click="advanceSearch()">
+                        
+                        <span class="glyphicon glyphicon-search" style="color:black;">DeepSearch</span> 
+                    </button>
+                </div>
+            
+            </script>
+
+
+    <!--Add new user which will redirect to a new page allow user to add new employee-->
+    </div>
+    
+
+    <!--Edit table and filter-->
+    <div class="row" ng-controller="edit">
+        <div uib-alert ng-repeat="alert in alerts" dismiss-on-timeout="2000" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+        <div>
+         
+            <button uib-popover="display all Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(all)" popover-class="black_word" popover-elem>
+                <span class="glyphicon "></span> All
+             </button>
+             <button uib-popover="display incompleted Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(incomplete)" popover-class="black_word">
+                <span class="glyphicon "></span> Incomplete
+             </button>
+             <button uib-popover="display completed Employee" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="changeUser(complete)" popover-class="black_word">
+                <span class="glyphicon "></span> Complete
+             </button> 
+            <div style="float:right">
+            <div class="btn-group" uib-dropdown keyboard-nav>
+                <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                    Change Line Count <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                    <li role="menuitem"><a href="" ng-click="changePageSize(5)">5</a></li>
+                    <li role="menuitem"><a href="" ng-click="changePageSize(10)">10</a></li>
+                    <li role="menuitem"><a href="" ng-click="changePageSize(15)">15</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        
+        <div ng-show="displayDownload">
+            <p></p>
+            <button uib-popover="print" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-warning" type="button" ng-click="printAll()" popover-class="black_word">
+                <span class="glyphicon glyphicon-print "> </span>
+            </button>
+
+            <button uib-popover="download" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-warning" type="button" ng-click="downloadAll()" popover-class="black_word">
+                <span class="glyphicon glyphicon-download "> </span>
+            </button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
+                    <th><a href="" ng-click="order('e_id')">Employee Id</a></th>
+                    <th><a href="" ng-click="order('first_name')">Name</a></th>
+                    <th><a href="" ng-click="order('visa_type')">Visa Status</a></th>
+                    <th><a href="" ng-click="order('end_time')">Visa Expire Date</a></th>
+                    <th><a href="" ng-click="order('job_title')">Job Title</a></th>
+                    <th><a href="" ng-click="order('progress')">Progress</a></th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
+                    <td><input type="checkbox" ng-model="user.flag" ng-click="display()"></td>
+                    <td>{{ user.e_id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ user.visa_type }}</td>
+                    <td>{{ user.end_time }}</td>
+                    <td>{{ user.job_title }}</td>
+                    <td>{{ user.progress }}</td>
+                    <td>
+                        <button class="btn btn-success" ng-click="showEmployeeDetail(user.e_id)" )>
+                            <span class="glyphicon glyphicon-paperclip"></span>Detail
+                        </button>
+
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" boundary-links="true" items-per-page="pageSize"></ul>
+    </div>
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Detail</h3>
+        </div>
+        <div class="modal-body">
+            <style>
+                .modal-body .table
+                {
+                    table-layout:fixed;
+                }
+            </style>
+            <uib-accordion close-others="personalInformation">
+                
+                <div uib-accordion-group class="panel-default" heading="Personal Information" is-open="true" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Employee ID:</label> </td>
+                                <td><span uib-popover={{wholeDetail.e_id}} popover-placement="bottom" popover-trigger="display('e_id')" class="form-control">{{ detail.e_id || 'None'}}</span></td>
+                                <td><label> First Name: </label> </td>
+                                <td><span uib-popover={{wholeDetail.first_name}} popover-placement="bottom" popover-trigger="display('first_name')" class="form-control">{{ detail.first_name || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Middle Name:</label> </td>
+                                <td><span uib-popover={{wholeDetail.middle_name}} popover-placement="bottom" popover-trigger="display('middle_name')" class="form-control">{{ detail.middle_name || 'None'}}</span></td>
+                                <td><label>Last Name: </label> </td>
+                                <td><span uib-popover={{wholeDetail.last_name}} popover-placement="bottom" popover-trigger="display('last_name')" class="form-control">{{ detail.last_name || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>DOB:</label> </td>
+                                <td><span uib-popover={{wholeDetail.dob}} popover-placement="bottom" popover-trigger="display('dob')" class="form-control">{{ detail.dob || 'None'}} </span></td>
+                                <td><label>SSN: </label> </td>
+                                <td><span uib-popover={{wholeDetail.ssn}} popover-placement="bottom" popover-trigger="display('ssn')" class="form-control">{{ detail.ssn || 'None'}}</span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Marriage:</span> </label>
+                                <td><span uib-popover={{wholeDetail.marital_status}} popover-placement="bottom" popover-trigger="display('marital_status')" class="form-control">{{ detail.marital_status || 'None'}} </span></td>
+                                <td><label></label></td>
+                                <td><span></span></td>
+                            </tr>
+                            </tobdy>
+                        </table>
+                 
+                    </div>
+
+                </div>
+            </uib-accordion>
+
+            <uib-accordion close-others="orderInformation">
+                <div uib-accordion-group class="panel-default" heading="Order Information" is-open="true" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Order Number:</label> </td>
+                                <td><span uib-popover={{wholeDetail.o_id}} popover-placement="bottom" popover-trigger="display('o_id')" class="form-control">{{ detail.o_id || 'None'}} </span></td>
+                                <td><label>Job Location: </label> </td>
+                                <td><span uib-popover={{wholeDetail.location}} popover-placement="bottom" popover-trigger="display('location')" class="form-control">{{ detail.location || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Company Name:</label> </td>
+                                <td><span uib-popover={{wholeDetail.company_name}} popover-placement="bottom" popover-trigger="display('company_name')" class="form-control">{{ detail.company_name || 'None'}}</span></td>
+                                <td><label>Description: </label> </td>
+                                <td><span uib-popover={{wholeDetail.order_description}} popover-placement="bottom" popover-trigger="display('order_description')" class="form-control">{{ detail.order_description || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Type:</label> </td>
+                                <td><span uib-popover={{wholeDetail.type}} popover-placement="bottom" popover-trigger="display('type')" class="form-control">{{ detail.type || 'None'}} </span></td>
+                                <td><label>Title: </label> </td>
+                                <td><span uib-popover={{wholeDetail.title}} popover-placement="bottom" popover-trigger="display('title')" class="form-control">{{ detail.title || 'None'}}</span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Start Time:</label> </td>
+                                <td><span uib-popover={{wholeDetail.o_start_time}} popover-placement="bottom" popover-trigger="display('o_start_time')" class="form-control">{{ detail.o_start_time || 'None'}} </span></td>
+                                <td><label>End Time:</label> </td>
+                                <td><span uib-popover={{wholeDetail.o_end_time}} popover-placement="bottom" popover-trigger="display('o_end_time')" class="form-control">{{ detail.o_end_time || 'None'}}</span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Owner:</label> </td>
+                                <td><span uib-popover={{wholeDetail.owner}} popover-placement="bottom" popover-trigger="display('owner')" class="form-control">{{ detail.owner || 'None'}} </span></td>
+                                <td><label>Extension Time:</label> </td>
+                                <td><span uib-popover={{wholeDetail.extension_time}} popover-placement="bottom" popover-trigger="display('extension_time')" class="form-control">{{ detail.extension_time || 'None'}}</span></td>
+                            </tr>
+                            </tobdy>
+                        </table>
+
+
+                     
+                    </div>
+                </div>
+            </uib-accordion>
+
+
+            <uib-accordion close-others="contactInformation">
+                <div uib-accordion-group class="panel-default" heading="Contact Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="container col-md-12">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Phone Number:</label> </td>
+                                <td><span uib-popover={{wholeDetail.cellphone}} popover-placement="bottom" popover-trigger="display('cellphone')" class="form-control col-md-4">{{ detail.cellphone || 'None'}} </span></td>
+                                <td><label>Home Number: </label> </td>
+                                <td><span uib-popover={{wholeDetail.home_phone}} popover-placement="bottom" popover-trigger="display('home_phone')" class="form-control col-md-4">{{ detail.home_phone || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Email:</label> </td>
+                                <td><span uib-popover={{wholeDetail.email}} popover-placement="bottom" popover-trigger="display('email')" class="form-control">{{ detail.email || 'None'}} </span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                       
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <uib-accordion close-others="addressInformation">
+                <div uib-accordion-group class="panel-default" heading="Address Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Billing Address:</label> </td>
+                                <td><span uib-popover={{wholeDetail.b_add}} popover-placement="bottom" popover-trigger="display('b_add')" class="form-control">{{ detail.b_add || 'None'}} </span></td>
+                                <td><label>City: </label> </td>
+                                <td><span uib-popover={{wholeDetail.b_city}} popover-placement="bottom" popover-trigger="display('b_city')" class="form-control">{{ detail.b_city || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>State:</label> </td>
+                                <td><span uib-popover={{wholeDetail.b_state}} popover-placement="bottom" popover-trigger="display('b_state')" class="form-control">{{ detail.b_state || 'None'}} </span></td>
+                                <td><label>Zip: </label> </td>
+                                <td><span uib-popover={{wholeDetail.b_zip}} popover-placement="bottom" popover-trigger="display('b_zip')" class="form-control">{{ detail.b_zip || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Country:</label> </td>
+                                <td><span uib-popover={{wholeDetail.b_country}} popover-placement="bottom" popover-trigger="display('b_country')" class="form-control">{{ detail.b_country || 'None'}} </span></td>
+                                
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Permanent Address: </label> </td>
+                                <td><span uib-popover={{wholeDetail.p_add}} popover-placement="bottom" popover-trigger="display('p_add')" class="form-control">{{ detail.p_add || 'None'}} </span></td>
+                                <td><label>Permanent City: </label> </td>
+                                <td><span uib-popover={{wholeDetail.p_city}} popover-placement="bottom" popover-trigger="display('p_city')" class="form-control">{{ detail.p_city || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Permanent State: </label> </td>
+                                <td><span uib-popover={{wholeDetail.p_state}} popover-placement="bottom" popover-trigger="display('p_state')" class="form-control">{{ detail.p_state || 'None'}} </span></td>
+                                <td><label>Permanent Zip: </label> </td>
+                                <td><span uib-popover={{wholeDetail.p_zip}} popover-placement="bottom" popover-trigger="display('p_zip')" class="form-control">{{ detail.p_zip || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Permanent Country: </label> </td>
+                                <td><span uib-popover={{wholeDetail.p_country}} popover-placement="bottom" popover-trigger="display('p_country')" class="form-control">{{ detail.p_country || 'None'}} </span></td>
+                                
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <uib-accordion>
+                <div uib-accordion-group class="panel-default" heading="Visa" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Visa ID:</label> </td>
+                                <td><span uib-popover={{wholeDetail.v_id}} popover-placement="bottom" popover-trigger="display('v_id')" class="form-control">{{ detail.v_id || 'None'}} </span></td>
+                                <td><label>Visa Type:</label> </td>
+                                <td><span uib-popover={{wholeDetail.status}} popover-placement="bottom" popover-trigger="display('status')" class="form-control">{{ detail.status || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Visa Start: </label> </td>
+                                <td><span uib-popover={{wholeDetail.start_time}} popover-placement="bottom" popover-trigger="display('start_time')" class="form-control">{{ detail.start_time || 'None'}} </span></td>
+                                <td><label>Visa End:</label> </td>
+                                <td><span uib-popover={{wholeDetail.end_time}} popover-placement="bottom" popover-trigger="display('end_time')" class="form-control">{{ detail.end_time || 'None'}} </span></td>               
+                            </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <uib-accordion close-others="jobInformation">
+                <div uib-accordion-group class="panel-default" heading="Education & Work Experience Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Education ID:</label> </td>
+                                <td><span uib-popover={{wholeDetail.ed_id}} popover-placement="bottom" popover-trigger="display('ed_id')" class="form-control">{{ detail.ed_id || 'None'}} </span></td>
+                                <td><label>University:</label> </td>
+                                <td><span uib-popover={{wholeDetail.university}} popover-placement="bottom" popover-trigger="display('university')" class="form-control">{{ detail.university || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Major: </label> </td>
+                                <td><span uib-popover={{wholeDetail.major}} popover-placement="bottom" popover-trigger="display('major')" class="form-control">{{ detail.major || 'None'}} </span></td>
+                                <td><label>Degree:</label> </td>
+                                <td><span uib-popover={{wholeDetail.degree}} popover-placement="bottom" popover-trigger="display('degree')" class="form-control">{{ detail.degree || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Title: </label> </td>
+                                <td><span uib-popover={{wholeDetail.title}} popover-placement="bottom" popover-trigger="display('title')" class="form-control">{{ detail.title || 'None'}} </span></td>
+                                <td><label>Job Type:</label> </td>
+                                <td><span uib-popover={{wholeDetail.type}} popover-placement="bottom" popover-trigger="display('type')" class="form-control">{{ detail.type || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Location: </label> </td>
+                                <td><span uib-popover={{wholeDetail.location}} popover-placement="bottom" popover-trigger="display('location')" class="form-control">{{ detail.location || 'None'}} </span></td>
+                                <td><label>Job Description:</label> </td>
+                                <td><span uib-popover={{wholeDetail.description}} popover-placement="bottom" popover-trigger="display('description')" class="form-control">{{ detail.description || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Start: </label> </td>
+                                <td><span uib-popover={{wholeDetail.w_start_time}} popover-placement="bottom" popover-trigger="display('w_start_time')" class="form-control">{{ detail.w_start_time || 'None'}} </span></td>
+                                <td><label>Job End:</label> </td>
+                                <td><span uib-popover={{wholeDetail.w_end_time}} popover-placement="bottom" popover-trigger="display('w_end_time')" class="form-control">{{ detail.w_end_time || 'None'}} </span></td>               
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <uib-accordion close-others="salaryInfomation">
+                <div uib-accordion-group class="panel-default" heading="Salary & Benefit Information" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Job Title:</label> </td>
+                                <td><span uib-popover={{wholeDetail.job_title}} popover-placement="bottom" popover-trigger="display('job_title')" class="form-control">{{ detail.job_title || 'None'}} </span></td>
+                                <td><label>Job Level:</label> </td>
+                                <td><span uib-popover={{wholeDetail.job_level}} popover-placement="bottom" popover-trigger="display('job_level')" class="form-control">{{ detail.job_level || 'None'}} </span></td>
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Salary: </label> </td>
+                                <td><span uib-popover={{wholeDetail.salary}} popover-placement="bottom" popover-trigger="display('salary')" class="form-control">{{ detail.salary || 'None'}} </span></td>
+                                <td><label>Health Insurance:</label> </td>
+                                <td><span uib-popover={{wholeDetail.health_ins}} popover-placement="bottom" popover-trigger="display('health_ins')" class="form-control">{{ detail.health_ins || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Regional Subsides: </label> </td>
+                                <td><span uib-popover={{wholeDetail.regional_subsides}} popover-placement="bottom" popover-trigger="display('regional_subsides')" class="form-control">{{ detail.regional_subsides || 'None'}} </span></td>
+                                <td><label>Reimbursement:</label> </td>
+                                <td><span uib-popover={{wholeDetail.reimbursement}} popover-placement="bottom" popover-trigger="display('reimbursement')" class="form-control">{{ detail.reimbursement || 'None'}} </span></td>               
+                            </tr>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Pay Raise Percentage: </label> </td>
+                                <td><span uib-popover={{wholeDetail.payrise_percentage}} popover-placement="bottom" popover-trigger="display('payrise_percentage')" class="form-control">{{ detail.payrise_percentage || 'None'}} </span></td>
+                                        
+                            </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <uib-accordion close-others="Termination">
+                <div uib-accordion-group class="panel-default" heading="Termination" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                    <div class="container">
+                        <table>
+                            <tbody>
+                            <tr ng-class-odd='odd'>
+                                <td><label>Termination Date:</label> </td>
+                                <td><span uib-popover={{wholeDetail.termn_date}} popover-placement="bottom" popover-trigger="display('termn_date')" class="form-control">{{ detail.termn_date || 'None'}} </span></td>
+                                <td><label>Reason:</label> </td>
+                                <td><span uib-popover={{wholeDetail.termn_reason}} popover-placement="bottom" popover-trigger="display('termn_reason')" class="form-control">{{ detail.termn_reason || 'None'}} </span></td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </uib-accordion>
+
+            <div id="printElement" style="display:none">
+                <ul ng-repeat='(k,v) in detail'>
+                    <li>{{k}}: {{v}} </li>
+                </ul>
+
+            </div>
+
+            <button class="btn btn-primary" type="button" ng-click="print()">Print</button>
+            <button class="btn btn-primary" type="button" ng-click="download()">Download</button>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        </div>
+    </script>
+    </div>
+    </div>
+
+</div>

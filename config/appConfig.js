@@ -103,7 +103,11 @@ var writeJsonFromConfig = function(configObj,callback){
     })
     //fs.writeFileSync('./config.json','1234',{flag:'w'});
     //fs.close();
+}
 
+var getConfigSync = function()
+{
+    return JSON.parse(fs.readFileSync('config/config.json','utf-8'));
 }
 
 
@@ -112,3 +116,4 @@ var writeJsonFromConfig = function(configObj,callback){
 module.exports = config;
 module.exports.readConfig = readConfigFromJson;
 module.exports.writeConfig = writeJsonFromConfig;
+module.exports.getConfig = getConfigSync;

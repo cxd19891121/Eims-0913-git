@@ -99,7 +99,14 @@ app.controller('application', function($scope,dataService,$uibModal)
     {
         dataService.getMessage(window.localStorage.username,function(data)
         {
-            if(data)
+            if(data == undefined) return void 0
+            if(Array.isArray(data) == false) 
+            {
+                var adap = data
+                var data = []
+                data.push(adap)
+            }
+            if(Array.isArray(data))
             {
                 $scope.messages = []
                 data.forEach(function(element)

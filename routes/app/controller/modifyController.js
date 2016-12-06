@@ -72,11 +72,28 @@ app.controller('modify', function ($scope, $http, $httpParamSerializerJQLike, $u
             $scope.uib[currentUib].open = false;
         }
     };
-
+    /*
+    $scope.$watch('config.auth',function()
+    {
+        console.log($scope.config.auth)
+        if(Array.isArray($scope.config.auth))
+        {
+            $scope.config.auth.forEach(function(e)
+            {
+                if (e.filePath == "/login.html") return void 0
+                e.filePath = "/user.html"
+                $scope.authData.forEach(function(ele)
+                {
+                    if (e.ops[ele] == true) e.filePath = "/administrator.html"
+                })
+            })
+        }
+    },true)
+    */
+    $scope.authData = ['addEmp','addUser','delEmp','delUser','editEmp','editUser','getAllUser']
 
     $scope.getHighestLevel = function (obj, property) {
         var highest = 0
-        //var 
         return highest
     }
     $scope.addAlert = function (type, msg) {

@@ -1,5 +1,22 @@
 var db = require('./../comm/database');
+var viewRule = require('./../service/viewRule')
+var auth = require('./../service/authority')
 
+var viewRuleWrapp = function(req,data,cb)
+{
+    auth.authCheck(req, function (authObj) {
+        var keyArr = viewRule.rule.putData([],authObj.ops)
+                if(keyArr.length != 0){
+                    data.forEach(function(info){
+                        keyArr.map(function(e){
+                            info[e] = "****"
+                        })
+                    })
+                }
+                cb(data)
+        })
+    
+}
 function isArray(list)
 {
     if(Array.isArray(list))
@@ -159,8 +176,12 @@ function searchByName(request,response,callback)
         }else {
             console.log(o.rows[0])
             if(o.rows[0]){
-
-                callback(null,o);
+                viewRuleWrapp(request,o.rows,function(data)
+                {
+                    o.rows = data
+                    callback(null,o)
+                })
+                
 
             }else{
                 //console.log(o.rows)
@@ -239,8 +260,14 @@ function deepSearch(request,response,callback)
             return console.error('error running query', e);
         }else {
             if(o.rows[0]){
-                //console.log(o.rows)
-                callback(null,o);
+                //console.log(Array.isArray(o.rows))
+                viewRuleWrapp(request,o.rows,function(data)
+                {
+                    o.rows = data
+                    callback(null,o)
+                })
+               
+                
             }else{
                 callback(null,o);
             }
@@ -390,9 +417,13 @@ function searchByWholeName(request,response,callback)
         }else {
 
             if(o.rows[0]){
+                viewRuleWrapp(request,o.rows,function(data)
+                {
+                    o.rows = data
+                    callback(null,o)
+                })
 
-                callback(null,o);
-
+            
             }else{
                 callback(o);
             }

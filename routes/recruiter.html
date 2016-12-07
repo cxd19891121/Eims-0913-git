@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="myApp" ng-controller="application">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="lib/css/vendor.css">
+<link rel="stylesheet" href="lib/css/app.css">    
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="lib/css/auth.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+<script src="https://rawgit.com/gilf/ngPrint/master/ngPrint.min.js"></script>
+<script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-switch.css">
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/main.css">
+<link rel="stylesheet" href="lib/css/vendor-f0a6e6463a.css">
+<link rel="stylesheet" href="lib/css/app-b989473ce9.css">
+
+<style>
+
+.close_button
+{
+    top:0px;
+    right:0px;
+    float:right;
+
+}
+.black_word
+{
+    color:black;
+}
+textarea
+{
+    resize:none;
+}
+</style>
+
+<body>
+    <page-top>
+    <div class="page-top clearfix ng-isolate-scope " scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
+        
+        <div class="navbar-left">
+            <a href="/#/">
+          
+            <img class="img-rounded" src="lib/bootstrap/css/mainLogo.png" height="60" width="240" >
+          
+            </a>
+        </div>
+
+        <div class="navbar-right text-success">
+           
+            <label style="font-size:150%">  Hello <em class="text-info">{{username}}</em></label>
+            
+            <button uib-popover="Read Messages" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary" type="button" ng-click="getMessage()">
+                Messages <span class="badge">{{letterNum}}</span>
+            </button>
+
+            <button uib-popover="Send Message" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-send" type="button" ng-click="sendMessage()">
+            </button>
+
+            
+
+            <button uib-popover="Logout" popover-placement="left-bottom" popover-trigger="'mouseenter'" class="btn btn-primary" ng-click="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </button> &nbsp;&nbsp; &nbsp;&nbsp;
+        </div>
+    </div>
+<div class="row">
+    <p></p>
+</div>
+   <br>
+   <br>
+   <br>
+   <br><br>
+   </page-top>
+
+   <!--This is the message template which will display all the message in that template-->
+    <script type="text/ng-template" id="message.html">
+        <div class="panel panel-blur">
+        <div class="close_button">
+        <button uib-popover="Close" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-remove" type="button" ng-click="close()" popover-class="black_word">
+        </button>
+        </div>
+        <div class="modal-header">
+            <h3 class="">Message</h3>
+        </div>
+
+
+
+        <table class="table table-striped modal-body">
+            <thead>
+                <tr>
+                    <th><a href="">Message </a></th>
+                    <th><a href="">From </a></th>
+                    <th><a href="">Send time </a></th>
+                    <th><a href="">Operation </a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-class="{'success' : message.flag === true, 'danger' : message.flag === false}" ng-repeat="message in messages | filter:paginate" ng-class-odd='odd'>
+                    <td>{{message.message}}</td>
+                    <td>{{message.from}} </td>
+                    <td>{{message.sendTime}}</td>
+                    <td><input type="checkbox" ng-model="message.delete"> delete </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="10" boundary-links="true" items-per-page="pageSize"></ul>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        </div>
+        </div>
+    </script>
+
+    <!--This is the send template which will display the sending bar in this template-->
+    <script type="text/ng-template" id="send.html">
+        <div class="panel panel-blur">
+            <div class="close_button">
+                <button uib-popover="Close" popover-placement="bottom" popover-trigger="'mouseenter'" class="btn btn-primary glyphicon glyphicon-remove" type="button" ng-click="close()" popover-class="black_word">
+                </button>
+            </div>
+            
+            <div class="modal-header">
+                <h3 >Send</h3>
+            </div>
+            
+            <div class="container col-md-12">
+                <div class="row">   
+                    <div ng-repeat="user in users" style="margin:8px;">
+                        <div class="col-md-4">
+                            <input  type="checkbox" ng-model="user.flag" ng-click="disableSend()"> 
+                            <span>{{user.username}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"></div>
+            <div class="modal-body">
+                <label>Message : </label>
+                
+                <div>
+                    <textarea rows="10" cols="70" ng-model="data"></textarea>
+                </div>
+                
+               
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-disabled="disables" ng-click="send()">Send </button>
+            </div>     
+        </div>
+    </script>
+
+
+    <div ng-view class="row">        
+    </div>
+
+
+<script src = 'app/app_recruiter.js'></script>
+<script src = 'app/comm.js'></script>
+<script src = 'app/rule.js'></script>
+
+<!-- Controllers  -->
+
+<script src = 'app/directive/myDirctive.js'></script>
+<script src = 'app/controller/addDetailController.js'></script>
+<script src = 'app/controller/editController.js'></script>
+<script src = 'app/controller/appController.js'></script>
+<script src = 'app/controller/application.js'></script>
+<script src = 'app/controller/search.js'></script>
+<script src = 'app/controller/edit.js'></script>
+<script src = 'app/controller/addCtrl.js'></script>
+<script src = 'app/controller/modifyController.js'></script>
+<script src = 'app/controller/userConfigController.js'></script>
+
+
+<script src = 'app/controller/ModalInstanceCtrl.js'></script>
+
+<!-- services -->
+<script src = 'app/service/dataService.js'></script>
+<script src = 'app/service/configService.js'></script>
+
+<!-- partial -->
+<script src = 'app/partial/user/search_user.html'></script>
+
+
+
+
+</body>
+</html>
+
+
+

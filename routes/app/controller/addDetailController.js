@@ -6,6 +6,8 @@
 app.controller('addDetailController', ['$scope','dataService', function ($scope, dataService) {
     var vm = this;
 
+    $scope.phoneNumberRegex = "\\d+"
+
     $scope.alert = {
         good: "New User Added",
         fail:"Add Fail",

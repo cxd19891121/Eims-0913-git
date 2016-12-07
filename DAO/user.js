@@ -2,6 +2,7 @@
  * Created by mooner00 on 8/13/2016.
  */
 var db = require('./../comm/database');
+var md5 = require('md5')
 
 var sql = {
     selectAllUsername:{name:'selectAllUsername',text:"select username from user_info where delete_flag = false"},
@@ -73,13 +74,13 @@ exports.deleteElementById = function(id,callback){
 
 exports.insertElement = function(dt,callback){
     console.log(dt)
-    sql['insertUser'].values = [dt.username,dt.password,dt.eid,dt.level,dt.email];
+    sql['insertUser'].values = [dt.username,md5(dt.password),dt.eid,dt.level,dt.email];
     return db.queryPres(sql['insertUser'],function(e,o){callback(e,o)});
 }
 
 exports.updateElementById = function(id,dt,callback){
     console.log(dt);
-    sql['updateUserById'].values = [dt.username,dt.password,dt.eid,dt.level,dt.email,id];
+    sql['updateUserById'].values = [dt.username,md5(dt.password),dt.eid,dt.level,dt.email,id];
     return db.queryPres(sql['updateUserById'],function(e,o){callback(e,o)});
 }
 

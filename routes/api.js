@@ -176,7 +176,7 @@ router.get('/all',function(req,res){
             var result = {};
             result.rows = [];
             o.rows.forEach(function(element){
-                console.log(element.first_name,element.delete_flag);
+                //console.log(element.first_name,element.delete_flag);
                 if(!element.delete_flag){
                     result.rows.push(element);
                 }

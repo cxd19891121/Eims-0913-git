@@ -29,7 +29,7 @@
                 <uib-accordion close-others="false" class="table table-striped">
 
                     <!--System config's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="System Config:" is-open="uib.system.open">
+                    <div uib-accordion-group class="panel-primary" heading="System Config:" ng-init="uib.system.open=true" is-open="true">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.url">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> {{key}}:</label>
@@ -41,7 +41,7 @@
                     </div>
 
                     <!--Database config's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Database Config:" is-open="uib.database.open">
+                    <div uib-accordion-group class="panel-primary" heading="Database Config:" ng-init="uib.database.open=false" is-open="uib.database.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.database">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> {{key}}:</label>
@@ -53,7 +53,7 @@
                     </div>
 
                     <!--Redis cache config's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Redis Config:" is-open="uib.redis.open">
+                    <div uib-accordion-group class="panel-primary" heading="Redis Config:" ng-init="uib.redis.open=false" is-open="uib.redis.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.redis">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> {{key}}:</label>
@@ -65,7 +65,7 @@
                     </div>
 
                     <!--Session's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Session Config:" is-open="uib.session.open">
+                    <div uib-accordion-group class="panel-primary" heading="Session Config:" ng-init="uib.session.open=false" is-open="uib.session.open">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"> secret:</label>
@@ -119,7 +119,7 @@
                     </div>
 
                     <!--Service's panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Service Config:" is-open="uib.service.open">
+                    <div uib-accordion-group class="panel-primary" heading="Service Config:" ng-init="uib.service.open=false" is-open="uib.service.open">
                         <form class="form-horizontal" role="form" ng-repeat="(key, value) in config.service">
                             <div ng-repeat="(k,v) in value">
                                 <div class="form-group">
@@ -141,7 +141,7 @@
                 <uib-accordion close-others="false" class="table table-striped">
 
                     <!--User's authority's config panel-->
-                    <div uib-accordion-group class="panel-primary" heading="Authority Config" is-open="uib.authority.open">
+                    <div uib-accordion-group class="panel-primary" heading="Authority Config" ng-init="uib.authority.open=false" is-open="uib.authority.open">
                         <uib-accordion close-others="true" class="table table-striped">
 
                             <div ng-repeat="user in config.auth">
@@ -226,7 +226,7 @@
 
                 <!--Create New Level -->
                 <uib-accordion close-others="false" class="table table-striped">
-                    <div uib-accordion-group class="panel-primary" heading="Create New Level:" is-open="uib.newLevel.open">
+                    <div uib-accordion-group class="panel-primary" heading="Create New Level:" ng-init="uib.newLevel.open=false" is-open="uib.newLevel.open">
 
                         <form class="form-horizontal" role="form">
                             <div class="form-group">

@@ -4,13 +4,12 @@ var config = require('./../config/appConfig')
 
 
 exports.authCheck = function(req,callback) {
-    console.log(4);
-    var authArray = config.auth;
+    var authArray = config.getConfig().auth;
     var noSession = authArray[0];
     var user = authArray[1];
     var admin = authArray[2];
 
-    console.log("req.session",req.session);
+    //console.log("req.session",req.session);
 
     if(req.session.user == undefined){
 

@@ -181,15 +181,8 @@
             
             </script>
 
-
-    <!--Add new user which will redirect to a new page allow user to add new employee-->
-    <div class="row">
-        <button uib-popover="add a new Employee" popover-placement="right" popover-trigger="'mouseenter'" class="btn btn-success" ng-click="addNewUser()" popover-class="black_word">
-            <span class="glyphicon glyphicon-user"></span> Add
-        </button> 
-        <br><br>
-
     </div>
+    
     
 
     <!--Edit table and filter-->
@@ -253,16 +246,8 @@
                     <td>{{ user.job_title }}</td>
                     <td>{{ user.progress }}</td>
                     <td>
-                        <button class="btn btn-success" ng-click="showEmployeeDetail(user.e_id)" )>
+                        <button class="btn btn-success" ng-click="showEmployeeDetail(user.e_id)">
                             <span class="glyphicon glyphicon-paperclip"></span>Detail
-                        </button>
-
-                        <button class="btn btn-primary" ng-click="editUser(user.e_id)">
-                            <span class="glyphicon glyphicon-pencil"></span>Edit
-                        </button>
-
-                        <button class="btn btn-danger" ng-click="deleteUser(user.e_id)">
-                            <span class="glyphicon glyphicon-trash"></span>Delete
                         </button>
 
                         

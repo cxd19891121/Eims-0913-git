@@ -507,20 +507,26 @@
                                  ng-class="{ 'has-error' : cTab.cphone.$invalid && cTab.cphone.$touched }">
                                 <input name="cphone"
                                        ng-required="addNewEmployee.contactInfo"
-                                       ng-model='vm.data.emp.cPhone' class="form-control" type='number'
+                                       ng-model='vm.data.emp.cPhone' class="form-control" 
+                                       type="text"
+                                       pattern="/^\+?\d{10,}$/"
+                                       ng-pattern="/^\+?\d{10,}$/"
                                        minlength="10"
+                                       maxlength="15"
                                        ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)"
                                        placeholder="eg: 5157081111 **">
                                 <div class="help-block" ng-messages="cTab.cphone.$error"
                                      ng-show="cTab.cphone.$touched">
                                     <!--<small ng-message="required" class="text-danger">You cannot leave this empty-->
                                     <!--</small>-->
-                                    <small ng-message="number" class="text-danger">Phone number must be 10 or more
-                                        digits
+                                    <small ng-message="maxlength" class="text-danger">Phone number must be 10 digits to 15 digits
                                     </small>
-                                    <small ng-message="minlength" class="text-danger">Phone number must be 10 or more
-                                        digits
+                                    <small ng-message="number" class="text-danger">Phone number must be 10 digits to 15 digits
                                     </small>
+                                    <small ng-message="minlength" class="text-danger">Phone number must be 10 digits to 15 digits
+                                    </small>
+                                    <small class="text-danger" ng-show="cTab.cphone.$error.pattern"><br>Not a valid Cell-Phone!</small>
+                            
                                 </div>
                             </div>
                             <div class="col-sm-2" ng-show="(vm.data.other.chinesePhone)">
@@ -535,9 +541,14 @@
                                 <input name="hphone" placeholder="eg: 5157081111" ng-model='vm.data.emp.hPhone'
                                        class="form-control" type='number'
                                        ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)"
-                                       minlength="10">
+                                       minlength="10"
+                                       pattern="/^\+?\d{10,}$/"
+                                       ng-pattern="/^\+?\d{10,}$/"
+                                       maxlength="15">
                                 <div class="help-block" ng-messages="cTab.hphone.$error"
                                      ng-show="cTab.hphone.$touched">
+                                     <small ng-message="maxlength" class="text-danger">Phone number must be 10 digits to 15 digits
+                                    </small>
                                     <small ng-message="number" class="text-danger">Invalid number</small>
                                     <small ng-message="maxlength" class="text-danger">Phone number must be 10
                                         digit
@@ -545,6 +556,7 @@
                                     <small ng-message="minlength" class="text-danger">Phone number must be 10
                                         digit
                                     </small>
+                                    <small class="text-danger" ng-show="cTab.hphone.$error.pattern"><br>Not a valid Home-Phone!</small>
                                 </div>
                             </div>
                         </div>

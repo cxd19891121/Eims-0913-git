@@ -33,12 +33,51 @@ router.get('/admin',function(req,res){
 
 })
 
+router.get('/HR',function(req,res){
+    logicService.reach(req,function(htmlFile)
+    {
+        res.sendFile(__dirname + htmlFile)
+    })
+})
+
+router.get('/recruiter',function(req,res){
+    logicService.reach(req,function(htmlFile)
+    {
+        res.sendFile(__dirname + htmlFile)
+    })
+})
+
+router.get('/accountManager',function(req,res){
+    logicService.reach(req,function(htmlFile)
+    {
+        res.sendFile(__dirname + htmlFile)
+    })
+})
+
+router.get('/marketingGeneral',function(req,res){
+    logicService.reach(req,function(htmlFile)
+    {
+        res.sendFile(__dirname + htmlFile)
+    })
+})
+
+
 router.post('/',function(req,res){
     logicService.login(req,function(e,htmlName){
+       
        if(e){
            res.send(e);
-       }else{
-           res.send(htmlName);
+       }else if(htmlName == "/administrator.html"){
+           res.send("admin");
+       }else if(htmlName == "/HR.html"){
+           res.send("HR")
+       }else if(htmlName == "/recruiter.html"){
+           res.send("recruiter")
+       }else if(htmlName == "/accountManager.html"){
+           res.send("accountManager")
+       }else if(htmlName == "/marketingGeneral.html")
+       {
+           res.send("marketingGeneral")
        }
     })
 })
@@ -203,6 +242,18 @@ router.get('/app/partial/addDetails.html',function(req,res){
 router.get('/app/partial/user/search_user.html',function(req,res){
     res.sendFile(__dirname + '/app/partial/user/search_user.html')
 })
+router.get('/app/partial/HR/search_HR.html',function(req,res){
+    res.sendFile(__dirname + '/app/partial/HR/search_HR.html')
+})
+router.get('/app/partial/recruiter/search_recruiter.html',function(req,res){
+    res.sendFile(__dirname + '/app/partial/recruiter/search_recruiter.html')
+})
+router.get('/app/partial/accountManager/search_accountManager.html',function(req,res){
+    res.sendFile(__dirname + '/app/partial/accountManager/search_accountManager.html')
+})
+router.get('/app/partial/marketingGeneral/search_marketingGeneral.html',function(req,res){
+    res.sendFile(__dirname + '/app/partial/marketingGeneral/search_marketingGeneral.html')
+})
 //user router provider
 router.get('/app/app_user.js',function(req,res,next){
     res.sendFile(__dirname + '/app/app_user.js')
@@ -223,6 +274,24 @@ router.get('/app/partial/admin/modify.html',function(req,res){
 //admin router provider
 router.get('/app/app_admin.js',function(req,res){
     res.sendFile(__dirname + '/app/app_admin.js')
+})
+
+router.get('/app/app_HR.js',function(req,res)
+{
+    res.sendFile(__dirname + '/app/app_HR.js')
+})
+
+router.get('/app/app_recruiter.js',function(req,res)
+{
+    res.sendFile(__dirname + '/app/app_recruiter.js')
+})
+router.get('/app/app_accountManager.js',function(req,res)
+{
+    res.sendFile(__dirname + '/app/app_accountManager.js')
+})
+router.get('/app/app_marketingGeneral.js',function(req,res)
+{
+    res.sendFile(__dirname + '/app/app_marketingGeneral.js')
 })
 
 
@@ -260,4 +329,6 @@ router.get('/images/furley_bg.png',function(req,res){
 router.get('/lib/*',function(req,res){
     res.sendFile(__dirname + req.path)
 })
+
+
 module.exports = router;

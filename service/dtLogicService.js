@@ -12,7 +12,9 @@ var forgetService = require('./../service/forget');
 var mail = require('./../service/mail');
 var client = require('./../comm/redis');
 var validation = require('./../service/validate');
-
+var config = require('./../config/appConfig')
+var md5 = require('md5')
+var viewRule = require('./../service/viewRule')
 
 var repMsg = {}
 var repMsgGroup = {
@@ -178,7 +180,8 @@ exports.login = function (req, callback) {
     var password = req.body['password'];
 
     userDAO.selectElementByName(username, function (e, o) {
-
+        //console.log(o.rows[0].password)
+        //console.log(md5(password) == o.rows[0].password)
         if (e) {
             // case 1: fail to connect to database: callback a error msg with the 'err' object.
             repMsg = {error: e, msg: 'fail to GET access to LOGIN system'};
@@ -189,11 +192,7 @@ exports.login = function (req, callback) {
             repMsg = {error: 'invalid username', msg: 'invalid username'};
             callback(repMsg);
         }
-        //case 3: find user but password do not match: callback a error msg without any data.
-        else if (o.rows[0].password != password) {
-            repMsg = {error: 'invalid password', msg: 'invalid password'}
-            callback(repMsg);
-        }
+        
         //case 4: correct username and password:
         // 1> put the user into the new session.
         // 2> send the right html file back to front-end
@@ -202,8 +201,23 @@ exports.login = function (req, callback) {
             req.session.user = o.rows[0];
           //  console.log("login",req.session.user.level);
             auth.authCheck(req, function (authObj) {
-                callback(null, authObj.fileName);
+                callback(null, authObj.filePath);
             })
+        }
+        else if (o.rows[0].password == md5(password))
+        {
+            req.session.user = o.rows[0];
+          //  console.log("login",req.session.user.level);
+            auth.authCheck(req, function (authObj) {
+           
+
+                callback(null, authObj.filePath);
+            })
+        }
+        //case 3: find user but password do not match: callback a error msg without any data.
+        else if (o.rows[0].password != password) {
+            repMsg = {error: 'invalid password', msg: 'invalid password'}
+            callback(repMsg);
         }
         else {
             callback({error: "error", msg: 'unknown error'});
@@ -230,21 +244,25 @@ exports.backToIndex = function (req, callback) {
 
 //get all data into an array.
 //
+
+
 exports.getAllBySql = function (req,callback) {
-    console.log("getAllBySql",req.session);
+
 
     auth.authCheck(req, function (authObj) {
-        console.log(3)
+        
         if (authObj.ops['search']) {
             search.getAll(function (e, o) {
 
                 //Filter : verify the "show salary"
                 //Hide salary if need.
-                if(!authObj.ops['showSalary']){
+                //var keyArr = []
+                var keyArr = viewRule.rule.putData([],authObj.ops)
+                if(keyArr.length != 0){
                     o.rows.forEach(function(info){
-                        info.salary = "****";
-                        console.log("change warning: ",info.salary);
-
+                        keyArr.map(function(e){
+                            info[e] = "****"
+                        })
                     })
                 }
                 callback(e,o);
@@ -547,6 +565,3 @@ function repMsgGroupRefresh() {
     }
 
 }
-
-
-

@@ -64,7 +64,10 @@
                 "delUser": true,
                 "recUser": true,
                 "getAllUsername": true,
-                "educationInfo": true
+                "educationInfo": true,
+                "viewPrivateInfo": true,
+                "viewSalaryBenefit": true,
+                "viewVisaInfo": true
             },
             "filePath": "/administrator.html",
             "hidden": false

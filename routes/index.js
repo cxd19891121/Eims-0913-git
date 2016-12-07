@@ -75,8 +75,7 @@ router.post('/',function(req,res){
            res.send("recruiter")
        }else if(htmlName == "/accountManager.html"){
            res.send("accountManager")
-       }else if(htmlName == "/marketingGeneral.html")
-       {
+       }else if(htmlName == "/marketingGeneral.html"){
            res.send("marketingGeneral")
        }
     })

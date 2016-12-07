@@ -67,7 +67,7 @@
                 "educationInfo": true
             },
             "filePath": "/administrator.html",
-            "hidden": true
+            "hidden": false
         },
         {
             "name": "HR Generalist",

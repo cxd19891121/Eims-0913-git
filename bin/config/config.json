@@ -31,7 +31,8 @@
         "login": true,
         "showSalary": true
       },
-      "filePath": "/login.html"
+      "filePath": "/login.html",
+      "hidden": true
     },
     {
       "name": "user",
@@ -154,33 +155,6 @@
         "getDelEmp": true,
         "showSalary": true,
         "getDelUser": true
-      },
-      "filePath": "/user.html",
-      "hidden": true
-    },
-    {
-      "name": "justtest",
-      "level": 6,
-      "tag": "fef",
-      "ops": {
-        "addEmp": true,
-        "getDelUser": true,
-        "showSalary": true,
-        "getDelEmp": true,
-        "delEmp": true,
-        "editEmp": true,
-        "download": true,
-        "recEmp": true,
-        "setting": true,
-        "search": true,
-        "print": true,
-        "addUser": true,
-        "message": true,
-        "editUser": true,
-        "delUser": true,
-        "recUser": true,
-        "getAllUsername": true,
-        "getAllUser": true
       },
       "filePath": "/user.html",
       "hidden": true

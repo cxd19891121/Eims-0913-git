@@ -145,7 +145,8 @@
                         <uib-accordion close-others="true" class="table table-striped">
 
                             <div ng-repeat="user in config.auth">
-                                <div uib-accordion-group class="panel-info" is-open="true" heading= "{{user.name}}:" >
+                                <div ng-show = !user.hidden>
+                                    <div uib-accordion-group class="panel-info" is-open="true" heading= "{{user.name}}:" >
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"> Name:</label>
@@ -196,6 +197,7 @@
                                         </div>
                                     </form>
 
+                                </div>
                                 </div>
                             </div>
                         </uib-accordion>

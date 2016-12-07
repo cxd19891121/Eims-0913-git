@@ -35,81 +35,9 @@
             "hidden": true
         },
         {
-            "name": "user",
-            "level": 1,
-            "tag": "users",
-            "ops": {
-                "download": true,
-                "print": true,
-                "search": true,
-                "message": true,
-                "getAllUsername": true,
-                "addEmp": null,
-                "editEmp": null,
-                "delEmp": true
-            },
-            "filePath": "/administrator.html",
-            "hidden": true
-        },
-        {
-            "name": "admin",
+            "name": "Administrator",
             "level": 0,
-            "tag": "HR, administrator",
-            "ops": {
-                "addEmp": true,
-                "delEmp": true,
-                "editEmp": true,
-                "download": true,
-                "print": true,
-                "search": true,
-                "addUser": true,
-                "editUser": true,
-                "delUser": true,
-                "recUser": true,
-                "getDelUser": true,
-                "getDelEmp": true,
-                "recEmp": true,
-                "setting": true,
-                "message": true,
-                "login": true,
-                "getAllUser": true,
-                "getAllUsername": true,
-                "viewPrivateInfo": true,
-                "viewSalaryBenefit": true,
-                "viewVisaInfo": true
-            },
-            "filePath": "/administrator.html"
-        },
-        {
-            "name": "salesUser",
-            "level": 2,
-            "tag": "sales user",
-            "ops": {
-                "download": true,
-                "print": true,
-                "search": true,
-                "message": true
-            },
-            "filePath": "/user.html",
-            "hidden": true
-        },
-        {
-            "name": "trainer",
-            "level": 3,
-            "tag": "trainer",
-            "ops": {
-                "download": true,
-                "print": true,
-                "search": true,
-                "message": true
-            },
-            "filePath": "/user.html",
-            "hidden": true
-        },
-        {
-            "name": "fortest",
-            "level": 4,
-            "tag": "sf",
+            "tag": "Administrator",
             "ops": {
                 "addEmp": null,
                 "delEmp": null,
@@ -143,7 +71,7 @@
         },
         {
             "name": "HR Generalist",
-            "level": 5,
+            "level": 1,
             "tag": "HR Generalist",
             "ops": {
                 "addEmp": true,
@@ -164,7 +92,7 @@
         },
         {
             "name": "HR Recruiter",
-            "level": 6,
+            "level": 2,
             "tag": "HR Recruiter",
             "ops": {
                 "download": true,
@@ -182,7 +110,7 @@
         },
         {
             "name": "Accounting Manager",
-            "level": 7,
+            "level": 3,
             "tag": "Accounting Manager",
             "ops": {
                 "editEmp": true,
@@ -201,7 +129,7 @@
         },
         {
             "name": "Marketing Manager",
-            "level": 8,
+            "level": 4,
             "tag": "Marketing Manager",
             "ops": {
                 "editEmp": true,
@@ -222,7 +150,7 @@
         },
         {
             "name": "General Staff",
-            "level": 9,
+            "level": 5,
             "tag": "General Staff",
             "ops": {
                 "editEmp": true,

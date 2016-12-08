@@ -15,7 +15,6 @@ var viewRuleWrapp = function(req,data,cb)
                 }
                 cb(data)
         })
-    
 }
 function isArray(list)
 {
@@ -168,7 +167,7 @@ function searchByName(request,response,callback)
 {
     var name = request.body.name
     
-    var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE LOWER(first_name)='" + name.toLowerCase() + "' OR LOWER(last_name)='" + name.toLowerCase() + "' order by emp_id;"
+    var sqlCode = "SELECT visa_info.type as visa_type, order_info.title as jobTitle,* FROM employee_info left join education_info on employee_info.emp_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE LOWER(first_name)='" + name.toLowerCase() + "' OR LOWER(last_name)='" + name.toLowerCase() + "' order by emp_id;"
     db.queryPres(sqlCode,function(e,o){
 
         if(e){
@@ -219,7 +218,7 @@ function deepSearchBuilder(sqlCode,searchObj)
         sqlCode += "("
         searchObj.job_title.forEach(function(e)
         {
-            sqlCode += " job_title='" + e + "' OR"
+            sqlCode += " order_info.title='" + e + "' OR"
         })
         sqlCode = sqlCode.substring(0,sqlCode.length-2)
         sqlCode +=") AND"
@@ -248,7 +247,7 @@ function deepSearch(request,response,callback)
 {
     console.log(request.body)
     var searchObj = JSON.parse(JSON.stringify(request.body))
-    var sqlCode = "SELECT visa_info.type as visa_type,* FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE  "
+    var sqlCode = "SELECT visa_info.type as visa_type ,order_info.title as jobtitle , * FROM employee_info left join education_info on employee_info.emp_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE  "
     
     sqlCode = deepSearchBuilder(sqlCode,searchObj)
     sqlCode += " ORDER BY visa_type,visa_info.end_time"
@@ -389,13 +388,20 @@ exports.sqlBuilder = sqlBuilderOO;
 exports.searchByWholeName = searchByWholeName;
 exports.getAll =  function(callback){
 
-    var sqlCode = sqlBuilderOO.select(['visa_info.type as visa_type,*'])
+    var sqlCode = sqlBuilderOO.select(['visa_info.type as visa_type , order_info.title as jobtitle,*'])
         .from(['employee_info','education_info','order_info','visa_info','work_info'],'left join','e_id')
         .whereNone()
         .orderBy()
         .build()
-
-    console.log('sqlCode = ' + sqlCode)
+    var temp = sqlCode.split(" ").map((e,i,arr)=>
+    {
+        if (e == "employee_info.e_id=education_info.e_id") 
+        {
+            arr[i] = "employee_info.emp_id=education_info.e_id"
+        }
+        return arr[i]
+    }).join(" ")
+    sqlCode = temp
     db.queryPres(sqlCode,function(e,o){
         console.log(e);
         callback(e,o);
@@ -409,7 +415,7 @@ function searchByWholeName(request,response,callback)
     var firstname = name[0]
     var lastname = name[1]
     
-    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.e_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE (LOWER(first_name)='" + firstname.toLowerCase() + "' AND LOWER(last_name)='" + lastname.toLowerCase() + "') OR (LOWER(first_name)='" +lastname.toLowerCase() + "' AND LOWER(last_name)='" + firstname.toLowerCase() + "') order by emp_id"
+    var sqlCode = "SELECT * FROM employee_info left join education_info on employee_info.emp_id=education_info.e_id left join order_info on education_info.e_id=order_info.e_id left join visa_info on order_info.e_id=visa_info.e_id left join work_info on visa_info.e_id=work_info.e_id WHERE (LOWER(first_name)='" + firstname.toLowerCase() + "' AND LOWER(last_name)='" + lastname.toLowerCase() + "') OR (LOWER(first_name)='" +lastname.toLowerCase() + "' AND LOWER(last_name)='" + firstname.toLowerCase() + "') order by emp_id"
     console.log(sqlCode)
     db.queryPres(sqlCode,function(e,o){
         if(e){

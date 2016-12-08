@@ -1178,11 +1178,34 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Job Title:</label>
                             <div class="col-sm-4">
-                                <input placeholder="eg: Junior Java Programmer" name="jobTitle"
+                                <!--<input placeholder="eg: Junior Java Programmer" name="jobTitle"
                                        ng-required="addNewEmployee.salaryBenefit" ng-model='vm.data.emp.jTitle'
                                        class="form-control"
 
-                                       ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)">
+                                       ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)">-->
+                                       <select name="jobTitle" ng-model='vm.data.emp.jTitle' ng-required="addNewEmployee.salaryBenefit"
+                                        class="form-control"
+                                        ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)">
+                                    <option value="Accounting Manager">Accounting Manager</option>
+                                    <option value="Sr. Software Enginner/Java">Sr. Software Enginner/Java</option>
+                                    <option value="Jr. Software Engineer/Java">Jr. Software Engineer/Java</option>
+                                    <option value="Software Engineer/Java">Software Engineer/Java</option>
+                                    <option value="Enterprise Architect">Enterprise Architect</option>
+                                    <option value="Marketing and Placement Manager">Marketing and Placement Manager</option>
+                                    <option value="Business Analyst">Business Analyst</option>
+                                    <option value="Sr. Business Analyst">Sr. Business Analyst</option>
+                                    <option value="Jr. Business Analyst">Jr. Business Analyst</option>
+                                    <option value="HR Manager">HR Manager</option>
+                                    <option value="IT Recruiter">IT Recruiter</option>
+                                    <option value="Account Manager">Account Manager</option>
+                                    <option value="HR Assistant">HR Assistant</option>
+                                    <option value="Product and Marketing Manager">Product and Marketing Manager</option>
+                                    <option value="Development Lead">Development Lead</option>
+                                    <option value="Technical Training Lead, Architecture">Technical Training Lead, Architecture</option>
+                                    <option value="BA Trainer">BA Trainer</option>
+                                    <option value="Business Development Manager">Business Development Manager</option>
+                                    <option value="Managing Director">Managing Director</option>
+                                </select>
 
                                 <div class="help-block" ng-messages="sTab.jobTitle.$error"
                                      ng-show="sTab.jobTitle.$touched">

@@ -1084,9 +1084,10 @@
                         <label class="col-sm-2 control-label">Job Level:</label>
                         <div class="col-sm-4"
                              ng-class="{ 'has-error' : sTab.joblv.$invalid && sTab.joblv.$touched }">
-                            <input placeholder="eg: Junior" name="joblv" ng-required="addNewEmployee.salaryBenefit"
-                                   ng-model='vm.data.emp.jLevel' class="form-control"
-                                   ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)">
+                            
+                                   <select name="jobTitle" ng-model='vm.data.emp.jTitle' 
+                                        class="form-control"
+                                        ng-blur="setProgress();vm.tabUpdate(pTab,oTab,cTab,adTab,vTab,tTab,jTab,sTab)">
                             <div class="help-block" ng-messages="sTab.joblv.$error"
                                  ng-show="sTab.joblv.$touched">
                                 <!--<small ng-message="required" class="text-danger">You cannot leave this empty-->

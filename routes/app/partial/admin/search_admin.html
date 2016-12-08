@@ -234,11 +234,11 @@
             <thead>
                 <tr>
                     <th><input type="checkbox" class="btn btn-primary" ng-click="selectAll()"> </th>
-                    <th><a href="" ng-click="order('e_id')">Employee Id</a></th>
+                    <th><a href="" ng-click="order('emp_id')">Employee Id</a></th>
                     <th><a href="" ng-click="order('first_name')">Name</a></th>
                     <th><a href="" ng-click="order('visa_type')">Visa Type</a></th>
                     <th><a href="" ng-click="order('end_time')">Visa Expire Date</a></th>
-                    <th><a href="" ng-click="order('job_title')">Job Title</a></th>
+                    <th><a href="" ng-click="order('title')">Job Title</a></th>
                     <th><a href="" ng-click="order('progress')">Progress</a></th>
                     <th>Operation</th>
                 </tr>
@@ -246,11 +246,11 @@
             <tbody>
                 <tr ng-repeat="user in users | orderBy:predicate:reverse | filter:paginate" ng-class-odd='odd'>
                     <td><input type="checkbox" ng-model="user.flag" ng-click="display()"></td>
-                    <td>{{ user.e_id }}</td>
+                    <td>{{ user.emp_id }}</td>
                     <td>{{ user.first_name }} {{ user.last_name }}</td>
                     <td>{{ user.visa_type }}</td>
                     <td>{{ user.end_time }}</td>
-                    <td>{{ user.job_title }}</td>
+                    <td>{{ user.jobtitle }}</td>
                     <td>{{ user.progress }}</td>
                     <td>
                         <button class="btn btn-success" ng-click="showEmployeeDetail(user.e_id)" )>

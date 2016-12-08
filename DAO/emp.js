@@ -37,7 +37,7 @@ var sql = {
         " reason","666 p street","ames","IA",50010,"USA","233 B road", "beijing","beijing",100000,"China","test healthIns","test rs","test rs",10,0]
     },
 
-    deleteEmpById: {name:"deleteEmpById",text:"DELETE FROM employee_info WHERE e_id = $1",value:[1]},
+    deleteEmpById: {name:"deleteEmpById",text:"DELETE FROM employee_info WHERE emp_id = $1",value:[1]},
     updateEmpById: {name:"updateEmpById",text:"UPDATE employee_info SET first_name = $1, last_name = $2, middle_name = $3, DOB = $4," +
     "SSN = $5, marital_status = $6," +
     "job_title = $7," +
@@ -63,7 +63,7 @@ var sql = {
     "reimbursement = $27," +
     "payrise_percentage = $28, "+
     "progress = $29"+
-    "where e_id = $30",},
+    "where emp_id = $30",},
 
     deleteFlagEmpById :{name:"deleteFlagUserById", text :"UPDATE employee_info SET delete_flag = true where emp_id = $1", values :[0]},
     undoDeleteEmpById :{name:"undoDeleteUserById",text:"UPDATE employee_info SET delete_flag = false where emp_id = $1",values:[0]},

@@ -34,8 +34,8 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
     }
     $scope.jobLevel = 
     {
-        account:{name:"Accounting manager" , value:false},
-        srJava:{name:"Sr.Software Engineer/Java" , value:false},
+        account:{name:"Accounting Manager" , value:false},
+        srJava:{name:"Sr.Software Enginner/Java" , value:false},
         jrJava:{name:"Jr.Software Engineer/Java" , value:false},
         Java:{name:"Software Engineer/Java" , value:false},
         arch:{name:"Enterprise Architect" , value:false},
@@ -43,12 +43,12 @@ app.controller('search',['$scope','dataService',function($scope,dataService,$htt
         ba:{name:"Business Analyst" , value:false},
         srBa:{name:"Sr.Business Analyst" , value:false},
         jrBa:{name:"Jr.Business Analyst" , value:false},
-        hr:{name:"HR manager" , value:false},
+        hr:{name:"HR Manager" , value:false},
         recruiter:{name:"IT Recruiter" , value:false},
-        assHr:{name:"HR assistant" , value:false},
+        assHr:{name:"HR Assistant" , value:false},
         marketManager:{name:"Product and Marketing Manager" , value:false},
         devLead:{name:"Development Lead" , value:false},
-        trainLead:{name:"Technical Training Lead,Architecture" , value:false},
+        trainLead:{name:"Technical Training Lead, Architecture" , value:false},
         trainBa:{name:"BA Trainer" , value:false},
         busDev:{name:"Business Development Manager" , value:false},
         director:{name:"Managing Director" , value:false},

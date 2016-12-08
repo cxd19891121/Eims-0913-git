@@ -257,7 +257,7 @@ exports.getAllBySql = function (req,callback) {
                 //Filter : verify the "show salary"
                 //Hide salary if need.
                 //var keyArr = []
-                console.log(authObj)
+                console.log()
                 var keyArr = viewRule.rule.putData([],authObj.ops)
                 if(keyArr.length != 0){
                     o.rows.forEach(function(info){
@@ -430,8 +430,9 @@ exports.getAllById = function (req, callback) {
 
 //update individual's all information by search the employee id.
 exports.updateAllById = function (req, callback) {
+    console.log(req.body);
     var id = req.params['id'];
-    req.body['emp'].e_id = id;
+    req.body['emp'].emp_id = id;
     validation.empValidate(req.body['emp']);
     validation.eduValidate(req.body['edu']);
     validation.workValidate(req.body['work']);

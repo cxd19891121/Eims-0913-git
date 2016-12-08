@@ -257,6 +257,7 @@ exports.getAllBySql = function (req,callback) {
                 //Filter : verify the "show salary"
                 //Hide salary if need.
                 //var keyArr = []
+                console.log(authObj)
                 var keyArr = viewRule.rule.putData([],authObj.ops)
                 if(keyArr.length != 0){
                     o.rows.forEach(function(info){

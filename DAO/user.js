@@ -80,7 +80,9 @@ exports.insertElement = function(dt,callback){
 
 exports.updateElementById = function(id,dt,callback){
     console.log(dt);
-    sql['updateUserById'].values = [dt.username,md5(dt.password),dt.eid,dt.level,dt.email,id];
+    if (dt.password.length <= 30) dt.password = md5(dt.password)
+
+    sql['updateUserById'].values = [dt.username,dt.password,dt.eid,dt.level,dt.email,id];
     return db.queryPres(sql['updateUserById'],function(e,o){callback(e,o)});
 }
 

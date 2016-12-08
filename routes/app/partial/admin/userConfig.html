@@ -6,7 +6,6 @@
             <hr>
 
             <h2>Change User Information</h2>
-
         </div>
         <div class="row">
             <table class="table table-striped">
@@ -35,9 +34,6 @@
 
                         </td>
                         <td>
-
-
-
                             <form role="form" name="emailForm" novalidate>
                                 <div  ng-class="{ 'has-error' : emailForm.email.$invalid && emailForm.email.$touched }">
                                     <input name ="email" type="email" ng-required="true" class="form-control" ng-model="user.email" placeholder="eg: xxx@example.com **">
@@ -49,19 +45,12 @@
                         </td>
                         <td>
                             <button class="btn btn-primary" ng-click="editUser(user.id)">
-                    <span class="glyphicon glyphicon-pencil"></span>Update
-                </button>
-
-
-
-
+                                <span class="glyphicon glyphicon-pencil"></span>Update
+                            </button>
                             <button class="btn btn-primary" ng-click="deleteUser(user.id)">
                                 <span class="glyphicon glyphicon-pencil"></span>Delete
                             </button>
-
                         </td>
-
-
                     </tr>
                 </tbody>
             </table>

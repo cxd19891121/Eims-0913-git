@@ -254,8 +254,9 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
             method: 'GET',
             url: baseUrl + tableName,
         }).then(function successCallback(data) {
-            //console.log("in sucess callback");
-            //console.log(data);
+            data.data.rows.forEach(function(e,i){
+                data.data.rows[i].oldpassword = data.data.rows[i].password
+            })
             callback(data.data.rows)
         }, function errorCallback(data) {
             //console.log("in error callback");
@@ -388,9 +389,10 @@ app.service('dataService', ['$http', '$httpParamSerializerJQLike', function ($ht
     }
 
     vm.updateUserById = function (id, user, callback) {
-        console.log('this is the update function')
-
-        console.log('user data:',angular.toJson(user));
+        //console.log('this is the update function')
+        console.log(user)
+        //console.log('user data:',angular.toJson(user));
+        
         var tableName = 'user'
         $http({
             method: 'PUT',

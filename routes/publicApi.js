@@ -18,8 +18,28 @@ router.get('/employee',function(req,res){
     var key = req.param('key');
     if (publicKey.id == id && publicKey.key == key){
         empDAO.selectAll(function(e,o){
-            if(e) res.json({msg:"server error, can not supply data"});
-            else res.json({data:o.rows});
+            if(e) {
+                res.json({msg:"server error, can not supply data"});
+            } else{ 
+                // adapter to requirement 
+                /*
+                */
+                var data = o.rows.map((e,i,a) => {
+                    return {
+                        firstName: e.first_name,
+                        lastName: e.last_name,
+                        wholeName: e.last_name + ' ' + e.first_name,
+                        email: e.email,
+                        homePhone: e.home_phone,
+                        cellphone: e.cellphone,
+                        address: e.p_add,
+                        city: e.p_city,
+                        state: e.p_state,
+                        zip: e.p_zip
+                    };
+                });
+                res.json({data: data});
+            }
         })
     }else{
         res.json({msg:"authorization error, id && key is can not be verify"})

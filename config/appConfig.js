@@ -111,9 +111,15 @@ var getConfigSync = function()
 }
 
 
+var getPublicKey = function()
+{
+    return JSON.parse(fs.readFileSync('config/publicKey.json','utf-8'))
+}
+
 
 //writeJsonFromConfig(config);
 module.exports = config;
 module.exports.readConfig = readConfigFromJson;
 module.exports.writeConfig = writeJsonFromConfig;
 module.exports.getConfig = getConfigSync;
+module.exports.publicKey = getPublicKey();

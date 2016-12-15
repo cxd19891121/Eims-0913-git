@@ -10,6 +10,7 @@ var api = require('./routes/api');
 var search  = require('./routes/search');
 var config = require('./config/appConfig');
 var client = require('./comm/redis');
+var publicApi = require('./routes/publicApi');
 var app = express();
 
 var sessionConfig = config.session;
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api',api);
 app.use('/search',search);
+app.use('/publicApi',publicApi);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

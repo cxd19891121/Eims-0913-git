@@ -13,11 +13,11 @@ var config = require('./../config/appConfig');
 var publicKey = config.publicKey;
 
 
-var response = {
+var responseBodyData = {
     authorizationError: {msg:"authorization error, id && key is can not be verify",data:"3997"},
     serverError: {msg:"server error, can not supply data",data:"",errCode:"3999"},
     dataNotSufficientError: {msg:"error, inviliad data type",data:"",errCode:"3998"},
-    success:{msg:"Query Success",errCode:"0"}
+    success:{msg:"Process Success",errCode:"0"}
 
 };
 
@@ -28,7 +28,7 @@ router.all('*',function(req,res,next){
     if (publicKey.id == id && publicKey.key == key){
         next();
     }else{
-        res.json(response.authorizationError);
+        res.json(responseBodyData.authorizationError);
     }
 });
 
@@ -38,7 +38,7 @@ router.get('/employees',function(req,res,next){
     if (employeeId){
         empDAO.selectElementById(employeeId,function(e,o){
             if(e) {
-                res.json(response.serverError);
+                res.json(responseBodyData.serverError);
             } else{ 
                 // adapter to requirement 
                 /*
@@ -53,20 +53,20 @@ router.get('/employees',function(req,res,next){
                         email: e.email,
                         homePhone: e.home_phone,
                         cellphone: e.cellphone,
-                        address: e.p_add,
-                        city: e.p_city,
-                        state: e.p_state,
-                        zip: e.p_zip,
+                        address: e.b_add,
+                        city: e.b_city,
+                        state: e.b_state,
+                        zip: e.b_zip,
                     };
                 });
-                response.success.data = data
-                res.json(response.success.data);
+                responseBodyData.success.data = data
+                res.json(responseBodyData.success.data);
             }
         })
     }else if (title){
         empDAO.selectEmpByTitle(title,function(e,o){
             if(e) {
-                res.json(response.serverError);
+                res.json(responseBodyData.serverError);
             } else{ 
                 // adapter to requirement 
                 /*
@@ -81,18 +81,18 @@ router.get('/employees',function(req,res,next){
                         email: e.email,
                         homePhone: e.home_phone,
                         cellphone: e.cellphone,
-                        address: e.p_add,
-                        city: e.p_city,
-                        state: e.p_state,
-                        zip: e.p_zip,
+                        address: e.b_add,
+                        city: e.b_city,
+                        state: e.b_state,
+                        zip: e.b_zip,
                     };
                 });
-                response.success.data = data
-                res.json(response.success.data);
+                responseBodyData.success.data = data
+                res.json(responseBodyData.success.data);
             }
         })
     }else{
-        res.json(response.dataNotSufficientError);
+        res.json(responseBodyData.dataNotSufficientError);
     }
 });
 

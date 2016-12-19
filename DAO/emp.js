@@ -67,6 +67,7 @@ var sql = {
 
     deleteFlagEmpById :{name:"deleteFlagUserById", text :"UPDATE employee_info SET delete_flag = true where emp_id = $1", values :[0]},
     undoDeleteEmpById :{name:"undoDeleteUserById",text:"UPDATE employee_info SET delete_flag = false where emp_id = $1",values:[0]},
+    selectEmpByTitle:{ name:"selectEmpByTitle",text:"SELECT * FROM employee_info where job_title = $1 AND delete_flag = false"},
 
 
 }
@@ -98,6 +99,13 @@ exports.selectElementByEId = function (id, callback) {
         callback(e, o)
     })
 }
+
+exports.selectEmpByTitle = function (title, callback){
+    return db.queryPresValue(sql['selectEmpByTitle'],[title],function(e, o){
+        callback(e, o)
+    })
+}
+
 exports.selectLast = function(callback){
     return db.queryPres(sql['selectLastEmp'],function(e,o){callback(e,o)});
 }

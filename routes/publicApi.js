@@ -12,37 +12,87 @@ var msgService = require('./../service/messageService');
 var config = require('./../config/appConfig');
 var publicKey = config.publicKey;
 
-router.get('/employee',function(req,res){
+
+var response = {
+    authorizationError: {msg:"authorization error, id && key is can not be verify",data:"3997"},
+    serverError: {msg:"server error, can not supply data",data:"",errCode:"3999"},
+    dataNotSufficientError: {msg:"error, inviliad data type",data:"",errCode:"3998"},
+    success:{msg:"Query Success",errCode:"0"}
+
+};
+
+
+router.all('*',function(req,res,next){
     var id = req.param('id');
-    console.log(publicKey.id)
     var key = req.param('key');
     if (publicKey.id == id && publicKey.key == key){
-        empDAO.selectAll(function(e,o){
+        next();
+    }else{
+        res.json(response.authorizationError);
+    }
+});
+
+router.get('/employees',function(req,res,next){
+    var title = req.param('title');
+    var employeeId = req.param('empId');
+    if (employeeId){
+        empDAO.selectElementById(employeeId,function(e,o){
             if(e) {
-                res.json({msg:"server error, can not supply data"});
+                res.json(response.serverError);
             } else{ 
                 // adapter to requirement 
                 /*
                 */
                 var data = o.rows.map((e,i,a) => {
                     return {
+                        id: e.emp_id,
                         firstName: e.first_name,
                         lastName: e.last_name,
-                        wholeName: e.last_name + ' ' + e.first_name,
+                        middleName: e.middle_name,
+                        wholeName: e.last_name +' ' + e.middle_name + ' ' + e.first_name,
                         email: e.email,
                         homePhone: e.home_phone,
                         cellphone: e.cellphone,
                         address: e.p_add,
                         city: e.p_city,
                         state: e.p_state,
-                        zip: e.p_zip
+                        zip: e.p_zip,
                     };
                 });
-                res.json({data: data});
+                response.success.data = data
+                res.json(response.success.data);
+            }
+        })
+    }else if (title){
+        empDAO.selectEmpByTitle(title,function(e,o){
+            if(e) {
+                res.json(response.serverError);
+            } else{ 
+                // adapter to requirement 
+                /*
+                */
+                var data = o.rows.map((e,i,a) => {
+                    return {
+                        id: e.emp_id,
+                        firstName: e.first_name,
+                        lastName: e.last_name,
+                        middleName: e.middle_name,
+                        wholeName: e.last_name +' ' + e.middle_name + ' ' + e.first_name,
+                        email: e.email,
+                        homePhone: e.home_phone,
+                        cellphone: e.cellphone,
+                        address: e.p_add,
+                        city: e.p_city,
+                        state: e.p_state,
+                        zip: e.p_zip,
+                    };
+                });
+                response.success.data = data
+                res.json(response.success.data);
             }
         })
     }else{
-        res.json({msg:"authorization error, id && key is can not be verify"})
+        res.json(response.dataNotSufficientError);
     }
 });
 

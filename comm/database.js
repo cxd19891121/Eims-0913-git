@@ -11,6 +11,7 @@ var pool = new pg.Pool(dbConfig);
 module.exports.query = function (text, value, callback) {
     return pool.query(text, value, function (err, result) {
         if (err) {
+            console.log("pool.query error (in file: database.js)",err);
             callback(err);
         } else {
             callback(null, result);
@@ -21,6 +22,8 @@ module.exports.query = function (text, value, callback) {
 module.exports.queryPres= function (preStm, callback) {
     return pool.query(preStm, function (err, result) {
         if (err) {
+
+            console.log("pool.query error (in file: database.js)",err);
             callback(err);
         } else {
             callback(null, result);
@@ -31,6 +34,7 @@ module.exports.queryPres= function (preStm, callback) {
 module.exports.queryPresValue = function(preStm,value,callback){
     return pool.query(preStm, value,function (err, result) {
         if (err) {
+            console.log("pool.query error (in file: database.js)",err);
             callback(err);
         } else {
             callback(null, result);

@@ -84,30 +84,38 @@ exports.undoDeleteById = function(id,callback){
 
 exports.selectAll = function (callback) {
     return db.queryPres(sql['selectAllEmp'], function (e, o) {
+
+        if(e){console.log("selectAll error (file: /DAO/emp.js)",e)}
         callback(e, o)
     })
 }
 
 exports.selectElementById = function (id, callback) {
     return db.queryPresValue(sql['selectEmpById'], [id], function (e, o) {
+        if(e){console.log("selectElementById error (file: /DAO/emp.js)",e)}
         callback(e, o)
     })
 }
 
 exports.selectElementByEId = function (id, callback) {
     return db.queryPresValue(sql['selectEmpById'], [id], function (e, o) {
+        if(e){console.log("selectElementByEId error (file: /DAO/emp.js)",e)}
         callback(e, o)
     })
 }
 
 exports.selectEmpByTitle = function (title, callback){
     return db.queryPresValue(sql['selectEmpByTitle'],[title],function(e, o){
+        if(e){console.log("selectEmpByTitle error (file: /DAO/emp.js)",e)}
         callback(e, o)
     })
 }
 
 exports.selectLast = function(callback){
-    return db.queryPres(sql['selectLastEmp'],function(e,o){callback(e,o)});
+    return db.queryPres(sql['selectLastEmp'],function(e,o){
+        if(e){console.log("selectLast error (file: /DAO/emp.js)",e)}
+        callback(e,o)
+    });
 }
 
 
@@ -122,6 +130,8 @@ exports.insertElement = function (data, callback) {
     sql['insertEmp'].values = [ data.fName, data.lName,data.mName,data.DOB,data.SSN,data.mStatus,data.jTitle,data.jLevel,data.salary,data.hPhone,data.cPhone,data.email,data.tDate,data.tReason,
         data.pAdd,data.pCity,data.pState,data.pZip,data.pCountry,data.bAdd,data.bCity,data.bState,data.bZip,data.bCountry,data.hInsurance,data.rSubside,data.reimbursement,data.rPercent,data.progress];
     return db.queryPres(sql['insertEmp'], function (e, o) {
+
+        if(e){console.log("insertElement error (file: /DAO/emp.js)",e)}
         callback(e, o)
     });
 }
@@ -131,6 +141,8 @@ exports.updateElementById = function (id,data, callback) {
         data.pAdd,data.pCity,data.pState,data.pZip,data.pCountry,data.bAdd,data.bCity,data.bState,data.bZip,data.bCountry,data.hInsurance,data.rSubside,
         data.reimbursement,data.rPercent,data.progress,id];
     return db.queryPres(sql['updateEmpById'], function (e, o) {
+
+        if(e){console.log("updateElementById error (file: /DAO/emp.js)",e)}
         callback(e, o)
     });
 }
